@@ -37,6 +37,17 @@ namespace API_Hospital_Boca
                 var connectionString = Configuration.GetConnectionString("HospitalBocaConnectionString");
                 options.UseMySQL(connectionString);
             });
+
+             services.AddCors(options =>
+            {
+               options.AddPolicy ("MY_CORS", builder =>
+               {
+                   builder.WithOrigins ("http://localhost:3000");
+                   builder.AllowAnyMethod ();
+                   builder.AllowAnyHeader ();
+               });
+            });
+
             services.AddControllers();
 
             services.AddScoped<IServicePacientes, ServicePacientes>();
