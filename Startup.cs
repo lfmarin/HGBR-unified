@@ -66,6 +66,7 @@ namespace API_Hospital_Boca
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("MY_CORS");
 
             app.UseAuthorization();
 
