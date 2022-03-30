@@ -131,8 +131,8 @@ export default function ListaPacientes (props) {
   
 
   const dateFormatter = (date) => {
-    var formatter = new Intl.DateTimeFormat('en-mx', 'DD-MM-YYYY');
-    return formatter.format(new Date (date));
+    var formatter = new Intl.DateTimeFormat('es-MX', 'dd-mm-yyyy');
+    return formatter.format(new Date(date));
   }
 
   const getAge = (d1) => {
