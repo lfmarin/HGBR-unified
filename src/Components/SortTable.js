@@ -23,6 +23,16 @@ function descendingComparator (a, b, orderBy) {
       });
       return stabilizedThis.map((el) => el[0]);
     },
+    searchTable: (array, search) => {
+      const expedienteFilter = array.filter(element => {
+        return element.noExpediente.toString().indexOf(search) !== -1 ||
+        element.nombre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.apPaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.apMaerno.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+      });
+  
+      return expedienteFilter;
+    }
 }
 
 export default SortTable;

@@ -12,6 +12,8 @@ import { visuallyHidden } from '@mui/utils';
 import Button from '@mui/material/Button'
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
+import EnhancedTableToolbar from '../Components/EnhancedTableToolbar';
 
 const headCells = [
   { id: 'noExpediente', numeric: false, label: 'No. Expediente' },
@@ -22,6 +24,36 @@ const headCells = [
   { id: 'fechaNacimiento', numeric: false, label: 'Fecha de Nacimiento' },
 ]
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  paper: {
+    width: '100%',
+    marginBottom: theme.spacing(2),
+    padding: theme.spacing(2)
+  },
+  table: {
+    minWidth: 750,
+    marginTop: theme.spacing(2),
+    border: "1px solid #ccc",
+  },
+  visuallyHidden: {
+    border: 0,
+    clip: 'rect(0 0 0 0)',
+    height: 1,
+    margin: -1,
+    overflow: 'hidden',
+    padding: 0,
+    position: 'absolute',
+    top: 20,
+    width: 1,
+  },
+  row: {
+    textDecoration: "none"
+  }
+}));
+
 export default function ListaPacientes (props) {
   const [pacientes,setPacientes] = useState([]);
   const [page, setPage] = useState(0);
@@ -29,8 +61,12 @@ export default function ListaPacientes (props) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('noExpediente');
   const [errorbd, setErrorbd] = useState(false);
+  const [refresh, setRefresh] = useState(true)
+
   //const [token, setToken] = useState(localStorage.getItem("ACCESS_TOKEN"));
   //const location = useLocation();
+  const [search, setSearch] = useState('');
+  const classes = useStyles();
  
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -47,31 +83,51 @@ export default function ListaPacientes (props) {
     setOrderBy(property);
   };
 
+  const handleEnterSearch = (event) => {
+    if (event.key === 'Enter') {
+      setPacientes(SortTable.searchTable(pacientes, search)); 
+    }
+  }
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  }
+
+  const handleCancelSearch = (event) => {
+    console.log(pacientes);
+    setRefresh(true);
+    //setPacientes(pacientes);
+    setSearch("");
+  }
+
   useEffect(() => {
-    axios.get("https://localhost:5001/hospitalBoca/pacientes/all", {
-      headers : {
-        'Content-type': 'application/json',
-        //'Authorization': `Bearer ${token}`
-      }
-    }).then (
-      (response) => {
-        if (response.status === 200) {
-          setPacientes(response.data);
-          setErrorbd(false);
+    if(refresh){
+      axios.get("https://localhost:5001/hospitalBoca/pacientes/all", {
+        headers : {
+          'Content-type': 'application/json',
+          //'Authorization': `Bearer ${token}`
         }
-      },
-      (error) => {
-        if(!error.response) setErrorbd(true);
-        /*else{
-          if (error.response.status === 401) {
-            localStorage.removeItem("ACCESS_TOKEN");
-            setToken('');
+      }).then (
+        (response) => {
+          if (response.status === 200) {
+            setPacientes(response.data);
             setErrorbd(false);
           }
-        }*/
-      }
-    );
-  },[])
+        },
+        (error) => {
+          if(!error.response) setErrorbd(true);
+          /*else{
+            if (error.response.status === 401) {
+              localStorage.removeItem("ACCESS_TOKEN");
+              setToken('');
+              setErrorbd(false);
+            }
+          }*/
+        }
+      );
+      setRefresh(false);
+    }
+  });
   
 
   const dateFormatter = (date) => {
@@ -103,43 +159,57 @@ export default function ListaPacientes (props) {
   }*/
 
   return (
-    <Paper>
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} stickyHeader aria-label="sticky table">
-          <EnhancedTableHead
-            sx={visuallyHidden}
-            order={order}
-            orderBy={orderBy}
-            headCells={headCells}
-            onRequestSort={handleRequestSort}
-          />
-                  
-          <TableBody>
-            {SortTable.stableSort(pacientes, SortTable.getComparator(order, orderBy))
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map ((item) =>{
-              return( 
-                <TableRow key={item.noExpediente}>
-                  <TableCell>{item.nombre}</TableCell>
-                  <TableCell>{item.apPaterno}</TableCell>
-                  <TableCell>{item.apMaerno}</TableCell>
-                  <TableCell>{getAge(item.fechaNacimiento)} años</TableCell>
-                  <TableCell>{dateFormatter(item.fechaNacimiento)}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-      rowsPerPageOptions={[5, 10, 50]}
-      component="div"
-      count={pacientes.length}
-      rowsPerPage={rowsPerPage}
-      page={page}
-      onPageChange={handleChangePage}
-      onRowsPerPageChange={handleChangeRowsPerPage}
-    />
+    <div className={classes.root}>
+      <Paper className={classes.paper}>
+        <EnhancedTableToolbar 
+          handleEnterSearch = {handleEnterSearch}
+          search = {search}
+          handleSearch = {handleSearch}
+          handleCancelSearch = {handleCancelSearch}
+        />
+        <TableContainer>
+          <Table
+            className={classes.table}
+            aria-labelledby="tableTitle"
+            size='medium'
+            aria-label="enhanced table"
+          >
+            <EnhancedTableHead
+              sx={visuallyHidden}
+              order={order}
+              orderBy={orderBy}
+              headCells={headCells}
+              onRequestSort={handleRequestSort}
+            />
+                    
+            <TableBody>
+              {SortTable.stableSort(pacientes, SortTable.getComparator(order, orderBy))
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map ((item) =>{
+                return( 
+                  <TableRow key={item.noExpediente}>
+                    <TableCell>{item.noExpediente}</TableCell>
+                    <TableCell>{item.nombre}</TableCell>
+                    <TableCell>{item.apPaterno}</TableCell>
+                    <TableCell>{item.apMaerno}</TableCell>
+                    <TableCell>{getAge(item.fechaNacimiento)} años</TableCell>
+                    <TableCell>{dateFormatter(item.fechaNacimiento)}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+        rowsPerPageOptions={[5, 10, 50]}
+        component="div"
+        count={pacientes.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Paper>
+   </div>
   );
 }  
