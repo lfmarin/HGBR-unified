@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using API_Hospital_Boca.Services;
 using API_Hospital_Boca.Models;
+using API_Hospital_Boca.Bussiness;
 
 namespace API_Hospital_Boca.Controllers
 {
     public class PacientesController : ControllerBase
     {
         private readonly IServicePacientes service;
-        public PacientesController(IServicePacientes service)
+        private readonly IServiceHistoriaClinica serviceHistoria;
+        public PacientesController(IServicePacientes service, IServiceHistoriaClinica serviceHistoria)
         {
             this.service = service;
+            this.serviceHistoria = serviceHistoria;
         }
 
 
@@ -21,11 +24,39 @@ namespace API_Hospital_Boca.Controllers
         }
 
         [HttpPost ("hospitalBoca/pacientes/save")]
-        public IActionResult savePaciente([FromBody] Paciente p) 
+        public IActionResult savePaciente([FromBody] NuevoPaciente np) 
         {
             try
             {
-                service.savePaciente(p);
+                service.savePaciente(np.paciente);
+
+                var hist = new Historiaclinica();
+                hist.FkPaciente = np.paciente.NoExpediente;
+                hist.FkHospital = np.hospital;
+                hist.FechaElab = System.DateTime.Today;
+                serviceHistoria.saveHistoriaClinica(hist);
+
+                int lastId = ((ServiceHistoriaClinica) serviceHistoria).getLastId();
+
+                var aux = new Motivosolicitud();
+                aux.FkHistoria = lastId;
+                serviceHistoria.saveMotivoSolicitud(aux);
+
+                var aux2 = new Historiaexploracion();
+                aux2.FkHistoria = lastId;
+                serviceHistoria.saveHistoriaExploracion(aux2);
+
+                var aux3 = new Procquirurgico();
+                aux3.FkHistoria = lastId;
+                serviceHistoria.saveProcedimientoQuirurgico(aux3);
+
+                var aux4 = new Estudioanatomo();
+                aux4.FkHistoria = lastId;
+                serviceHistoria.saveEstudioAnatomo(aux4);
+
+                var aux5 = new Evolucion();
+                aux5.FkHistoria = lastId;
+                serviceHistoria.saveEvolucion(aux5);
                 return Ok (true);
             }
             catch (System.Exception)
@@ -62,5 +93,11 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+    }
+
+    public class NuevoPaciente
+    {
+        public Paciente paciente { get; set; }
+        public int hospital { get; set; }
     }
 }

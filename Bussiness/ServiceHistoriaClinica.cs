@@ -197,5 +197,10 @@ namespace API_Hospital_Boca.Bussiness
                 throw;
             }
         }
+        public int getLastId()
+        {
+            var lastHist = context.Historiaclinicas.OrderBy(hi => hi.IdHistoriaClinica).Last();
+            return lastHist.IdHistoriaClinica;
+        }
     }
 }
