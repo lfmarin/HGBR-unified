@@ -46,8 +46,119 @@ namespace API_Hospital_Boca.Controllers
         {
             try
             {
-                System.Console.WriteLine(ms.FkHistoria);
                 service.updateMotivoSolicitud(ms);
+                return Ok(true);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/historiaClinica/historiaExploracion/save")]
+        public IActionResult saveHistoriaExploracion([FromBody] Historiaexploracion he)
+        {
+            try
+            {
+                service.saveHistoriaExploracion(he);
+                return Ok(true);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/historiaClinica/historiaExploracion/update")]
+        public IActionResult updateHistoriaExploracion([FromBody] Historiaexploracion he)
+        {
+            try
+            {
+                service.updateHistoriaExploracion(he);
+                return Ok(true);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/historiaClinica/procedimientoQuirurgico/save")]
+        public IActionResult saveProcedimientoQuirurgico([FromBody] Procquirurgico pq)
+        {
+            try
+            {
+                service.saveProcedimientoQuirurgico(pq);
+                return Ok(true);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/historiaClinica/procedimientoQuirurgico/update")]
+        public IActionResult updateProcedimientoQuirurgico([FromBody] Procquirurgico pq)
+        {
+            try
+            {
+                service.updateProcedimeintoQuirurgico(pq);
+                return Ok(true);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/historiaClinica/estudioAnatomo/save")]
+        public IActionResult saveEstudioAnatomo([FromBody] Estudioanatomo ea)
+        {
+            try
+            {
+                service.saveEstudioAnatomo(ea);
+                return Ok(true);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/historiaClinica/estudioAnatomo/update")]
+        public IActionResult updateEstudioAnatomoo([FromBody] Estudioanatomo ea)
+        {
+            try
+            {
+                service.updateEstudioAnatomo(ea);
+                return Ok(true);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/historiaClinica/evolucion/save")]
+        public IActionResult saveEvolucion([FromBody] Evolucion ev)
+        {
+            try
+            {
+                service.saveEvolucion(ev);
+                return Ok(true);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/historiaClinica/evolucion/update")]
+        public IActionResult updateEvolucion([FromBody] Evolucion ev)
+        {
+            try
+            {
+                service.updateEvolucion(ev);
                 return Ok(true);
             }
             catch (System.Exception)
