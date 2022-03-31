@@ -26,6 +26,35 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+
+        [HttpPost ("hospitalBoca/historiaClinica/motivoSolicitud/save")]
+        public IActionResult saveMotivoSolicitud([FromBody] Motivosolicitud ms)
+        {
+            try
+            {
+                service.saveMotivoSolicitud(ms);
+                return Ok(true);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/historiaClinica/motivoSolicitud/update")]
+        public IActionResult updateMotivoSolicitud([FromBody] Motivosolicitud ms)
+        {
+            try
+            {
+                System.Console.WriteLine(ms.FkHistoria);
+                service.updateMotivoSolicitud(ms);
+                return Ok(true);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }

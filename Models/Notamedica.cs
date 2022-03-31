@@ -7,7 +7,7 @@ namespace API_Hospital_Boca.Models
 {
     public partial class Notamedica
     {
-        public int? FkFicha { get; set; }
+        public int FkFicha { get; set; }
         public DateTime? FechaHora { get; set; }
         public string SignosVitales { get; set; }
         public string DiagnosticoPre { get; set; }

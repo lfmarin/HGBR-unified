@@ -42,6 +42,7 @@ namespace API_Hospital_Boca.Models
         public virtual Lugarreferencium FkLugarReferenciaNavigation { get; set; }
         public virtual Ocupacion FkOcupacionNavigation { get; set; }
         public virtual Religion FkReligionNavigation { get; set; }
+        public virtual Encuestaseguimiento Encuestaseguimiento { get; set; }
         public virtual ICollection<Fichaidentificacion> Fichaidentificacions { get; set; }
         public virtual ICollection<Historiaclinica> Historiaclinicas { get; set; }
     }

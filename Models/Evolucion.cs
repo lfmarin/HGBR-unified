@@ -7,7 +7,7 @@ namespace API_Hospital_Boca.Models
 {
     public partial class Evolucion
     {
-        public int? FkHistoria { get; set; }
+        public int FkHistoria { get; set; }
         public string Complicaciones { get; set; }
         public bool? Espermaconteo { get; set; }
         public DateTime? Fecha1 { get; set; }

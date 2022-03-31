@@ -7,7 +7,7 @@ namespace API_Hospital_Boca.Models
 {
     public partial class Cartaconsentimiento
     {
-        public int? FkFicha { get; set; }
+        public int FkFicha { get; set; }
         public int? FkHospital { get; set; }
         public DateTime? FechaHora { get; set; }
         public int? FkConsejeria { get; set; }

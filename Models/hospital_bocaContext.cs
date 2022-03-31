@@ -45,11 +45,11 @@ namespace API_Hospital_Boca.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-//             if (!optionsBuilder.IsConfigured)
-//             {
+            if (!optionsBuilder.IsConfigured)
+            {
 // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
 //                 optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=12345;database=hospital_boca");
-//             }
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -84,7 +84,8 @@ namespace API_Hospital_Boca.Models
 
             modelBuilder.Entity<Cartaconsentimiento>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FkFicha)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("cartaconsentimiento");
 
@@ -92,17 +93,15 @@ namespace API_Hospital_Boca.Models
 
                 entity.HasIndex(e => e.FkDoctor, "fkDoctor");
 
-                entity.HasIndex(e => e.FkFicha, "fkFicha");
-
                 entity.HasIndex(e => e.FkHospital, "fkHospital");
+
+                entity.Property(e => e.FkFicha).HasColumnName("fkFicha");
 
                 entity.Property(e => e.FechaHora).HasColumnName("fechaHora");
 
                 entity.Property(e => e.FkConsejeria).HasColumnName("fkConsejeria");
 
                 entity.Property(e => e.FkDoctor).HasColumnName("fkDoctor");
-
-                entity.Property(e => e.FkFicha).HasColumnName("fkFicha");
 
                 entity.Property(e => e.FkHospital).HasColumnName("fkHospital");
 
@@ -115,22 +114,23 @@ namespace API_Hospital_Boca.Models
                     .HasColumnName("testigo2");
 
                 entity.HasOne(d => d.FkConsejeriaNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Cartaconsentimientos)
                     .HasForeignKey(d => d.FkConsejeria)
                     .HasConstraintName("cartaconsentimiento_ibfk_3");
 
                 entity.HasOne(d => d.FkDoctorNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Cartaconsentimientos)
                     .HasForeignKey(d => d.FkDoctor)
                     .HasConstraintName("cartaconsentimiento_ibfk_4");
 
                 entity.HasOne(d => d.FkFichaNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.FkFicha)
+                    .WithOne(p => p.Cartaconsentimiento)
+                    .HasForeignKey<Cartaconsentimiento>(d => d.FkFicha)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("cartaconsentimiento_ibfk_1");
 
                 entity.HasOne(d => d.FkHospitalNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Cartaconsentimientos)
                     .HasForeignKey(d => d.FkHospital)
                     .HasConstraintName("cartaconsentimiento_ibfk_2");
             });
@@ -159,7 +159,8 @@ namespace API_Hospital_Boca.Models
 
             modelBuilder.Entity<Encuestaseguimiento>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FkPaciente)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("encuestaseguimiento");
 
@@ -173,7 +174,9 @@ namespace API_Hospital_Boca.Models
 
                 entity.HasIndex(e => e.FkHospitalReferencia, "fkHospitalReferencia");
 
-                entity.HasIndex(e => e.FkPaciente, "fkPaciente");
+                entity.Property(e => e.FkPaciente)
+                    .HasMaxLength(15)
+                    .HasColumnName("fkPaciente");
 
                 entity.Property(e => e.Complicacion).HasColumnName("complicacion");
 
@@ -202,10 +205,6 @@ namespace API_Hospital_Boca.Models
                 entity.Property(e => e.FkHospital).HasColumnName("fkHospital");
 
                 entity.Property(e => e.FkHospitalReferencia).HasColumnName("fkHospitalReferencia");
-
-                entity.Property(e => e.FkPaciente)
-                    .HasMaxLength(15)
-                    .HasColumnName("fkPaciente");
 
                 entity.Property(e => e.LugarEspermaconteo).HasMaxLength(50);
 
@@ -242,33 +241,34 @@ namespace API_Hospital_Boca.Models
                 entity.Property(e => e.Satisfaccion).HasColumnName("satisfaccion");
 
                 entity.HasOne(d => d.FkCalidadNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Encuestaseguimientos)
                     .HasForeignKey(d => d.FkCalidad)
                     .HasConstraintName("encuestaseguimiento_ibfk_5");
 
                 entity.HasOne(d => d.FkCalidadRelacionNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Encuestaseguimientos)
                     .HasForeignKey(d => d.FkCalidadRelacion)
                     .HasConstraintName("encuestaseguimiento_ibfk_6");
 
                 entity.HasOne(d => d.FkConsejeriaNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Encuestaseguimientos)
                     .HasForeignKey(d => d.FkConsejeria)
                     .HasConstraintName("encuestaseguimiento_ibfk_3");
 
                 entity.HasOne(d => d.FkHospitalNavigation)
-                    .WithMany()
+                    .WithMany(p => p.EncuestaseguimientoFkHospitalNavigations)
                     .HasForeignKey(d => d.FkHospital)
                     .HasConstraintName("encuestaseguimiento_ibfk_2");
 
                 entity.HasOne(d => d.FkHospitalReferenciaNavigation)
-                    .WithMany()
+                    .WithMany(p => p.EncuestaseguimientoFkHospitalReferenciaNavigations)
                     .HasForeignKey(d => d.FkHospitalReferencia)
                     .HasConstraintName("encuestaseguimiento_ibfk_4");
 
                 entity.HasOne(d => d.FkPacienteNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.FkPaciente)
+                    .WithOne(p => p.Encuestaseguimiento)
+                    .HasForeignKey<Encuestaseguimiento>(d => d.FkPaciente)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("encuestaseguimiento_ibfk_1");
             });
 
@@ -302,11 +302,12 @@ namespace API_Hospital_Boca.Models
 
             modelBuilder.Entity<Estudioanatomo>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FkHistoria)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("estudioanatomo");
 
-                entity.HasIndex(e => e.FkHistoria, "fkHistoria");
+                entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
 
                 entity.Property(e => e.Clave)
                     .HasMaxLength(50)
@@ -316,25 +317,25 @@ namespace API_Hospital_Boca.Models
                     .HasColumnType("date")
                     .HasColumnName("fechaEnvio");
 
-                entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
-
                 entity.Property(e => e.Resultado)
                     .HasMaxLength(50)
                     .HasColumnName("resultado");
 
                 entity.HasOne(d => d.FkHistoriaNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.FkHistoria)
+                    .WithOne(p => p.Estudioanatomo)
+                    .HasForeignKey<Estudioanatomo>(d => d.FkHistoria)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("estudioanatomo_ibfk_1");
             });
 
             modelBuilder.Entity<Evolucion>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FkHistoria)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("evolucion");
 
-                entity.HasIndex(e => e.FkHistoria, "fkHistoria");
+                entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
 
                 entity.Property(e => e.Complicaciones)
                     .HasMaxLength(100)
@@ -350,8 +351,6 @@ namespace API_Hospital_Boca.Models
                     .HasColumnType("date")
                     .HasColumnName("fecha2");
 
-                entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
-
                 entity.Property(e => e.Resultado1)
                     .HasMaxLength(50)
                     .HasColumnName("resultado1");
@@ -361,8 +360,9 @@ namespace API_Hospital_Boca.Models
                     .HasColumnName("resultado2");
 
                 entity.HasOne(d => d.FkHistoriaNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.FkHistoria)
+                    .WithOne(p => p.Evolucion)
+                    .HasForeignKey<Evolucion>(d => d.FkHistoria)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("evolucion_ibfk_1");
             });
 
@@ -431,11 +431,12 @@ namespace API_Hospital_Boca.Models
 
             modelBuilder.Entity<Historiaexploracion>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FkHistoria)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("historiaexploracion");
 
-                entity.HasIndex(e => e.FkHistoria, "fkHistoria");
+                entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
 
                 entity.Property(e => e.AntFamiliares)
                     .HasMaxLength(100)
@@ -456,8 +457,6 @@ namespace API_Hospital_Boca.Models
                 entity.Property(e => e.Fc)
                     .HasMaxLength(10)
                     .HasColumnName("fc");
-
-                entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
 
                 entity.Property(e => e.Fr)
                     .HasMaxLength(10)
@@ -484,8 +483,9 @@ namespace API_Hospital_Boca.Models
                     .HasColumnName("tipoPaciente");
 
                 entity.HasOne(d => d.FkHistoriaNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.FkHistoria)
+                    .WithOne(p => p.Historiaexploracion)
+                    .HasForeignKey<Historiaexploracion>(d => d.FkHistoria)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("historiaexploracion_ibfk_1");
             });
 
@@ -513,34 +513,34 @@ namespace API_Hospital_Boca.Models
 
             modelBuilder.Entity<Instruccionespost>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FkFicha)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("instruccionespost");
 
                 entity.HasIndex(e => e.FkDoctor, "fkDoctor");
 
-                entity.HasIndex(e => e.FkFicha, "fkFicha");
-
                 entity.HasIndex(e => e.FkHospital, "fkHospital");
 
-                entity.Property(e => e.FkDoctor).HasColumnName("fkDoctor");
-
                 entity.Property(e => e.FkFicha).HasColumnName("fkFicha");
+
+                entity.Property(e => e.FkDoctor).HasColumnName("fkDoctor");
 
                 entity.Property(e => e.FkHospital).HasColumnName("fkHospital");
 
                 entity.HasOne(d => d.FkDoctorNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Instruccionesposts)
                     .HasForeignKey(d => d.FkDoctor)
                     .HasConstraintName("instruccionespost_ibfk_3");
 
                 entity.HasOne(d => d.FkFichaNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.FkFicha)
+                    .WithOne(p => p.Instruccionespost)
+                    .HasForeignKey<Instruccionespost>(d => d.FkFicha)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("instruccionespost_ibfk_1");
 
                 entity.HasOne(d => d.FkHospitalNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Instruccionesposts)
                     .HasForeignKey(d => d.FkHospital)
                     .HasConstraintName("instruccionespost_ibfk_2");
             });
@@ -575,51 +575,52 @@ namespace API_Hospital_Boca.Models
 
             modelBuilder.Entity<Motivosolicitud>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FkHistoria)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("motivosolicitud");
-
-                entity.HasIndex(e => e.FkHistoria, "fkHistoria");
 
                 entity.HasIndex(e => e.FkMetodoPlanificacion, "fkMetodoPlanificacion");
 
                 entity.HasIndex(e => e.FkOpinion, "fkOpinion");
 
+                entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
+
                 entity.Property(e => e.CausaNoHijos)
                     .HasMaxLength(60)
                     .HasColumnName("causaNoHijos");
-
-                entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
 
                 entity.Property(e => e.FkMetodoPlanificacion).HasColumnName("fkMetodoPlanificacion");
 
                 entity.Property(e => e.FkOpinion).HasColumnName("fkOpinion");
 
                 entity.HasOne(d => d.FkHistoriaNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.FkHistoria)
+                    .WithOne(p => p.Motivosolicitud)
+                    .HasForeignKey<Motivosolicitud>(d => d.FkHistoria)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("motivosolicitud_ibfk_1");
 
                 entity.HasOne(d => d.FkMetodoPlanificacionNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Motivosolicituds)
                     .HasForeignKey(d => d.FkMetodoPlanificacion)
                     .HasConstraintName("motivosolicitud_ibfk_3");
 
                 entity.HasOne(d => d.FkOpinionNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Motivosolicituds)
                     .HasForeignKey(d => d.FkOpinion)
                     .HasConstraintName("motivosolicitud_ibfk_2");
             });
 
             modelBuilder.Entity<Notamedica>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FkFicha)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("notamedica");
 
                 entity.HasIndex(e => e.FkDoctor, "fkDoctor");
 
-                entity.HasIndex(e => e.FkFicha, "fkFicha");
+                entity.Property(e => e.FkFicha).HasColumnName("fkFicha");
 
                 entity.Property(e => e.CirugiaProgramada)
                     .HasMaxLength(100)
@@ -647,8 +648,6 @@ namespace API_Hospital_Boca.Models
 
                 entity.Property(e => e.FkDoctor).HasColumnName("fkDoctor");
 
-                entity.Property(e => e.FkFicha).HasColumnName("fkFicha");
-
                 entity.Property(e => e.Preparacion)
                     .HasMaxLength(100)
                     .HasColumnName("preparacion");
@@ -662,13 +661,14 @@ namespace API_Hospital_Boca.Models
                     .HasColumnName("tipoAnestesia");
 
                 entity.HasOne(d => d.FkDoctorNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Notamedicas)
                     .HasForeignKey(d => d.FkDoctor)
                     .HasConstraintName("notamedica_ibfk_2");
 
                 entity.HasOne(d => d.FkFichaNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.FkFicha)
+                    .WithOne(p => p.Notamedica)
+                    .HasForeignKey<Notamedica>(d => d.FkFicha)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("notamedica_ibfk_1");
             });
 
@@ -837,21 +837,20 @@ namespace API_Hospital_Boca.Models
 
             modelBuilder.Entity<Procquirurgico>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FkHistoria)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("procquirurgico");
 
                 entity.HasIndex(e => e.FkDoctor, "fkDoctor");
 
-                entity.HasIndex(e => e.FkHistoria, "fkHistoria");
+                entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
 
                 entity.Property(e => e.FechaCirugia)
                     .HasColumnType("date")
                     .HasColumnName("fechaCirugia");
 
                 entity.Property(e => e.FkDoctor).HasColumnName("fkDoctor");
-
-                entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
 
                 entity.Property(e => e.NotaQuirurgica)
                     .HasMaxLength(100)
@@ -862,13 +861,14 @@ namespace API_Hospital_Boca.Models
                     .HasColumnName("patologia");
 
                 entity.HasOne(d => d.FkDoctorNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Procquirurgicos)
                     .HasForeignKey(d => d.FkDoctor)
                     .HasConstraintName("procquirurgico_ibfk_2");
 
                 entity.HasOne(d => d.FkHistoriaNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.FkHistoria)
+                    .WithOne(p => p.Procquirurgico)
+                    .HasForeignKey<Procquirurgico>(d => d.FkHistoria)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("procquirurgico_ibfk_1");
             });
 
@@ -888,13 +888,14 @@ namespace API_Hospital_Boca.Models
 
             modelBuilder.Entity<Solicitudexamene>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.FkFicha)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("solicitudexamenes");
 
                 entity.HasIndex(e => e.FkDoctor, "fkDoctor");
 
-                entity.HasIndex(e => e.FkFicha, "fkFicha");
+                entity.Property(e => e.FkFicha).HasColumnName("fkFicha");
 
                 entity.Property(e => e.Estudios).HasColumnName("estudios");
 
@@ -902,18 +903,17 @@ namespace API_Hospital_Boca.Models
 
                 entity.Property(e => e.FkDoctor).HasColumnName("fkDoctor");
 
-                entity.Property(e => e.FkFicha).HasColumnName("fkFicha");
-
                 entity.Property(e => e.TipoSolicitud).HasColumnName("tipoSolicitud");
 
                 entity.HasOne(d => d.FkDoctorNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Solicitudexamenes)
                     .HasForeignKey(d => d.FkDoctor)
                     .HasConstraintName("solicitudexamenes_ibfk_2");
 
                 entity.HasOne(d => d.FkFichaNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.FkFicha)
+                    .WithOne(p => p.Solicitudexamene)
+                    .HasForeignKey<Solicitudexamene>(d => d.FkFicha)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("solicitudexamenes_ibfk_1");
             });
 

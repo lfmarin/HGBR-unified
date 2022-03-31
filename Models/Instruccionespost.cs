@@ -7,7 +7,7 @@ namespace API_Hospital_Boca.Models
 {
     public partial class Instruccionespost
     {
-        public int? FkFicha { get; set; }
+        public int FkFicha { get; set; }
         public int? FkDoctor { get; set; }
         public int? FkHospital { get; set; }
 

@@ -9,7 +9,11 @@ namespace API_Hospital_Boca.Models
     {
         public Hospitale()
         {
+            Cartaconsentimientos = new HashSet<Cartaconsentimiento>();
+            EncuestaseguimientoFkHospitalNavigations = new HashSet<Encuestaseguimiento>();
+            EncuestaseguimientoFkHospitalReferenciaNavigations = new HashSet<Encuestaseguimiento>();
             Historiaclinicas = new HashSet<Historiaclinica>();
+            Instruccionesposts = new HashSet<Instruccionespost>();
         }
 
         public int IdHospital { get; set; }
@@ -17,6 +21,10 @@ namespace API_Hospital_Boca.Models
         public string JurSanitaria { get; set; }
         public string UMedica { get; set; }
 
+        public virtual ICollection<Cartaconsentimiento> Cartaconsentimientos { get; set; }
+        public virtual ICollection<Encuestaseguimiento> EncuestaseguimientoFkHospitalNavigations { get; set; }
+        public virtual ICollection<Encuestaseguimiento> EncuestaseguimientoFkHospitalReferenciaNavigations { get; set; }
         public virtual ICollection<Historiaclinica> Historiaclinicas { get; set; }
+        public virtual ICollection<Instruccionespost> Instruccionesposts { get; set; }
     }
 }

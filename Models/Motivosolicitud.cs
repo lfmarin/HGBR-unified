@@ -7,7 +7,7 @@ namespace API_Hospital_Boca.Models
 {
     public partial class Motivosolicitud
     {
-        public int? FkHistoria { get; set; }
+        public int FkHistoria { get; set; }
         public string CausaNoHijos { get; set; }
         public int? FkOpinion { get; set; }
         public int? FkMetodoPlanificacion { get; set; }

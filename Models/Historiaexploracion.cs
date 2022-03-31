@@ -7,7 +7,7 @@ namespace API_Hospital_Boca.Models
 {
     public partial class Historiaexploracion
     {
-        public int? FkHistoria { get; set; }
+        public int FkHistoria { get; set; }
         public string AntFamiliares { get; set; }
         public string AntPersonalesNoPat { get; set; }
         public string AntPersonalesPat { get; set; }

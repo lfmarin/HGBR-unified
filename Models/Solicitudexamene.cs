@@ -7,7 +7,7 @@ namespace API_Hospital_Boca.Models
 {
     public partial class Solicitudexamene
     {
-        public int? FkFicha { get; set; }
+        public int FkFicha { get; set; }
         public DateTime? FechaHora { get; set; }
         public bool? TipoSolicitud { get; set; }
         public int? FkDoctor { get; set; }
