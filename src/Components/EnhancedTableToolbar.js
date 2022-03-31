@@ -12,6 +12,7 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ClearRounded from '@material-ui/icons/ClearRounded';
+import { Link } from 'react-router-dom';
 
 const useToolbarStyles = makeStyles((theme) => ({
     root: {
@@ -66,7 +67,13 @@ export default function EnhancedTableToolbar (props) {
           onClick={props.handleCancelSearch}>
           <ClearRounded/>
         </IconButton>
-        <Button className={classes.button} variant="contained" color="secondary" startIcon={<PersonAddIcon/>}>Agregar paciente</Button>
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="secondary"
+          startIcon={<PersonAddIcon/>}
+          component = {Link} to={'/pacientes/registro'}
+        > Agregar paciente </Button>
       </Toolbar>
     );
   };
