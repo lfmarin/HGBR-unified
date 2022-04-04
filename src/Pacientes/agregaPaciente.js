@@ -12,8 +12,6 @@ import { MenuItem } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { Grid } from '@mui/material';
-import clsx from 'clsx';
-
 
 export default function RegistroPaciente(){
     const [isFail, setIsFail] = useState(false);
@@ -40,11 +38,11 @@ export default function RegistroPaciente(){
         NombreEsposa : "",
         AosRelac : 0,
         CalleCasa : "",
-        NumCasa : "",
+        NumCasa : 0,
         ColCasa : "",
         TelCasa: "",
         CalleTrabajo: "",
-        NumTrabajo : "",
+        NumTrabajo : 0,
         ColTrabajo: "",
         TelTrabajo : "",
         FkHospital: ""
@@ -236,7 +234,24 @@ export default function RegistroPaciente(){
     return (
         <div className={style.fullWidth}>
         <Paper elevation={3}>
-            <Grid container spacing={1} justifyContent="flex-end" direction="row-reverse" alignItems="center">
+            <Grid container spacing={1} justifyContent="flex-end" alignItems="center">
+              <Grid item xs margin={1}>
+                <TextField
+                    required
+                    id="NoExpediente"
+                    label="No. de Expediente"
+                    variant="outlined"
+                    name = "NoExpediente"
+                    error={datos.NoExpediente === "" && isFail}
+                    defaultValue={datos.NoExpediente}
+                    onChange={handleChange}
+                    fullWidth
+                    inputProps={{ maxLength: 15 }}
+                />
+              </Grid>
+
+              <Grid item xs margin={1}></Grid>
+
               <Grid item xs margin={1}>
                   <FormControl variant="outlined" fullWidth>
                     <InputLabel id="FkHospital">Hospital que remite</InputLabel>
@@ -254,8 +269,6 @@ export default function RegistroPaciente(){
                     </Select>
                   </FormControl>
               </Grid>
-              <Grid item xs margin={1}></Grid>
-              <Grid item xs margin={1}></Grid>
             </Grid>
 
             <Grid container spacing={1} justifyContent="center">
@@ -275,6 +288,7 @@ export default function RegistroPaciente(){
                         defaultValue={datos.Nombre}
                         onChange={handleChange}
                         fullWidth
+                        inputProps={{ maxLength: 50 }}
                     />
                 </Grid>
 
@@ -289,6 +303,7 @@ export default function RegistroPaciente(){
                         defaultValue={datos.ApPaterno}
                         onChange={handleChange}
                         fullWidth
+                        inputProps={{ maxLength: 50 }}
                     />
                 </Grid>
 
@@ -303,6 +318,7 @@ export default function RegistroPaciente(){
                         defaultValue={datos.ApMaterno}
                         onChange={handleChange}
                         fullWidth
+                        inputProps={{ maxLength: 50 }}
                     />
                 </Grid>
             </Grid>
@@ -446,6 +462,7 @@ export default function RegistroPaciente(){
                         defaultValue={datos.NombreEsposa}
                         onChange={handleChange}
                         fullWidth
+                        inputProps={{ maxLength: 100 }}
                     />
                 </Grid>
 
@@ -511,6 +528,7 @@ export default function RegistroPaciente(){
                         fullWidth
                         required
                         error={datos.CalleCasa === "" && isFail}
+                        inputProps={{ maxLength: 50 }}
                     />
                 </Grid>
                 <Grid item xs margin={1}>
@@ -536,6 +554,7 @@ export default function RegistroPaciente(){
                         fullWidth
                         required
                         error={datos.ColCasa === "" && isFail}
+                        inputProps={{ maxLength: 50 }}
                     />
                 </Grid>
                 <Grid item xs margin={1}>
@@ -549,6 +568,7 @@ export default function RegistroPaciente(){
                         fullWidth
                         required
                         error={datos.TelCasa === "" && isFail}
+                        inputProps={{ maxLength: 12 }}
                     />
                 </Grid>
             </Grid> 
@@ -568,6 +588,7 @@ export default function RegistroPaciente(){
                         defaultValue={datos.CalleCasa}
                         onChange={handleChange}
                         fullWidth
+                        inputProps={{ maxLength: 50 }}
                     />
                 </Grid>
                 <Grid item xs margin={1}>
@@ -591,6 +612,7 @@ export default function RegistroPaciente(){
                         defaultValue={datos.ColTrabajo}
                         onChange={handleChange}
                         fullWidth
+                        inputProps={{ maxLength: 50 }}
                     />
                 </Grid>
                 <Grid item xs margin={1}>
@@ -602,6 +624,7 @@ export default function RegistroPaciente(){
                         defaultValue={datos.TelTrabajo}
                         onChange={handleChange}
                         fullWidth
+                        inputProps={{ maxLength: 12 }}
                     />
                 </Grid>
             </Grid> 
