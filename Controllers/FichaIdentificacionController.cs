@@ -26,5 +26,34 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+
+        [HttpGet ("hospitalBoca/notasMedicas/paciente")]
+        public IActionResult getAllNotasMedicas([FromBody] int numFicha)
+        {
+            try
+            {
+                var res = service.getAllNotasMedicas(numFicha);
+                return Ok(res);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/notasMedicas/save")]
+        public IActionResult saveNotaMedica([FromBody] Notamedica nm)
+        {
+            try
+            {
+                service.saveNotaMedica(nm);   
+                return Ok(nm);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+        
     }
 }

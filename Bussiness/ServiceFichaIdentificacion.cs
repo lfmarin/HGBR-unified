@@ -42,5 +42,42 @@ namespace API_Hospital_Boca.Bussiness
                 throw;
             }
         }
+        public void saveNotaMedica(Notamedica nm)
+        {
+            try
+            {
+                context.Notamedicas.Add(nm);  
+
+                context.SaveChanges(); 
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public IQueryable<object> getAllNotasMedicas(int numFicha)
+        {
+            try
+            {
+                return context.Notamedicas.Where(no => no.FkFicha == numFicha).Select(n => new {
+                    FechaHora = n.FechaHora,
+                    SignosVitales = n.SignosVitales,
+                    DiagnosticoPre = n.DiagnosticoPre,
+                    CirugiaProgamada = n.CirugiaProgramada,
+                    FechaCirugia = n.FechaCirugia,
+                    TipoAnestesia = n.TipoAnestesia,
+                    Preparacion = n.Preparacion,
+                    FkDoctor = n.FkDoctor,
+                    DiagnosticoPost = n.DiagnosticoPost,
+                    Complicaciones = n.Complicaciones,
+                    Descripcion = n.Descripcion
+                });
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }
