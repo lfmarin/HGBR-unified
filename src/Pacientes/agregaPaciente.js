@@ -12,10 +12,12 @@ import { MenuItem } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { Grid } from '@mui/material';
+import clsx from 'clsx';
 
 
 export default function RegistroPaciente(){
     const [isFail, setIsFail] = useState(false);
+    const [hospital, setHospital] = useState([]);
     const [estadoCivil, setEstadoCivil] = useState([]);
     const [escolaridad, setEscolaridad] = useState([]);
     const [ocupacion, setOcupacion] = useState([]);
@@ -44,10 +46,29 @@ export default function RegistroPaciente(){
         CalleTrabajo: "",
         NumTrabajo : "",
         ColTrabajo: "",
-        TelTrabajo : ""
+        TelTrabajo : "",
+        FkHospital: ""
     })
     const [errorbd, setErrorbd] = useState(false);
     const style = useStyles();
+
+    useEffect(() => {
+      axios.get("https://localhost:5001/hospitalBoca/hospitales/all", {
+        headers : {
+          'Content-type': 'application/json',
+        }
+      }).then (
+        (response) => {
+          if (response.status === 200) {
+            setHospital(response.data);
+            setErrorbd(false);
+          }
+        },
+        (error) => {
+          if(!error.response) setErrorbd(true);
+        }
+      );
+  },[])
 
     useEffect(() => {
         axios.get("https://localhost:5001/hospitalBoca/catalogos/estadoCivil", {
@@ -150,29 +171,32 @@ export default function RegistroPaciente(){
 
     const guardaPaciente = () => {
         axios.post ("https://localhost:5001/hospitalBoca/pacientes/save", {
-            NoExpediente : datos.NoExpediente,
-            Nombre : datos.Nombre,
-            ApPaterno : datos.ApPaterno,
-            ApMaterno : datos.ApMaterno,
-            FechaNac : datos.FechaNac,
-            FkEstadoCivil : datos.FkEstadoCivil,
-            Ivs : datos.Ivs,
-            FkEscolaridad : datos.FkEscolaridad,
-            FkOcupacion : datos.FkOcupacion,
-            FkReligion : datos.FkReligion,
-            FkLugarReferencia : datos.FkLugarReferencia,
-            NumHijosVivos : datos.NumHijosVivos,
-            EdadHijoMenor : datos.EdadHijoMenor,
-            NombreEsposa : datos.NombreEsposa,
-            AosRelac : datos.AosRelac,
-            CalleCasa : datos.CalleCasa,
-            NumCasa : datos.NumCasa,
-            ColCasa : datos.ColCasa,
-            TelCasa: datos.TelCasa,
-            CalleTrabajo: datos.CalleTrabajo,
-            NumTrabajo : datos.NumTrabajo,
-            ColTrabajo: datos.ColTrabajo,
-            TelTrabajo : datos.TelTrabajo
+            paciente: {
+              NoExpediente : datos.NoExpediente,
+              Nombre : datos.Nombre,
+              ApPaterno : datos.ApPaterno,
+              ApMaterno : datos.ApMaterno,
+              FechaNac : datos.FechaNac,
+              FkEstadoCivil : datos.FkEstadoCivil,
+              Ivs : datos.Ivs,
+              FkEscolaridad : datos.FkEscolaridad,
+              FkOcupacion : datos.FkOcupacion,
+              FkReligion : datos.FkReligion,
+              FkLugarReferencia : datos.FkLugarReferencia,
+              NumHijosVivos : datos.NumHijosVivos,
+              EdadHijoMenor : datos.EdadHijoMenor,
+              NombreEsposa : datos.NombreEsposa,
+              AosRelac : datos.AosRelac,
+              CalleCasa : datos.CalleCasa,
+              NumCasa : datos.NumCasa,
+              ColCasa : datos.ColCasa,
+              TelCasa: datos.TelCasa,
+              CalleTrabajo: datos.CalleTrabajo,
+              NumTrabajo : datos.NumTrabajo,
+              ColTrabajo: datos.ColTrabajo,
+              TelTrabajo : datos.TelTrabajo
+            },
+            hospital : datos.FkHospital
         },
         {
           headers : {
@@ -197,8 +221,8 @@ export default function RegistroPaciente(){
 
     const handleSave = () => {
         if (datos.NoExpediente==="" || datos.Nombre=== "" || datos.ApPaterno ==="" ||
-        datos.ApMaterno==="" || datos.FechaNac=== "" || datos.FkEstadoCivil === 0 || datos.FkEscolaridad === 0 || datos.FkOcupacion === 0 || datos.FkReligion === 0 ||
-        datos.FkLugarReferencia=== 0 || datos.TelCasa=== "" || datos.CalleCasa ==="" || datos.ColCasa === ""
+        datos.ApMaterno==="" || datos.FechaNac=== "" || datos.FkEstadoCivil === "" || datos.FkEscolaridad === "" || datos.FkOcupacion === "" || datos.FkReligion === "" ||
+        datos.FkLugarReferencia=== "" || datos.TelCasa=== "" || datos.CalleCasa ==="" || datos.ColCasa === "" || datos.FkHospital === ""
         ) {
             setIsFail(true)
             return;
@@ -212,6 +236,28 @@ export default function RegistroPaciente(){
     return (
         <div className={style.fullWidth}>
         <Paper elevation={3}>
+            <Grid container spacing={1} justifyContent="flex-end" direction="row-reverse" alignItems="center">
+              <Grid item xs margin={1}>
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel id="FkHospital">Hospital que remite</InputLabel>
+                    <Select
+                        required
+                        labelId="FkHospital"
+                        id="FkHospital"
+                        label="Hospital que remite"
+                        name="FkHospital"
+                        defaultValue={datos.FkHospital}
+                        onChange={handleChange}
+                        error={datos.FkHospital === "" && isFail}
+                    >
+                        {hospital.map(n => {return (<MenuItem value={n.idHospital}>{n.uMedica}</MenuItem>)})}
+                    </Select>
+                  </FormControl>
+              </Grid>
+              <Grid item xs margin={1}></Grid>
+              <Grid item xs margin={1}></Grid>
+            </Grid>
+
             <Grid container spacing={1} justifyContent="center">
                 <Grid item xs margin={1}>
                     <Typography className={style.line} variant="h5" style={{color: "#AC3833", fontWeight: "bold"}}>Información básica</Typography>
