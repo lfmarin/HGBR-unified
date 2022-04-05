@@ -5,6 +5,7 @@ import ListaPacientes from '../Pacientes/listaPacientes';
 import RegistroPaciente from '../Pacientes/agregaPaciente';
 import ListaDoctores from '../Doctores/ListaDoctores';
 import RegistroDoctor from '../Doctores/agregaDoctor';
+import ListaConsejeria from '../Consejeria/ListaPersonal';
 
 export default function MainRoutes() {
     return(
@@ -20,6 +21,9 @@ export default function MainRoutes() {
             </Route>
             <Route exact path="/doctores">
                 <ListaDoctores/>
+            </Route>
+            <Route exact path="/consejeria">
+                <ListaConsejeria/>
             </Route>
             <Route exact path="/">
                 <Home/>
