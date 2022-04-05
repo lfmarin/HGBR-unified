@@ -12,6 +12,8 @@ import { MenuItem } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { Grid } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 export default function RegistroPaciente(){
     const [isFail, setIsFail] = useState(false);
@@ -50,6 +52,7 @@ export default function RegistroPaciente(){
     const [errorbd, setErrorbd] = useState(false);
     const [finish, setFinish] = useState(false);
     const style = useStyles();
+    const [delay, setDelay] = useState(false);
 
     useEffect(() => {
       axios.get("https://localhost:5001/hospitalBoca/hospitales/all", {
@@ -168,6 +171,7 @@ export default function RegistroPaciente(){
         );
     },[])
 
+
     const guardaPaciente = () => {
         axios.post ("https://localhost:5001/hospitalBoca/pacientes/save", {
             paciente: {
@@ -233,7 +237,10 @@ export default function RegistroPaciente(){
 
     if(errorbd) return <Redirect to='/error'/>;
 
-    if(finish) return <Redirect to='/pacientes'/>;
+    if(finish){
+      setTimeout(() => setDelay(true), 3500);
+      if (delay) return <Redirect to='/pacientes'/>;
+    }
 
     return (
         <div className={style.fullWidth}>
@@ -643,6 +650,12 @@ export default function RegistroPaciente(){
               </Button>
             </Grid>
         </Paper>
-        </div>
+
+        <Snackbar open={finish}>
+          <Alert variant="filled" severity="success" sx={{ width: '100%' }}>
+            Paciente registrado con éxito, redirigiendo...
+          </Alert>
+        </Snackbar>
+      </div>
     );
 }

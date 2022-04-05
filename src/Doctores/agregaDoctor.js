@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import axios from 'axios';
@@ -8,6 +8,8 @@ import useStyles from '../Styles/formularioStyles';
 import { Button } from '@material-ui/core';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { Grid } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 export default function RegistroDoctor(){
     const [isFail, setIsFail] = useState(false);
@@ -18,6 +20,7 @@ export default function RegistroDoctor(){
     })
     const [errorbd, setErrorbd] = useState(false);
     const [finish, setFinish] = useState(false);
+    const [delay, setDelay] = useState(false);
     const style = useStyles();
 
     const guardaDoctor = () => {
@@ -59,7 +62,10 @@ export default function RegistroDoctor(){
 
     if(errorbd) return <Redirect to='/error'/>;
 
-    if(finish) return <Redirect to='/doctores'/>;
+    if(finish){
+      setTimeout(() => setDelay(true), 3500);
+      if (delay) return <Redirect to='/doctores'/>;
+    }
 
     return (
         <div className={style.fullWidth}>
@@ -126,6 +132,11 @@ export default function RegistroDoctor(){
               </Button>
             </Grid>
         </Paper>
-        </div>
+        <Snackbar open={finish}>
+          <Alert variant="filled" severity="success" sx={{ width: '100%' }}>
+            Doctor registrado con éxito, redirigiendo...
+          </Alert>
+        </Snackbar>
+      </div>
     );
 }
