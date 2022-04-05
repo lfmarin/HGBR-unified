@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
         marginLeft: theme.spacing(1),
         color: "white",
         backgroundColor: "#AC3833"

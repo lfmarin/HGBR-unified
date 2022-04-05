@@ -15,6 +15,17 @@ export default function Home() {
           altura = "150"
         />
       </Grid>
+
+      <Grid container spacing={2}>
+        <ExtendedCard
+          imgPath = "media/logo.png"
+          imgText = "Secretaria de Salud Doctores"
+          Title = "Doctores"
+          link = "/doctores"
+          alineacion = "center"
+          altura = "150"
+        />
+      </Grid>
     </div>
   );   
 }

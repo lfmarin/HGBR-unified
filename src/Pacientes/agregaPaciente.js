@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { TextField } from '@mui/material';
-import useStyles from './formularioStyles';
+import useStyles from '../Styles/formularioStyles';
 import { FormControl } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import { Select } from '@material-ui/core';

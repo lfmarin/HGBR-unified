@@ -3,7 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import ListaPacientes from '../Pacientes/listaPacientes';
 import RegistroPaciente from '../Pacientes/agregaPaciente';
-import ListaDoctores from '../Doctores/ListaDoctores'
+import ListaDoctores from '../Doctores/ListaDoctores';
+import RegistroDoctor from '../Doctores/agregaDoctor';
 
 export default function MainRoutes() {
     return(
@@ -13,6 +14,9 @@ export default function MainRoutes() {
             </Route>
             <Route exact path="/pacientes">
                 <ListaPacientes/>
+            </Route>
+            <Route exact path="/doctores/registro">
+                <RegistroDoctor/>
             </Route>
             <Route exact path="/doctores">
                 <ListaDoctores/>
