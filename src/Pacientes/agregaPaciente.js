@@ -48,6 +48,7 @@ export default function RegistroPaciente(){
         FkHospital: ""
     })
     const [errorbd, setErrorbd] = useState(false);
+    const [finish, setFinish] = useState(false);
     const style = useStyles();
 
     useEffect(() => {
@@ -203,6 +204,7 @@ export default function RegistroPaciente(){
         }).then ((response) => {
           if (response.status === 200) {
             setErrorbd(false);
+            setFinish(true);
           }
         }, (error) => {
           if(!error.response) setErrorbd(true);
@@ -210,12 +212,12 @@ export default function RegistroPaciente(){
       }
 
     const handleChange = e => {
-		const {name, value} = e.target;
-		setDatos({
-		...datos,
-		[name] : value
-		})
-	};
+      const {name, value} = e.target;
+      setDatos({
+      ...datos,
+      [name] : value
+      })
+	  };
 
     const handleSave = () => {
         if (datos.NoExpediente==="" || datos.Nombre=== "" || datos.ApPaterno ==="" ||
@@ -230,6 +232,8 @@ export default function RegistroPaciente(){
 
 
     if(errorbd) return <Redirect to='/error'/>;
+
+    if(finish) return <Redirect to='/pacientes'/>;
 
     return (
         <div className={style.fullWidth}>
@@ -628,21 +632,6 @@ export default function RegistroPaciente(){
                     />
                 </Grid>
             </Grid> 
-
-            <Grid>
-                <Typography>
-                    Nombre: {datos.Nombre} | A paterno: {datos.ApPaterno} | A Materno: {datos.ApMaterno} | Fecha Nac: {datos.FechaNac}
-                </Typography>
-                <Typography>
-                    Estado Civil: {datos.FkEstadoCivil} | IVS: {datos.Ivs} |Escolaridad: {datos.FkEscolaridad} | Religion: {datos.FkReligion} | Ocupacion: {datos.FkOcupacion}
-                </Typography>
-                <Typography>
-                   Lugar Ref: {datos.FkLugarReferencia} | Hijos vivos: {datos.NumHijosVivos} | Hijo menor: {datos.EdadHijoMenor} | Esposa: {datos.NombreEsposa} | Años Relac: {datos.AosRelac}
-                </Typography>
-                <Typography>
-                    Domicilio casa: {datos.CalleCasa} | {datos.NumCasa} | {datos.ColCasa} | Tel casa: {datos.TelCasa} | Domicilio Trab: {datos.CalleTrabajo} | {datos.NumTrabajo} | {datos.ColTrabajo} | Tel Trabajo: {datos.TelTrabajo}
-                </Typography>
-            </Grid>
             
             <Grid>
               <Button variant="contained" color="secondary"

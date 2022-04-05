@@ -47,7 +47,7 @@ export default function EnhancedTableToolbar (props) {
         className={clsx(classes.root)}
       >
         <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          Listado de pacientes
+          {props.title}
         </Typography>
         
         <TextField size="small" variant="outlined" label="Busqueda:" placeholder="Buscar..."
@@ -72,8 +72,8 @@ export default function EnhancedTableToolbar (props) {
           variant="contained"
           color="secondary"
           startIcon={<PersonAddIcon/>}
-          component = {Link} to={'/pacientes/registro'}
-        > Agregar paciente </Button>
+          component = {Link} to={props.link}
+        > {props.buttonTitle} </Button>
       </Toolbar>
     );
   };

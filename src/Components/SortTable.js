@@ -32,6 +32,16 @@ function descendingComparator (a, b, orderBy) {
       });
   
       return expedienteFilter;
+    },
+    searchTableDoctores: (array, search) => {
+      const idFilter = array.filter(element => {
+        return element.idDoctor.toString().indexOf(search) !== -1 ||
+        element.nombre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.apPaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.apMaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+      });
+  
+      return idFilter;
     }
 }
 
