@@ -9,10 +9,11 @@ import TablePagination from '@mui/material/TablePagination';
 import SortTable from '../Components/SortTable';
 import EnhancedTableHead from '../Components/HeadSortTable';
 import { visuallyHidden } from '@mui/utils';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
+import useStyles from '../Styles/listaPacientesStyles';
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar';
+import Button from '@mui/material/Button';
 
 const headCells = [
   { id: 'noExpediente', numeric: false, label: 'No. Expediente' },
@@ -21,37 +22,8 @@ const headCells = [
   { id: 'apMaerno', numeric: false, label: 'Apellido Materno' },
   { id: 'fechaNacimiento', numeric: false, label: 'Edad' },
   { id: 'fechaNacimiento', numeric: false, label: 'Fecha de Nacimiento' },
+  { id: 'accion', numeric: false }
 ]
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(2)
-  },
-  table: {
-    minWidth: 750,
-    marginTop: theme.spacing(2),
-    border: "1px solid #ccc",
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
-  row: {
-    textDecoration: "none"
-  }
-}));
 
 export default function ListaPacientes (props) {
   const [pacientes,setPacientes] = useState([]);
@@ -196,6 +168,11 @@ export default function ListaPacientes (props) {
                     <TableCell>{item.apMaerno}</TableCell>
                     <TableCell>{getAge(item.fechaNacimiento)} años</TableCell>
                     <TableCell>{dateFormatter(item.fechaNacimiento)}</TableCell>
+                    <TableCell>
+                      <Button component={Link} to={`/pacientes/detalles/`} variant="outlined" sx={{borderColor: "#AC3833", color:"#AC3833"}}>
+                        Expediente
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 );
               })}

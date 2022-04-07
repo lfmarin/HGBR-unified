@@ -6,10 +6,18 @@ import RegistroPaciente from '../Pacientes/agregaPaciente';
 import ListaDoctores from '../Doctores/ListaDoctores';
 import RegistroDoctor from '../Doctores/agregaDoctor';
 import ListaConsejeria from '../Consejeria/ListaPersonal';
+import DetallesPaciente from '../Pacientes/detallesPaciente';
+import MainHistoriaClinica from '../Pacientes/HistoriaClinica/MainHistoria';
 
 export default function MainRoutes() {
     return(
         <Switch>
+            <Route exact path="/pacientes/detalles/historia-clinica">
+                <MainHistoriaClinica/>
+            </Route>
+            <Route exact path="/pacientes/detalles">
+                <DetallesPaciente/>
+            </Route>
             <Route exact path="/pacientes/registro">
                 <RegistroPaciente/>
             </Route>

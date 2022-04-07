@@ -14,12 +14,12 @@ export default function ExtendedCard(props){
       <CardActionArea>
         <CardMedia
           component="img"
-          height="50"
+          height="100"
           image= {props.imgPath}
           alt= {props.imgText}
         />
         <Box>
-          <CardContent>
+          <CardContent sx={{ height: 20, margin: -1}}>
             <Typography gutterBottom variant="h6" component="div" color="#000000">
               {props.Title}
             </Typography>

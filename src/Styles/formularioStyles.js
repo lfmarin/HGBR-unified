@@ -52,7 +52,33 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(1),
         color: "white",
         backgroundColor: "#AC3833"
-      }
+      },
+    otbutton: {
+      borderColor: "#AC3833",
+      color:"#AC3833"
+    },
+    contenedor: {
+      backgroundColor: "white",
+      border: "1px solid #ccc",
+      borderRadius: "5px",
+      padding: theme.spacing(4),
+    },
+    heading: {
+      fontSize: theme.typography.pxToRem(18),
+      fontWeight: theme.typography.fontWeightRegular,
+      color: "white",
+    },
+    head: {
+      backgroundColor: "#AC3833",
+    },
+    datoSuperior: {
+      marginTop: theme.spacing(4),
+    },
+    center: {
+      display: "flex",
+      padding: theme.spacing(5),
+      justifyContent: "space-around",
+    }
   }));
   
 export default useStyles;
