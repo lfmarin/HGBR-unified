@@ -43,6 +43,23 @@ namespace API_Hospital_Boca.Bussiness
             throw new System.NotImplementedException();
         }
 
+        public object getDoctor(int idDoctor)
+        {
+            try
+            {
+                return context.Doctores.Where(d => d.IdDoctor == idDoctor).Select(doc => new {
+                    IdDcotor = doc.IdDoctor,
+                    Nombre = doc.Nombre,
+                    ApPaterno = doc.ApPaterno,
+                    ApMaterno = doc.ApMaterno
+                }).First();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
         public void saveDoctor(Doctore d)
         {
             try

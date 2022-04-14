@@ -43,6 +43,43 @@ namespace API_Hospital_Boca.Bussiness
             }
         }
 
+        public object getPaciente(string numExpediente)
+        {
+            try
+            {
+                return context.Pacientes.Where(p => p.NoExpediente == numExpediente).Select(pa => new {
+                    NoExpediente = pa.NoExpediente,
+                    Nombre = pa.Nombre,
+                    ApPaterno = pa.ApPaterno,
+                    ApMaterno = pa.ApMaterno,
+                    FechaNac = pa.FechaNac,
+                    FkEstadoCivil = pa.FkEstadoCivil,
+                    Ivs = pa.Ivs,
+                    FkEscolaridad = pa.FkEscolaridad,
+                    FkOcupacion = pa.FkOcupacion,
+                    FkReligion = pa.FkReligion,
+                    FkLugarReferencia = pa.FkLugarReferencia,
+                    NumHijosVivos = pa.NumHijosVivos,
+                    EdadHijoMenor = pa.EdadHijoMenor,
+                    NombreEsposa = pa.NombreEsposa,
+                    AosRelac = pa.AosRelac,
+                    CalleCasa = pa.CalleCasa,
+                    NumCasa = pa.NumCasa,
+                    ColCasa = pa.ColCasa,
+                    TelCasa = pa.TelCasa,
+                    CalleTrabajo = pa.CalleTrabajo,
+                    NumTrabajo = pa.NumTrabajo,
+                    ColTrabajo = pa.ColTrabajo,
+                    TelTrabajo = pa.TelTrabajo
+                }).First();
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+
         public void savePaciente(Paciente pa)
         {
             try

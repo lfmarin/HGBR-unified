@@ -61,5 +61,19 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+
+        [HttpGet ("hospitalBoca/doctores/getOne")]
+        public IActionResult getDoctor([FromBody] int idDoctor)
+        {
+            try
+            {
+                var doc = service.getDoctor(idDoctor);
+                return Ok(doc);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }

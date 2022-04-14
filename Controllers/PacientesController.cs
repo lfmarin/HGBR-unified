@@ -100,6 +100,20 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+
+         [HttpGet ("hospitalBoca/pacientes/getOne")]
+         public IActionResult getPaciente([FromBody] string numExpediente)
+         {
+            try
+            {
+                var info = service.getPaciente(numExpediente);
+                return Ok(info);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+         }
     }
 
     public class NuevoPaciente
