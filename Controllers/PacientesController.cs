@@ -101,8 +101,8 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-         [HttpGet ("hospitalBoca/pacientes/getOne")]
-         public IActionResult getPaciente([FromBody] string numExpediente)
+         [HttpGet ("hospitalBoca/pacientes/{numExpediente}")]
+         public IActionResult getPaciente(string numExpediente)
          {
             try
             {
