@@ -6,6 +6,7 @@ import RegistroPaciente from '../Pacientes/agregaPaciente';
 import ListaDoctores from '../Doctores/ListaDoctores';
 import RegistroDoctor from '../Doctores/agregaDoctor';
 import ListaConsejeria from '../Consejeria/ListaPersonal';
+import RegistroPersonal from '../Consejeria/agregaPersonal';
 import DetallesPaciente from '../Pacientes/detallesPaciente';
 import MainHistoriaClinica from '../Pacientes/HistoriaClinica/MainHistoria';
 
@@ -29,6 +30,9 @@ export default function MainRoutes() {
             </Route>
             <Route exact path="/doctores">
                 <ListaDoctores/>
+            </Route>
+            <Route exact path="/consejeria/registro">
+                <RegistroPersonal/>
             </Route>
             <Route exact path="/consejeria">
                 <ListaConsejeria/>
