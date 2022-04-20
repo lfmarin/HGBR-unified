@@ -62,8 +62,8 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpGet ("hospitalBoca/doctores/getOne")]
-        public IActionResult getDoctor([FromBody] int idDoctor)
+        [HttpGet ("hospitalBoca/doctores/{idDoctor}")]
+        public IActionResult getDoctor(int idDoctor)
         {
             try
             {
