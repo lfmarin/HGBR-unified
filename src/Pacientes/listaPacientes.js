@@ -169,7 +169,7 @@ export default function ListaPacientes (props) {
                     <TableCell>{getAge(item.fechaNacimiento)} años</TableCell>
                     <TableCell>{dateFormatter(item.fechaNacimiento)}</TableCell>
                     <TableCell>
-                      <Button component={Link} to={`/pacientes/detalles/`} variant="outlined" sx={{borderColor: "#AC3833", color:"#AC3833"}}>
+                      <Button component={Link} to={`/pacientes/detalles/${item.noExpediente}`} variant="outlined" sx={{borderColor: "#AC3833", color:"#AC3833"}}>
                         Expediente
                       </Button>
                     </TableCell>

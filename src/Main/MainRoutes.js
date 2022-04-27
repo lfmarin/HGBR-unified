@@ -13,10 +13,10 @@ import MainHistoriaClinica from '../Pacientes/HistoriaClinica/MainHistoria';
 export default function MainRoutes() {
     return(
         <Switch>
-            <Route exact path="/pacientes/detalles/historia-clinica">
+            <Route exact path="/pacientes/detalles/:noExpediente/historia-clinica">
                 <MainHistoriaClinica/>
             </Route>
-            <Route exact path="/pacientes/detalles">
+            <Route exact path="/pacientes/detalles/:noExpediente">
                 <DetallesPaciente/>
             </Route>
             <Route exact path="/pacientes/registro">

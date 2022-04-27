@@ -9,8 +9,10 @@ import CartaConsentimiento from './Secciones/CartaConsentimiento';
 import InstruccionesPost from './Secciones/InstruccionesPost';
 import SeccionEncuesta from './Secciones/Encuesta';
 import SeccionExamenes from './Secciones/Examenes';
+import { useParams } from 'react-router';
 
 export default function DetallesPaciente() {
+  const {noExpediente} = useParams();
   const classes = useStyles();
   return (
     <div className={classes.root}>

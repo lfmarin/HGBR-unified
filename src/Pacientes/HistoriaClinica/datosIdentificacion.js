@@ -1,28 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { TextField } from '@mui/material';
 import useStyles from '../../Styles/formularioStyles';
+import { Button } from '@material-ui/core';
+import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
+import { Grid } from '@mui/material';
+import { useParams } from 'react-router';
+import Paper from '@material-ui/core/Paper';
 import { FormControl } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
-import { Button } from '@material-ui/core';
-import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
-import { Grid } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
 export default function DatosIdentificacion(){
+    const {noExpediente} = useParams();
     const [isFail, setIsFail] = useState(false);
-    const [hospital, setHospital] = useState([]);
-    const [estadoCivil, setEstadoCivil] = useState([]);
-    const [escolaridad, setEscolaridad] = useState([]);
-    const [ocupacion, setOcupacion] = useState([]);
-    const [religion, setReligion] = useState([]);
-    const [lugar, setLugar] = useState([]);
     const [datos, setDatos] = useState({
         NoExpediente : "",
         Nombre : "",
@@ -47,22 +43,98 @@ export default function DatosIdentificacion(){
         NumTrabajo : 0,
         ColTrabajo: "",
         TelTrabajo : "",
-        FkHospital: ""
-    })
+    });
+    const [estadoCivil, setEstadoCivil] = useState([]);
+    const [escolaridad, setEscolaridad] = useState([]);
+    const [ocupacion, setOcupacion] = useState([]);
+    const [religion, setReligion] = useState([]);
+    const [lugar, setLugar] = useState([]);
     const [errorbd, setErrorbd] = useState(false);
     const [finish, setFinish] = useState(false);
     const style = useStyles();
     const [delay, setDelay] = useState(false);
+    const [load, setLoad] = useState(true);
+    const [show, setShow] = useState(false);
+
+    const cargaPaciente = () => {
+      axios.get(`https://localhost:5001/hospitalBoca/pacientes/${noExpediente}`,{
+        headers : {
+          'Content-type' : 'application/json',
+        }
+      }).then((response) => {
+        if (response.status === 200){
+          var fecha = response.data.fechaNac.substring(0, response.data.fechaNac.indexOf("T"));
+          setDatos({
+            NoExpediente : response.data.noExpediente,
+            Nombre : response.data.nombre,
+            ApPaterno : response.data.apPaterno,
+            ApMaterno : response.data.apMaterno,
+            FechaNac : fecha,
+            FkEstadoCivil : response.data.fkEstadoCivil,
+            Ivs : response.data.ivs,
+            FkEscolaridad : response.data.fkEscolaridad,
+            FkOcupacion : response.data.fkOcupacion,
+            FkReligion : response.data.fkReligion,
+            FkLugarReferencia : response.data.fkLugarReferencia,
+            NumHijosVivos : response.data.numHijosVivos,
+            EdadHijoMenor : response.data.edadHijoMenor,
+            NombreEsposa : response.data.nombreEsposa,
+            AosRelac : response.data.aosRelac,
+            CalleCasa : response.data.calleCasa,
+            NumCasa : response.data.numCasa,
+            ColCasa : response.data.colCasa,
+            TelCasa: response.data.telCasa,
+            CalleTrabajo: response.data.calleTrabajo,
+            NumTrabajo : response.data.numTrabajo,
+            ColTrabajo: response.data.colTrabajo,
+            TelTrabajo : response.data.telTrabajo,
+          });
+          setShow(true);
+        }
+      }, (error) => {
+        if(!error.response){
+          setErrorbd(true);
+          setShow(false);
+        }
+      });
+    };
 
     useEffect(() => {
-      axios.get("https://localhost:5001/hospitalBoca/hospitales/all", {
+      axios.get("https://localhost:5001/hospitalBoca/catalogos/estadoCivil", {
+        headers : {
+          'Content-type': 'application/json',
+          //'Authorization': `Bearer ${token}`
+        }
+      }).then (
+        (response) => {
+          if (response.status === 200) {
+            setEstadoCivil(response.data);
+            setErrorbd(false);
+          }
+        },
+        (error) => {
+          if(!error.response) setErrorbd(true);
+          /*else{
+            if (error.response.status === 401) {
+              localStorage.removeItem("ACCESS_TOKEN");
+              setToken('');
+              setErrorbd(false);
+            }
+          }*/
+        }
+      );
+  },[])
+
+
+  useEffect(() => {
+      axios.get("https://localhost:5001/hospitalBoca/catalogos/escolaridad", {
         headers : {
           'Content-type': 'application/json',
         }
       }).then (
         (response) => {
           if (response.status === 200) {
-            setHospital(response.data);
+            setEscolaridad(response.data);
             setErrorbd(false);
           }
         },
@@ -72,167 +144,120 @@ export default function DatosIdentificacion(){
       );
   },[])
 
-    useEffect(() => {
-        axios.get("https://localhost:5001/hospitalBoca/catalogos/estadoCivil", {
-          headers : {
-            'Content-type': 'application/json',
-            //'Authorization': `Bearer ${token}`
-          }
-        }).then (
-          (response) => {
-            if (response.status === 200) {
-              setEstadoCivil(response.data);
-              setErrorbd(false);
-            }
-          },
-          (error) => {
-            if(!error.response) setErrorbd(true);
-            /*else{
-              if (error.response.status === 401) {
-                localStorage.removeItem("ACCESS_TOKEN");
-                setToken('');
-                setErrorbd(false);
-              }
-            }*/
-          }
-        );
-    },[])
-
-
-    useEffect(() => {
-        axios.get("https://localhost:5001/hospitalBoca/catalogos/escolaridad", {
-          headers : {
-            'Content-type': 'application/json',
-          }
-        }).then (
-          (response) => {
-            if (response.status === 200) {
-              setEscolaridad(response.data);
-              setErrorbd(false);
-            }
-          },
-          (error) => {
-            if(!error.response) setErrorbd(true);
-          }
-        );
-    },[])
-
-    useEffect(() => {
-        axios.get("https://localhost:5001/hospitalBoca/catalogos/ocupacion", {
-          headers : {
-            'Content-type': 'application/json',
-          }
-        }).then (
-          (response) => {
-            if (response.status === 200) {
-              setOcupacion(response.data);
-              setErrorbd(false);
-            }
-          },
-          (error) => {
-            if(!error.response) setErrorbd(true);
-          }
-        );
-    },[])
-
-    useEffect(() => {
-        axios.get("https://localhost:5001/hospitalBoca/catalogos/religion", {
-          headers : {
-            'Content-type': 'application/json',
-          }
-        }).then (
-          (response) => {
-            if (response.status === 200) {
-              setReligion(response.data);
-              setErrorbd(false);
-            }
-          },
-          (error) => {
-            if(!error.response) setErrorbd(true);
-          }
-        );
-    },[])
-
-    useEffect(() => {
-        axios.get("https://localhost:5001/hospitalBoca/catalogos/lugarReferencia", {
-          headers : {
-            'Content-type': 'application/json',
-          }
-        }).then (
-          (response) => {
-            if (response.status === 200) {
-              setLugar(response.data);
-              setErrorbd(false);
-            }
-          },
-          (error) => {
-            if(!error.response) setErrorbd(true);
-          }
-        );
-    },[])
-
-
-    const guardaPaciente = () => {
-        axios.post ("https://localhost:5001/hospitalBoca/pacientes/save", {
-            paciente: {
-              NoExpediente : datos.NoExpediente,
-              Nombre : datos.Nombre,
-              ApPaterno : datos.ApPaterno,
-              ApMaterno : datos.ApMaterno,
-              FechaNac : datos.FechaNac,
-              FkEstadoCivil : datos.FkEstadoCivil,
-              Ivs : datos.Ivs,
-              FkEscolaridad : datos.FkEscolaridad,
-              FkOcupacion : datos.FkOcupacion,
-              FkReligion : datos.FkReligion,
-              FkLugarReferencia : datos.FkLugarReferencia,
-              NumHijosVivos : datos.NumHijosVivos,
-              EdadHijoMenor : datos.EdadHijoMenor,
-              NombreEsposa : datos.NombreEsposa,
-              AosRelac : datos.AosRelac,
-              CalleCasa : datos.CalleCasa,
-              NumCasa : datos.NumCasa,
-              ColCasa : datos.ColCasa,
-              TelCasa: datos.TelCasa,
-              CalleTrabajo: datos.CalleTrabajo,
-              NumTrabajo : datos.NumTrabajo,
-              ColTrabajo: datos.ColTrabajo,
-              TelTrabajo : datos.TelTrabajo
-            },
-            hospital : datos.FkHospital
-        },
-        {
-          headers : {
-            'Content-type': 'application/json',
-          }
-        }).then ((response) => {
+  useEffect(() => {
+      axios.get("https://localhost:5001/hospitalBoca/catalogos/ocupacion", {
+        headers : {
+          'Content-type': 'application/json',
+        }
+      }).then (
+        (response) => {
           if (response.status === 200) {
+            setOcupacion(response.data);
             setErrorbd(false);
-            setFinish(true);
           }
-        }, (error) => {
+        },
+        (error) => {
           if(!error.response) setErrorbd(true);
-        })
-      }
+        }
+      );
+  },[])
 
-    const handleChange = e => {
-      const {name, value} = e.target;
+  useEffect(() => {
+      axios.get("https://localhost:5001/hospitalBoca/catalogos/religion", {
+        headers : {
+          'Content-type': 'application/json',
+        }
+      }).then (
+        (response) => {
+          if (response.status === 200) {
+            setReligion(response.data);
+            setErrorbd(false);
+          }
+        },
+        (error) => {
+          if(!error.response) setErrorbd(true);
+        }
+      );
+  },[])
+
+  useEffect(() => {
+      axios.get("https://localhost:5001/hospitalBoca/catalogos/lugarReferencia", {
+        headers : {
+          'Content-type': 'application/json',
+        }
+      }).then (
+        (response) => {
+          if (response.status === 200) {
+            setLugar(response.data);
+            setErrorbd(false);
+          }
+        },
+        (error) => {
+          if(!error.response) setErrorbd(true);
+        }
+      );
+  },[])
+
+    const handleChange = (event) => {
+      //const {name, value} = e.target;
       setDatos({
       ...datos,
-      [name] : value
+      [event.target.name] : event.target.value
       })
 	  };
 
-    const handleSave = () => {
-        if (datos.NoExpediente==="" || datos.Nombre=== "" || datos.ApPaterno ==="" ||
-        datos.ApMaterno==="" || datos.FechaNac=== "" || datos.FkEstadoCivil === "" || datos.FkEscolaridad === "" || datos.FkOcupacion === "" || datos.FkReligion === "" ||
-        datos.FkLugarReferencia=== "" || datos.TelCasa=== "" || datos.CalleCasa ==="" || datos.ColCasa === "" || datos.FkHospital === ""
-        ) {
-            setIsFail(true)
-            return;
+    const guardaPaciente = () => {
+      axios.post ("https://localhost:5001/hospitalBoca/pacientes/update", {
+        NoExpediente : datos.NoExpediente,
+        Nombre : datos.Nombre,
+        ApPaterno : datos.ApPaterno,
+        ApMaterno : datos.ApMaterno,
+        FechaNac : datos.FechaNac,
+        FkEstadoCivil : datos.FkEstadoCivil,
+        Ivs : datos.Ivs,
+        FkEscolaridad : datos.FkEscolaridad,
+        FkOcupacion : datos.FkOcupacion,
+        FkReligion : datos.FkReligion,
+        FkLugarReferencia : datos.FkLugarReferencia,
+        NumHijosVivos : datos.NumHijosVivos,
+        EdadHijoMenor : datos.EdadHijoMenor,
+        NombreEsposa : datos.NombreEsposa,
+        AosRelac : datos.AosRelac,
+        CalleCasa : datos.CalleCasa,
+        NumCasa : datos.NumCasa,
+        ColCasa : datos.ColCasa,
+        TelCasa: datos.TelCasa,
+        CalleTrabajo: datos.CalleTrabajo,
+        NumTrabajo : datos.NumTrabajo,
+        ColTrabajo: datos.ColTrabajo,
+        TelTrabajo : datos.TelTrabajo,
+      },
+      {
+        headers : {
+          'Content-type': 'application/json',
         }
-        else guardaPaciente();
-      };
+      }).then ((response) => {
+        if (response.status === 200) {
+          setErrorbd(false);
+          setFinish(true);
+        }
+      }, (error) => {
+        if(!error.response) setErrorbd(true);
+      })
+    }
+
+    const handleSave = () => {
+      if (datos.NoExpediente==="" || datos.Nombre=== "" || datos.ApPaterno ==="" ||
+      datos.ApMaterno==="" || datos.FechaNac=== "" || datos.FkEstadoCivil === "" || datos.FkEscolaridad === "" || datos.FkOcupacion === "" || datos.FkReligion === "" ||
+      datos.FkLugarReferencia=== "" || datos.TelCasa=== "" || datos.CalleCasa ==="" || datos.ColCasa === "" || datos.FkHospital === ""
+      ) {
+          setIsFail(true)
+          return;
+      }
+      else{
+        guardaPaciente();
+      }
+    };
 
 
     if(errorbd) return <Redirect to='/error'/>;
@@ -242,8 +267,15 @@ export default function DatosIdentificacion(){
       if (delay) return <Redirect to='/pacientes'/>;
     }
 
-    return (
+    if (load){
+      cargaPaciente();
+      setLoad(false);
+    }
+
+    if (show){
+      return (
         <div className={style.fullWidth}>
+        <Paper elevation={3}>
             <Grid container spacing={1} justifyContent="flex-end" alignItems="center">
               <Grid item xs margin={1}>
                 <TextField
@@ -261,24 +293,6 @@ export default function DatosIdentificacion(){
               </Grid>
 
               <Grid item xs margin={1}></Grid>
-
-              <Grid item xs margin={1}>
-                  <FormControl variant="outlined" fullWidth>
-                    <InputLabel id="FkHospital">Hospital que remite</InputLabel>
-                    <Select
-                        required
-                        labelId="FkHospital"
-                        id="FkHospital"
-                        label="Hospital que remite"
-                        name="FkHospital"
-                        defaultValue={datos.FkHospital}
-                        onChange={handleChange}
-                        error={datos.FkHospital === "" && isFail}
-                    >
-                        {hospital.map(n => {return (<MenuItem value={n.idHospital}>{n.uMedica}</MenuItem>)})}
-                    </Select>
-                  </FormControl>
-              </Grid>
             </Grid>
 
             <Grid container spacing={1} justifyContent="center">
@@ -337,7 +351,7 @@ export default function DatosIdentificacion(){
                 <Grid item xs margin={1}>
                     <TextField
                         required
-                        id="fechaNac"
+                        id="FechaNac"
                         label="Fecha de nacimiento" 
                         type="date"
                         variant="outlined"
@@ -648,12 +662,19 @@ export default function DatosIdentificacion(){
                 GUARDAR
               </Button>
             </Grid>
+        </Paper>
 
         <Snackbar open={finish}>
           <Alert variant="filled" severity="success" sx={{ width: '100%' }}>
-            Paciente guardado con éxito, redirigiendo...
+            Paciente registrado con éxito, redirigiendo...
           </Alert>
         </Snackbar>
       </div>
     );
-}
+    }
+    else{
+      return(
+        <Typography> Ha habido un problema cargando la información del usuario </Typography>
+      );
+    }
+  }
