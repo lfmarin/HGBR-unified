@@ -297,7 +297,7 @@ export default function DatosIdentificacion(){
 
             <Grid container spacing={1} justifyContent="center">
                 <Grid item xs margin={1}>
-                    <Typography className={style.line} variant="h5" style={{color: "#AC3833", fontWeight: "bold"}}>Información básica</Typography>
+                    <Typography className={style.line} variant="h6" style={{color: "#AC3833", fontWeight: "bold"}}>Información básica</Typography>
                 </Grid>
             </Grid>
             <Grid container spacing={1} justifyContent="center">
@@ -473,7 +473,7 @@ export default function DatosIdentificacion(){
                 
             <Grid container spacing={1} justifyContent="center">
                 <Grid item xs margin={1}>
-                    <Typography className={style.line} variant="h5" style={{color: "#AC3833", fontWeight: "bold"}}>Información familiar</Typography>
+                    <Typography className={style.line} variant="h6" style={{color: "#AC3833", fontWeight: "bold"}}>Información familiar</Typography>
                 </Grid>
             </Grid>
             <Grid container spacing={1} justifyContent="center">
@@ -532,7 +532,7 @@ export default function DatosIdentificacion(){
 
             <Grid container spacing={1} justifyContent="center">
                 <Grid item xs margin={1}>
-                    <Typography className={style.line} variant="h5" style={{color: "#AC3833", fontWeight: "bold"}}>Información de contacto</Typography>
+                    <Typography className={style.line} variant="h6" style={{color: "#AC3833", fontWeight: "bold"}}>Información de contacto</Typography>
                 </Grid>
             </Grid>
             <Grid container spacing={1} justifyContent="center">

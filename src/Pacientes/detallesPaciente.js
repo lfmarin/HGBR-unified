@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Accordion, AccordionSummary, Typography } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import useStyles from "../Styles/detallesStyles";
@@ -10,12 +10,49 @@ import InstruccionesPost from './Secciones/InstruccionesPost';
 import SeccionEncuesta from './Secciones/Encuesta';
 import SeccionExamenes from './Secciones/Examenes';
 import { useParams } from 'react-router';
+import axios from 'axios';
 
 export default function DetallesPaciente() {
   const {noExpediente} = useParams();
   const classes = useStyles();
+  const [datos, setDatos] = useState({
+    NoExpediente : "",
+    Nombre : "",
+    ApPaterno : "",
+    ApMaterno : "",
+  });
+  const [load, setLoad] = useState(true);
+  const [errorbd, setErrorbd] = useState(false);
+  const cargaPaciente = () => {
+    axios.get(`https://localhost:5001/hospitalBoca/pacientes/${noExpediente}`,{
+      headers : {
+        'Content-type' : 'application/json',
+      }
+    }).then((response) => {
+      if (response.status === 200){
+        setDatos({
+          NoExpediente : response.data.noExpediente,
+          Nombre : response.data.nombre,
+          ApPaterno : response.data.apPaterno,
+          ApMaterno : response.data.apMaterno,
+        });
+      }
+    }, (error) => {
+      if(!error.response){
+        setErrorbd(true);
+      }
+    });
+  };
+
+  if (load){
+    cargaPaciente();
+    setLoad(false);
+  }
+
   return (
     <div className={classes.root}>
+      <Typography variant="h6"> Número de expediente: {datos.NoExpediente}</Typography>
+      <Typography variant="h6"> Paciente: {datos.Nombre} {datos.ApPaterno} {datos.ApMaterno }</Typography>
       <Paper className={classes.paper}>
         <Accordion className={classes.datoSuperior}>
           <AccordionSummary
