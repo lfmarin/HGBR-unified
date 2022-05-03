@@ -17,5 +17,6 @@ namespace API_Hospital_Boca.Services
         void saveEvolucion(Evolucion ev);
         void updateEvolucion(Evolucion ev);
         object getHistoriaByNumExp(string numExpe);
+        object getMotivoSolicitudByIdHist(int idHistoria);
     }
 }

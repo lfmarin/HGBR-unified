@@ -180,6 +180,20 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+
+        [HttpGet ("hospitalBoca/historiaClinica/motivoSolicitud/{idHistoria}")]
+        public IActionResult getMotivoSolicitudByIdHist(int idHistoria)
+        {
+            try
+            {
+                var res = service.getMotivoSolicitudByIdHist(idHistoria);
+                return Ok(res);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }
