@@ -17,6 +17,7 @@ import { MenuItem } from '@material-ui/core';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { Redirect } from 'react-router-dom';
+import GetHistoriaClinica from './getHistoriaClin';
 
 
 export default function MotivoSolicitud() {
@@ -61,7 +62,7 @@ export default function MotivoSolicitud() {
         if(!error.response) setErrorbd(true);
       }
     );
-},[])
+  },[])
 
   useEffect(() => {
     axios.get("https://localhost:5001/hospitalBoca/catalogos/metodoPlanificacion", {
@@ -133,28 +134,7 @@ export default function MotivoSolicitud() {
     return (
       <div className={style.fullWidth}>
         <form className={style.fullWidth}>
-          <div className={style.justify}>
-            <TextField
-              className={clsx(style.input, style.input30)}
-              label="No. de Expediente"
-              variant="outlined"
-              name = "NoExpediente"
-              error={noExpediente === "" && isFail}
-              defaultValue={noExpediente}
-              onChange={handleChange}
-              fullWidth
-              inputProps={{ maxLength: 15 }}
-            />
-            <TextField
-              className={clsx(style.input, style.input30)}
-              name="fecha"
-              label="Fecha de elaboración de la Historia Clínica"
-              variant="outlined"
-              required type="date"
-              InputLabelProps={{shrink: true}}
-            />
-          </div>
-          
+          <GetHistoriaClinica/>          
           <Typography className={style.line} style={{color: "#AC3833", fontWeight: "bold"}} variant="h6">
             Motivos de solicitud
           </Typography>
