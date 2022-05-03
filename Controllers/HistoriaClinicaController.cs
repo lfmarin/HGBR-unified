@@ -236,6 +236,19 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+        [HttpGet ("hospitalBoca/historiaClinica/evolucion/{idHistoria}")]
+        public IActionResult getEvolucionByIdHsit(int idHistoria)
+        {
+            try
+            {
+                var res = service.getEvolucionByIdHist(idHistoria);
+                return Ok(res);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }
