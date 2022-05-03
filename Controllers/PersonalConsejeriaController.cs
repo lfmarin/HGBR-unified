@@ -40,5 +40,33 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+
+        [HttpGet ("hospitalBoca/personalConsejeria/{idPersonal}")]
+        public IActionResult getOnePersonalConsejeria(int idPersonal)
+        {
+            try
+            {
+                var perso = service.getOnePersonalConsejeria(idPersonal);
+                return Ok(perso);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/personalConsejeria/update")]
+        public IActionResult updatePersonalConsejeria([FromBody] Personalconsejerium pc)
+        {
+            try
+            {
+                service.updatePersonalConsejeria(pc);
+                return Ok(true);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\codigos\\PSBW_Proyects\\PSBW2021\\api_hospital_boca\\API_Hospital_Boca.csproj": {}
+    "D:\\codigos\\psbw_proyects\\psbw2021\\api_hospital_boca\\API_Hospital_Boca.csproj": {}
   },
   "projects": {
-    "D:\\codigos\\PSBW_Proyects\\PSBW2021\\api_hospital_boca\\API_Hospital_Boca.csproj": {
+    "D:\\codigos\\psbw_proyects\\psbw2021\\api_hospital_boca\\API_Hospital_Boca.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\codigos\\PSBW_Proyects\\PSBW2021\\api_hospital_boca\\API_Hospital_Boca.csproj",
+        "projectUniqueName": "D:\\codigos\\psbw_proyects\\psbw2021\\api_hospital_boca\\API_Hospital_Boca.csproj",
         "projectName": "API_Hospital_Boca",
-        "projectPath": "D:\\codigos\\PSBW_Proyects\\PSBW2021\\api_hospital_boca\\API_Hospital_Boca.csproj",
+        "projectPath": "D:\\codigos\\psbw_proyects\\psbw2021\\api_hospital_boca\\API_Hospital_Boca.csproj",
         "packagesPath": "C:\\Users\\rpsau\\.nuget\\packages\\",
-        "outputPath": "D:\\codigos\\PSBW_Proyects\\PSBW2021\\api_hospital_boca\\obj\\",
+        "outputPath": "D:\\codigos\\psbw_proyects\\psbw2021\\api_hospital_boca\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rpsau\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -77,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

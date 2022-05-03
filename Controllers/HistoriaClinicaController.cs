@@ -166,6 +166,20 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+
+        [HttpGet ("hospitalBoca/historiaClinica/{numExp}")]
+        public IActionResult getHistoriaByNumExp(string numExp)
+        {
+            try
+            {
+                var res = service.getHistoriaByNumExp(numExp);
+                return Ok(res);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }

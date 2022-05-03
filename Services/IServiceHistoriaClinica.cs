@@ -16,5 +16,6 @@ namespace API_Hospital_Boca.Services
         void updateEstudioAnatomo(Estudioanatomo ea);
         void saveEvolucion(Evolucion ev);
         void updateEvolucion(Evolucion ev);
+        object getHistoriaByNumExp(string numExpe);
     }
 }

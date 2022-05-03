@@ -202,5 +202,22 @@ namespace API_Hospital_Boca.Bussiness
             var lastHist = context.Historiaclinicas.OrderBy(hi => hi.IdHistoriaClinica).Last();
             return lastHist.IdHistoriaClinica;
         }
+
+        public object getHistoriaByNumExp(string numExpe)
+        {
+            try
+            {
+                return context.Historiaclinicas.Where(h => h.FkPaciente == numExpe).Select(hi => new {
+                    IdHistoriaClinica = hi.IdHistoriaClinica,
+                    FkHospital = hi.FkHospital,
+                    FkPaciente = hi.FkPaciente,
+                    FechaElab = hi.FechaElab
+                }).First();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -5,7 +5,6 @@ D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\bin\Debug\net5.0\API_Hospita
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\bin\Debug\net5.0\API_Hospital_Boca.runtimeconfig.json
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\bin\Debug\net5.0\API_Hospital_Boca.runtimeconfig.dev.json
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\bin\Debug\net5.0\API_Hospital_Boca.dll
-D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\bin\Debug\net5.0\ref\API_Hospital_Boca.dll
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\bin\Debug\net5.0\API_Hospital_Boca.pdb
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\bin\Debug\net5.0\BouncyCastle.Crypto.dll
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\bin\Debug\net5.0\Google.Protobuf.dll
@@ -38,7 +37,6 @@ D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\API_Hospita
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\API_Hospital_Boca.MvcApplicationPartsAssemblyInfo.cs
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\API_Hospital_Boca.MvcApplicationPartsAssemblyInfo.cache
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\staticwebassets\API_Hospital_Boca.StaticWebAssets.Manifest.cache
-D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\staticwebassets\API_Hospital_Boca.StaticWebAssets.xml
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\scopedcss\bundle\API_Hospital_Boca.styles.css
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\API_Hospital_Boca.RazorTargetAssemblyInfo.cache
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\API_Hospital_Boca.csproj.CopyComplete
@@ -46,3 +44,4 @@ D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\API_Hospita
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\ref\API_Hospital_Boca.dll
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\API_Hospital_Boca.pdb
 D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\API_Hospital_Boca.genruntimeconfig.cache
+D:\Codigos\PSBW_Proyects\PSBW2021\API_Hospital_Boca\obj\Debug\net5.0\refint\API_Hospital_Boca.dll
