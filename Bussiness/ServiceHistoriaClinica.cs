@@ -261,5 +261,23 @@ namespace API_Hospital_Boca.Bussiness
                 throw;
             }
         }
+
+        public object getProcedimientoQuirurgicoByIdHist(int idHistoria)
+        {
+            try
+            {
+                return context.Procquirurgicos.Where(p => p.FkHistoria == idHistoria).Select(pq => new {
+                    FkHistoria = pq.FkHistoria,
+                    FechaCirugia = pq.FechaCirugia,
+                    FkDoctor = pq.FkDoctor,
+                    NotaQuirurgica = pq.NotaQuirurgica,
+                    Patologia = pq.Patologia
+                }).First();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }

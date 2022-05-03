@@ -19,5 +19,7 @@ namespace API_Hospital_Boca.Services
         object getHistoriaByNumExp(string numExpe);
         object getMotivoSolicitudByIdHist(int idHistoria);
         object getHistoriaexploracionByIdHist(int idHistoria);
+        object getProcedimientoQuirurgicoByIdHist(int idHistoria);
+        
     }
 }
