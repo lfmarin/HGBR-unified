@@ -279,5 +279,22 @@ namespace API_Hospital_Boca.Bussiness
                 throw;
             }
         }
+
+        public object getEstudioAnatomo(int idHistoria)
+        {
+            try
+            {
+                return context.Estudioanatomos.Where(e => e.FkHistoria == idHistoria).Select(ea => new {
+                    FkHistoria = ea.FkHistoria,
+                    FechaEnvio = ea.FechaEnvio,
+                    Clave = ea.Clave,
+                    Resultado = ea.Resultado
+                }).First();
+            }
+            catch (System.Exception)
+            {   
+                throw;
+            }
+        }
     }
 }

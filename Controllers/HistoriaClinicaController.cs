@@ -222,6 +222,20 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+
+        [HttpGet ("hospitalBoca/historiaClinica/EstudioAnatomo/{idHistoria}")]
+        public IActionResult getEstudioAnatomoByIdHsit(int idHistoria)
+        {
+            try
+            {
+                var res = service.getEstudioAnatomo(idHistoria);
+                return Ok(res);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }
