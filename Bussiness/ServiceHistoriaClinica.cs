@@ -237,5 +237,29 @@ namespace API_Hospital_Boca.Bussiness
             }
         }
 
+        public object getHistoriaexploracionByIdHist(int idHistoria)
+        {
+            try
+            {
+                return context.Historiaexploracions.Where(h => h.FkHistoria == idHistoria).Select(he => new {
+                    FkHistoria = he.FkHistoria,
+                    AntFamiliares = he.AntFamiliares,
+                    AntPersonalesNoPat = he.AntPersonalesNoPat,
+                    AntPersonalesPat = he.AntPersonalesPat,
+                    Ta = he.Ta,
+                    Peso = he.Peso,
+                    Talla = he.Talla,
+                    Fc = he.Fc,
+                    Fr = he.Fr,
+                    Tem = he.Tem,
+                    ExpOrganos = he.ExpOrganos,
+                    TipoPaciente = he.TipoPaciente
+                }).First();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }
