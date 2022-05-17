@@ -20,10 +20,10 @@ import { Redirect } from 'react-router-dom';
 export default function MotivoSolicitud() {
   const style = useStyles();
   const [datos, setDatos] = useState({
-    FkHistoria: "",
-    CausaNoHijos: "",
-    FkOpinion: "",
-    FkMetodoPlanificacion: ""
+    FkHistoria: '',
+    CausaNoHijos: '',
+    FkOpinion: '',
+    FkMetodoPlanificacion: '',
   })
   const [datosHC, setDatosHC] = useState({
     fkPaciente: '',
@@ -155,12 +155,11 @@ export default function MotivoSolicitud() {
       if(!error.response) setErrorbd(true);
     })
   }
-  
+
   const handleSave = () => {
-    if ( datos.FkHistoria === "" || datos.CausaNoHijos === "" || datos.FkOpinion === "" || datos.FkMetodoPlanificacion === "")
-    {
-        setIsFail(true)
-        return;
+    if (datos.FkOpinion === null || datos.FkMetodoPlanificacion === null || datos.CausaNoHijos === null){
+      setIsFail(true)
+      return;
     }
     else{
       guardaMotivo();
@@ -168,10 +167,6 @@ export default function MotivoSolicitud() {
   };
 
   if(errorbd) return <Redirect to='/error'/>;
-
-  if(finish){
-    setTimeout(() => setDelay(true), 3500);
-  }
 
   if (load){
     cargaHC();
@@ -216,7 +211,7 @@ export default function MotivoSolicitud() {
               label="¿Cuál es la causa más importante para no tener más hijos? "
               variant="outlined"
               name = "CausaNoHijos"
-              error={datos.CausaNoHijos === "" && isFail}
+              error={datos.CausaNoHijos === null && isFail}
               defaultValue={datos.CausaNoHijos}
               onChange={handleChange}
               fullWidth
@@ -238,7 +233,7 @@ export default function MotivoSolicitud() {
                   name="FkOpinion"
                   defaultValue={datos.FkOpinion}
                   onChange={handleChange}
-                  error={datos.FkOpinion === "" && isFail}
+                  error={datos.FkOpinion === null && isFail}
                   className={clsx(style.input, style.input100) }
               >
                   {opinion.map(n => {return (<MenuItem value={n.idOpinion}>{n.nombreOpinion}</MenuItem>)})}
@@ -259,7 +254,7 @@ export default function MotivoSolicitud() {
                   name="FkMetodoPlanificacion"
                   defaultValue={datos.FkMetodoPlanificacion}
                   onChange={handleChange}
-                  error={datos.FkMetodoPlanificacion === "" && isFail}
+                  error={datos.FkMetodoPlanificacion === null && isFail}
                   className={clsx(style.input, style.input100) }
               >
                   {metodo.map(n => {return (<MenuItem value={n.idMetodo}>{n.nombreMetodo}</MenuItem>)})}
