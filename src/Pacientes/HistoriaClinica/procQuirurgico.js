@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import clsx from 'clsx';
+import GetHistoriaClinica from './getHistoriaClin';
 
 
 export default function ProcedimientoQuirurgico() {
@@ -14,12 +15,7 @@ export default function ProcedimientoQuirurgico() {
 
   return (
     <div className={style.fullWidth}>
-      <form className={style.fullWidth}>
-        <div className={style.justify}>
-          <TextField className={clsx(style.input, style.input30)} name="noExpediente" label="Número de expediente" variant="outlined" required type="number" />
-          <TextField className={clsx(style.input, style.input30)} name="fecha" label="Fecha de elaboración de la Historia Clínica" variant="outlined" required type="date" InputLabelProps={{shrink: true}}/>
-        </div>
-        
+      <form className={style.fullWidth}>        
         <Typography className={style.line} variant="h6">
           Cirugía
         </Typography>

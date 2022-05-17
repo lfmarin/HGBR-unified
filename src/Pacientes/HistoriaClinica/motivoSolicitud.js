@@ -7,7 +7,6 @@ import {
 } from '@material-ui/core';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import clsx from 'clsx';
-import { Grid } from '@mui/material';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { FormControl } from '@material-ui/core';
@@ -17,8 +16,6 @@ import { MenuItem } from '@material-ui/core';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { Redirect } from 'react-router-dom';
-import GetHistoriaClinica from './getHistoriaClin';
-
 
 export default function MotivoSolicitud() {
   const style = useStyles();
@@ -28,6 +25,11 @@ export default function MotivoSolicitud() {
     FkOpinion: "",
     FkMetodoPlanificacion: ""
   })
+  const [datosHC, setDatosHC] = useState({
+    fkPaciente: '',
+    fkHospital: '',
+    fechaElab: '',
+  })
   const [opinion, setOpinion] = useState([])
   const [metodo, setMetodo] = useState([])
   const {noExpediente} = useParams();
@@ -36,10 +38,10 @@ export default function MotivoSolicitud() {
   const [finish, setFinish] = useState(false);
   const [delay, setDelay] = useState(false);
   const [load, setLoad] = useState(true);
+  const [loadMotivo, setLoadMotivo] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleChange = (event) => {
-    //const {name, value} = e.target;
     setDatos({
     ...datos,
     [event.target.name] : event.target.value
@@ -82,6 +84,57 @@ export default function MotivoSolicitud() {
     );
   },[])
 
+  const cargaHC = () => {
+    axios.get(`https://localhost:5001/hospitalBoca/historiaClinica/${noExpediente}`, {
+      headers : {
+        'Content-type' : 'application/json',
+      }
+    }).then((response) => {
+      if (response.status === 200){
+        var fecha = response.data.fechaElab.substring(0, response.data.fechaElab.indexOf("T"));
+        setDatosHC({
+          fkPaciente: response.data.fkPaciente,
+          fkHospital: response.data.fkHospital,
+          fechaElab: fecha,
+        });
+        setDatos({
+          ...datos,
+          FkHistoria: response.data.idHistoriaClinica
+        })
+        setLoadMotivo(true);
+      }
+    }, (error) => {
+      if(!error.response){
+        setErrorbd(true);
+        setLoadMotivo(false);
+      }
+    });
+    setLoadMotivo(true);
+  };
+
+  const cargaMotivo = () => {
+    axios.get(`https://localhost:5001/hospitalBoca/historiaClinica/motivoSolicitud/${datos.FkHistoria}`,{
+      headers : {
+        'Content-type' : 'application/json',
+      }
+    }).then((response) => {
+      if (response.status === 200){
+        setDatos({
+          FkHistoria: response.data.fkHistoria,
+          CausaNoHijos: response.data.caudaNoHijos,
+          FkOpinion: response.data.fkOpinion,
+          FkMetodoPlanificacion: response.data.fkMetodoPlanificacion
+        });
+        setShow(true);
+      }
+    }, (error) => {
+      if(!error.response){
+        setErrorbd(true);
+        setShow(false);
+      }
+    });
+  };
+
   const guardaMotivo = () => {
     axios.post ("https://localhost:5001/hospitalBoca/historiaClinica/motivoSolicitud/update", {
       FkHistoria: datos.FkHistoria,
@@ -103,11 +156,6 @@ export default function MotivoSolicitud() {
     })
   }
 
-  const cargaMotivo = () => {
-    setShow(true);
-  }
-
-
   const handleSave = () => {
     if ( datos.FkHistoria === "" || datos.CausaNoHijos === "" || datos.FkOpinion === "" || datos.FkMetodoPlanificacion === "")
     {
@@ -126,15 +174,38 @@ export default function MotivoSolicitud() {
   }
 
   if (load){
-     cargaMotivo();
-     setLoad(false);
+    cargaHC();
+    setLoad(false);
   }
 
-  if (show){
+  if (loadMotivo){
+    cargaMotivo();
+    setLoadMotivo(false);
+    //setShow(true);
+  }
+
+  if(show){
     return (
       <div className={style.fullWidth}>
+        <TextField
+            className={clsx(style.input, style.input30)}
+            label="No. de Expediente"
+            variant="outlined"
+            name = "NoExpediente"
+            defaultValue={datosHC.fkPaciente}
+            fullWidth
+            inputProps={{ readOnly: true }}
+        />
+        <TextField
+            className={clsx(style.input, style.input30)}
+            name="fechaElab"
+            variant="outlined"
+            required type="date"
+            defaultValue={datosHC.fechaElab}
+            inputProps={{ readOnly: true }}
+        />
+
         <form className={style.fullWidth}>
-          <GetHistoriaClinica/>          
           <Typography className={style.line} style={{color: "#AC3833", fontWeight: "bold"}} variant="h6">
             Motivos de solicitud
           </Typography>
@@ -149,7 +220,7 @@ export default function MotivoSolicitud() {
               defaultValue={datos.CausaNoHijos}
               onChange={handleChange}
               fullWidth
-              inputProps={{ maxLength: 15 }}
+              inputProps={{ maxLength: 60 }}
             />
 
             <FormControl variant="outlined" fullWidth>

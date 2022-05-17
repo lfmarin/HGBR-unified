@@ -284,11 +284,9 @@ export default function DatosIdentificacion(){
                     label="No. de Expediente"
                     variant="outlined"
                     name = "NoExpediente"
-                    error={datos.NoExpediente === "" && isFail}
                     defaultValue={datos.NoExpediente}
-                    onChange={handleChange}
                     fullWidth
-                    inputProps={{ maxLength: 15 }}
+                    inputProps={{ readOnly: true }}
                 />
               </Grid>
 

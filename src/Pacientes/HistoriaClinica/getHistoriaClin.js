@@ -8,7 +8,7 @@ import useStyles from '../../Styles/formularioStyles';
 import { Typography } from '@material-ui/core';
 import { useParams } from 'react-router';
 
-export default function GetHistoriaClinica(){
+export default function GetHistoriaClinica(props){
     const style = useStyles();
     const {noExpediente} = useParams();
     const [datos, setDatos] = useState({
@@ -33,7 +33,7 @@ export default function GetHistoriaClinica(){
             idHistoriaClinica: response.data.idHistoriaClinica,
             fkPaciente: response.data.fkPaciente,
             fkHospital: response.data.fkHospital,
-            fechaElab: fecha
+            fechaElab: fecha,
           });
           setShow(true);
         }
@@ -52,6 +52,7 @@ export default function GetHistoriaClinica(){
 
 
   if(show){
+    props.setIdHistoria(datos.idHistoriaClinica)
     return(
       <div className={style.justify}>
           <TextField
