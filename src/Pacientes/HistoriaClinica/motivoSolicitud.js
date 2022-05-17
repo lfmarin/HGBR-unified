@@ -155,7 +155,7 @@ export default function MotivoSolicitud() {
       if(!error.response) setErrorbd(true);
     })
   }
-
+  
   const handleSave = () => {
     if ( datos.FkHistoria === "" || datos.CausaNoHijos === "" || datos.FkOpinion === "" || datos.FkMetodoPlanificacion === "")
     {
