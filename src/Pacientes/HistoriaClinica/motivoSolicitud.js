@@ -176,7 +176,6 @@ export default function MotivoSolicitud() {
   if (loadMotivo){
     cargaMotivo();
     setLoadMotivo(false);
-    //setShow(true);
   }
 
   if(show){

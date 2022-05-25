@@ -110,18 +110,18 @@ export default function MotivoSolicitud() {
 
   const guardaExploracion = () => {
     axios.post ("https://localhost:5001/hospitalBoca/historiaClinica/historiaExploracion/update", {
-      fkHistoria: datos.FkHistoria,
-      antFamiliares: datos.antFamiliares,
-      antPersonalesNoPat: datos.antPersonalesNoPat,
-      antPersonalesPat: datos.antPersonalesPat,
-      ta: datos.ta,
-      peso: datos.peso,
-      talla: datos.talla,
-      fc: datos.fc,
-      fr: datos.fr,
-      tem: datos.tem,
-      expOrganos: datos.expOrganos,
-      tipoPaciente: datos.tipoPaciente,
+      FkHistoria: datos.FkHistoria,
+      AntFamiliares: datos.antFamiliares,
+      AntPersonalesNoPat: datos.antPersonalesNoPat,
+      AntPersonalesPat: datos.antPersonalesPat,
+      Ta: datos.ta,
+      Peso: datos.peso,
+      Talla: datos.talla,
+      Fc: datos.fc,
+      Fr: datos.fr,
+      Tem: datos.tem,
+      ExpOrganos: datos.expOrganos,
+      TipoPaciente: datos.tipoPaciente,
     },
     {
       headers : {
