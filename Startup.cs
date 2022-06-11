@@ -57,6 +57,7 @@ namespace API_Hospital_Boca
             services.AddScoped<IServiceCatalogos, ServiceCatalogos>();
             services.AddScoped<IServiceFichaIdentificacion, ServiceFichaIdentificacion>();
             services.AddScoped<IServicePersonalConsejeria, ServicePersonalConsejeria>();
+            services.AddScoped<IServiceEncuestaSeguimeinto, ServiceEncuestaSeguimeinto>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

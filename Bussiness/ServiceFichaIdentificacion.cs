@@ -79,5 +79,85 @@ namespace API_Hospital_Boca.Bussiness
                 throw;
             }
         }
+
+        public void saveCartaConsentimiento(Cartaconsentimiento cc, string numExp)
+        {
+            try
+            {
+                var id = context.Fichaidentificacions.Where(f => f.FkPaciente == numExp)
+                .Select(fi => fi.IdFicha).First();
+                cc.FkFicha = id;
+                context.Cartaconsentimientos.Add(cc);
+                context.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public object getCartaConsentimiento(string expediente)
+        {
+            try
+            {
+                var id = context.Fichaidentificacions.Where(f => f.FkPaciente == expediente)
+                .Select(fi => fi.IdFicha).First();
+
+                return context.Cartaconsentimientos.Where(c => c.FkFicha == id).Select(cc => new {
+                    FkFicha = cc.FkFicha,
+                    FkHospital = cc.FkHospital,
+                    FechaHora = cc.FechaHora,
+                    FkConsejeria = cc.FkConsejeria,
+                    Testigo1 = cc.Testigo1,
+                    Testigo2 = cc.Testigo2,
+                    FkDoctor = cc.FkDoctor
+                }).First();
+
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        public object getFichaMedica(string expediente)
+        {
+            try
+            {
+                return context.Fichaidentificacions.Where(f => f.FkPaciente == expediente).Select(fi => new {
+                    IdFicha = fi.IdFicha,
+                    FkPaciente = fi.FkPaciente,
+                    Servicio = fi.Servicio,
+                    Diagnostico = fi.Diagnostico
+                }).First();   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public void updateCartaConsentimiento(Cartaconsentimiento cc)
+        {
+            try
+            {
+                var dbDatos = context.Cartaconsentimientos.Where(c => c.FkFicha == cc.FkFicha).First();
+                
+                if (!Utils.isTheSame(dbDatos.FkHospital, cc.FkHospital)) dbDatos.FkHospital = cc.FkHospital;
+                if (!Utils.isTheSame(dbDatos.FechaHora, cc.FechaHora)) dbDatos.FechaHora = cc.FechaHora;
+                if (!Utils.isTheSame(dbDatos.FkConsejeria, cc.FkConsejeria)) dbDatos.FkConsejeria = cc.FkConsejeria;
+                if (!Utils.isTheSame(dbDatos.Testigo1, cc.Testigo1)) dbDatos.Testigo1 = cc.Testigo1;
+                if (!Utils.isTheSame(dbDatos.Testigo2, cc.Testigo2)) dbDatos.Testigo2 = cc.Testigo2;
+                if (!Utils.isTheSame(dbDatos.FkDoctor, cc.FkDoctor)) dbDatos.FkDoctor = cc.FkDoctor;
+
+                context.SaveChanges();
+
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }

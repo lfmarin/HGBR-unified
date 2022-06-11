@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YQD76vrteaDwzvF/1Pb8Q9Si/h9DjD6JDdPN9FUI3o7qk0NezciEyYtvPAc5E+7AcV9CaPf9J6MXw3MHPnH80Q==",
+  "dgSpecHash": "b99w7mtUu7Qsy4suWz6qzUW7y69JKvV97hkaixWF21gSDDoBlahf7g+xAaOzlKLgUuu4chQnFclkwLTTdo5UCQ==",
   "success": true,
-  "projectFilePath": "D:\\codigos\\psbw_proyects\\psbw2021\\api_hospital_boca\\API_Hospital_Boca.csproj",
+  "projectFilePath": "D:\\Codigos\\PSBW_Proyects\\PSBW2021\\API_Hospital_Boca\\API_Hospital_Boca.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rpsau\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\rpsau\\.nuget\\packages\\google.protobuf\\3.14.0\\google.protobuf.3.14.0.nupkg.sha512",

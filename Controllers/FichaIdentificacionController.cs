@@ -54,6 +54,35 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
+
+        [HttpGet ("hospitalBoca/CartaConsentimiento/{numExp}")]
+        public IActionResult getCartaConsentimiento(string numExp)
+        {
+            try
+            {
+                var res = this.service.getCartaConsentimiento(numExp);
+                return Ok(res);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/CartaConsentimiento/update")]
+        public IActionResult updateCartaConsentimiento([FromBody] Cartaconsentimiento cc)
+        {
+            try
+            {
+                this.service.updateCartaConsentimiento(cc);
+                return Ok(true);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
         
     }
 }
