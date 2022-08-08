@@ -34,7 +34,6 @@ export default function ProcedimientoQuirurgico() {
   const [isFail, setIsFail] = useState(false)
   const [errorbd, setErrorbd] = useState(false);
   const [finish, setFinish] = useState(false);
-  const [delay, setDelay] = useState(false);
   const [load, setLoad] = useState(true);
   const [loadProc, setLoadProc] = useState(false);
   const [show, setShow] = useState(false);
