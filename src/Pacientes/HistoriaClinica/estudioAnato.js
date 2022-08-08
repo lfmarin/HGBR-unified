@@ -79,7 +79,8 @@ export default function EstudioAnato() {
       }
     }).then((response) => {
       if (response.status === 200){
-        var fecha = response.data.fechaEnvio.substring(0, response.data.fechaEnvio.indexOf("T"));
+        if (response.data.fechaEnvio != null ) {var fecha = response.data.fechaEnvio.substring(0, response.data.fechaEnvio.indexOf("T"));}
+        else {var fecha = response.data.fechaEnvio}
         setDatos({
           fkHistoria: response.data.fkHistoria,
           fechaEnvio: fecha,

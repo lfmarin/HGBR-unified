@@ -98,7 +98,8 @@ export default function ProcedimientoQuirurgico() {
       }
     }).then((response) => {
       if (response.status === 200){
-        var fecha = response.data.fechaCirugia.substring(0, response.data.fechaCirugia.indexOf("T"));
+        if (response.data.fechaCirugia != null) {var fecha = response.data.fechaCirugia.substring(0, response.data.fechaCirugia.indexOf("T"));}
+        else {var fecha = response.data.fechaCirugia}
         setDatos({
           fkHistoria: response.data.fkHistoria,
           fechaCirugia: fecha,
