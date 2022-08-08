@@ -99,10 +99,10 @@ export default function ProcedimientoQuirurgico() {
       }
     }).then((response) => {
       if (response.status === 200){
-        //var fecha = response.data.fechaCirugia.substring(0, response.data.fechaCirugia.indexOf("T"));
+        var fecha = response.data.fechaCirugia.substring(0, response.data.fechaCirugia.indexOf("T"));
         setDatos({
           fkHistoria: response.data.fkHistoria,
-          fechaCirugia: '',//fecha,
+          fechaCirugia: fecha,
           fkDoctor: response.data.fkDoctor,
           notaQuirurgica: response.data.notaQuirurgica,
           patologia: response.data.patologia
@@ -119,11 +119,11 @@ export default function ProcedimientoQuirurgico() {
 
   const guardaProcedimiento = () => {
     axios.post ("https://localhost:5001/hospitalBoca/historiaClinica/procedimientoQuirurgico/update", {
-      FkHistoria: datos.FkHistoria,
-      fechaCirugia: datos.fechaCirugia,
-      fkDoctor: datos.fkDoctor,
-      notaQuirurgica: datos.notaQuirurgica,
-      patologia: datos.patologia,
+      FkHistoria: datos.fkHistoria,
+      FechaCirugia: datos.fechaCirugia,
+      FkDoctor: datos.fkDoctor,
+      NotaQuirurgica: datos.notaQuirurgica,
+      Patologia: datos.patologia,
     },
     {
       headers : {
