@@ -10,11 +10,6 @@ import clsx from 'clsx';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { Redirect } from 'react-router-dom';
-import { FormControl } from '@material-ui/core';
-import { InputLabel } from '@material-ui/core';
-import { Select } from '@material-ui/core';
-import { MenuItem } from '@material-ui/core';
-
 
 export default function EstudioAnato() {
   const style = useStyles();

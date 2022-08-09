@@ -9,12 +9,16 @@ import ListaConsejeria from '../Consejeria/ListaPersonal';
 import RegistroPersonal from '../Consejeria/agregaPersonal';
 import DetallesPaciente from '../Pacientes/detallesPaciente';
 import MainHistoriaClinica from '../Pacientes/HistoriaClinica/MainHistoria';
+import Encuesta from '../Pacientes/Encuesta/Encuesta';
 
 export default function MainRoutes() {
     return(
         <Switch>
             <Route exact path="/pacientes/detalles/:noExpediente/historia-clinica">
                 <MainHistoriaClinica/>
+            </Route>
+            <Route exact path="/pacientes/detalles/:noExpediente/encuesta">
+                <Encuesta/>
             </Route>
             <Route exact path="/pacientes/detalles/:noExpediente">
                 <DetallesPaciente/>

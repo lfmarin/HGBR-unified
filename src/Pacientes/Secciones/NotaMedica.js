@@ -21,14 +21,14 @@ export default function SeccionNotaMedica() {
   return (
     <AccordionDetails className={styles.center}>
       <Button variant="outlined" size="large" >
-        Consultas
+        Crear nota médica
       </Button>
       <Button variant="outlined" size="large" >
-        Notas Médicas
+        Ver notas médicas
       </Button>
-      <Button variant="outlined" size="large" startIcon={<GetAppRoundedIcon/>}>
+      {/* <Button variant="outlined" size="large" startIcon={<GetAppRoundedIcon/>}>
         Descargar Notas Médicas
-      </Button>
+      </Button> */}
     </AccordionDetails>
   );
 }
