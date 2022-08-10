@@ -159,5 +159,11 @@ namespace API_Hospital_Boca.Bussiness
                 throw;
             }
         }
+
+        public int getLastFichaId()
+        {
+            var lastFicha = context.Fichaidentificacions.OrderBy(f => f.IdFicha).Last();
+            return lastFicha.IdFicha;
+        }
     }
 }

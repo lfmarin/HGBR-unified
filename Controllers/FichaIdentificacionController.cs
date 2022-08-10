@@ -7,10 +7,12 @@ namespace API_Hospital_Boca.Controllers
     public class FichaIdentificacionController : ControllerBase
     {
         private readonly IServiceFichaIdentificacion service;
+        private readonly IServiceNotaMedica serviceNota;
 
-        public FichaIdentificacionController(IServiceFichaIdentificacion service)
+        public FichaIdentificacionController(IServiceFichaIdentificacion service, IServiceNotaMedica serviceNota)
         {
             this.service = service;
+            this.serviceNota = serviceNota;
         }
 
         [HttpPost ("hospitalBoca/fichaIdent/update")]
@@ -83,6 +85,33 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
+        [HttpGet ("hospitalBoca/NotaMedica/{numExp}")]
+        public IActionResult getNotaMedicaByIdFicha(string numExp)
+        {
+            try
+            {
+                var nota = serviceNota.getNotaMedicaByNumExp(numExp); 
+                return Ok(nota);  
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost ("hospitalBoca/NotaMedica/update")]
+        public IActionResult updateNotaMedica([FromBody] Notamedica notamedica)
+        {
+            try
+            {
+                serviceNota.updateNotaMedica(notamedica);
+                return Ok(true);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
         
     }
 }

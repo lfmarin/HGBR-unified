@@ -11,13 +11,16 @@ namespace API_Hospital_Boca.Controllers
         private readonly IServiceHistoriaClinica serviceHistoria;
         private readonly IServiceFichaIdentificacion serviceFicha;
         private readonly IServiceEncuestaSeguimeinto serviceEncuesta;
+        private readonly IServiceNotaMedica serviceNotaMedica;
         public PacientesController(IServicePacientes service, IServiceHistoriaClinica serviceHistoria, 
-                                    IServiceFichaIdentificacion serviceFicha, IServiceEncuestaSeguimeinto serviceEncuesta)
+                                    IServiceFichaIdentificacion serviceFicha, IServiceEncuestaSeguimeinto serviceEncuesta,
+                                    IServiceNotaMedica notaMedica)
         {
             this.service = service;
             this.serviceHistoria = serviceHistoria;
             this.serviceFicha = serviceFicha;
             this.serviceEncuesta = serviceEncuesta;
+            this.serviceNotaMedica = notaMedica;
         }
 
 
@@ -72,6 +75,11 @@ namespace API_Hospital_Boca.Controllers
                 var aux7 = new Encuestaseguimiento();
                 aux7.FkPaciente = np.paciente.NoExpediente;
                 serviceEncuesta.saveEncuestaSeguimeinto(aux7);
+
+                var aux8 = new Notamedica();
+                aux8.FkFicha = ((ServiceFichaIdentificacion) serviceFicha).getLastFichaId();
+                serviceNotaMedica.saveNotaMedica(aux8);
+
                 return Ok (true);
             }
             catch (System.Exception)
