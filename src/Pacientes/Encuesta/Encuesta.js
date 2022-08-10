@@ -351,14 +351,12 @@ export default function Encuesta() {
                         labelPlacement="start"
                         control={
                           <Checkbox
-                            checked={datos.referido}
-                            onChange={() => setDatos({referido: !datos.referido})}
+                            defaultChecked={datos.referido}
+                            onChange={() => setDatos({...datos, referido: !datos.referido})}
                           />
                         }
                     />
                 </FormGroup>
-
-                <Typography> Referido: {datos.referido ? "True" : "False"} </Typography>
 
                 <FormControl variant="outlined" disabled={!datos.referido} fullWidth className={clsx(style.input)}>
                     <InputLabel id="fkHospitalReferencia">¿Cuál centro de salud?</InputLabel>
@@ -398,11 +396,14 @@ export default function Encuesta() {
                     <FormControlLabel
                         label="Selecciona si el paciente quedó satisfecho con la atención brindada durante la cirugía"
                         labelPlacement="start"
-                        control={<Checkbox defaultChecked={datos.satisfaccion} onChange={handleChange}/>}
+                        control={
+                          <Checkbox
+                            defaultChecked={datos.satisfaccion}
+                            onChange={() => setDatos({...datos, satisfaccion: !datos.satisfaccion})}
+                            />
+                          }
                     />
                 </FormGroup>
-
-                <Typography> Satisfacción: {datos.satisfaccion ? "True" : "False"} </Typography>
                 </div>
 
                 <TextField
@@ -420,11 +421,13 @@ export default function Encuesta() {
                         <FormControlLabel
                             label="Selecciona si el paciente tuvo alguna complicación después de la cirugía"
                             labelPlacement="start"
-                            control={<Checkbox defaultChecked={datos.complicacion} onChange={handleChange}/>}
+                            control={
+                              <Checkbox
+                                defaultChecked={datos.complicacion}
+                                onChange={() => setDatos({...datos, complicacion: !datos.complicacion})}/>
+                              }
                         />
                     </FormGroup>
-
-                    <Typography> Complicación: {datos.complicacion ? "True" : "False"} </Typography>
                 </div>
 
                 <TextField
@@ -434,6 +437,7 @@ export default function Encuesta() {
                     name = "motivoComplicación"
                     defaultValue={datos.motivoComplicacion}
                     onChange={handleChange}
+                    disabled={!datos.complicacion}
                     fullWidth
                 />
 
@@ -461,7 +465,7 @@ export default function Encuesta() {
                     defaultValue={datos.motivoCalidad}
                     onChange={handleChange}
                     fullWidth
-                    disabled={datos.fkCalidadRelacion === 2}
+                    disabled={datos.fkCalidadRelacion != 3}
                 />
 
                 <div className={clsx(style.fullWidth)}>
@@ -493,11 +497,13 @@ export default function Encuesta() {
                         <FormControlLabel
                             label="Seleccione si recomendaría la realización de la Vasectomía Sin Bisturí"
                             labelPlacement="start"
-                            control={<Checkbox defaultChecked={datos.recomendacion} onChange={handleChange}/>}
+                            control={
+                            <Checkbox
+                              defaultChecked={datos.recomendacion}
+                              onChange={() => setDatos({...datos, recomendacion: !datos.recomendacion})}/>
+                            }
                         />
                     </FormGroup>
-
-                    <Typography> Recomendacion: {datos.recomendacion ? "True" : "False"} </Typography>
                 </div>
 
                 <TextField
@@ -515,11 +521,13 @@ export default function Encuesta() {
                         <FormControlLabel
                             label="Seleccione si un hospital le parece mejor para realizarse la VSB. Deje en blanco si prefiere el Centro de Salud."
                             labelPlacement="start"
-                            control={<Checkbox defaultChecked={datos.LugarVasectomia} onChange={handleChange}/>}
+                            control={
+                            <Checkbox
+                              defaultChecked={datos.LugarVasectomia}
+                              onChange={() => setDatos({...datos, LugarVasectomia: !datos.LugarVasectomia})}/>
+                            }
                         />
                     </FormGroup>
-
-                    <Typography> Lugar VSB: {datos.LugarVasectomia ? "True" : "False"} </Typography>
                 </div>
 
                 <TextField
@@ -537,11 +545,12 @@ export default function Encuesta() {
                         <FormControlLabel
                             label="Seleccione si tiene alguna recomendación para mejorar los servicios de salud"
                             labelPlacement="start"
-                            control={<Checkbox defaultChecked={datos.recomendacionHospital} onChange={handleChange}/>}
+                            control={
+                            <Checkbox
+                              defaultChecked={datos.recomendacionHospital}
+                              onChange={() => setDatos({...datos, recomendacionHospital: !datos.recomendacionHospital})}/>}
                         />
                     </FormGroup>
-
-                    <Typography> Recomendacion Hospital: {datos.recomendacionHospital ? "True" : "False"} </Typography>
                 </div>
 
                 <TextField
