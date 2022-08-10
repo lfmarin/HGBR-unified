@@ -349,7 +349,12 @@ export default function Encuesta() {
                     <FormControlLabel
                         label="Selecciona si el paciente fue referido de un centro de salud"
                         labelPlacement="start"
-                        control={<Checkbox defaultChecked={datos.referido} onChange={handleChange}/>}
+                        control={
+                          <Checkbox
+                            checked={datos.referido}
+                            onChange={() => setDatos({referido: !datos.referido})}
+                          />
+                        }
                     />
                 </FormGroup>
 
