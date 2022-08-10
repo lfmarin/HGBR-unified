@@ -47,7 +47,6 @@ export default function Encuesta() {
   })
   const [hospital, setHospital] = useState([]);
   const [personal, setPersonal] = useState([]);
-  const [hospitalRef, setHospitalRef] = useState([]);
   const [calidad, setCalidad] = useState([]);
   const [calidadRel, setCalidadRel] = useState([]);
   const {noExpediente} = useParams();
@@ -124,7 +123,6 @@ export default function Encuesta() {
       (response) => {
         if (response.status === 200) {
           setHospital(response.data);
-          setHospitalRef(response.data);
           setErrorbd(false);
         }
       },
@@ -188,12 +186,31 @@ export default function Encuesta() {
         );
     },[])
 
-  /*const guardaEstudio = () => {
-    axios.post ("https://localhost:5001/hospitalBoca/historiaClinica/estudioAnatomo/update", {
-      FkHistoria: datos.fkHistoria,
-      FechaEnvio: datos.fechaEnvio,
-      Clave: datos.clave,
-      Resultado: datos.resultado,
+  const guardaEncuesta = () => {
+    axios.post ("https://localhost:5001/hospitalBoca/EncuestaSeguimiento/update", {
+      FkPaciente: datos.fkPaciente,
+      FkHospital: datos.fkHospital,
+      fechaEncuesta: datos.fechaEncuesta,
+      FechaVasectomia: datos.fechaVasectomia,
+      OrigenInfo: datos.origenInfo,
+      FkConsejeria: datos.fkConsejeria,
+      Referido: datos.referido,
+      FkHospitalReferencia: datos.fkHospitalReferencia,
+      FkCalidad: datos.fkCalidad,
+      Satisfaccion: datos.satisfaccion,
+      MotivoSatisfaccion: datos.motivoSatisfaccion,
+      //complicacion: datos.complicacion,
+      //MotivoComplicacion: datos.motivoComplicacion,
+      FkCalidadRelacion: datos.fkCalidadRelacion,
+      MotivoCalidad: datos.motivoCalidad,
+      FechaNegativo: datos.fechaNegativo,
+      //LugarEspermaconteo: datos.LugarEspermaconteo,
+      Recomendacion: datos.recomendacion,
+      //MotivoRecomendacion: datos.motivoRecomendacion,
+      //LugarVasectomia: datos.LugarVasectomia,
+      MotivoLugar: datos.motivoLugar,
+      //RecomendacionHospital: datos.recomendacionHospital,
+      CualRecomendacion: datos.cualRecomendacion
     },
     {
       headers : {
@@ -207,17 +224,17 @@ export default function Encuesta() {
     }, (error) => {
       if(!error.response) setErrorbd(true);
     })
-  }*/
+  }
 
-  /*const handleSave = () => {
-    if (datos.fechaEnvio === null || datos.clave === null){
+  const handleSave = () => {
+    if (datos.fkHospital === '' || datos.fechaVasectomia === ''){
       setIsFail(true)
       return;
     }
     else{
-      guardaEstudio();
+      guardaEncuesta();
     }
-  };*/
+  };
 
   if(errorbd) return <Redirect to='/error'/>;
 
@@ -572,6 +589,7 @@ export default function Encuesta() {
             <Button variant="contained" color="secondary"
               type="submit" size="large"
               startIcon={<SaveOutlinedIcon/>}
+              onClick={handleSave}
               >
               GUARDAR
             </Button>
