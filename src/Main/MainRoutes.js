@@ -10,6 +10,7 @@ import RegistroPersonal from '../Consejeria/agregaPersonal';
 import DetallesPaciente from '../Pacientes/detallesPaciente';
 import MainHistoriaClinica from '../Pacientes/HistoriaClinica/MainHistoria';
 import Encuesta from '../Pacientes/Encuesta/Encuesta';
+import NotaMedica from '../Pacientes/NotasMedicas/notaMedica';
 
 export default function MainRoutes() {
     return(
@@ -19,6 +20,9 @@ export default function MainRoutes() {
             </Route>
             <Route exact path="/pacientes/detalles/:noExpediente/encuesta">
                 <Encuesta/>
+            </Route>
+            <Route exact path="/pacientes/detalles/:noExpediente/nota-medica">
+                <NotaMedica/>
             </Route>
             <Route exact path="/pacientes/detalles/:noExpediente">
                 <DetallesPaciente/>
