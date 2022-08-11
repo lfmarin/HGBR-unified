@@ -607,7 +607,7 @@ export default function DatosIdentificacion(){
                         label="Calle"
                         variant="outlined"
                         name = "CalleTrabajo"
-                        defaultValue={datos.CalleCasa}
+                        defaultValue={datos.CalleTrabajo}
                         onChange={handleChange}
                         fullWidth
                         inputProps={{ maxLength: 50 }}
