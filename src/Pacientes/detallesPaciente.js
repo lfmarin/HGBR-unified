@@ -1,58 +1,66 @@
-import React, { useState } from 'react';
-import { Accordion, AccordionSummary, Typography } from "@material-ui/core";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import useStyles from "../Styles/detallesStyles";
-import Paper from '@material-ui/core/Paper';
-import SeccionHistoriaClinica from './Secciones/HistoriaClinica';
-import SeccionNotaMedica from './Secciones/NotaMedica';
-import CartaConsentimiento from './Secciones/CartaConsentimiento';
-import InstruccionesPost from './Secciones/InstruccionesPost';
-import SeccionEncuesta from './Secciones/Encuesta';
-import SeccionExamenes from './Secciones/Examenes';
-import { useParams } from 'react-router';
-import axios from 'axios';
+import React, { useState } from 'react'
+import { Accordion, AccordionSummary, Typography } from '@material-ui/core'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import useStyles from '../Styles/detallesStyles'
+import Paper from '@material-ui/core/Paper'
+import SeccionHistoriaClinica from './Secciones/HistoriaClinica'
+import SeccionNotaMedica from './Secciones/NotaMedica'
+import CartaConsentimiento from './Secciones/CartaConsentimiento'
+import InstruccionesPost from './Secciones/InstruccionesPost'
+import SeccionEncuesta from './Secciones/Encuesta'
+import SeccionExamenes from './Secciones/Examenes'
+import { useParams } from 'react-router'
+import axios from 'axios'
 
 export default function DetallesPaciente() {
-  const {noExpediente} = useParams();
-  const classes = useStyles();
+  const { noExpediente } = useParams()
+  const classes = useStyles()
   const [datos, setDatos] = useState({
-    NoExpediente : "",
-    Nombre : "",
-    ApPaterno : "",
-    ApMaterno : "",
-  });
-  const [load, setLoad] = useState(true);
-  const [errorbd, setErrorbd] = useState(false);
+    NoExpediente: '',
+    Nombre: '',
+    ApPaterno: '',
+    ApMaterno: '',
+  })
+  const [load, setLoad] = useState(true)
+  const [errorbd, setErrorbd] = useState(false)
   const cargaPaciente = () => {
-    axios.get(`https://localhost:5001/hospitalBoca/pacientes/${noExpediente}`,{
-      headers : {
-        'Content-type' : 'application/json',
-      }
-    }).then((response) => {
-      if (response.status === 200){
-        setDatos({
-          NoExpediente : response.data.noExpediente,
-          Nombre : response.data.nombre,
-          ApPaterno : response.data.apPaterno,
-          ApMaterno : response.data.apMaterno,
-        });
-      }
-    }, (error) => {
-      if(!error.response){
-        setErrorbd(true);
-      }
-    });
-  };
+    axios
+      .get(`https://localhost:5001/hospitalBoca/pacientes/${noExpediente}`, {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(
+        response => {
+          if (response.status === 200) {
+            setDatos({
+              NoExpediente: response.data.noExpediente,
+              Nombre: response.data.nombre,
+              ApPaterno: response.data.apPaterno,
+              ApMaterno: response.data.apMaterno,
+            })
+          }
+        },
+        error => {
+          if (!error.response) {
+            setErrorbd(true)
+          }
+        }
+      )
+  }
 
-  if (load){
-    cargaPaciente();
-    setLoad(false);
+  if (load) {
+    cargaPaciente()
+    setLoad(false)
   }
 
   return (
     <div className={classes.root}>
       <Typography variant="h6"> Número de expediente: {datos.NoExpediente}</Typography>
-      <Typography variant="h6"> Paciente: {datos.Nombre} {datos.ApPaterno} {datos.ApMaterno }</Typography>
+      <Typography variant="h6">
+        {' '}
+        Paciente: {datos.Nombre} {datos.ApPaterno} {datos.ApMaterno}
+      </Typography>
       <Paper className={classes.paper}>
         <Accordion className={classes.datoSuperior}>
           <AccordionSummary
@@ -63,7 +71,7 @@ export default function DetallesPaciente() {
           >
             <Typography className={classes.heading}>Historia clínica</Typography>
           </AccordionSummary>
-          <SeccionHistoriaClinica/>
+          <SeccionHistoriaClinica />
         </Accordion>
 
         <Accordion>
@@ -75,7 +83,7 @@ export default function DetallesPaciente() {
           >
             <Typography className={classes.heading}>Nota médica</Typography>
           </AccordionSummary>
-          <SeccionNotaMedica/>
+          <SeccionNotaMedica />
         </Accordion>
 
         <Accordion>
@@ -87,7 +95,7 @@ export default function DetallesPaciente() {
           >
             <Typography className={classes.heading}>Carta de consentimiento</Typography>
           </AccordionSummary>
-          <CartaConsentimiento/>
+          <CartaConsentimiento />
         </Accordion>
 
         <Accordion>
@@ -99,7 +107,7 @@ export default function DetallesPaciente() {
           >
             <Typography className={classes.heading}>Instrucciones Postoperatorias</Typography>
           </AccordionSummary>
-          <InstruccionesPost/>
+          <InstruccionesPost />
         </Accordion>
 
         <Accordion>
@@ -111,21 +119,21 @@ export default function DetallesPaciente() {
           >
             <Typography className={classes.heading}>Encuesta de seguimiento</Typography>
           </AccordionSummary>
-          <SeccionEncuesta/>
+          <SeccionEncuesta />
         </Accordion>
 
         <Accordion>
-            <AccordionSummary
-                className={classes.head}
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel6a-content"
-                id="panel6a-header"
-                >
-                <Typography className={classes.heading}>Solicitud de exámenes de laboratorio</Typography>
-            </AccordionSummary>
-            <SeccionExamenes/>
+          <AccordionSummary
+            className={classes.head}
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel6a-content"
+            id="panel6a-header"
+          >
+            <Typography className={classes.heading}>Solicitud de exámenes de laboratorio</Typography>
+          </AccordionSummary>
+          <SeccionExamenes />
         </Accordion>
       </Paper>
-   </div>
-  );
+    </div>
+  )
 }
