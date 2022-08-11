@@ -96,10 +96,10 @@ export default function Encuesta() {
             fkCalidadRelacion: response.data.fkCalidadRelacion,
             motivoCalidad: response.data.motivoCalidad,
             fechaNegativo: fechaNegativo,
-            LugarEspermaconteo: response.data.LugarEspermaconteo,
+            LugarEspermaconteo: response.data.lugarEspermaconteo,
             recomendacion: response.data.recomendacion,
             motivoRecomendacion: response.data.motivoRecomendacion,
-            LugarVasectomia: response.data.LugarVasectomia,
+            LugarVasectomia: response.data.lugarVasectomia,
             motivoLugar: response.data.motivoLugar,
             recomendacionHospital: response.data.recomendacionHospital,
             cualRecomendacion: response.data.cualRecomendacion
@@ -188,29 +188,29 @@ export default function Encuesta() {
 
   const guardaEncuesta = () => {
     axios.post ("https://localhost:5001/hospitalBoca/EncuestaSeguimiento/update", {
-      FkPaciente: datos.fkPaciente,
-      FkHospital: datos.fkHospital,
+      fkPaciente: datos.fkPaciente,
+      fkHospital: datos.fkHospital,
       fechaEncuesta: datos.fechaEncuesta,
-      FechaVasectomia: datos.fechaVasectomia,
-      OrigenInfo: datos.origenInfo,
-      FkConsejeria: datos.fkConsejeria,
-      Referido: datos.referido,
-      FkHospitalReferencia: datos.fkHospitalReferencia,
-      FkCalidad: datos.fkCalidad,
-      Satisfaccion: datos.satisfaccion,
-      MotivoSatisfaccion: datos.motivoSatisfaccion,
-      //complicacion: datos.complicacion,
-      //MotivoComplicacion: datos.motivoComplicacion,
-      FkCalidadRelacion: datos.fkCalidadRelacion,
-      MotivoCalidad: datos.motivoCalidad,
-      FechaNegativo: datos.fechaNegativo,
-      //LugarEspermaconteo: datos.LugarEspermaconteo,
-      Recomendacion: datos.recomendacion,
-      //MotivoRecomendacion: datos.motivoRecomendacion,
-      //LugarVasectomia: datos.LugarVasectomia,
-      MotivoLugar: datos.motivoLugar,
-      //RecomendacionHospital: datos.recomendacionHospital,
-      CualRecomendacion: datos.cualRecomendacion
+      fechaVasectomia: datos.fechaVasectomia,
+      origenInfo: datos.origenInfo,
+      fkConsejeria: datos.fkConsejeria,
+      referido: datos.referido,
+      fkHospitalReferencia: datos.fkHospitalReferencia,
+      fkCalidad: datos.fkCalidad,
+      satisfaccion: datos.satisfaccion,
+      motivoSatisfaccion: datos.motivoSatisfaccion,
+      complicacion: datos.complicacion,
+      motivoComplicacion: datos.motivoComplicacion,
+      fkCalidadRelacion: datos.fkCalidadRelacion,
+      motivoCalidad: datos.motivoCalidad,
+      fechaNegativo: datos.fechaNegativo,
+      lugarEspermaconteo: datos.LugarEspermaconteo,
+      recomendacion: datos.recomendacion,
+      motivoRecomendacion: datos.motivoRecomendacion,
+      lugarVasectomia: datos.LugarVasectomia,
+      motivoLugar: datos.motivoLugar,
+      recomendacionHospital: datos.recomendacionHospital,
+      cualRecomendacion: datos.cualRecomendacion
     },
     {
       headers : {
@@ -227,7 +227,7 @@ export default function Encuesta() {
   }
 
   const handleSave = () => {
-    if (datos.fkHospital === '' || datos.fechaVasectomia === ''){
+    if (datos.fkHospital === '' || datos.fechaVasectomia === '' || datos.fechaEncuesta === ''){
       setIsFail(true)
       return;
     }
@@ -251,34 +251,6 @@ export default function Encuesta() {
             Encuesta de seguimiento
           </Typography>
           <div className={style.justify}>
-            {/* 
-            <Typography>Blablabla</Typography>
-            <Typography>fkPaciente {datos.fkPaciente}</Typography>
-            <Typography>fechaEncuesta{datos.fechaEncuesta}</Typography>
-
-            <Typography>fkHospital {datos.fkHospital}</Typography>
-            <Typography>fechaVasectomia{datos.fechaVasectomia}</Typography>
-
-            <Typography>origenInfo{datos.origenInfo}</Typography>
-            <Typography>fkConsejeria{datos.fkConsejeria}</Typography>
-            <Typography>referido{datos.referido}</Typography>
-            <Typography>fkHospitalReferencia{datos.fkHospitalReferencia}</Typography>
-            <Typography>fkCalidad{datos.fkCalidad}</Typography>
-            <Typography>satisfaccion{datos.satisfaccion}</Typography>
-            <Typography>motivoSatisfaccion{datos.motivoSatisfaccion}</Typography>
-            <Typography>complicacion{datos.complicacion}</Typography>
-            <Typography>motivoComplicacion{datos.motivoComplicacion}</Typography>
-            <Typography>fkCalidadRelacion{datos.fkCalidadRelacion}</Typography>
-            <Typography>motivoCalidad{datos.motivoCalidad}</Typography>
-            <Typography>fechaNegativo{datos.fechaNegativo}</Typography>
-            <Typography>LugarEspermaconteo{datos.LugarEspermaconteo}</Typography>
-            <Typography>recomendacion{datos.recomendacion}</Typography>
-            <Typography>motivoRecomendacion{datos.motivoRecomendacion}</Typography>
-            <Typography>LugarVasectomia{datos.LugarVasectomia}</Typography>
-            <Typography>motivoLugar{datos.motivoLugar}</Typography>
-            <Typography>recomendacionHospital{datos.recomendacionHospital}</Typography>
-            <Typography>cualRecomendacion{datos.cualRecomendacion}</Typography> */}
-
             <div className={clsx(style.fullWidth)}>
                 <TextField
                     className={clsx(style.input, style.input30)}
@@ -296,7 +268,10 @@ export default function Encuesta() {
                     name = "fechaEncuesta"
                     defaultValue={datos.fechaEncuesta}
                     fullWidth
-                    inputProps={{ readOnly: true }}
+                    error={datos.fechaEncuesta === '' && isFail}
+                    onChange={handleChange}
+                    type="date"
+                    InputLabelProps={{shrink: true}}
                 />
                 
             </div>
@@ -451,7 +426,7 @@ export default function Encuesta() {
                     className={clsx(style.input, style.input100) }
                     label="¿Cuál? "
                     variant="outlined"
-                    name = "motivoComplicación"
+                    name = "motivoComplicacion"
                     defaultValue={datos.motivoComplicacion}
                     onChange={handleChange}
                     disabled={!datos.complicacion}
@@ -482,7 +457,7 @@ export default function Encuesta() {
                     defaultValue={datos.motivoCalidad}
                     onChange={handleChange}
                     fullWidth
-                    disabled={datos.fkCalidadRelacion != 3}
+                    disabled={datos.fkCalidadRelacion !== 3}
                 />
 
                 <div className={clsx(style.fullWidth)}>
@@ -527,7 +502,7 @@ export default function Encuesta() {
                     className={clsx(style.input, style.input100) }
                     label="¿Por qué? "
                     variant="outlined"
-                    name = "motivoRecomendación"
+                    name = "motivoRecomendacion"
                     defaultValue={datos.motivoRecomendacion}
                     onChange={handleChange}
                     fullWidth
