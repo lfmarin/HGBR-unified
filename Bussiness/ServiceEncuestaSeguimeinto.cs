@@ -42,7 +42,7 @@ namespace API_Hospital_Boca.Bussiness
                 if (!Utils.isTheSame(oldData.FkCalidad, es.FkCalidad)) oldData.FkCalidad = es.FkCalidad;
                 if (!Utils.isTheSame(oldData.Satisfaccion, es.Satisfaccion)) oldData.Satisfaccion = es.Satisfaccion;
                 if (!Utils.isTheSame(oldData.MotivoSatisfaccion, es.MotivoSatisfaccion)) oldData.MotivoSatisfaccion = es.MotivoSatisfaccion;
-                if (!Utils.isTheSame(oldData.Complicacion, es.Complicacion)) oldData.Complicacion = oldData.Complicacion;
+                if (!Utils.isTheSame(oldData.Complicacion, es.Complicacion)) oldData.Complicacion = es.Complicacion;
                 if (!Utils.isTheSame(oldData.MotivoComplicacion, es.MotivoComplicacion)) oldData.MotivoComplicacion = es.MotivoComplicacion;
                 if (!Utils.isTheSame(oldData.FkCalidadRelacion, es.FkCalidadRelacion)) oldData.FkCalidadRelacion = es.FkCalidadRelacion;
                 if (!Utils.isTheSame(oldData.MotivoCalidad, es.MotivoCalidad)) oldData.MotivoCalidad = es.MotivoCalidad;
@@ -89,7 +89,7 @@ namespace API_Hospital_Boca.Bussiness
                     MotivoRecomendacion = es.MotivoRecomendacion,
                     LugarVasectomia = es.LugarVasectomia,
                     MotivoLugar = es.MotivoLugar,
-                    RecomendacionHopital = es.RecomendacionHospital,
+                    RecomendacionHospital = es.RecomendacionHospital,
                     CualRecomendacion = es.CualRecomendacion
                 }).First();
             }

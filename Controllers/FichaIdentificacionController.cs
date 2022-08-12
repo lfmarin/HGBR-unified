@@ -29,6 +29,20 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
+        [HttpGet ("hospitalBoca/fichaIdent/{numExp}")]
+        public IActionResult getFichaByNumExp(string numExp)
+        {
+            try
+            {
+                var ficha = service.getFichaByNumExp(numExp);
+                return Ok(ficha);   
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
         [HttpGet ("hospitalBoca/notasMedicas/paciente")]
         public IActionResult getAllNotasMedicas([FromBody] int numFicha)
         {
@@ -112,6 +126,7 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
-        
+
+           
     }
 }

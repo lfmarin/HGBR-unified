@@ -7,6 +7,7 @@ namespace API_Hospital_Boca.Services
     {
         void saveFichaIdentificacion(Fichaidentificacion fi);
         void updateFichaIdentificacion(Fichaidentificacion fi);
+        object getFichaByNumExp(string numExp);
         object getFichaMedica(string expediente);
         void saveNotaMedica(Notamedica nm);
         IQueryable<object> getAllNotasMedicas(int numFicha);

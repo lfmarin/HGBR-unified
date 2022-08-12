@@ -165,5 +165,22 @@ namespace API_Hospital_Boca.Bussiness
             var lastFicha = context.Fichaidentificacions.OrderBy(f => f.IdFicha).Last();
             return lastFicha.IdFicha;
         }
+
+        public object getFichaByNumExp(string numExp)
+        {
+            try
+            {
+                return context.Fichaidentificacions.Where(f => f.FkPaciente == numExp).Select(fi => new {
+                    IdFicha = fi.IdFicha,
+                    FkPaciente = fi.FkPaciente,
+                    Servicio = fi.Servicio,
+                    Diagnostico = fi.Diagnostico
+                }).First();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            };
+        }
     }
 }
