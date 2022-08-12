@@ -26,6 +26,9 @@ export default function SeccionNotaMedica() {
       <Button component={Link} to={`/pacientes/detalles/${noExpediente}/nota-medica`} variant="outlined" size="large">
         Ver nota médica
       </Button>
+      {/*<Button component={Link} to={`/pacientes/detalles/${noExpediente}/nota-medica/lista`} variant="outlined" size="large">
+        Lista de notas médicas
+        </Button>*/}
       {/* <Button variant="outlined" size="large" startIcon={<GetAppRoundedIcon/>}>
         Descargar Notas Médicas
       </Button> */}

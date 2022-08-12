@@ -244,7 +244,6 @@ export default function NotaMedica() {
           </Typography>
           <div className={style.justify}>
             <div className={clsx(style.fullWidth)}>
-              <Typography>{ficha.idFicha}, {ficha.fkPaciente}. {ficha.servicio}, {ficha.servicio} </Typography>
               <TextField
                 className={clsx(style.input, style.input30)}
                 label="Número de ficha de identificación"

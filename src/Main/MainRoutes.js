@@ -11,6 +11,7 @@ import DetallesPaciente from '../Pacientes/detallesPaciente'
 import MainHistoriaClinica from '../Pacientes/HistoriaClinica/MainHistoria'
 import Encuesta from '../Pacientes/Encuesta/Encuesta'
 import NotaMedica from '../Pacientes/NotasMedicas/notaMedica'
+import ListaNotas from '../Pacientes/NotasMedicas/listaNotasMedicas'
 
 export default function MainRoutes() {
   return (
@@ -23,6 +24,9 @@ export default function MainRoutes() {
       </Route>
       <Route exact path="/pacientes/detalles/:noExpediente/nota-medica">
         <NotaMedica />
+      </Route>
+      <Route exact path="/pacientes/detalles/:noExpediente/nota-medica/lista">
+        <ListaNotas />
       </Route>
       <Route exact path="/pacientes/detalles/:noExpediente">
         <DetallesPaciente />
