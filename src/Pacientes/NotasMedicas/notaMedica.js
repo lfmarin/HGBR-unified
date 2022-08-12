@@ -28,12 +28,19 @@ export default function NotaMedica() {
     descripcion: '',
   })
   const [doctores, setDoctores] = useState([])
+  const [ficha, setFicha] = useState({
+    idFicha: '',
+    fkPaciente: '',
+    servicio: '',
+    diagnostico: '',
+  })
 
   const { noExpediente } = useParams()
   const [isFail, setIsFail] = useState(false)
   const [errorbd, setErrorbd] = useState(false)
   const [finish, setFinish] = useState(false)
-  const [load, setLoad] = useState(true)
+  const [loadFicha, setLoadFicha] = useState(true)
+  const [load, setLoad] = useState(false)
   const [show, setShow] = useState(false)
 
   const handleChange = event => {
@@ -41,6 +48,41 @@ export default function NotaMedica() {
       ...datos,
       [event.target.name]: event.target.value,
     })
+  }
+
+  const handleChangeFicha = event2 => {
+    setFicha({
+      ...ficha,
+      [event2.target.name]: event2.target.value,
+    })
+  }
+
+  const cargaFicha = () => {
+    axios
+      .get(`https://localhost:5001/hospitalBoca/fichaIdent/${noExpediente}`, {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(
+        response => {
+          if (response.status === 200) {
+            setFicha({
+              idFicha: response.data.idFicha,
+              fkPaciente: response.data.fkPaciente,
+              servicio: response.data.servicio,
+              diagnostico: response.data.diagnostico
+            })
+            setLoad(true)
+          }
+        },
+        error => {
+          if (!error.response) {
+            setErrorbd(true)
+            setLoad(false)
+          }
+        }
+      )
   }
 
   const carga = () => {
@@ -142,18 +184,53 @@ export default function NotaMedica() {
       )
   }
 
+  const guardaFicha = () => {
+    axios
+      .post(
+        'https://localhost:5001/hospitalBoca/fichaIdent/update',
+        {
+          idFicha: ficha.idFicha,
+          fkPaciente: ficha.fkPaciente,
+          servicio: ficha.servicio,
+          diagnostico: ficha.diagnostico,
+        },
+        {
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }
+      )
+      .then(
+        response => {
+          if (response.status === 200) {
+            setErrorbd(false)
+            setFinish(true)
+          }
+        },
+        error => {
+          if (!error.response) setErrorbd(true)
+        }
+      )
+  }
+
   const handleSave = () => {
     if (datos.fechaHora === '') {
       setIsFail(true)
       return
     } else {
+      guardaFicha()
       guardaNotaMedica()
     }
   }
 
   if (errorbd) return <Redirect to="/error" />
 
-  if (load) {
+  if (loadFicha) {
+    cargaFicha()
+    setLoadFicha(false)
+  }
+
+  if(load){
     carga()
     setLoad(false)
   }
@@ -167,15 +244,45 @@ export default function NotaMedica() {
           </Typography>
           <div className={style.justify}>
             <div className={clsx(style.fullWidth)}>
-              <Typography>AQUI VAMOS A PONER TODO LO DE LA FICHA DE IDENTIFICACION OK</Typography>
+              <Typography>{ficha.idFicha}, {ficha.fkPaciente}. {ficha.servicio}, {ficha.servicio} </Typography>
               <TextField
                 className={clsx(style.input, style.input30)}
                 label="Número de ficha de identificación"
                 variant="outlined"
                 name="fkFicha"
-                defaultValue={datos.fkFicha}
+                defaultValue={ficha.idFicha}
                 fullWidth
                 inputProps={{ readOnly: true }}
+              />
+
+              <TextField
+                className={clsx(style.input, style.input30)}
+                label="Paciente"
+                variant="outlined"
+                name="fkPaciente"
+                defaultValue={ficha.fkPaciente}
+                fullWidth
+                inputProps={{ readOnly: true }}
+              />
+
+              <TextField
+                className={clsx(style.input, style.input30)}
+                label="Servicio"
+                variant="outlined"
+                name="servicio"
+                defaultValue={ficha.servicio}
+                fullWidth
+                onChange={handleChangeFicha}
+              />
+
+            <TextField
+                className={clsx(style.input, style.input30)}
+                label="Diagnóstico"
+                variant="outlined"
+                name="diagnostico"
+                defaultValue={ficha.diagnostico}
+                fullWidth
+                onChange={handleChangeFicha}
               />
             </div>
 
