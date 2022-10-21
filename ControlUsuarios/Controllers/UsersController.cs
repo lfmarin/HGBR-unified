@@ -6,7 +6,6 @@ using ControlUsuarios.Services;
 
 namespace UsersManagement.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     public class UsersController : Controller
     {

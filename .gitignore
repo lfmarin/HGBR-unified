@@ -1,8 +1,10 @@
 .DS_Store
 
-/.vs
-# Evita subir el cotenido compilado de estos programas.
+/.vs 
 /bin
 /obj
+# Evita subir el cotenido compilado de estos programas.
+API_Hospital_Boca/bin
+API_Hospital_Boca/obj
 ControlUsuarios/obj
 ControlUsuarios/bin

@@ -12,7 +12,8 @@
     "ControlUsuarios": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:21465",
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:29862",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

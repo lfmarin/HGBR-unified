@@ -120,15 +120,11 @@ namespace API_Hospital_Boca.Controllers
          [HttpGet ("hospitalBoca/pacientes/{numExpediente}")]
          public IActionResult getPaciente(string numExpediente)
          {
-            try
-            {
-                var info = service.getPaciente(numExpediente);
-                return Ok(info);   
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            var info = service.getPaciente(numExpediente);
+            if (info != null)
+                return Ok(info);
+
+            return Ok(info);
          }
     }
 
