@@ -1,5 +1,8 @@
 .DS_Store
 
 /.vs
+# Evita subir el cotenido compilado de estos programas.
 /bin
 /obj
+ControlUsuarios/obj
+ControlUsuarios/bin

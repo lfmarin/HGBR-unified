@@ -75,8 +75,7 @@ namespace API_Hospital_Boca.Bussiness
             }
             catch (System.Exception)
             {
-                
-                throw;
+                return null;
             }
         }
 
