@@ -23,7 +23,7 @@ builder.Services.AddScoped<IRolesRepository, RolesRepository>();
 
 builder.Services.AddDbContext<userContext>(options =>
 {
-    var connectionString = configuration.GetConnectionString("HospitalBocaConnectionString");
+    var connectionString = configuration.GetConnectionString("HospitalBocaUsrConnectionString");
     var version = ServerVersion.Parse("8.0.26-mysql");
     options.UseMySql(connectionString, version);
 });

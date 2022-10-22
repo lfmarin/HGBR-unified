@@ -5,6 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using ControlUsuarios.Repositories;
 using ControlUsuarios.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ControlUsuarios.Services.Impl
 {
@@ -13,18 +14,19 @@ namespace ControlUsuarios.Services.Impl
         private readonly IUsersRepository _usersRepository;
         private readonly IRolesRepository _rolesRepository;
         private readonly JwtSettings _jwtSettings;
+        private readonly userContext _context;
 
-        public UserService(IOptions<JwtSettings> options, IUsersRepository usersRepository, IRolesRepository rolesRepository)
+        public UserService(userContext usersRepository) //, IRolesRepository rolesRepository)
         {
-            _usersRepository = usersRepository;
-            _rolesRepository = rolesRepository;
-            _jwtSettings = options.Value;
+            _context = usersRepository;
+            //_rolesRepository = rolesRepository;
+            //_jwtSettings = options.Value;
         }
 
         public User Authenticate(string username, string password)
         {
             var users = _usersRepository.GetAll();
-            var user = users.SingleOrDefault(u => u.UserName == username && u.Password == password);
+            var user = users.SingleOrDefault(u => u.userName == username && u.Password== password);
             if (user == null) return user;
 
             var roles = _rolesRepository.GetAll();
@@ -38,10 +40,10 @@ namespace ControlUsuarios.Services.Impl
                 Subject = new ClaimsIdentity(
                     new Claim[]
                     {
-                        new Claim("UserName", user.UserName),
-                        new Claim("DisplayName", $"{user.FirstName} {user.LastName}"),
-                        new Claim("CanRead", user.Canread.Value.ToString()),
-                        new Claim("CanWrite", user.Canwrite.Value.ToString()),
+                        new Claim("UserName", user.userName),
+                        //new Claim("DisplayName", $"{user.FirstName} {user.LastName}"),
+                        //new Claim("CanRead", user.Canread.Value.ToString()),
+                        //new Claim("CanWrite", user.Canwrite.Value.ToString()),
                         new Claim(ClaimTypes.Role, role.Name)
                     }
                 ),
@@ -53,13 +55,20 @@ namespace ControlUsuarios.Services.Impl
             return user;
         }
 
-        public IEnumerable<User> GetAll()
+        public IQueryable<object> GetAll()
         {
-            var users = _usersRepository.GetAll();
-            return users.Select(u => {
-                u.Password = "";
-                return u;
-            });
+            try
+            {
+                return _context.Users.Select(p => new {
+                    ID = p.ID,
+                    UserName = p.userName,
+                    IdRole = p.IdRole
+                });
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
     }
 }

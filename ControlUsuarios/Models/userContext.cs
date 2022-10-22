@@ -37,51 +37,42 @@ namespace ControlUsuarios.Models
                     .HasColumnName("id");
 
                 entity.Property(e => e.Description)
-                    .HasMaxLength(40)
-                    .HasColumnName("description");
+                    .HasColumnName("descripcion");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(20)
-                    .HasColumnName("name");
+                    .HasColumnName("namerole");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("users");
+                entity.ToTable("Usuarios");
 
-                entity.HasIndex(e => e.IdRole, "id_role");
+                entity.HasIndex(e => e.IdRole, "fkRole");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(15)
-                    .HasColumnName("id");
+                Console.WriteLine("found the role");
 
-                entity.Property(e => e.Canread).HasColumnName("canread");
+                entity.Property(e => e.ID)
+                    .HasColumnName("idUsr")
+                    .IsRequired();
 
-                entity.Property(e => e.Canwrite).HasColumnName("canwrite");
-
-                entity.Property(e => e.FirstName)
-                    .HasMaxLength(40)
-                    .HasColumnName("first_name");
-
-                entity.Property(e => e.IdRole).HasColumnName("id_role");
-
-                entity.Property(e => e.LastName)
-                    .HasMaxLength(40)
-                    .HasColumnName("last_name");
+                entity.Property(e => e.userName)
+                    .HasMaxLength(30)
+                    .HasColumnName("userName");
 
                 entity.Property(e => e.Password)
-                    .HasMaxLength(40)
-                    .HasColumnName("password");
+                    .HasMaxLength(30)
+                    .HasColumnName("strpass")
+                    .IsRequired();
 
-                entity.Property(e => e.UserName)
-                    .HasMaxLength(40)
-                    .HasColumnName("user_name");
+                entity.Property(e => e.IdRole)
+                    .HasColumnName("fkRole")
+                    .IsRequired();
 
-                entity.HasOne(d => d.IdRoleNavigation)
-                    .WithMany(p => p.Users)
+                entity.HasOne(e => e.IdRoleNavigation)
+                    .WithMany(d => d.Users)
                     .HasForeignKey(d => d.IdRole)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("users_ibfk_1");
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             OnModelCreatingPartial(modelBuilder);

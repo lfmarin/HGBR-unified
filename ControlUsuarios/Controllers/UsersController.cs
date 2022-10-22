@@ -29,10 +29,10 @@ namespace UsersManagement.Controllers
         }
 
         [HttpGet("user/all")]
-        public IEnumerable<User> GetAllUser()
+        public IActionResult GetAllUser()
         {
             var result = _usersService.GetAll();
-            return result;
+            return Ok(result);
         }
 
         [HttpPost]
