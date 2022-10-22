@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ControlUsuarios.Models;
 using ControlUsuarios.Services;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace UsersManagement.Controllers
 {
@@ -21,10 +23,14 @@ namespace UsersManagement.Controllers
         [HttpPost("authenticate")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public IActionResult Authenticate([FromBody] LoginInfo loginInfo)
         {
             var result = _usersService.Authenticate(loginInfo.Username, loginInfo.Password);
+
+            if (result == null)
+                return Forbid();
+
             return Ok(result);
         }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ControlUsuarios.Models;
 namespace ControlUsuarios.Repositories.Impl
 {

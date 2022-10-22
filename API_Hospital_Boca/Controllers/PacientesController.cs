@@ -2,6 +2,7 @@
 using API_Hospital_Boca.Services;
 using API_Hospital_Boca.Models;
 using API_Hospital_Boca.Bussiness;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API_Hospital_Boca.Controllers
 {
@@ -24,6 +25,7 @@ namespace API_Hospital_Boca.Controllers
         }
 
 
+        [Authorize]
         [HttpGet ("hospitalBoca/pacientes/all")]
         public IActionResult getAll()
         {
@@ -31,6 +33,7 @@ namespace API_Hospital_Boca.Controllers
             return Ok(res);
         }
 
+        [Authorize]
         [HttpPost ("hospitalBoca/pacientes/save")]
         public IActionResult savePaciente([FromBody] NuevoPaciente np) 
         {
@@ -89,6 +92,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost ("hospitalBoca/pacientes/update")]
         public IActionResult updatePaciente([FromBody] Paciente p)
         {
@@ -103,6 +107,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost ("hospitalBoca/pacientes/delete")]
         public IActionResult deletePaciente([FromBody] string numExpediente)
         {
@@ -117,15 +122,14 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-         [HttpGet ("hospitalBoca/pacientes/{numExpediente}")]
-         public IActionResult getPaciente(string numExpediente)
-         {
+        [Authorize]
+        [HttpGet ("hospitalBoca/pacientes/{numExpediente}")]
+        public IActionResult getPaciente(string numExpediente)
+        {
             var info = service.getPaciente(numExpediente);
             if (info != null)
-                return Ok(info);
-
-            return Ok(info);
-         }
+                return Ok(info);return Ok(info);
+        }
     }
 
     public class NuevoPaciente

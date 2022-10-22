@@ -7,6 +7,8 @@ using ControlUsuarios.Repositories;
 using ControlUsuarios.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using API_Hospital_Boca.Models.dto;
+using System.Collections.Generic;
 
 namespace ControlUsuarios.Services.Impl
 {

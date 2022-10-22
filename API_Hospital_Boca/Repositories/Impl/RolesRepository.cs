@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ControlUsuarios.Models;
 namespace ControlUsuarios.Repositories.Impl
 {

@@ -1,4 +1,5 @@
-﻿using ControlUsuarios.Models;
+﻿using System.Collections.Generic;
+using ControlUsuarios.Models;
 
 namespace ControlUsuarios.Repositories
 {

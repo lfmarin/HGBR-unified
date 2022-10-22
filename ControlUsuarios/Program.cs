@@ -17,6 +17,11 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 configuration.AddEnvironmentVariables();
 
+builder.Host.UseSerilog((ctx, lc) =>
+{
+    lc.WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information);
+});
+
 builder.Services.AddScoped<IUsersService, UserService>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IRolesRepository, RolesRepository>();

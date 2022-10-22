@@ -17,6 +17,12 @@ using API_Hospital_Boca.Models.dto;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.MariaDB.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using ControlUsuarios.Services;
+using ControlUsuarios.Services.Impl;
+using ControlUsuarios.Repositories;
+using ControlUsuarios.Repositories.Impl;
+using Microsoft.Extensions.Options;
 
 namespace API_Hospital_Boca
 {
@@ -41,12 +47,14 @@ namespace API_Hospital_Boca
                 options.UseMySQL(connectionString);
             });
 
-            // Aplica las politicas para los usuarios.
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("WritePermission", policy => policy.RequireClaim("CanWrite", "true"));
-                options.AddPolicy("ReadPermission", policy => policy.RequireClaim("CanRead", "true"));
+            services.AddDbContext<ControlUsuarios.Models.userContext>(options => {
+                var connectionString = Configuration.GetConnectionString("HospitalUsuarioConnectionString");
+                options.UseMySQL(connectionString);
             });
+
+            services.AddScoped<IUsersService, UserService>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IRolesRepository, RolesRepository>();
 
             services.AddScoped<IServicePacientes, ServicePacientes>();
             services.AddScoped<IServiceDoctores, ServiceDoctores>();
@@ -67,6 +75,27 @@ namespace API_Hospital_Boca
 
             services.Configure<JwtSettings>(jwtSection);
 
+            services.AddAuthentication(authOptions =>
+            {
+                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(bearerOptions =>
+            {
+                bearerOptions.RequireHttpsMetadata = false;
+                bearerOptions.SaveToken = true;
+                bearerOptions.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            //services.AddAuthorization();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+
             services.AddCors(options =>
             {
                options.AddPolicy ("MY_CORS", builder =>
@@ -76,18 +105,6 @@ namespace API_Hospital_Boca
                    builder.AllowAnyHeader ();
                });
             });
-
-            services.AddControllers();
-
-            services.AddScoped<IServicePacientes, ServicePacientes>();
-            services.AddScoped<IServiceDoctores, ServiceDoctores>();
-            services.AddScoped<IServiceHospitales, ServiceHospitales>();
-            services.AddScoped<IServiceHistoriaClinica, ServiceHistoriaClinica>();
-            services.AddScoped<IServiceCatalogos, ServiceCatalogos>();
-            services.AddScoped<IServiceFichaIdentificacion, ServiceFichaIdentificacion>();
-            services.AddScoped<IServicePersonalConsejeria, ServicePersonalConsejeria>();
-            services.AddScoped<IServiceEncuestaSeguimeinto, ServiceEncuestaSeguimeinto>();
-            services.AddScoped<IServiceNotaMedica, ServiceNotaMedica>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,7 +120,7 @@ namespace API_Hospital_Boca
             app.UseRouting();
             app.UseCors("MY_CORS");
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
