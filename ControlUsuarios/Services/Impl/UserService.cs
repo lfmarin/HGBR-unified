@@ -55,7 +55,11 @@ namespace ControlUsuarios.Services.Impl
 
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            var users = _usersRepository.GetAll();
+            return users.Select(u => {
+                u.Password = "";
+                return u;
+            });
         }
     }
 }

@@ -28,7 +28,7 @@ namespace UsersManagement.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("user/all")]
         public IEnumerable<User> GetAllUser()
         {
             var result = _usersService.GetAll();
