@@ -48,36 +48,44 @@ namespace ControlUsuarios.Models
             {
                 entity.ToTable("Usuarios");
 
-                entity.HasIndex(e => e.IdRole, "fkRole");
+                entity.HasIndex(e => e.ID, "idUser");
 
-                Console.WriteLine("found the role");
-
+                Console.WriteLine("Getting User");
                 entity.Property(e => e.ID)
-                    .HasColumnName("idUsr")
+                    .HasColumnName("idUser")
                     .IsRequired();
 
+                Console.WriteLine("Getting UserNAme");
                 entity.Property(e => e.userName)
                     .HasMaxLength(30)
-                    .HasColumnName("userName");
+                    .HasColumnName("userName")
+                    .IsRequired();
 
+                Console.WriteLine("Getting Pass");
                 entity.Property(e => e.Password)
                     .HasMaxLength(30)
                     .HasColumnName("strpass")
                     .IsRequired();
 
-                entity.Property(e => e.IdRole)
-                    .HasColumnName("fkRole")
+                Console.WriteLine("Getting Role");
+                entity.Property(e => e.IdRole).HasColumnName("RoleId");
+
+                Console.WriteLine("Getting DocID");
+                entity.Property(e => e.IDDoctor)
+                    .HasColumnName("idDoc")
                     .IsRequired();
 
                 entity.HasOne(e => e.IdRoleNavigation)
                     .WithMany(d => d.Users)
                     .HasForeignKey(d => d.IdRole)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("users_ibfk_1");
             });
 
-            OnModelCreatingPartial(modelBuilder);
+            base.OnModelCreating(modelBuilder);
+            //base.OnModelCreatingPartial(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

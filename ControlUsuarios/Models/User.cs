@@ -8,10 +8,12 @@ namespace ControlUsuarios.Models
     {
         public int ID { get; set; }
         public string userName { get; set; }
+
+        [JsonIgnore]
         public string Password { get; set; }
 
         [JsonIgnore]
-        public int? IDDoctor { get; set; }
+        public int IDDoctor { get; set; }
 
         //[JsonIgnore]
         //public bool? Canread { get; set; }

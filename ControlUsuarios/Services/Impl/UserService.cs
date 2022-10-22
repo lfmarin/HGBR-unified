@@ -6,6 +6,7 @@ using System.Security.Claims;
 using ControlUsuarios.Repositories;
 using ControlUsuarios.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace ControlUsuarios.Services.Impl
 {
@@ -14,19 +15,19 @@ namespace ControlUsuarios.Services.Impl
         private readonly IUsersRepository _usersRepository;
         private readonly IRolesRepository _rolesRepository;
         private readonly JwtSettings _jwtSettings;
-        private readonly userContext _context;
 
-        public UserService(userContext usersRepository) //, IRolesRepository rolesRepository)
+        public UserService(IOptions<JwtSettings> options, IUsersRepository usersRepository, IRolesRepository rolesRepository) //, IRolesRepository rolesRepository)
         {
-            _context = usersRepository;
-            //_rolesRepository = rolesRepository;
-            //_jwtSettings = options.Value;
+            _usersRepository = usersRepository;
+            _rolesRepository = rolesRepository;
+            _jwtSettings = options.Value;
         }
 
-        public User Authenticate(string username, string password)
+        public User? Authenticate(string username, string password)
         {
-            var users = _usersRepository.GetAll();
-            var user = users.SingleOrDefault(u => u.userName == username && u.Password== password);
+            IEnumerable<User> users = GetAll().AsEnumerable();
+            var user = users.SingleOrDefault<User>(u => u.userName == username && u.Password == password);
+
             if (user == null) return user;
 
             var roles = _rolesRepository.GetAll();
@@ -55,14 +56,13 @@ namespace ControlUsuarios.Services.Impl
             return user;
         }
 
-        public IQueryable<object> GetAll()
+        public IEnumerable<User> GetAll()
         {
             try
             {
-                return _context.Users.Select(p => new {
-                    ID = p.ID,
-                    UserName = p.userName,
-                    IdRole = p.IdRole
+                var users = _usersRepository.GetAll();
+                return users.Select(p => {
+                    return p;
                 });
             }
             catch (System.Exception)
