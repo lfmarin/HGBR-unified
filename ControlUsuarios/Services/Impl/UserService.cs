@@ -53,6 +53,10 @@ namespace ControlUsuarios.Services.Impl
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            user.Token = tokenHandler.WriteToken(token);
+            user.Password = String.Empty;
+
             return user;
         }
 
