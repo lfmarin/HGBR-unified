@@ -43,6 +43,7 @@ export default function DetallesPaciente() {
         },
         error => {
           if (!error.response) {
+            console.log("There was an error.");
             setErrorbd(true)
           }
         }

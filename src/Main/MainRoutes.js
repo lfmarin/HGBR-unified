@@ -12,6 +12,7 @@ import MainHistoriaClinica from '../Pacientes/HistoriaClinica/MainHistoria'
 import Encuesta from '../Pacientes/Encuesta/Encuesta'
 import NotaMedica from '../Pacientes/NotasMedicas/notaMedica'
 import ListaNotas from '../Pacientes/NotasMedicas/listaNotasMedicas'
+import Login from '../Session/Login'
 
 export default function MainRoutes() {
   return (
@@ -52,8 +53,14 @@ export default function MainRoutes() {
       <Route exact path="/">
         <Home />
       </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
       <Route path="*">
-        <h1> Oops! La página que buscas no existe :(</h1>
+        <div>
+          <h1>La página que buscas no existe.</h1>
+          <a href="/">Volver a inicio</a>
+        </div>
       </Route>
     </Switch>
   )

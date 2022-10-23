@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../Components/SortTable'
 import EnhancedTableHead from '../Components/HeadSortTable'
 import { visuallyHidden } from '@mui/utils'
-import { Link, Redirect, useLocation } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 import useStyles from '../Styles/listaPacientesStyles'
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
@@ -34,7 +34,7 @@ export default function ListaPacientes(props) {
   const [errorbd, setErrorbd] = useState(false)
   const [refresh, setRefresh] = useState(true)
 
-  //const [token, setToken] = useState(localStorage.getItem("ACCESS_TOKEN"));
+  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   //const location = useLocation();
   const [search, setSearch] = useState('')
   const classes = useStyles()
@@ -77,7 +77,7 @@ export default function ListaPacientes(props) {
         .get('https://localhost:5001/hospitalBoca/pacientes/all', {
           headers: {
             'Content-type': 'application/json',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
           },
         })
         .then(
@@ -98,8 +98,7 @@ export default function ListaPacientes(props) {
           }*/
           }
         )
-      setRefresh(false)
-    }
+      }
   })
 
   const dateFormatter = date => {

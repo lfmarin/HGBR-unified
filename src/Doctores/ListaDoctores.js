@@ -59,7 +59,7 @@ export default function ListaDoctores(props) {
   const [errorbd, setErrorbd] = useState(false)
   const [refresh, setRefresh] = useState(true)
 
-  //const [token, setToken] = useState(localStorage.getItem("ACCESS_TOKEN"));
+  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   //const location = useLocation();
   const [search, setSearch] = useState('')
   const classes = useStyles()

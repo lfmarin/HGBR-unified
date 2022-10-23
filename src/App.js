@@ -2,9 +2,11 @@ import {React, useState} from 'react'
 import NavBar from './Main/AppBar';
 import { createTheme, ThemeProvider} from '@material-ui/core/styles';
 import MainRoutes from './Main/MainRoutes';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route,  Switch, Redirect } from 'react-router-dom';
 import useStyles from './Styles/Styles';
 import Drawer from './Main/Drawer';
+// import { PrivateRoute } from './Components/PrivateRoute';
+// import { Login } from './Session/Login';
 
 const theme = createTheme({
   palette: {
@@ -33,8 +35,13 @@ export default function App() {
             <NavBar menuCallBack = {handleDrawer}/>
             <Drawer open={isOpen} menuCallBack = {handleDrawer}/>
           </header>
-          <main className = {classes.main}>
-            <MainRoutes/>
+          {/* <Switch>
+            <PrivateRoute exact path="/" component={MainRoutes} />
+            <Route path="/login" component={Login} />
+            <Redirect from="*" to="/" />
+          </Switch> */}
+          <main className={classes.main}>
+            <MainRoutes />
           </main>
         </ThemeProvider>
       </div>
