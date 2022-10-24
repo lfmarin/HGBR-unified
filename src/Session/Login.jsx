@@ -5,8 +5,8 @@ import axios from 'axios'
 export default function Login(props) {
 	// Declara estados para verificar la sesion.
 	const [errorMessages, setErrorMessages] = useState({});
-	const [isSubmitted, setIsSubmitted] = useState(false);
-	const [errorbd, setErrorbd] = useState(false)
+	const [isSubmitted, setIsSubmitted] = useState(sessionStorage.getItem('jwtToken'));
+	const [Redirect, setRedirect] = useState(false)
 
 	const renderErrorMessage = (name) => {
 		name === errorMessages.name && (
@@ -15,31 +15,33 @@ export default function Login(props) {
 	}
 
 	const handleSubmit = (event) => {
+		// No permitas la pagina en recargar.
 		event.preventDefault();
 
 		var {uname, pass} = document.forms[0];
 
-		console.log(uname.value, pass.value)
-
 		// Pide el API la información con lo escrito del usuario.
 		const opcionesPOST = {username: uname.value, password: pass.value}
-
-		console.log(opcionesPOST)
 
 		axios
 		.post('https://localhost:5001/api/Users/authenticate', opcionesPOST)
 		.then(
 			response => {
 				if (response.status === 200) {
-					console.log(response.data)
 					// Verifica si recibimos un Token.
 					if( response.data.token && uname.value === response.data.userName )
 					{
 						// Hora de guardar el token.
-						//console.log("TENEMOS SESION")
 						sessionStorage.setItem('jwtToken',response.data.token);
-
+						setRedirect(true)
 					}
+				}
+			}
+		)
+		.catch(
+			err => {
+				if(err.response.status === 401) {
+					setErrorMessages({ name: "uname", message: "Wrong username"});
 				}
 			}
 		)

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from './Home'
+import { SetStateAction } from 'react'
 import ListaPacientes from '../Pacientes/listaPacientes'
 import RegistroPaciente from '../Pacientes/agregaPaciente'
 import ListaDoctores from '../Doctores/ListaDoctores'
@@ -13,8 +14,12 @@ import Encuesta from '../Pacientes/Encuesta/Encuesta'
 import NotaMedica from '../Pacientes/NotasMedicas/notaMedica'
 import ListaNotas from '../Pacientes/NotasMedicas/listaNotasMedicas'
 import Login from '../Session/Login'
+import Logout from '../Session/Logout'
+import { Redirect } from 'react-router-dom'
 
 export default function MainRoutes() {
+  const [isSubmitted, setIsSubmitted] = useState(() => sessionStorage.getItem('jwtToken') !== "");
+  
   return (
     <Switch>
       <Route exact path="/pacientes/detalles/:noExpediente/historia-clinica">
@@ -55,6 +60,9 @@ export default function MainRoutes() {
       </Route>
       <Route exact path="/login">
         <Login />
+      </Route>
+      <Route exact path="/logout">
+        <Logout />
       </Route>
       <Route path="*">
         <div>

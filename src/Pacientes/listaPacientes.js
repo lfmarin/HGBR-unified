@@ -88,7 +88,7 @@ export default function ListaPacientes(props) {
             }
           },
           error => {
-            if (!error.response) setErrorbd(true)
+            if (error.response.status) setErrorbd(true)
             /*else{
             if (error.response.status === 401) {
               localStorage.removeItem("ACCESS_TOKEN");
@@ -113,7 +113,7 @@ export default function ListaPacientes(props) {
     return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25))
   }
 
-  if (errorbd) return <Redirect to="/error" />
+  if (errorbd) return <Redirect to="/login" />
   /*if(!token){
     return(
       //console.log(location.pathname),
