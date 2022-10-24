@@ -1,17 +1,25 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import axios from 'axios'
+import { Redirect } from "react-router-dom";
 
+/**
+ * Pagina de inicio de sesión.
+ * @param {*} props 
+ */
 export default function Login(props) {
 	// Declara estados para verificar la sesion.
 	const [errorMessages, setErrorMessages] = useState({});
 	const [isSubmitted, setIsSubmitted] = useState(sessionStorage.getItem('jwtToken'));
-	const [Redirect, setRedirect] = useState(false)
 
+	/**
+	 * Esta función se encarga de reportar al usuario que los datos introducidos son incorrectos
+	 * @param {*} name El elemento que será modificado.
+	 * @returns {HTMLDivElement} El elemento generado.
+	 */
 	const renderErrorMessage = (name) => {
-		name === errorMessages.name && (
-			<div className='error'>{errorMessages.message}</div> 
-		);
+		return name === errorMessages.name ? (
+			<div className='error'>{errorMessages.message}</div>
+		) : <div></div>;
 	}
 
 	const handleSubmit = (event) => {
@@ -33,7 +41,7 @@ export default function Login(props) {
 					{
 						// Hora de guardar el token.
 						sessionStorage.setItem('jwtToken',response.data.token);
-						setRedirect(true)
+						setIsSubmitted(true)
 					}
 				}
 			}
@@ -41,7 +49,8 @@ export default function Login(props) {
 		.catch(
 			err => {
 				if(err.response.status === 401) {
-					setErrorMessages({ name: "uname", message: "Wrong username"});
+					// Reporta el mensaje que los datos son incorrectos.
+					setErrorMessages({ name: "pass", message: "Los datos son incorrectos."});
 				}
 			}
 		)
@@ -58,11 +67,11 @@ export default function Login(props) {
 				</div>
 				<div className='input-container'>
 					<label>Contraseña</label>
-					<input type="text" name="pass" required />
+					<input type="password" name="pass" required />
 					{renderErrorMessage("pass")}
 				</div>
 				<div className='button-container'>
-					<input type="submit" />
+					<input type="submit" value="Iniciar" />
 				</div>
 			</form>
 		</div>
@@ -72,7 +81,7 @@ export default function Login(props) {
 		<div className="login">
 			<div className="login-form">
 				<div className="title">Inicio de sesión</div>
-				{isSubmitted ? <div>Ya inicio sesión</div> : Formulario}
+				{isSubmitted ? <Redirect to="/" /> : Formulario}
 			</div>
 		</div>
 	)

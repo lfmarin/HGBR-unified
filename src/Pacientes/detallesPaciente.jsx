@@ -33,6 +33,7 @@ export default function DetallesPaciente() {
       .then(
         response => {
           if (response.status === 200) {
+            setLoad(true)
             setDatos({
               NoExpediente: response.data.noExpediente,
               Nombre: response.data.nombre,
