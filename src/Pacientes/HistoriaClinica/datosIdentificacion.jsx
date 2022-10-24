@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Typography } from '@material-ui/core'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
-import { TextField } from '@mui/material'
+import { Redirect, Link } from 'react-router-dom'
+import { TextField, Grid } from '@mui/material'
 import useStyles from '../../Styles/formularioStyles'
-import { Button } from '@material-ui/core'
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
-import { Grid } from '@mui/material'
 import { useParams } from 'react-router'
 import Paper from '@material-ui/core/Paper'
-import { FormControl } from '@material-ui/core'
-import { InputLabel } from '@material-ui/core'
-import { Select } from '@material-ui/core'
-import { MenuItem } from '@material-ui/core'
+import { Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 
@@ -55,12 +50,14 @@ export default function DatosIdentificacion() {
   const [delay, setDelay] = useState(false)
   const [load, setLoad] = useState(true)
   const [show, setShow] = useState(false)
+  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
 
   const cargaPaciente = () => {
     axios
       .get(`https://localhost:5001/hospitalBoca/pacientes/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
       })
       .then(
@@ -94,6 +91,11 @@ export default function DatosIdentificacion() {
             })
             setShow(true)
           }
+
+          if( response.status === 204 ) {
+            setErrorbd(true)
+            setShow(false)
+          }
         },
         error => {
           if (!error.response) {
@@ -109,7 +111,7 @@ export default function DatosIdentificacion() {
       .get('https://localhost:5001/hospitalBoca/catalogos/estadoCivil', {
         headers: {
           'Content-type': 'application/json',
-          //'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`
         },
       })
       .then(
@@ -252,6 +254,7 @@ export default function DatosIdentificacion() {
         {
           headers: {
             'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
         }
       )
@@ -725,6 +728,6 @@ export default function DatosIdentificacion() {
       </div>
     )
   } else {
-    return <Typography> Ha habido un problema cargando la información del usuario </Typography>
+    return <Typography> Cargando información...</Typography>
   }
 }

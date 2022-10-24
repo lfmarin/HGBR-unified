@@ -85,6 +85,7 @@ export default function ListaPacientes(props) {
             if (response.status === 200) {
               setPacientes(response.data)
               setErrorbd(false)
+              setRefresh(false)
             }
           },
           error => {

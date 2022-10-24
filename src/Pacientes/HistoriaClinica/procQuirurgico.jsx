@@ -33,6 +33,7 @@ export default function ProcedimientoQuirurgico() {
   const [load, setLoad] = useState(true)
   const [loadProc, setLoadProc] = useState(false)
   const [show, setShow] = useState(false)
+  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
 
   const handleChange = event => {
     setDatos({
@@ -46,6 +47,7 @@ export default function ProcedimientoQuirurgico() {
       .get('https://localhost:5001/hospitalBoca/doctores/all', {
         headers: {
           'Content-type': 'application/json',
+          'Authentication': `Bearer ${token}`
         },
       })
       .then(
@@ -66,6 +68,7 @@ export default function ProcedimientoQuirurgico() {
       .get(`https://localhost:5001/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authentication': `Bearer ${token}`
         },
       })
       .then(
@@ -99,6 +102,7 @@ export default function ProcedimientoQuirurgico() {
       .get(`https://localhost:5001/hospitalBoca/historiaClinica/procedimientoQuirurgico/${datos.fkHistoria}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authentication': `Bearer ${token}`
         },
       })
       .then(
@@ -142,6 +146,7 @@ export default function ProcedimientoQuirurgico() {
         {
           headers: {
             'Content-type': 'application/json',
+            'Authentication': `Bearer ${token}`
           },
         }
       )

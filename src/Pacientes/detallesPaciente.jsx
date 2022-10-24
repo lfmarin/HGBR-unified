@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Accordion, AccordionSummary, Typography } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import useStyles from '../Styles/detallesStyles'
@@ -15,6 +15,7 @@ import axios from 'axios'
 export default function DetallesPaciente() {
   const { noExpediente } = useParams()
   const classes = useStyles()
+  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   const [datos, setDatos] = useState({
     NoExpediente: '',
     Nombre: '',
@@ -28,12 +29,13 @@ export default function DetallesPaciente() {
       .get(`https://localhost:5001/hospitalBoca/pacientes/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
       })
       .then(
         response => {
           if (response.status === 200) {
-            setLoad(true)
+            setLoad(false)
             setDatos({
               NoExpediente: response.data.noExpediente,
               Nombre: response.data.nombre,
@@ -51,10 +53,11 @@ export default function DetallesPaciente() {
       )
   }
 
-  if (load) {
-    cargaPaciente()
-    setLoad(false)
-  }
+  useEffect(() => {
+    if (load) {
+      cargaPaciente()
+    }
+  });
 
   return (
     <div className={classes.root}>

@@ -35,11 +35,6 @@ export default function App() {
             <NavBar menuCallBack = {handleDrawer}/>
             <Drawer open={isOpen} menuCallBack = {handleDrawer}/>
           </header>
-          {/* <Switch>
-            <PrivateRoute exact path="/" component={MainRoutes} />
-            <Route path="/login" component={Login} />
-            <Redirect from="*" to="/" />
-          </Switch> */}
           <main className={classes.main}>
             <MainRoutes />
           </main>
