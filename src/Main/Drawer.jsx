@@ -1,8 +1,9 @@
-import React from 'react'
+import {React, useState} from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import Send from '@material-ui/icons/Send'
 import PersonIcon from '@mui/icons-material/Person'
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
 import { Link } from 'react-router-dom'
@@ -24,12 +25,27 @@ const useStyles = makeStyles({
 
 export default function TempDrawer(props) {
   const classes = useStyles()
+  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
+  const IsLoggedIn = token.length === 0
 
   const toggleDrawer = open => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return
 
     props.menuCallBack()
   }
+
+  const SetLoginOrLogout = () => (
+      <List>
+        <Link className={classes.enlace} to={IsLoggedIn ? "/login" : "/logout"}>
+          <ListItem button key="salir">
+            <ListItemIcon>
+              {!IsLoggedIn && <ExitToAppIcon />}
+            </ListItemIcon>
+            <ListItemText primary={IsLoggedIn ? "Iniciar Sesión" : "Salir"} />
+          </ListItem>
+        </Link>
+      </List>
+  )
 
   const list = () => (
     <div
@@ -64,16 +80,7 @@ export default function TempDrawer(props) {
 
       <Divider />
 
-      <List>
-        <Link className={classes.enlace} to="/logout">
-          <ListItem button key="salir">
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <ListItemText primary="Salir" />
-          </ListItem>
-        </Link>
-      </List>
+      {SetLoginOrLogout()}
     </div>
   )
 

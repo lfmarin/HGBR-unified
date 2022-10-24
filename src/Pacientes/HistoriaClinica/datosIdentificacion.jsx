@@ -122,14 +122,7 @@ export default function DatosIdentificacion() {
           }
         },
         error => {
-          if (!error.response) setErrorbd(true)
-          /*else{
-            if (error.response.status === 401) {
-              localStorage.removeItem("ACCESS_TOKEN");
-              setToken('');
-              setErrorbd(false);
-            }
-          }*/
+          if (error.status === 401) setErrorbd(true)
         }
       )
   }, [])
@@ -295,7 +288,9 @@ export default function DatosIdentificacion() {
     }
   }
 
-  if (errorbd) return <Redirect to="/error" />
+  // Si hay un error en la base de datos, entonces significa que hay que
+  // iniciar sesión. Sino, entonces hay que reportar.
+  if (errorbd) return <Redirect to="/login" />
 
   if (finish) {
     setTimeout(() => setDelay(true), 3500)

@@ -57,6 +57,7 @@ export default function ListaDoctores(props) {
   const [order, setOrder] = useState('asc')
   const [orderBy, setOrderBy] = useState('idDoctor')
   const [errorbd, setErrorbd] = useState(false)
+  const [noAutorizado, AutRedir] = useState(false)
   const [refresh, setRefresh] = useState(true)
 
   const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
@@ -101,7 +102,7 @@ export default function ListaDoctores(props) {
         .get('https://localhost:5001/hospitalBoca/doctores/all', {
           headers: {
             'Content-type': 'application/json',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
           },
         })
         .then(
@@ -112,34 +113,18 @@ export default function ListaDoctores(props) {
             }
           },
           error => {
-            if (!error.response) setErrorbd(true)
-            /*else{
             if (error.response.status === 401) {
-              localStorage.removeItem("ACCESS_TOKEN");
               setToken('');
-              setErrorbd(false);
+              AutRedir(true);
             }
-          }*/
           }
         )
       setRefresh(false)
     }
   })
 
+  if (noAutorizado) return <Redirect to="/login" />
   if (errorbd) return <Redirect to="/error" />
-  /*if(!token){
-    return(
-      //console.log(location.pathname),
-      <Redirect to={
-        {
-          pathname:'/login',
-          state:{
-            from: location
-          }
-        }
-      }/>
-    )
-  }*/
 
   return (
     <div className={classes.root}>

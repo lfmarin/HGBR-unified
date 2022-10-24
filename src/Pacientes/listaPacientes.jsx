@@ -14,6 +14,7 @@ import axios from 'axios'
 import useStyles from '../Styles/listaPacientesStyles'
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
 import Button from '@mui/material/Button'
+import JWTToken from '../Session/Token'
 
 const headCells = [
   { id: 'noExpediente', numeric: false, label: 'No. Expediente' },
@@ -90,13 +91,6 @@ export default function ListaPacientes(props) {
           },
           error => {
             if (error.response.status) setErrorbd(true)
-            /*else{
-            if (error.response.status === 401) {
-              localStorage.removeItem("ACCESS_TOKEN");
-              setToken('');
-              setErrorbd(false);
-            }
-          }*/
           }
         )
       }
@@ -115,19 +109,6 @@ export default function ListaPacientes(props) {
   }
 
   if (errorbd) return <Redirect to="/login" />
-  /*if(!token){
-    return(
-      //console.log(location.pathname),
-      <Redirect to={
-        {
-          pathname:'/login',
-          state:{
-            from: location
-          }
-        }
-      }/>
-    )
-  }*/
 
   return (
     <div className={classes.root}>

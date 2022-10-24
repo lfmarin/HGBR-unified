@@ -9,7 +9,7 @@ import CartaConsentimiento from './Secciones/CartaConsentimiento'
 import InstruccionesPost from './Secciones/InstruccionesPost'
 import SeccionEncuesta from './Secciones/Encuesta'
 import SeccionExamenes from './Secciones/Examenes'
-import { useParams } from 'react-router'
+import { useParams, Redirect } from 'react-router'
 import axios from 'axios'
 
 export default function DetallesPaciente() {
@@ -24,6 +24,7 @@ export default function DetallesPaciente() {
   })
   const [load, setLoad] = useState(true)
   const [errorbd, setErrorbd] = useState(false)
+  const [noAutorizado, AutRedir] = useState(false)
   const cargaPaciente = () => {
     axios
       .get(`https://localhost:5001/hospitalBoca/pacientes/${noExpediente}`, {
@@ -45,9 +46,10 @@ export default function DetallesPaciente() {
           }
         },
         error => {
-          if (!error.response) {
-            console.log("There was an error.");
-            setErrorbd(true)
+          console.log(error.response)
+          if (error.response.status === 401) {
+            setToken("")
+            AutRedir(true)
           }
         }
       )
@@ -58,6 +60,9 @@ export default function DetallesPaciente() {
       cargaPaciente()
     }
   });
+
+  if( noAutorizado )
+    return <Redirect to="/login" />
 
   return (
     <div className={classes.root}>
