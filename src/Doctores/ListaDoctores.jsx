@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../Components/SortTable'
 import EnhancedTableHead from '../Components/HeadSortTable'
 import { visuallyHidden } from '@mui/utils'
-import { Redirect, useLocation } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
@@ -91,7 +91,7 @@ export default function ListaDoctores(props) {
   }
 
   const handleCancelSearch = event => {
-    console.log(doctores)
+    // console.log(doctores)
     setRefresh(true)
     setSearch('')
   }
@@ -121,7 +121,7 @@ export default function ListaDoctores(props) {
         )
       setRefresh(false)
     }
-  })
+  }, [refresh, token])
 
   if (noAutorizado) return <Redirect to="/login" />
   if (errorbd) return <Redirect to="/error" />

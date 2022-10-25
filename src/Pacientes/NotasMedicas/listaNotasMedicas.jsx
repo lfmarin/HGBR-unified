@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../../Components/SortTable'
 import EnhancedTableToolbar from '../../Components/EnhancedTableToolbar'
 import { visuallyHidden } from '@mui/utils'
-import { Link, Redirect, useLocation } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import useStyles from '../../Styles/listaPacientesStyles'
 import EnhancedTableHead from '../../Components/HeadSortTable'
@@ -28,7 +28,7 @@ export default function ListaNotas(props) {
   const [errorbd, setErrorbd] = useState(false)
   const [refresh, setRefresh] = useState(true)
 
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
+  const [token] = useState(sessionStorage.getItem('jwtToken'));
   //const location = useLocation();
   const [search, setSearch] = useState('')
   const classes = useStyles()
@@ -59,7 +59,7 @@ export default function ListaNotas(props) {
   }
 
   const handleCancelSearch = event => {
-    console.log(notas)
+    // console.log(notas)
     setRefresh(true)
     //setPacientes(pacientes);
     setSearch('')
@@ -71,7 +71,7 @@ export default function ListaNotas(props) {
         .get('https://localhost:5001/hospitalBoca/notasMedicas/paciente', {
           headers: {
             'Content-type': 'application/json',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
           },
         })
         .then(
@@ -94,12 +94,14 @@ export default function ListaNotas(props) {
         )
       setRefresh(false)
     }
-  })
+  }, [refresh, token])
 
+  /*
   const dateFormatter = date => {
     var formatter = new Intl.DateTimeFormat('es-MX', 'dd-mm-yyyy')
     return formatter.format(new Date(date))
   }
+  */
 
   if (errorbd) return <Redirect to="/error" />
   /*if(!token){

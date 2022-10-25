@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import { Redirect } from "react-router-dom";
+import { TextField } from '@mui/material'
+import './sesion.css'
 
 /**
  * Pagina de inicio de sesión.
@@ -41,6 +43,7 @@ export default function Login(props) {
 					{
 						// Hora de guardar el token.
 						sessionStorage.setItem('jwtToken',response.data.token);
+						props.changeUser(response.data.userName)
 						setIsSubmitted(true)
 					}
 				}
@@ -61,13 +64,28 @@ export default function Login(props) {
 		<div className='form'>
 			<form onSubmit={handleSubmit}>
 				<div className='input-container'>
-					<label>Nombre de usuario</label>
-					<input type="text" name="uname" required />
+					<TextField
+						required
+						id="box"
+						label="Nombre de usuario"
+						variant="outlined"
+						name="uname"
+						fullWidth
+						inputProps={{ maxLength: 50 }}
+					/>
 					{renderErrorMessage("uname")}
 				</div>
 				<div className='input-container'>
-					<label>Contraseña</label>
-					<input type="password" name="pass" required />
+				<TextField
+						required
+						id="box"
+						label="Contraseña"
+						variant="outlined"
+						name="pass"
+						type="password"
+						fullWidth
+						inputProps={{ maxLength: 50 }}
+					/>
 					{renderErrorMessage("pass")}
 				</div>
 				<div className='button-container'>
@@ -80,7 +98,7 @@ export default function Login(props) {
 	return (
 		<div className="login">
 			<div className="login-form">
-				<div className="title">Inicio de sesión</div>
+				<h2 className="title">Inicio de sesión</h2>
 				{isSubmitted ? <Redirect to="/" /> : Formulario}
 			</div>
 		</div>

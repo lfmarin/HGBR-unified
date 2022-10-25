@@ -13,6 +13,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+const mostrarUsuario = (nombre) => {
+  return <div style={{right: 30, position: 'absolute'}}>
+    {nombre}
+  </div>
+}
+
 export default function NavBar(props) {
   const classes = useStyles()
   return (
@@ -34,6 +40,7 @@ export default function NavBar(props) {
               Hospital General de Boca del Río
             </Typography>
           </Link>
+          {mostrarUsuario(props.userName)}
         </Toolbar>
       </AppBar>
     </div>

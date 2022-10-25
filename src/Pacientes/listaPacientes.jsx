@@ -14,7 +14,6 @@ import axios from 'axios'
 import useStyles from '../Styles/listaPacientesStyles'
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
 import Button from '@mui/material/Button'
-import JWTToken from '../Session/Token'
 
 const headCells = [
   { id: 'noExpediente', numeric: false, label: 'No. Expediente' },
@@ -35,7 +34,7 @@ export default function ListaPacientes(props) {
   const [errorbd, setErrorbd] = useState(false)
   const [refresh, setRefresh] = useState(true)
 
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
+  const [token] = useState(sessionStorage.getItem('jwtToken'));
   //const location = useLocation();
   const [search, setSearch] = useState('')
   const classes = useStyles()
@@ -66,7 +65,7 @@ export default function ListaPacientes(props) {
   }
 
   const handleCancelSearch = event => {
-    console.log(pacientes)
+    // console.log(pacientes)
     setRefresh(true)
     //setPacientes(pacientes);
     setSearch('')

@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../Components/SortTable'
 import EnhancedTableHead from '../Components/HeadSortTable'
 import { visuallyHidden } from '@mui/utils'
-import { Redirect, useLocation } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
@@ -59,7 +59,7 @@ export default function ListaConsejeria(props) {
   const [errorbd, setErrorbd] = useState(false)
   const [refresh, setRefresh] = useState(true)
 
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
+  const [token] = useState(sessionStorage.getItem('jwtToken'));
   //const location = useLocation();
   const [search, setSearch] = useState('')
   const classes = useStyles()
@@ -90,7 +90,7 @@ export default function ListaConsejeria(props) {
   }
 
   const handleCancelSearch = event => {
-    console.log(consejeria)
+    // console.log(consejeria)
     setRefresh(true)
     setSearch('')
   }
@@ -101,7 +101,7 @@ export default function ListaConsejeria(props) {
         .get('https://localhost:5001/hospitalBoca/personalConsejeria/all', {
           headers: {
             'Content-type': 'application/json',
-            //'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
           },
         })
         .then(
@@ -124,7 +124,7 @@ export default function ListaConsejeria(props) {
         )
       setRefresh(false)
     }
-  })
+  }, [refresh, token])
 
   if (errorbd) return <Redirect to="/error" />
   /*if(!token){

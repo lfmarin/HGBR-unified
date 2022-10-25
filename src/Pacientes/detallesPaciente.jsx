@@ -23,7 +23,6 @@ export default function DetallesPaciente() {
     ApMaterno: '',
   })
   const [load, setLoad] = useState(true)
-  const [errorbd, setErrorbd] = useState(false)
   const [noAutorizado, AutRedir] = useState(false)
   const cargaPaciente = () => {
     axios
@@ -46,7 +45,7 @@ export default function DetallesPaciente() {
           }
         },
         error => {
-          console.log(error.response)
+          // console.log(error.response)
           if (error.response.status === 401) {
             setToken("")
             AutRedir(true)
