@@ -48,7 +48,7 @@ namespace API_Hospital_Boca.Bussiness
             try
             {
                 return context.Doctores.Where(d => d.IdDoctor == idDoctor).Select(doc => new {
-                    IdDcotor = doc.IdDoctor,
+                    IdDoctor = doc.IdDoctor,
                     Nombre = doc.Nombre,
                     ApPaterno = doc.ApPaterno,
                     ApMaterno = doc.ApMaterno

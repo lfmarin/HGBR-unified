@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using API_Hospital_Boca.Services;
 using API_Hospital_Boca.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API_Hospital_Boca.Controllers
 {
@@ -12,7 +13,7 @@ namespace API_Hospital_Boca.Controllers
             this.service = service;
         }
 
-
+        [Authorize]
         [HttpGet ("hospitalBoca/doctores/all")]
         public IActionResult getAll()
         {
@@ -20,6 +21,7 @@ namespace API_Hospital_Boca.Controllers
             return Ok(res);
         }
 
+        [Authorize]
         [HttpPost ("hospitalBoca/doctores/save")]
         public IActionResult saveDoctor([FromBody] Doctore d)
         {
@@ -34,6 +36,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost ("hospitalBoca/doctores/update")]
         public IActionResult updateDoctor([FromBody] Doctore d)
         {
@@ -48,6 +51,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost ("hospitalBoca/doctores/delete")]
         public IActionResult deleteDoctor([FromBody] int idDoctor)
         {
@@ -62,6 +66,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet ("hospitalBoca/doctores/{idDoctor}")]
         public IActionResult getDoctor(int idDoctor)
         {
@@ -72,7 +77,7 @@ namespace API_Hospital_Boca.Controllers
             }
             catch (System.Exception)
             {
-                throw;
+                return NotFound();
             }
         }
     }

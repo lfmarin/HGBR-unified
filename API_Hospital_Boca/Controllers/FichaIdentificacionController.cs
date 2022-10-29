@@ -77,7 +77,7 @@ namespace API_Hospital_Boca.Controllers
             try
             {
                 var res = this.service.getCartaConsentimiento(numExp);
-                return Ok(res);   
+                return Ok(res); 
             }
             catch (System.Exception)
             {

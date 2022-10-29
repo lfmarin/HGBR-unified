@@ -23,13 +23,13 @@ namespace UsersManagement.Controllers
         [HttpPost("authenticate")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Authenticate([FromBody] LoginInfo loginInfo)
         {
             var result = _usersService.Authenticate(loginInfo.Username, loginInfo.Password);
 
             if (result == null)
-                return Forbid();
+                return Unauthorized();
 
             return Ok(result);
         }
