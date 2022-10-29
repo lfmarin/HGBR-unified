@@ -60,9 +60,11 @@ namespace API_Hospital_Boca.Controllers
                 service.deleteDoctor(idDoctor);
                 return Ok(true);
             }
+            // TODO: ¡Marcar las excepciones especificas para declarar cada tipo
+            // de resultado!
             catch (System.Exception)
             {
-                throw;
+                return NotFound();
             }
         }
 
