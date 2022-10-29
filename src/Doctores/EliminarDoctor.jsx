@@ -13,6 +13,7 @@ export default function EliminarDoctor() {
   const classes = useStyles()
   const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   const [delay, setDelay] = useState(false)
+  const [cancelado, setCancelado] = useState(false)
   const [datos, setDatos] = useState({
     IdDoctor: '',
     Nombre: '',
@@ -93,6 +94,7 @@ export default function EliminarDoctor() {
   }
 
   const cancelarOp = () => {
+	setCancelado(true);
 	confirmarFin(true);
   }
 
@@ -105,8 +107,9 @@ export default function EliminarDoctor() {
   }, [load, datos.IdDoctor]);
 
   if (Finalizado) {
-    setTimeout(() => setDelay(true), 3500)
-    if (delay) return <Redirect to="/doctores" />
+	if(!cancelado)
+    	setTimeout(() => setDelay(true), 3500)
+    if (delay || cancelado) return <Redirect to="/doctores" />
   }
 
   if( noAutorizado )
