@@ -159,18 +159,14 @@ export default function ListaDoctores(props) {
                       <TableCell>{item.nombre}</TableCell>
                       <TableCell>{item.apPaterno}</TableCell>
                       <TableCell>{item.apMaterno}</TableCell>
-                      <TableCell>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        type="submit"
-                        size="large"
-                        component={Link}
-                        to={`/doctores/detalles/${item.idDoctor}`}
-                        // startIcon={<SaveOutlinedIcon />}
-                      >
-                        Editar
-                      </Button>
+                      <TableCell align='center' >
+                        <Button variant="contained" type="submit" component={Link} to={`/doctores/detalles/${item.idDoctor}`}>
+                          Editar
+                        </Button>
+                        <text>&nbsp;&nbsp;&nbsp;&nbsp;</text>
+                        <Button variant="contained" type="submit" component={Link} to={`/doctores/eliminar/${item.idDoctor}`}>
+                          Eliminar
+                        </Button>
                       </TableCell>
                     </TableRow>
                   )

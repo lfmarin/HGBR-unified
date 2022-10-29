@@ -18,6 +18,7 @@ export default function RegistroDoctor() {
     ApPaterno: '',
     ApMaterno: '',
   })
+  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   const [errorbd, setErrorbd] = useState(false)
   const [finish, setFinish] = useState(false)
   const [delay, setDelay] = useState(false)
@@ -35,6 +36,7 @@ export default function RegistroDoctor() {
         {
           headers: {
             'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
         }
       )

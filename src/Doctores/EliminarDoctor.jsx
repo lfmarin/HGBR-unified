@@ -4,11 +4,15 @@ import { useParams, Redirect } from 'react-router'
 import axios from 'axios'
 import { TextField } from '@mui/material'
 import './editar.css'
+import {Button} from '@mui/material'
+import Alert from '@mui/material/Alert'
+import Snackbar from '@mui/material/Snackbar'
 
-export default function DetalleDoctor() {
+export default function EliminarDoctor() {
   const { noDoctor } = useParams()
   const classes = useStyles()
   const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
+  const [delay, setDelay] = useState(false)
   const [datos, setDatos] = useState({
     IdDoctor: '',
     Nombre: '',
@@ -27,7 +31,8 @@ export default function DetalleDoctor() {
 
 	// Envia el nuevo cambio al API.
 	axios
-	.post('https://localhost:5001/hospitalBoca/doctores/update', datos,
+	.post('https://localhost:5001/hospitalBoca/doctores/delete',
+	datos.IdDoctor,
 	{
 		headers: {
 			'Content-type': 'application/json',
@@ -75,8 +80,6 @@ export default function DetalleDoctor() {
               ApPaterno: response.data.apPaterno,
               ApMaterno: response.data.apMaterno,
             })
-
-			console.log(datos)
           }
         },
         error => {
@@ -89,6 +92,10 @@ export default function DetalleDoctor() {
       )
   }
 
+  const cancelarOp = () => {
+	confirmarFin(true);
+  }
+
   useEffect(() => {
 	if( datos.IdDoctor !== '' )
 		setLoad(false)
@@ -97,62 +104,36 @@ export default function DetalleDoctor() {
     }
   }, [load, datos.IdDoctor]);
 
+  if (Finalizado) {
+    setTimeout(() => setDelay(true), 3500)
+    if (delay) return <Redirect to="/doctores" />
+  }
+
   if( noAutorizado )
     return <Redirect to="/login" />
 
-  if( Finalizado )
-  	return <Redirect to="/doctores" />
-
   return (
     <div className={classes.root}>
-	{/* Carga el formulario para editar información. */}
-	{!load ?
-		<div className='input-container'>
-			<h2>ID de doctor: {datos.IdDoctor}</h2>
-			<form onSubmit={modificarDoctor}>
-				<div>
-					<TextField
-						required
-						id="box"
-						label="Nombre"
-						variant="outlined"
-						name="nombre"
-						defaultValue={datos.Nombre}
-						onChange={handleChange}
-						fullWidth
-						inputProps={{ maxLength: 50 }}
-					/>
-					<p />
-					<TextField
-						required
-						id="box"
-						label="Apellido Paterno"
-						variant="outlined"
-						name="apPaterno"
-						defaultValue={datos.ApPaterno}
-						onChange={handleChange}
-						fullWidth
-						inputProps={{ maxLength: 50 }}
-					/>
-					<p />
-					<TextField
-						required
-						id="box"
-						label="Apellido Materno"
-						variant="outlined"
-						name="apMaterno"
-						defaultValue={datos.ApMaterno}
-						onChange={handleChange}
-						fullWidth
-						inputProps={{ maxLength: 50 }}
-					/>
+		{!load ?
+			<div className='input-container'>
+				<p>¿Estas seguro de eliminar al doctor {datos.Nombre} {datos.ApMaterno} {datos.apPaterno} ?</p>
+				<form onSubmit={modificarDoctor}>
 					<div className='button-container'>
-						<input type="submit" value="Confirmar" />
+						<Button variant="contained" color="secondary" type="submit" size="large" >
+							Eliminar
+						</Button>
+						<Button variant="contained" color="primary" type="submit" size="large" onClick={cancelarOp} >
+							Cancelar
+						</Button>
 					</div>
-				</div>
-			</form>
-		</div>
-	: null}
+				</form>
+			</div>
+		: null}
+		<Snackbar open={Finalizado}>
+			<Alert variant="filled" severity="success" sx={{ width: '100%' }}>
+				Doctor eliminado con éxito, redirigiendo...
+			</Alert>
+		</Snackbar>
     </div>
   )
 }
