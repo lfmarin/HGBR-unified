@@ -1,0 +1,10 @@
+.input-container{
+	max-width: 500px;
+	margin: auto !important;
+	display: flex;
+	flex-direction: column;;
+}
+
+.input-container #box{
+	/* margin: 30px 0px; */
+}

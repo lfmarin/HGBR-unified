@@ -9,7 +9,8 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../Components/SortTable'
 import EnhancedTableHead from '../Components/HeadSortTable'
 import { visuallyHidden } from '@mui/utils'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { Button } from '@material-ui/core'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
@@ -18,6 +19,7 @@ const headCells = [
   { id: 'nombre', numeric: false, label: 'Nombre' },
   { id: 'apPaterno', numeric: false, label: 'Apellido Paterno' },
   { id: 'apMaterno', numeric: false, label: 'Apellido Materno' },
+  { id: 'edit', numeric: false, label: 'Accion' },
 ]
 
 const useStyles = makeStyles(theme => ({
@@ -157,6 +159,19 @@ export default function ListaDoctores(props) {
                       <TableCell>{item.nombre}</TableCell>
                       <TableCell>{item.apPaterno}</TableCell>
                       <TableCell>{item.apMaterno}</TableCell>
+                      <TableCell>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        type="submit"
+                        size="large"
+                        component={Link}
+                        to={`/doctores/detalles/${item.idDoctor}`}
+                        // startIcon={<SaveOutlinedIcon />}
+                      >
+                        Editar
+                      </Button>
+                      </TableCell>
                     </TableRow>
                   )
                 })}

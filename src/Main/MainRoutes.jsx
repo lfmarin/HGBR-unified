@@ -12,6 +12,7 @@ import MainHistoriaClinica from '../Pacientes/HistoriaClinica/MainHistoria'
 import Encuesta from '../Pacientes/Encuesta/Encuesta'
 import NotaMedica from '../Pacientes/NotasMedicas/notaMedica'
 import ListaNotas from '../Pacientes/NotasMedicas/listaNotasMedicas'
+import DetalleDoctor from '../Doctores/DetalleDoctor'
 import Login from '../Session/Login'
 import Logout from '../Session/Logout'
 
@@ -31,6 +32,7 @@ export default function MainRoutes(props) {
       <Route exact path="/pacientes/registro"> <RegistroPaciente /> </Route>
       <Route exact path="/pacientes"> <ListaPacientes /> </Route>
       <Route exact path="/doctores/registro"> <RegistroDoctor /> </Route>
+      <Route exact path="/doctores/detalles/:noDoctor"> <DetalleDoctor /> </Route>
       <Route exact path="/doctores"> <ListaDoctores /> </Route>
       <Route exact path="/consejeria/registro"> <RegistroPersonal /> </Route>
       <Route exact path="/consejeria"> <ListaConsejeria /> </Route>
