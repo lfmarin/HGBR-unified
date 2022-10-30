@@ -34,7 +34,7 @@ export default function NavBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <img src="media/logo.png" alt="logo" className={classes.logo} />
+          <img src="/media/logo.png" alt="logo" className={classes.logo} />
           <Link to="/" style={{ textDecoration: 'none', color: '#FFF' }}>
             <Typography variant="title" color="inherit">
               Hospital General de Boca del Río

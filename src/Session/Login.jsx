@@ -44,6 +44,7 @@ export default function Login(props) {
 						// Hora de guardar el token.
 						sessionStorage.setItem('jwtToken',response.data.token);
 						props.changeUser(response.data.userName)
+						sessionStorage.setItem('Dusername',response.data.userName)
 						setIsSubmitted(true)
 					}
 				}

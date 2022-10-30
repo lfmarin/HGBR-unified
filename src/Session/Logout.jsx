@@ -7,6 +7,7 @@ export default function Login(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	sessionStorage.removeItem('jwtToken');
+	sessionStorage.removeItem('Dusername');
 	return (
 		<div>
 			<p>Cerrando sesión...</p>

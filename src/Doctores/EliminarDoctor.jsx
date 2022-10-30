@@ -55,15 +55,6 @@ export default function EliminarDoctor() {
 	)
   }
 
-  const handleChange = event => {
-    //const {name, value} = e.target;
-	console.log("chabge")
-    setDatos({
-      ...datos,
-      [event.target.name]: event.target.value,
-    })
-  }
-
   const cargaPaciente = () => {
     axios
       .get(`https://localhost:5001/hospitalBoca/doctores/${noDoctor}`, {

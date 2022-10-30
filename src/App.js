@@ -22,7 +22,7 @@ const theme = createTheme({
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const classes = useStyles();
-  const [curUserName, changeUsername] = useState(false);
+  const [curUserName, changeUsername] = useState(sessionStorage.getItem('Dusername'));
 
   const handleDrawer = () => {
     setIsOpen(!isOpen);
