@@ -2,6 +2,7 @@ import React from 'react'
 import { AccordionDetails, Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
+import axios from 'axios'
 
 const useStyles = makeStyles(theme => ({
   center: {
@@ -17,16 +18,58 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function CartaConsentimiento() {
+export default function CartaConsentimiento({expediente, token}) {
   const classes = useStyles()
+
+  /**
+   * 
+   * @param {Event} event 
+   */
+  const ConvertirImagen = (event) => {
+    event.preventDefault();
+
+    var {Testigo1, Testigo2, Personal, Medico} = document.forms[0];
+
+    const opcionesPOST = {
+      pacienteID: expediente,
+      fam1: Testigo1.value,
+      fam2: Testigo2.value,
+      doc: Medico.value
+    }
+
+    axios
+		.post('https://localhost:5001/hospitalBoca/pacientes/consentimiento', opcionesPOST,{
+      responseType: 'arraybuffer',
+      headers: {
+			  'Content-type': 'application/json',
+			  'Authorization': `Bearer ${token}`,
+        // SOLO acepta PDFs.
+        'Accept': 'application/pdf'
+			},
+    })
+		.then(
+			response => {
+				if (response.status === 200) {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          window.location.href = url;
+				}
+			}
+		)
+		.catch(
+			err => {
+        console.log(err)
+			}
+		)
+  }
 
   return (
     <AccordionDetails>
-      <form autoComplete="off" className={classes.fullWidth}>
+      <form onSubmit={ConvertirImagen} autoComplete="off" className={classes.fullWidth}>
         <div className={classes.center}>
           <TextField
             id="outlined-basic"
             variant="outlined"
+            name='Testigo1'
             fullWidth
             required
             label="Nombre del (la) Testigo 1"
@@ -34,6 +77,7 @@ export default function CartaConsentimiento() {
           <TextField
             id="outlined-basic"
             variant="outlined"
+            name='Testigo2'
             fullWidth
             required
             className={classes.marginLeft}
@@ -44,6 +88,7 @@ export default function CartaConsentimiento() {
           <TextField
             id="outlined-basic"
             variant="outlined"
+            name='Personal'
             fullWidth
             required
             label="Personal que proporcionó la consejería"
@@ -51,6 +96,7 @@ export default function CartaConsentimiento() {
           <TextField
             id="outlined-basic"
             variant="outlined"
+            name='Medico'
             fullWidth
             required
             className={classes.marginLeft}

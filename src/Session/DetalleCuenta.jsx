@@ -96,40 +96,22 @@ export default function DetalleCuenta(props) {
 			<form onSubmit={verificarCambio}>
 				<div className='input-container'>
 					<TextField
-						required
-						id="box"
-						label="Contraseña actual"
-						variant="outlined"
-						name="curPass"
-						type="password"
-						fullWidth
-						inputProps={{ maxLength: 50 }}
+						required id="box" label="Contraseña actual"
+						variant="outlined" name="curPass" type="password" fullWidth inputProps={{ maxLength: 50 }}
 					/>
 					{renderErrorMessage("uname")}
 				</div>
 				<div className='input-container'>
 				<TextField
-						required
-						id="box"
-						label="Nueva contraseña"
-						variant="outlined"
-						name="newPass1"
-						type="password"
-						fullWidth
-						inputProps={{ maxLength: 50 }}
+						required id="box" label="Nueva contraseña"
+						variant="outlined" name="newPass1" type="password" fullWidth inputProps={{ maxLength: 50 }}
 					/>
 					{renderErrorMessage("pass")}
 				</div>
 				<div className='input-container'>
 				<TextField
-						required
-						id="box"
-						label="Repite nueva contraseña"
-						variant="outlined"
-						name="newPass2"
-						type="password"
-						fullWidth
-						inputProps={{ maxLength: 50 }}
+						required id="box" label="Repite nueva contraseña"
+						variant="outlined" name="newPass2" type="password" fullWidth inputProps={{ maxLength: 50 }}
 					/>
 					{renderErrorMessage("pass")}
 				</div>

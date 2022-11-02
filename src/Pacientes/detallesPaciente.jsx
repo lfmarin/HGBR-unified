@@ -104,7 +104,7 @@ export default function DetallesPaciente() {
           >
             <Typography className={classes.heading}>Carta de consentimiento</Typography>
           </AccordionSummary>
-          <CartaConsentimiento />
+          <CartaConsentimiento expediente={datos.NoExpediente} token={token} />
         </Accordion>
 
         <Accordion>
