@@ -4,6 +4,7 @@ using API_Hospital_Boca.Models;
 
 namespace API_Hospital_Boca.Controllers
 {
+    [Route("hospitalBoca/personalConsejeria")]
     public class PersonalConsejeriaController : ControllerBase
     {
         private readonly IServicePersonalConsejeria service;
@@ -13,7 +14,7 @@ namespace API_Hospital_Boca.Controllers
             this.service = service;
         }
 
-        [HttpGet ("hospitalBoca/personalConsejeria/all")]
+        [HttpGet ("all")]
         public IActionResult getAllPersonalConsejeria()
         {
             try
@@ -27,7 +28,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/personalConsejeria/save")]
+        [HttpPost ("save")]
         public IActionResult savePersonalConsejeria([FromBody] Personalconsejerium pc)
         {
             try
@@ -41,7 +42,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpGet ("hospitalBoca/personalConsejeria/{idPersonal}")]
+        [HttpGet ("{idPersonal}")]
         public IActionResult getOnePersonalConsejeria(int idPersonal)
         {
             try
@@ -55,7 +56,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/personalConsejeria/update")]
+        [HttpPost ("update")]
         public IActionResult updatePersonalConsejeria([FromBody] Personalconsejerium pc)
         {
             try

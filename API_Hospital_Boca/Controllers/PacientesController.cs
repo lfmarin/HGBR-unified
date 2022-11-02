@@ -3,9 +3,15 @@ using API_Hospital_Boca.Services;
 using API_Hospital_Boca.Models;
 using API_Hospital_Boca.Bussiness;
 using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics;
+using System.Linq;
+using System;
 
 namespace API_Hospital_Boca.Controllers
 {
+    // Este valor define el lugar donde será aplicado en el API.
+    // Ejemplo: con "all": hospitalBoca/pacientes/all.
+    [Route("hospitalBoca/pacientes")]
     public class PacientesController : ControllerBase
     {
         private readonly IServicePacientes service;
@@ -26,7 +32,7 @@ namespace API_Hospital_Boca.Controllers
 
 
         [Authorize]
-        [HttpGet ("hospitalBoca/pacientes/all")]
+        [HttpGet ("all")]
         public IActionResult getAll()
         {
             var res = service.getAll();
@@ -34,7 +40,14 @@ namespace API_Hospital_Boca.Controllers
         }
 
         [Authorize]
-        [HttpPost ("hospitalBoca/pacientes/save")]
+        [HttpGet("{numExpediente}")]
+        public IActionResult getPaciente(string numExpediente)
+        {
+            var info = service.getPaciente(numExpediente);
+            if (info != null)
+                return Ok(info);
+            return NotFound();
+        }
         public IActionResult savePaciente([FromBody] NuevoPaciente np) 
         {
             try
@@ -93,7 +106,7 @@ namespace API_Hospital_Boca.Controllers
         }
 
         [Authorize]
-        [HttpPost ("hospitalBoca/pacientes/update")]
+        [HttpPost ("update")]
         public IActionResult updatePaciente([FromBody] Paciente p)
         {
             try
@@ -108,7 +121,7 @@ namespace API_Hospital_Boca.Controllers
         }
 
         [Authorize]
-        [HttpPost ("hospitalBoca/pacientes/delete")]
+        [HttpPost ("delete")]
         public IActionResult deletePaciente([FromBody] string numExpediente)
         {
             try
@@ -120,15 +133,6 @@ namespace API_Hospital_Boca.Controllers
             {   
                 throw;
             }
-        }
-
-        [Authorize]
-        [HttpGet ("hospitalBoca/pacientes/{numExpediente}")]
-        public IActionResult getPaciente(string numExpediente)
-        {
-            var info = service.getPaciente(numExpediente);
-            if (info != null)
-                return Ok(info);return Ok(info);
         }
     }
 

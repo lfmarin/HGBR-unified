@@ -4,6 +4,7 @@ using API_Hospital_Boca.Models;
 
 namespace API_Hospital_Boca.Controllers
 {
+    [Route("hospitalBoca/historiaClinica")]
     public class HistoriaclinicaController : ControllerBase
     {
         private readonly IServiceHistoriaClinica service;
@@ -13,7 +14,7 @@ namespace API_Hospital_Boca.Controllers
             this.service = service;
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/save")]
+        [HttpPost ("save")]
         public IActionResult saveHistoriaClinca([FromBody] Historiaclinica hc)
         {
             try
@@ -27,7 +28,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/motivoSolicitud/save")]
+        [HttpPost ("motivoSolicitud/save")]
         public IActionResult saveMotivoSolicitud([FromBody] Motivosolicitud ms)
         {
             try
@@ -41,7 +42,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/motivoSolicitud/update")]
+        [HttpPost ("motivoSolicitud/update")]
         public IActionResult updateMotivoSolicitud([FromBody] Motivosolicitud ms)
         {
             try
@@ -55,7 +56,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/historiaExploracion/save")]
+        [HttpPost ("historiaExploracion/save")]
         public IActionResult saveHistoriaExploracion([FromBody] Historiaexploracion he)
         {
             try
@@ -69,7 +70,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/historiaExploracion/update")]
+        [HttpPost ("historiaExploracion/update")]
         public IActionResult updateHistoriaExploracion([FromBody] Historiaexploracion he)
         {
             try
@@ -83,7 +84,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/procedimientoQuirurgico/save")]
+        [HttpPost ("procedimientoQuirurgico/save")]
         public IActionResult saveProcedimientoQuirurgico([FromBody] Procquirurgico pq)
         {
             try
@@ -97,7 +98,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/procedimientoQuirurgico/update")]
+        [HttpPost ("procedimientoQuirurgico/update")]
         public IActionResult updateProcedimientoQuirurgico([FromBody] Procquirurgico pq)
         {
             try
@@ -111,7 +112,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/estudioAnatomo/save")]
+        [HttpPost ("estudioAnatomo/save")]
         public IActionResult saveEstudioAnatomo([FromBody] Estudioanatomo ea)
         {
             try
@@ -125,7 +126,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/estudioAnatomo/update")]
+        [HttpPost ("estudioAnatomo/update")]
         public IActionResult updateEstudioAnatomoo([FromBody] Estudioanatomo ea)
         {
             try
@@ -139,7 +140,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/evolucion/save")]
+        [HttpPost ("evolucion/save")]
         public IActionResult saveEvolucion([FromBody] Evolucion ev)
         {
             try
@@ -153,7 +154,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/historiaClinica/evolucion/update")]
+        [HttpPost ("evolucion/update")]
         public IActionResult updateEvolucion([FromBody] Evolucion ev)
         {
             try
@@ -167,7 +168,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpGet ("hospitalBoca/historiaClinica/{numExp}")]
+        [HttpGet ("{numExp}")]
         public IActionResult getHistoriaByNumExp(string numExp)
         {
             try
@@ -181,7 +182,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpGet ("hospitalBoca/historiaClinica/motivoSolicitud/{idHistoria}")]
+        [HttpGet ("motivoSolicitud/{idHistoria}")]
         public IActionResult getMotivoSolicitudByIdHist(int idHistoria)
         {
             try
@@ -195,7 +196,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpGet ("hospitalBoca/historiaClinica/historiaExploracion/{idHistoria}")]
+        [HttpGet ("historiaExploracion/{idHistoria}")]
         public IActionResult gethistoriaExploracionByIdHist(int idHistoria)
         {
             try
@@ -209,7 +210,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpGet ("hospitalBoca/historiaClinica/procedimientoQuirurgico/{idHistoria}")]
+        [HttpGet ("procedimientoQuirurgico/{idHistoria}")]
         public IActionResult getProcedimientoQuirurgico(int idHistoria)
         {
             try
@@ -223,7 +224,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpGet ("hospitalBoca/historiaClinica/EstudioAnatomo/{idHistoria}")]
+        [HttpGet ("EstudioAnatomo/{idHistoria}")]
         public IActionResult getEstudioAnatomoByIdHsit(int idHistoria)
         {
             try
@@ -236,7 +237,7 @@ namespace API_Hospital_Boca.Controllers
                 throw;
             }
         }
-        [HttpGet ("hospitalBoca/historiaClinica/evolucion/{idHistoria}")]
+        [HttpGet ("evolucion/{idHistoria}")]
         public IActionResult getEvolucionByIdHsit(int idHistoria)
         {
             try

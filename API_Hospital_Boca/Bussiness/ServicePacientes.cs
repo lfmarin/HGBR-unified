@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using API_Hospital_Boca.Models;
+using System;
 
 namespace API_Hospital_Boca.Bussiness
 {
@@ -39,6 +40,28 @@ namespace API_Hospital_Boca.Bussiness
             }
             catch (System.Exception)
             {
+                throw;
+            }
+        }
+
+        /* TODO: Esta acción resulta ser incompatible con Linq.dll,
+         * Dado la dirección en donde está obteniendo la información por medio
+         * del IQuerable<>. hay que verificar la acción si hay una opción donde
+         * no es valido o nulo, aun que el valor de Paciente por alguna razón
+         * no me deja colocarlo en nulo, aun que puede ocurrir casos donde
+         * puede ser nulo, justo como este.
+        */
+        public Paciente getClassPaciente(string numExpediente)
+        {
+            try
+            {
+                Console.WriteLine("Attempting to fetch the patient");
+                var pc = context.Pacientes.Where(p => p.NoExpediente == numExpediente).FirstOrDefault();
+                return pc;
+            }
+            catch (System.InvalidOperationException IOE)
+            {
+                Console.WriteLine(IOE.Message);
                 throw;
             }
         }

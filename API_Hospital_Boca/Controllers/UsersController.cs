@@ -54,17 +54,8 @@ namespace UsersManagement.Controllers
             return Ok();
         }
 
-        [HttpPost("hash")]
-        [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-        public IActionResult HashPass([FromBody] LoginInfo loginInfo)
-        {
-            Console.WriteLine(loginInfo.Password);
-            var result = _usersService.getHash(loginInfo.Password);
-            return Ok(result);
-        }
-
         [HttpGet("user/all")]
+        [Authorize(Roles = "Admin,Coordinador")]
         public IActionResult GetAllUser()
         {
             var result = _usersService.GetAll();
@@ -73,6 +64,7 @@ namespace UsersManagement.Controllers
 
         [Authorize]
         [HttpPost]
+        [Authorize(Roles = "Admin,Coordinador")]
         public IActionResult SetRole([FromQuery] int empNo, [FromQuery] string role)
         {
             var userIdentity = new IdentityUser

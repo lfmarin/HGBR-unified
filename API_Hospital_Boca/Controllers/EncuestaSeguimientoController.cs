@@ -4,6 +4,7 @@ using API_Hospital_Boca.Models;
 
 namespace API_Hospital_Boca.Controllers
 {
+    [Route("hospitalBoca/EncuestaSeguimiento")]
     public class EncuestaSeguimientoController : ControllerBase
     {
         private readonly IServiceEncuestaSeguimeinto service;
@@ -13,7 +14,7 @@ namespace API_Hospital_Boca.Controllers
             this.service = service;
         }
 
-        [HttpGet ("hospitalBoca/EncuestaSeguimiento/{numExp}")]
+        [HttpGet ("{numExp}")]
         public IActionResult getEncuestaByNumExp(string numExp)
         {
             try
@@ -27,7 +28,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/EncuestaSeguimiento/update")]
+        [HttpPost ("update")]
         public IActionResult updateEncuestaSeg([FromBody] Encuestaseguimiento es)
         {
             try

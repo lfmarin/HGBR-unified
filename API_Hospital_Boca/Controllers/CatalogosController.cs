@@ -4,6 +4,7 @@ using API_Hospital_Boca.Models;
 
 namespace API_Hospital_Boca.Controllers
 {
+    [Route("hospitalBoca/catalogos")]
     public class CatalogosController : ControllerBase
     {
         private readonly IServiceCatalogos service;
@@ -13,7 +14,7 @@ namespace API_Hospital_Boca.Controllers
             this.service = service;
         }
 
-        [HttpGet ("hospitalBoca/catalogos/calidadRelacion")]
+        [HttpGet ("calidadRelacion")]
         public IActionResult getAllCalidadRelacion()
         {
             try
@@ -27,7 +28,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpGet ("hospitalBoca/catalogos/calidadServicio")]
+        [HttpGet ("calidadServicio")]
         public IActionResult getAllCalidadServicio()
         {
             try
@@ -41,7 +42,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
         
-        [HttpGet ("hospitalBoca/catalogos/escolaridad")]
+        [HttpGet ("escolaridad")]
         public IActionResult getAllEscolaridad()
         {
             try
@@ -55,7 +56,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
         
-        [HttpGet ("hospitalBoca/catalogos/estadoCivil")]
+        [HttpGet ("estadoCivil")]
         public IActionResult getAllEstadoCivil()
         {
             try
@@ -69,7 +70,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
         
-        [HttpGet ("hospitalBoca/catalogos/lugarReferencia")]
+        [HttpGet ("lugarReferencia")]
         public IActionResult getAllLugarReferencia()
         {
             try
@@ -83,7 +84,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
         
-        [HttpGet ("hospitalBoca/catalogos/metodoPlanificacion")]
+        [HttpGet ("metodoPlanificacion")]
         public IActionResult getAllMetodoPlanificacion()
         {
             try
@@ -97,7 +98,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
         
-        [HttpGet ("hospitalBoca/catalogos/ocupacion")]
+        [HttpGet ("ocupacion")]
         public IActionResult getAllOcupacion()
         {
             try
@@ -111,7 +112,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
         
-        [HttpGet ("hospitalBoca/catalogos/opinionPareja")]
+        [HttpGet ("opinionPareja")]
         public IActionResult getAllOpinionPareja()
         {
             try
@@ -125,7 +126,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
         
-        [HttpGet ("hospitalBoca/catalogos/religion")]
+        [HttpGet ("religion")]
         public IActionResult getAllReligion()
         {
             try

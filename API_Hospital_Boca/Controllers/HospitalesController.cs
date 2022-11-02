@@ -4,6 +4,7 @@ using API_Hospital_Boca.Models;
 
 namespace API_Hospital_Boca.Controllers
 {
+    [Route("hospitalBoca/hospitales")]
     public class HospitalesController : ControllerBase
     {
         private readonly IServiceHospitales service;
@@ -13,7 +14,7 @@ namespace API_Hospital_Boca.Controllers
             this.service = service;
         }
 
-        [HttpGet ("hospitalBoca/hospitales/all")]
+        [HttpGet ("all")]
         public IActionResult getAll()
         {
             try
@@ -27,7 +28,7 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [HttpPost ("hospitalBoca/hospitales/save")]
+        [HttpPost ("save")]
         public IActionResult saveHospital([FromBody] Hospitale hos)
         {
             try

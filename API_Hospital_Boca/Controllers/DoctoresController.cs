@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API_Hospital_Boca.Controllers
 {
+    [Route("hospitalBoca/doctores")]
     public class DoctoresController : ControllerBase
     {
         private readonly IServiceDoctores service;
@@ -14,15 +15,15 @@ namespace API_Hospital_Boca.Controllers
         }
 
         [Authorize]
-        [HttpGet ("hospitalBoca/doctores/all")]
+        [HttpGet ("all")]
         public IActionResult getAll()
         {
             var res = service.getAll();
             return Ok(res);
         }
 
-        [Authorize]
-        [HttpPost ("hospitalBoca/doctores/save")]
+        [Authorize(Roles = "Admin,Coordinador")]
+        [HttpPost ("save")]
         public IActionResult saveDoctor([FromBody] Doctore d)
         {
             try
@@ -36,8 +37,8 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [Authorize]
-        [HttpPost ("hospitalBoca/doctores/update")]
+        [Authorize(Roles = "Admin,Coordinador")]
+        [HttpPost ("update")]
         public IActionResult updateDoctor([FromBody] Doctore d)
         {
             try
@@ -51,8 +52,8 @@ namespace API_Hospital_Boca.Controllers
             }
         }
 
-        [Authorize]
-        [HttpPost ("hospitalBoca/doctores/delete")]
+        [Authorize(Roles = "Admin,Coordinador")]
+        [HttpPost ("delete")]
         public IActionResult deleteDoctor([FromBody] int idDoctor)
         {
             try
@@ -69,7 +70,7 @@ namespace API_Hospital_Boca.Controllers
         }
 
         [Authorize]
-        [HttpGet ("hospitalBoca/doctores/{idDoctor}")]
+        [HttpGet ("{idDoctor}")]
         public IActionResult getDoctor(int idDoctor)
         {
             try
