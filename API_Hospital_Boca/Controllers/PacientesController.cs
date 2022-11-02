@@ -55,52 +55,51 @@ namespace API_Hospital_Boca.Controllers
         public async Task<ActionResult> generarConsentimiento([FromBody] InfoConsentimiento infoCons)
         {
             try
-            {
-                Paciente info = service.getClassPaciente(infoCons.pacienteID);
+			{
+				Paciente info = service.getClassPaciente(infoCons.pacienteID);
 
-                if (info == null)
-                {
-                    Console.WriteLine("No encuentro el paciente con el ID " + infoCons.pacienteID);
-                    return NotFound();
-                }
+				if (info == null)
+				{
+					Console.WriteLine("No encuentro el paciente con el ID " + infoCons.pacienteID);
+					return NotFound();
+				}
 
-                var nombre = info.Nombre;
-                var apMate = info.ApMaterno;
-                var apPate = info.ApPaterno;
-                var Famil1 = infoCons.fam1;
-                var Famil2 = infoCons.fam2;
-                var Doct = infoCons.doc;
-                ProcessStartInfo psi = new ProcessStartInfo();
-                psi.FileName = $"/bin/sh";
-                // psi.WorkingDirectory = "/Users/joseluis/docsh/";
-                psi.WorkingDirectory = "./docsh/";
-                psi.Arguments = "-c \"pwd\"";
-                // Crea el comando para correr la aplicación.
-                psi.Arguments = "-c \"./constancia.sh '" + nombre + " " + apMate + " " + apPate + "' " + infoCons.pacienteID
-                    + " '"+Famil1+"' '" + Famil2 + "' '" + Doct + "' \"";
-                psi.UseShellExecute = false;
-                psi.RedirectStandardOutput = true;
-                psi.RedirectStandardError = true;
+				var nombre = info.Nombre;
+				var apMate = info.ApMaterno;
+				var apPate = info.ApPaterno;
+				var Famil1 = infoCons.fam1;
+				var Famil2 = infoCons.fam2;
+				var Doct = infoCons.doc;
+				ProcessStartInfo psi = new ProcessStartInfo();
+				psi.FileName = $"/bin/sh";
+				psi.WorkingDirectory = "./docsh/";
+				psi.Arguments = "-c \"pwd\"";
+				// Crea el comando para correr la aplicación.
+				psi.Arguments = "-c \"./constancia.sh '" + nombre + " " + apMate + " " + apPate + "' " + infoCons.pacienteID
+					+ " '" + Famil1 + "' '" + Famil2 + "' '" + Doct + "' \"";
+				psi.UseShellExecute = false;
+				psi.RedirectStandardOutput = true;
+				psi.RedirectStandardError = true;
 
-                Process proc = new Process
-                {
-                    StartInfo = psi
-                };
+				Process proc = new Process
+				{
+					StartInfo = psi
+				};
 
-                proc.Start();
+				proc.Start();
+				proc.WaitForExit();
 
-                string error = proc.StandardError.ReadToEnd();
-
-                string output = proc.StandardOutput.ReadToEnd();
-
-                proc.WaitForExit();
-
-                string createdFileName = $"./docsh/gen/const_{infoCons.pacienteID}.pdf";
-                Response.Headers.ContentDisposition.Append("inline; filename="+ createdFileName);
-                var bytes = await System.IO.File.ReadAllBytesAsync(createdFileName);
-                return File(bytes, "application/pdf", "constancia.pdf");
-            }
-            catch (System.Exception e)
+				string createdFileName = $"./docsh/gen/const_{infoCons.pacienteID}.pdf";
+				if (!System.IO.File.Exists(createdFileName))
+				{
+					return NotFound();
+				}
+				Response.Headers.ContentDisposition.Append("inline; filename=" + createdFileName);
+				var bytes = await System.IO.File.ReadAllBytesAsync(createdFileName);
+				System.IO.File.Delete(createdFileName);
+				return File(bytes, "application/pdf", "constancia.pdf");
+			}
+			catch (System.Exception e)
             {
                 Console.WriteLine(e.Message);
                 return NotFound();
