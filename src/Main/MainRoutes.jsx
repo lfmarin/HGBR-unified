@@ -16,6 +16,7 @@ import DetalleDoctor from '../Doctores/DetalleDoctor'
 import EliminarDoctor from '../Doctores/EliminarDoctor'
 import Login from '../Session/Login'
 import Logout from '../Session/Logout'
+import DetalleCuenta from '../Session/DetalleCuenta'
 
 export default function MainRoutes(props) {
   const [isSubmitted] = useState(sessionStorage.getItem('jwtToken'));
@@ -39,6 +40,7 @@ export default function MainRoutes(props) {
       <Route exact path="/consejeria/registro"> <RegistroPersonal /> </Route>
       <Route exact path="/consejeria"> <ListaConsejeria /> </Route>
       <Route exact path="/"> <Home /> </Route>
+      <Route exact path="/cuenta"> <DetalleCuenta /> </Route>
       <Route exact path="/login"> <Login changeUser = {props.changeUsr} /> </Route>
       <Route exact path="/logout"> <Logout changeUser = {props.changeUsr} /> </Route>
       <Route path="*">

@@ -266,7 +266,7 @@ export default function RegistroPaciente() {
   if (errorbd) return <Redirect to="/error" />
 
   if (finish) {
-    setTimeout(() => setDelay(true), 3500)
+    setTimeout(() => setDelay(true), 2000)
     if (delay) return <Redirect to="/pacientes" />
   }
 

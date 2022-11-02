@@ -99,7 +99,7 @@ export default function EliminarDoctor() {
 
   if (Finalizado) {
 	if(!cancelado)
-    	setTimeout(() => setDelay(true), 3500)
+    	setTimeout(() => setDelay(true), 2000)
     if (delay || cancelado) return <Redirect to="/doctores" />
   }
 

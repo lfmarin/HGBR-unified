@@ -89,7 +89,10 @@ export default function ListaPacientes(props) {
             }
           },
           error => {
-            if (error.response.status) setErrorbd(true)
+            if (error.response.status){
+              sessionStorage.clear('jwtToken')
+              setErrorbd(true)
+            }
           }
         )
       }

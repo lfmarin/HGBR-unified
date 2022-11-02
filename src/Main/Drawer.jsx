@@ -5,6 +5,7 @@ import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText } from '@ma
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import PersonIcon from '@mui/icons-material/Person'
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
+import Usericon from '@mui/icons-material/Person3Outlined'
 import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 
@@ -72,6 +73,19 @@ export default function TempDrawer(props) {
               <LocalHospitalIcon />
             </ListItemIcon>
             <ListItemText primary="Doctores" />
+          </ListItem>
+        </Link>
+      </List>
+
+      <Divider />
+
+      <List>
+        <Link className={classes.enlace} to="/cuenta">
+          <ListItem button key="cuenta">
+            <ListItemIcon>
+              <Usericon />
+            </ListItemIcon>
+            <ListItemText primary="Cuenta" />
           </ListItem>
         </Link>
       </List>
