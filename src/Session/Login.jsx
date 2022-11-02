@@ -96,11 +96,14 @@ export default function Login(props) {
 		</div>
 	)
 
+	if(isSubmitted)
+		return <Redirect to="/" />
+
 	return (
 		<div className="login">
 			<div className="login-form">
 				<h2 className="title">Inicio de sesión</h2>
-				{isSubmitted ? <Redirect to="/" /> : Formulario}
+				{isSubmitted ? null: Formulario}
 			</div>
 		</div>
 	)
