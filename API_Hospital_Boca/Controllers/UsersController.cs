@@ -49,9 +49,10 @@ namespace UsersManagement.Controllers
             if (!String.IsNullOrEmpty(accessToken))
             {
                 _usersService.AddLoggedOutToken(accessToken);
+                return Ok();
             }
 
-            return Ok();
+            return Unauthorized();
         }
 
         [HttpGet("user/all")]
@@ -62,8 +63,30 @@ namespace UsersManagement.Controllers
             return Ok(result);
         }
 
+        /**
+            Obtiene la información del usuario actual.
+        */
+        [HttpGet("details")]
+        public IActionResult GetUser()
+        {
+            var m = User.Claims.FirstOrDefault(c => c.Type == "UserName").Value;
+            var user = _usersService.GetUser(m);
+            //var result = _usersService.GetUser(userID);
+            return Ok(user);
+        }
+
+        [HttpPost("cambiarpass")]
         [Authorize]
-        [HttpPost]
+        public IActionResult ChangePassword([FromBody] newPassData data)
+        {
+            var m = User.Claims.FirstOrDefault(c => c.Type == "UserName").Value;
+            var user = _usersService.GetUser(m);
+            var ProcessDone = _usersService.ChangePassword(user.userName, data.givenPassword, data.newPassword);
+            return ProcessDone ? Ok() : Unauthorized();
+        }
+
+        [Authorize]
+        [HttpPost("setrole")]
         [Authorize(Roles = "Admin,Coordinador")]
         public IActionResult SetRole([FromQuery] int empNo, [FromQuery] string role)
         {
@@ -75,6 +98,11 @@ namespace UsersManagement.Controllers
             };
 
             return Ok();
+        }
+
+        public class newPassData {
+            public string givenPassword {get; set;}
+            public string newPassword {get; set;}
         }
     }
 }

@@ -52,6 +52,22 @@ namespace ControlUsuarios.Services.Impl
             return _usersRepository.HasToken(token);
         }
 
+        public bool ChangePassword(string usr, string givenPassword, string newPassword)
+        {
+            // Hay que confirmar si la contraseña que el usuario acaba de dar es valido antes de
+            // cambiarlo.
+            IEnumerable<User> users = GetAll().AsEnumerable();
+            var pass = getHash(givenPassword);
+            var user = users.SingleOrDefault<User>(u => u.userName == usr && u.Password == pass);
+
+            // Acaso hay un usuario?
+            if (user == null)
+                return false;
+
+            // El proceso fue un exito!
+            return _usersRepository.ChangePassword( user.userName, getHash(newPassword) );
+        }
+
         public User? Authenticate(string username, string password)
         {
             IEnumerable<User> users = GetAll().AsEnumerable();
@@ -98,6 +114,18 @@ namespace ControlUsuarios.Services.Impl
                 return users.Select(p => {
                     return p;
                 });
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public User GetUser(string userID)
+        {
+            try{
+                var user = _usersRepository.GetUser(userID);
+                return user;
             }
             catch (System.Exception)
             {
