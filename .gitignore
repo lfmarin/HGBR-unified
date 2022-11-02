@@ -6,5 +6,9 @@
 # Evita subir el cotenido compilado de estos programas.
 API_Hospital_Boca/bin
 API_Hospital_Boca/obj
+API_Hospital_Boca/docsh/gen
+# Para evitar problemas con documentos generados,
+# las bases de documentos requeridos son serán agregados al repositorio.
+API_Hospital_Boca/docsh/src
 ControlUsuarios/obj
 ControlUsuarios/bin

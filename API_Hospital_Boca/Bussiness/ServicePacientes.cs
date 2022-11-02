@@ -56,12 +56,12 @@ namespace API_Hospital_Boca.Bussiness
             try
             {
                 Console.WriteLine("Attempting to fetch the patient");
-                var pc = context.Pacientes.Where(p => p.NoExpediente == numExpediente).FirstOrDefault();
-                return pc;
+                Paciente pa = context.Pacientes.Where(p => p.NoExpediente.Equals(numExpediente)).First();
+                return pa;
             }
-            catch (System.InvalidOperationException IOE)
+            catch (System.Exception e)
             {
-                Console.WriteLine(IOE.Message);
+                Console.WriteLine(e.Message);
                 throw;
             }
         }

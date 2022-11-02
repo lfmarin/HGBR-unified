@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 
 namespace API_Hospital_Boca.Controllers
 {
@@ -48,6 +49,66 @@ namespace API_Hospital_Boca.Controllers
                 return Ok(info);
             return NotFound();
         }
+
+        [Authorize]
+        [HttpPost ("consentimiento")]
+        public async Task<ActionResult> generarConsentimiento([FromBody] InfoConsentimiento infoCons)
+        {
+            try
+            {
+                Paciente info = service.getClassPaciente(infoCons.pacienteID);
+
+                if (info == null)
+                {
+                    Console.WriteLine("No encuentro el paciente con el ID " + infoCons.pacienteID);
+                    return NotFound();
+                }
+
+                var nombre = info.Nombre;
+                var apMate = info.ApMaterno;
+                var apPate = info.ApPaterno;
+                var Famil1 = infoCons.fam1;
+                var Famil2 = infoCons.fam2;
+                var Doct = infoCons.doc;
+                ProcessStartInfo psi = new ProcessStartInfo();
+                psi.FileName = $"/bin/sh";
+                // psi.WorkingDirectory = "/Users/joseluis/docsh/";
+                psi.WorkingDirectory = "./docsh/";
+                psi.Arguments = "-c \"pwd\"";
+                // Crea el comando para correr la aplicación.
+                psi.Arguments = "-c \"./constancia.sh '" + nombre + " " + apMate + " " + apPate + "' " + infoCons.pacienteID
+                    + " '"+Famil1+"' '" + Famil2 + "' '" + Doct + "' \"";
+                psi.UseShellExecute = false;
+                psi.RedirectStandardOutput = true;
+                psi.RedirectStandardError = true;
+
+                Process proc = new Process
+                {
+                    StartInfo = psi
+                };
+
+                proc.Start();
+
+                string error = proc.StandardError.ReadToEnd();
+
+                string output = proc.StandardOutput.ReadToEnd();
+
+                proc.WaitForExit();
+
+                string createdFileName = $"./docsh/gen/const_{infoCons.pacienteID}.pdf";
+                Response.Headers.ContentDisposition.Append("inline; filename="+ createdFileName);
+                var bytes = await System.IO.File.ReadAllBytesAsync(createdFileName);
+                return File(bytes, "application/pdf", "constancia.pdf");
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return NotFound();
+            }
+        }
+
+        [Authorize]
+        [HttpPost ("save")]
         public IActionResult savePaciente([FromBody] NuevoPaciente np) 
         {
             try
@@ -140,5 +201,13 @@ namespace API_Hospital_Boca.Controllers
     {
         public Paciente paciente { get; set; }
         public int hospital { get; set; }
+    }
+
+    public class InfoConsentimiento
+    {
+        public string pacienteID { get; set; }
+        public string fam1 { get; set; }
+        public string fam2 { get; set; }
+        public string doc { get; set; }
     }
 }
