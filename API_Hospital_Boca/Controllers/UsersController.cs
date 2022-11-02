@@ -5,6 +5,10 @@ using ControlUsuarios.Models;
 using ControlUsuarios.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Net.Http.Headers;
 
 namespace UsersManagement.Controllers
 {
@@ -34,6 +38,32 @@ namespace UsersManagement.Controllers
             return Ok(result);
         }
 
+        [HttpPost("logout")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
+        public IActionResult LogOut()
+        {
+            var accessToken = Request.Headers[HeaderNames.Authorization];
+
+            // Is the current account authorized?
+            if (!String.IsNullOrEmpty(accessToken))
+            {
+                _usersService.AddLoggedOutToken(accessToken);
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("hash")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        public IActionResult HashPass([FromBody] LoginInfo loginInfo)
+        {
+            Console.WriteLine(loginInfo.Password);
+            var result = _usersService.getHash(loginInfo.Password);
+            return Ok(result);
+        }
+
         [HttpGet("user/all")]
         public IActionResult GetAllUser()
         {
@@ -41,6 +71,7 @@ namespace UsersManagement.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult SetRole([FromQuery] int empNo, [FromQuery] string role)
         {

@@ -9,6 +9,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using API_Hospital_Boca.Models.dto;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace ControlUsuarios.Services.Impl
 {
@@ -25,10 +29,34 @@ namespace ControlUsuarios.Services.Impl
             _jwtSettings = options.Value;
         }
 
+        public string getHash(string text)
+        {
+            // SHA512 is disposable by inheritance.  
+            using (var sha256 = SHA256.Create())
+            {
+                // Send a sample text to hash.  
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(text));
+                // Get the hashed string.  
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
+        }
+
+        public bool AddLoggedOutToken(string token)
+        {
+            _usersRepository.AddTokenToBlock(token);
+            return true;
+        }
+
+        public bool TokenHasBeenRevoked(string token)
+        {
+            return _usersRepository.HasToken(token);
+        }
+
         public User? Authenticate(string username, string password)
         {
             IEnumerable<User> users = GetAll().AsEnumerable();
-            var user = users.SingleOrDefault<User>(u => u.userName == username && u.Password == password);
+            var pass = getHash(password);
+            var user = users.SingleOrDefault<User>(u => u.userName == username && u.Password == pass);
 
             if (user == null) return user;
 

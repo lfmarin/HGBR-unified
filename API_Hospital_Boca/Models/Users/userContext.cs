@@ -18,6 +18,7 @@ namespace ControlUsuarios.Models
 
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<TokenBlacklist> loggedOutTokens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -42,6 +43,14 @@ namespace ControlUsuarios.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(20)
                     .HasColumnName("namerole");
+            });
+
+            modelBuilder.Entity<TokenBlacklist>(entity =>
+            {
+                entity.ToTable("TokensCerrados");
+
+                entity.HasIndex(e => e.IdToken, "idToken");
+                entity.Property(e => e.strToken).HasColumnName("strToken");
             });
 
             modelBuilder.Entity<User>(entity =>

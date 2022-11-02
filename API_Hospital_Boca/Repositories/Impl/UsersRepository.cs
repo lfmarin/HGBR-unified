@@ -9,6 +9,18 @@ namespace ControlUsuarios.Repositories.Impl
         private readonly userContext _context;
         public UsersRepository(userContext context) => _context = context;
         public IEnumerable<User> GetAll() => _context.Users.ToList();
+        public void AddTokenToBlock(string token)
+        {
+            Console.WriteLine(token);
+            TokenBlacklist TB = new TokenBlacklist();
+            TB.strToken = token;
+            _context.loggedOutTokens.Add(TB);
+            _context.SaveChanges();
+        }
+        public bool HasToken(string token)
+        {
+            return _context.loggedOutTokens.Select(e => e.strToken == token).First();
+        }
     }
 }
 

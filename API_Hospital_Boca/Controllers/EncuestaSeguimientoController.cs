@@ -23,7 +23,7 @@ namespace API_Hospital_Boca.Controllers
             }
             catch (System.Exception)
             {
-                throw;
+                return NotFound();
             }
         }
 
@@ -33,7 +33,7 @@ namespace API_Hospital_Boca.Controllers
             try
             {
                 service.updateEncuestaSeguimiento(es);
-                return Ok                                                                     (true);   
+                return Ok(true);
             }
             catch (System.Exception)
             {
