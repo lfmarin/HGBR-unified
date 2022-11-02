@@ -40,7 +40,6 @@ namespace UsersManagement.Controllers
 
         [HttpPost("logout")]
         [Authorize]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
         public IActionResult LogOut()
         {
             var accessToken = Request.Headers[HeaderNames.Authorization];
