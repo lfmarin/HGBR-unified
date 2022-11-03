@@ -68,7 +68,7 @@ namespace ControlUsuarios.Services.Impl
             return _usersRepository.ChangePassword( user.userName, getHash(newPassword) );
         }
 
-        public User? Authenticate(string username, string password)
+        public User Authenticate(string username, string password)
         {
             IEnumerable<User> users = GetAll().AsEnumerable();
             var pass = getHash(password);

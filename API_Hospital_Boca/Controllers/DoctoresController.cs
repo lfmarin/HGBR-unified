@@ -71,6 +71,7 @@ namespace API_Hospital_Boca.Controllers
 
         [Authorize]
         [HttpGet ("{idDoctor}")]
+        [Authorize(Roles = "Admin,Coordinador")]
         public IActionResult getDoctor(int idDoctor)
         {
             try
