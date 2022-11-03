@@ -14,6 +14,7 @@ export default function EliminarDoctor() {
   const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   const [delay, setDelay] = useState(false)
   const [cancelado, setCancelado] = useState(false)
+  const [NoPermitido, setPermit] = useState(false)
   const [datos, setDatos] = useState({
     IdDoctor: '',
     Nombre: '',
@@ -80,6 +81,7 @@ export default function EliminarDoctor() {
             setToken("")
             AutRedir(true)
           }
+          setPermit(error.response.status === 403)
         }
       )
   }
@@ -108,6 +110,10 @@ export default function EliminarDoctor() {
 
   return (
     <div className={classes.root}>
+      {NoPermitido ? <div>
+        <h2>Acceso Denegado</h2>
+        <p>Usted no tiene los permisos necesarios para modificar el contenido.</p>
+      </div> : null}
 		{!load ?
 			<div className='input-container'>
 				<p>¿Estas seguro de eliminar al doctor {datos.Nombre} {datos.ApMaterno} {datos.apPaterno} ?</p>

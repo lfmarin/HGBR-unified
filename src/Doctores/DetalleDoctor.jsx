@@ -10,12 +10,13 @@ export default function DetalleDoctor() {
   const classes = useStyles()
   const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   const [datos, setDatos] = useState({
-    IdDoctor: '',
-    Nombre: '',
-    ApPaterno: '',
-    ApMaterno: '',
+	IdDoctor: '',
+	Nombre: '',
+	ApPaterno: '',
+	ApMaterno: '',
   })
   const [load, setLoad] = useState(true)
+  const [NoPermitido, setPermit] = useState(false)
   const [noAutorizado, AutRedir] = useState(false)
   const [Finalizado, confirmarFin] = useState(false)
 
@@ -50,61 +51,66 @@ export default function DetalleDoctor() {
   }
 
   const handleChange = event => {
-    //const {name, value} = e.target;
+	//const {name, value} = e.target;
 	console.log("chabge")
-    setDatos({
-      ...datos,
-      [event.target.name]: event.target.value,
-    })
+	setDatos({
+	  ...datos,
+	  [event.target.name]: event.target.value,
+	})
   }
 
   const cargaPaciente = () => {
-    axios
-      .get(`https://localhost:5001/hospitalBoca/doctores/${noDoctor}`, {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-      })
-      .then(
-        response => {
-          if (response.status === 200) {
-            setDatos({
+	axios
+	  .get(`https://localhost:5001/hospitalBoca/doctores/${noDoctor}`, {
+		headers: {
+		  'Content-type': 'application/json',
+		  'Authorization': `Bearer ${token}`
+		},
+	  })
+	  .then(
+		response => {
+		  if (response.status === 200) {
+			setDatos({
 			  IdDoctor: response.data.idDoctor,
-              Nombre: response.data.nombre,
-              ApPaterno: response.data.apPaterno,
-              ApMaterno: response.data.apMaterno,
-            })
+			  Nombre: response.data.nombre,
+			  ApPaterno: response.data.apPaterno,
+			  ApMaterno: response.data.apMaterno,
+			})
 
 			console.log(datos)
-          }
-        },
-        error => {
-          // console.log(error.response)
-          if (error.response.status === 401) {
-            setToken("")
-            AutRedir(true)
-          }
-        }
-      )
+		  }
+		},
+		error => {
+			// console.log(error.response)
+			if (error.response.status === 401) {
+				setToken("")
+				AutRedir(true)
+			}
+			setPermit(error.response.status === 403)
+		}
+	  )
   }
 
   useEffect(() => {
 	if( datos.IdDoctor !== '' )
 		setLoad(false)
-    if (load) {
-      cargaPaciente()
-    }
+	if (load) {
+	  cargaPaciente()
+	}
   }, [load, datos.IdDoctor]);
 
   if( noAutorizado )
-    return <Redirect to="/login" />
+	return <Redirect to="/login" />
 
   if( Finalizado )
   	return <Redirect to="/doctores" />
 
   return (
-    <div className={classes.root}>
+	<div className={classes.root}>
+	{NoPermitido ? <div>
+		<h2>Acceso Denegado</h2>
+		<p>Usted no tiene los permisos necesarios para modificar el contenido.</p>
+	</div> : null}
 	{/* Carga el formulario para editar información. */}
 	{!load ?
 		<div className='input-container'>
@@ -153,6 +159,6 @@ export default function DetalleDoctor() {
 			</form>
 		</div>
 	: null}
-    </div>
+	</div>
   )
 }
