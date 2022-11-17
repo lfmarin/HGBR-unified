@@ -12,7 +12,7 @@ namespace ControlUsuarios.Models
         [JsonIgnore]
         public string Password { get; set; }
 
-        [JsonIgnore]
+        // [JsonIgnore]
         public int IDDoctor { get; set; }
 
         //[JsonIgnore]
@@ -21,7 +21,7 @@ namespace ControlUsuarios.Models
         //[JsonIgnore]
         //public bool? Canwrite { get; set; }
 
-        [JsonIgnore]
+        // [JsonIgnore]
         public int IdRole { get; set; }
 
         [JsonIgnore]

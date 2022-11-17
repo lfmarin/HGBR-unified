@@ -9,7 +9,31 @@ namespace ControlUsuarios.Repositories.Impl
         private readonly userContext _context;
         public UsersRepository(userContext context) => _context = context;
         public IEnumerable<User> GetAll() => _context.Users.ToList();
+        public IQueryable<object> GetAllObject()
+        {
+            return _context.Users.Select(p => new{
+                id = p.ID,
+                userName = p.userName,
+                idDoctor = p.IDDoctor,
+                idRole = _context.Roles.FirstOrDefault( e => e.Id == p.IdRole ).Name
+            });
+        }
         public User GetUser(string userID) => _context.Users.FirstOrDefault(e => e.userName == userID);
+        public IEnumerable<Role> GetRoles() => _context.Roles.ToList();
+        public bool AddUser(User usr){
+            try
+            {
+                _context.Users.Add(usr);
+                _context.SaveChanges();
+                Console.WriteLine("Proceso completado!");
+                return true;  
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Proceso fallido!");
+                return false;
+            }
+        }
         public void AddTokenToBlock(string token)
         {
             Console.WriteLine(token);

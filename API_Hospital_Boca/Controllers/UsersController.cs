@@ -54,14 +54,29 @@ namespace UsersManagement.Controllers
             return Unauthorized();
         }
 
-        [HttpGet("user/all")]
+        [HttpGet("all")]
         [Authorize(Roles = "Admin,Coordinador")]
         public IActionResult GetAllUser()
         {
-            var result = _usersService.GetAll();
+            var result = _usersService.GetAllObject();
             return Ok(result);
         }
 
+        [HttpPost("adduser")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddUser([FromBody] User usr)
+        {
+            var result = _usersService.AddUser(usr);
+            return Ok(result);
+        }
+
+        [HttpGet("getroles")]
+        [Authorize(Roles = "Admin,Coordinador")]
+        public IActionResult GetRolesList()
+        {
+            var result = _usersService.GetRoles();
+            return Ok(result);
+        }
         /**
             Obtiene la información del usuario actual.
         */

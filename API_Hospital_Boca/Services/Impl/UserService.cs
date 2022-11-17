@@ -56,7 +56,7 @@ namespace ControlUsuarios.Services.Impl
         {
             // Hay que confirmar si la contraseña que el usuario acaba de dar es valido antes de
             // cambiarlo.
-            IEnumerable<User> users = GetAll().AsEnumerable();
+            IEnumerable<User> users = GetAll();
             var pass = getHash(givenPassword);
             var user = users.SingleOrDefault<User>(u => u.userName == usr && u.Password == pass);
 
@@ -70,7 +70,7 @@ namespace ControlUsuarios.Services.Impl
 
         public User Authenticate(string username, string password)
         {
-            IEnumerable<User> users = GetAll().AsEnumerable();
+            IEnumerable<User> users = GetAll();
             var pass = getHash(password);
             var user = users.SingleOrDefault<User>(u => u.userName == username && u.Password == pass);
 
@@ -121,6 +121,19 @@ namespace ControlUsuarios.Services.Impl
             }
         }
 
+        public IQueryable<object> GetAllObject()
+        {
+            try
+            {
+                var users = _usersRepository.GetAllObject();
+                return users;
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
         public User GetUser(string userID)
         {
             try{
@@ -128,6 +141,27 @@ namespace ControlUsuarios.Services.Impl
                 return user;
             }
             catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool AddUser(User usr)
+        {
+            try{
+                _usersRepository.AddUser(usr);
+                return true;
+            } catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<Role> GetRoles()
+        {
+            try {
+                return _rolesRepository.GetAll();
+            } catch (System.Exception)
             {
                 throw;
             }
