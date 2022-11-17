@@ -17,31 +17,6 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Configuration;
 
-/*
-namespace API_Hospital_Boca
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            //CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-
-                    if (new hospital_bocaContext() != null)
-                    {
-                        Console.WriteLine("Sirve");
-                    }
-                });
-    }
-}
-*/
-
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 configuration.AddEnvironmentVariables();
