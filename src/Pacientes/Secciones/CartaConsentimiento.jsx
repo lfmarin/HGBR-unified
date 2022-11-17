@@ -3,6 +3,7 @@ import { AccordionDetails, Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
 import axios from 'axios'
+import {CircularProgress, Box } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   center: {
@@ -104,9 +105,21 @@ export default function CartaConsentimiento({expediente, token}) {
           />
         </div>
         <div className={classes.center}>
-          <Button variant="outlined" size="large" startIcon={<GetAppRoundedIcon />} type="submit">
-            Generar Carta
-          </Button>
+          <Box sx={{ m: 1, position: 'relative'}} >
+            <Button variant="outlined" size="large" startIcon={<GetAppRoundedIcon />} type="submit">
+              Generar Carta
+            </Button>
+            <CircularProgress
+              size={24}
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: '-12px',
+                marginLeft: '-12px',
+              }}
+            />
+          </Box>
         </div>
       </form>
     </AccordionDetails>
