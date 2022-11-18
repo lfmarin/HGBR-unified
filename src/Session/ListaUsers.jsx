@@ -2,7 +2,7 @@
 	Lista usuario:
 	Esta página muestra la lista de los usuarios que están registrados en la página.
 */
-import React, { useState } from 'react'
+import React from 'react'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -13,13 +13,12 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../Components/SortTable'
 import EnhancedTableHead from '../Components/HeadSortTable'
 import { visuallyHidden } from '@mui/utils'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, useLocation } from 'react-router-dom'
 import axios from 'axios'
+import { withStyles } from '@material-ui/core/styles';
 import useStyles from '../Styles/listaPacientesStyles'
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
 import Button from '@mui/material/Button'
-import { useEffect } from 'react'
-// import ListaDoctores from '../Doctores/ListaDoctores'
 
 /*
 {
@@ -41,164 +40,194 @@ const headCells = [
  * Pagina de inicio de sesión.
  * @param {*} props 
  */
-export default function ListaUsuarios(props) {
-	// Declara estados para verificar la sesion.
-	// const [errorMessages, setErrorMessages] = useState({});
-	const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
-	const [listaUsr, setListaUsr] = useState([])
-	const [doctoresLista, setDocs] = useState([])
-	const [page, setPage] = useState(0)
-	const [rowsPerPage, setRowsPerPage] = useState(5)
-	const [order, setOrder] = useState('asc')
-	const [orderBy, setOrderBy] = useState('noExpediente')
-	const [noAutorizado, AutRedir] = useState(false)
-	// const [errorbd, setErrorbd] = useState(false)
-	const [refresh, setRefresh] = useState(true)
-	const [search, setSearch] = useState('')
-	const classes = useStyles()
+class ListaUsuarios extends React.Component {
+	constructor (props) {
+		super(props);
 
-	const ObtenerDoctor = ( id ) => {
-		if (doctoresLista.length === 0)
+		this.state = {
+			token : sessionStorage.getItem('jwtToken'),
+			listaUsr : [],
+			doctoresLista : [],
+			page : 0,
+			rowsPerPage : 5,
+			order : 'asc',
+			orderBy : 'noExpediente',
+			noAutorizado : false,
+			isFetched : true,
+			search : '',
+			// 
+			UsrObtenido : false,
+			DocObtenido : false,
+		}
+
+		this.classes = withStyles(useStyles)
+
+		this.Usuarios_URL = process.env.REACT_APP_USUARIOS + process.env.REACT_APP_GET_ALL
+		this.Doctores_URL = process.env.REACT_APP_DOCTORES + process.env.REACT_APP_GET_ALL
+	}
+
+	ObtenerDoctor = ( id ) => {
+		if (this.state.doctoresLista.length === 0)
 			return ""
 		if (id === 0 || id === null)
 			return "N/A"
-		return doctoresLista[id].nombre
+		return this.state.doctoresLista[id].nombre
 	}
 
-	const handleChangePage = (event, newPage) => {
-		setPage(newPage)
-	  }
+	handleChangePage = (event, newPageToUse) => {
+		this.setState({page: newPageToUse})
+	}
 	
-	  const handleChangeRowsPerPage = event => {
-		setRowsPerPage(+event.target.value)
-		setPage(0)
-	  }
+	handleChangeRowsPerPage = event => {
+		this.setState({rowsPerPage: +event.target.value, page: 0})
+	}
 	
-	  const handleRequestSort = (event, property) => {
-		const isAsc = orderBy === property && order === 'asc'
-		setOrder(isAsc ? 'desc' : 'asc')
-		setOrderBy(property)
-	  }
+	handleRequestSort = (event, property) => {
+		const isAsc = this.orderBy === property && this.order === 'asc'
+		this.setState({order: isAsc ? 'desc' : 'asc', orderBy: property})
+	}
 	
-	  const handleEnterSearch = event => {
+	handleEnterSearch = event => {
 		if (event.key === 'Enter') {
-			setListaUsr(SortTable.searchTable(listaUsr, search))
+			this.setState({listaUsr: SortTable.searchTable(this.listaUsr, this.search)})
 		}
-	  }
+	}
 	
-	  const handleSearch = event => {
-		setSearch(event.target.value)
-	  }
+	handleSearch = event => {
+		this.setState({search: event.target.value})
+	}
 	
-	  const handleCancelSearch = event => {
-		// console.log(pacientes)
-		setRefresh(true)
-		//setPacientes(pacientes);
-		setSearch('')
-	  }
+	handleCancelSearch = event => {
+		this.setState({isFetched : true, search: ''})
+	}
 
-	useEffect(() => {
-		if (refresh) {
-			axios.get('https://localhost:5001/api/Users/all', {
-			headers: {
-				'Content-type': 'application/json',
-				'Authorization': `Bearer ${token}`
-			},
-			})
-			.then(
-				response => {
-					if (response.status === 200) {
-						setListaUsr(response.data)
-						console.log(response.data)
-						setRefresh(false)
-					}
-				},
-				error => {
-					setToken("")
-					AutRedir(true)
+	// Corre la función cuando el componente ha sido construido.
+	componentDidMount() {
+		// this.setState({token: sessionStorage.getItem('jwtToken')})
+
+		axios.get(this.Usuarios_URL, {
+		headers: {
+			'Content-type': 'application/json',
+			'Authorization': `Bearer ${this.state.token}`
+		},
+		})
+		.then(
+			response => {
+				if (response.status === 200) {
+					this.setState({listaUsr: response.data, UsrObtenido: true})
 				}
-			)
-
-			axios.get('https://localhost:5001/hospitalBoca/doctores/all', {
-			headers: {
-				'Content-type': 'application/json',
-				'Authorization': `Bearer ${token}`
 			},
-			})
-			.then(
-				response => {
-					if (response.status === 200) {
-						setDocs(response.data)
-						setRefresh(false)
-					}
-				},
-				error => {}
+			error => {
+				if( !error.status )
+					console.warn("what did i recieve?")
+			}
+		)
+
+		axios.get(this.Doctores_URL, {
+		headers: {
+			'Content-type': 'application/json',
+			'Authorization': `Bearer ${this.state.token}`
+		},
+		})
+		.then(
+			response => {
+				if (response.status === 200) {
+					this.setState({doctoresLista: response.data, DocObtenido: true})
+				}
+			},
+			error => {}
+		)
+
+		if( this.state.UsrObtenido && this.state.DocObtenido )
+			this.setState({isFetched: true})
+	}
+
+	render() {
+		if (this.state.noAutorizado) return <Redirect to="/login" />
+
+		if (!this.state.isFetched) {
+			return (
+				<div>
+					<h2>Cargando...</h2>
+				</div>
 			)
 		}
-	})
 
-	if (noAutorizado) return <Redirect to="/login" />
-
-	return (
-		<div className={classes.root}>
-			<Paper className={classes.paper}>
-			<EnhancedTableToolbar
-				handleEnterSearch={handleEnterSearch}
-				search={search}
-				handleSearch={handleSearch}
-				handleCancelSearch={handleCancelSearch}
-				title="Listado de usuarios"
-				buttonTitle="AGREGA USUARIO"
-				link="/usuarios/registrarusuario"
-			/>
-			<TableContainer>
-			  <Table className={classes.table} aria-labelledby="tableTitle" size="medium" aria-label="enhanced table">
-				<EnhancedTableHead
-					sx={visuallyHidden}
-					order={order}
-					orderBy={orderBy}
-					headCells={headCells}
-					onRequestSort={handleRequestSort}
+		return (
+			<div className={this.classes.root}>
+				<Paper className={this.classes.paper}>
+				<EnhancedTableToolbar
+					handleEnterSearch={this.handleEnterSearch}
+					search={this.search}
+					handleSearch={this.handleSearch}
+					handleCancelSearch={this.handleCancelSearch}
+					title="Listado de usuarios"
+					buttonTitle="AGREGA USUARIO"
+					link="/usuarios/registrarusuario"
 				/>
-	
-				<TableBody>
-					{SortTable.stableSort(listaUsr, SortTable.getComparator(order, orderBy))
-					.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-					.map(item => {
-					  return (
-						<TableRow key={item.id}>
-							<TableCell>{item.id}</TableCell>
-							<TableCell>{item.userName}</TableCell>
-							<TableCell>{ObtenerDoctor(item.idDoctor)}</TableCell>
-							<TableCell>{item.idRole}</TableCell>
-							{/* <TableCell>{getAge(item.fechaNacimiento)} años</TableCell> */}
-							{/* <TableCell>{dateFormatter(item.fechaNacimiento)}</TableCell> */}
-							<TableCell>
-								<Button
-									component={Link}
-									to={`/usuarios/detalles/${item.id}`}
-									variant="outlined"
-									sx={{ borderColor: '#AC3833', color: '#AC3833' }}
-								>
-								Expediente
-								</Button>
-							</TableCell>
-						</TableRow>
-						)
-					})}
-				</TableBody>
-			</Table>
-			</TableContainer>
-			<TablePagination
-			  rowsPerPageOptions={[5, 10, 50]}
-			  component="div"
-			  count={listaUsr.length}
-			  rowsPerPage={rowsPerPage}
-			  page={page}
-			  onPageChange={handleChangePage}
-			  onRowsPerPageChange={handleChangeRowsPerPage}
-			/>
-		  </Paper>
-		</div>
-	  )
+				<TableContainer>
+				<Table className={this.classes.table} aria-labelledby="tableTitle" size="medium" aria-label="enhanced table">
+					<EnhancedTableHead
+						sx={visuallyHidden}
+						order={this.order}
+						orderBy={this.orderBy}
+						headCells={headCells}
+						onRequestSort={this.handleRequestSort}
+					/>
+		
+					<TableBody>
+						{SortTable.stableSort(this.state.listaUsr, SortTable.getComparator(this.state.order, this.state.orderBy))
+						.slice(this.state.page * this.state.rowsPerPage,
+							this.state.page * this.state.rowsPerPage + this.state.rowsPerPage)
+						.map(item => {
+						return (
+							<TableRow key={item.id}>
+								<TableCell>{item.id}</TableCell>
+								<TableCell>{item.userName}</TableCell>
+								<TableCell>{this.ObtenerDoctor(item.idDoctor)}</TableCell>
+								<TableCell>{item.idRole}</TableCell>
+								<TableCell>
+									<Button
+										component={Link}
+										to={`/usuarios/detalles/${item.id}`}
+										variant="outlined"
+										sx={{ borderColor: '#AC3833', color: '#AC3833' }}
+									>
+									Expediente
+									</Button>
+								</TableCell>
+							</TableRow>
+							)
+						})}
+					</TableBody>
+				</Table>
+				</TableContainer>
+				<TablePagination
+					rowsPerPageOptions={[5, 10, 50]}
+					component="div"
+					count={this.state.listaUsr.length}
+					rowsPerPage={this.state.rowsPerPage}
+					page={this.state.page}
+					onPageChange={this.handleChangePage}
+					onRowsPerPageChange={this.handleChangeRowsPerPage}
+				/>
+			</Paper>
+			</div>
+		)
+	}
 }
+
+//other necessary hack to get around react-router v6
+//heavy hooks utlization
+function WithRouter (Component) {
+    function ComponentWithRouterProps (props) {
+        let location = useLocation ();
+        return (
+            <Component {...props}{...{location}} />
+        )
+    }
+
+    return ComponentWithRouterProps;
+}
+
+export default WithRouter(ListaUsuarios);

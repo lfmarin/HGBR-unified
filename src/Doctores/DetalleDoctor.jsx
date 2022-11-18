@@ -28,7 +28,7 @@ export default function DetalleDoctor() {
 
 	// Envia el nuevo cambio al API.
 	axios
-	.post('https://localhost:5001/hospitalBoca/doctores/update', datos,
+	.post(`${process.env.REACT_APP_DOCTORES}update`, datos,
 	{
 		headers: {
 			'Content-type': 'application/json',

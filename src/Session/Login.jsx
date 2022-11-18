@@ -10,8 +10,14 @@ import './sesion.css'
  */
 export default function Login(props) {
 	// Declara estados para verificar la sesion.
-	const [errorMessages, setErrorMessages] = useState({});
-	const [isSubmitted, setIsSubmitted] = useState(sessionStorage.getItem('jwtToken'));
+	const [estado, setEstado] = useState(
+		{
+			errorMessages : {},
+			isSubmitted : sessionStorage.getItem('jwtToken')
+		}
+	)
+	// const [errorMessages, setErrorMessages] = useState({});
+	// const [isSubmitted, setIsSubmitted] = useState(sessionStorage.getItem('jwtToken'));
 
 	/**
 	 * Esta función se encarga de reportar al usuario que los datos introducidos son incorrectos
@@ -19,8 +25,8 @@ export default function Login(props) {
 	 * @returns {HTMLDivElement} El elemento generado.
 	 */
 	const renderErrorMessage = (name) => {
-		return name === errorMessages.name ? (
-			<div className='error'>{errorMessages.message}</div>
+		return name === estado.errorMessages.name ? (
+			<div className='error'>{estado.errorMessages.message}</div>
 		) : <div></div>;
 	}
 
@@ -34,7 +40,7 @@ export default function Login(props) {
 		const opcionesPOST = {username: uname.value, password: pass.value}
 
 		axios
-		.post('https://localhost:5001/api/Users/authenticate', opcionesPOST)
+		.post( process.env.REACT_APP_USUARIOS + 'authenticate', opcionesPOST)
 		.then(
 			response => {
 				if (response.status === 200) {
@@ -45,7 +51,10 @@ export default function Login(props) {
 						sessionStorage.setItem('jwtToken',response.data.token);
 						props.changeUser(response.data.userName)
 						sessionStorage.setItem('Dusername',response.data.userName)
-						setIsSubmitted(true)
+						setEstado( prev => ({
+							...prev,
+							isSubmitted : true
+						}))
 					}
 				}
 			}
@@ -54,7 +63,7 @@ export default function Login(props) {
 			err => {
 				if(err.response.status === 401) {
 					// Reporta el mensaje que los datos son incorrectos.
-					setErrorMessages({ name: "pass", message: "Los datos son incorrectos."});
+					setEstado({errorMessages: { name: "pass", message: "Los datos son incorrectos."}})
 				}
 			}
 		)
@@ -96,14 +105,14 @@ export default function Login(props) {
 		</div>
 	)
 
-	if(isSubmitted)
+	if(estado.isSubmitted)
 		return <Redirect to="/" />
 
 	return (
 		<div className="login">
 			<div className="login-form">
 				<h2 className="title">Inicio de sesión</h2>
-				{isSubmitted ? null: Formulario}
+				{estado.isSubmitted ? null: Formulario}
 			</div>
 		</div>
 	)

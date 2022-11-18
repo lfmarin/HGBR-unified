@@ -58,7 +58,7 @@ export default function EliminarDoctor() {
 
   const cargaPaciente = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/doctores/${noDoctor}`, {
+      .get(`${process.env.REACT_APP_DOCTORES}${noDoctor}`, {
         headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -68,7 +68,7 @@ export default function EliminarDoctor() {
         response => {
           if (response.status === 200) {
             setDatos({
-			  IdDoctor: response.data.idDoctor,
+			        IdDoctor: response.data.idDoctor,
               Nombre: response.data.nombre,
               ApPaterno: response.data.apPaterno,
               ApMaterno: response.data.apMaterno,

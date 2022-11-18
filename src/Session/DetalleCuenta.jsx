@@ -40,7 +40,7 @@ export default function DetalleCuenta(props) {
 		var {curPass, newPass1, newPass2} = document.forms[0];
 
 		// Checa si la nueva contraseña es la misma.
-		if( newPass1.value != newPass2.value )
+		if( newPass1.value !== newPass2.value )
 		{
 			setErrorMessages({ name: "pass", message: "Las contraseñas no coinciden."});
 			return;
