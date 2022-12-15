@@ -17,7 +17,7 @@ import Snackbar from '@mui/material/Snackbar'
 export default function DetalleCuenta(props) {
 	// Declara estados para verificar la sesion.
 	const [errorMessages, setErrorMessages] = useState({});
-	const [token, setIsSubmitted] = useState(sessionStorage.getItem('jwtToken'));
+	const token = useState(sessionStorage.getItem('jwtToken'));
 	const [finish, setFinished] = useState(false);
 	const [delay, setDelay] = useState(false);
 

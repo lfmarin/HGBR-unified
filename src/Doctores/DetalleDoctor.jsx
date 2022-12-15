@@ -59,45 +59,44 @@ export default function DetalleDoctor() {
 	})
   }
 
-  const cargaPaciente = () => {
-	axios
-	  .get(`https://localhost:5001/hospitalBoca/doctores/${noDoctor}`, {
-		headers: {
-		  'Content-type': 'application/json',
-		  'Authorization': `Bearer ${token}`
-		},
-	  })
-	  .then(
-		response => {
-		  if (response.status === 200) {
-			setDatos({
-			  IdDoctor: response.data.idDoctor,
-			  Nombre: response.data.nombre,
-			  ApPaterno: response.data.apPaterno,
-			  ApMaterno: response.data.apMaterno,
-			})
-
-			console.log(datos)
-		  }
-		},
-		error => {
-			// console.log(error.response)
-			if (error.response.status === 401) {
-				setToken("")
-				AutRedir(true)
-			}
-			setPermit(error.response.status === 403)
-		}
-	  )
-  }
-
   useEffect(() => {
 	if( datos.IdDoctor !== '' )
 		setLoad(false)
 	if (load) {
-	  cargaPaciente()
+		const cargaPaciente = () => {
+		axios
+			.get(`https://localhost:5001/hospitalBoca/doctores/${noDoctor}`, {
+			headers: {
+				'Content-type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+			})
+			.then(
+			response => {
+				if (response.status === 200) {
+				setDatos({
+					IdDoctor: response.data.idDoctor,
+					Nombre: response.data.nombre,
+					ApPaterno: response.data.apPaterno,
+					ApMaterno: response.data.apMaterno,
+				})
+	
+				console.log(datos)
+				}
+			},
+			error => {
+				// console.log(error.response)
+				if (error.response.status === 401) {
+					setToken("")
+					AutRedir(true)
+				}
+				setPermit(error.response.status === 403)
+			}
+			)
+		}
+		cargaPaciente()
 	}
-  }, [load, datos.IdDoctor]);
+  }, [load, datos.IdDoctor, datos, noDoctor, token]);
 
   if( noAutorizado )
 	return <Redirect to="/login" />

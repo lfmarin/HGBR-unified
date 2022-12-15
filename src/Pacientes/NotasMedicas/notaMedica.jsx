@@ -38,7 +38,7 @@ export default function NotaMedica() {
   const { noExpediente } = useParams()
   const [isFail, setIsFail] = useState(false)
   const [errorbd, setErrorbd] = useState(false)
-  const [finish, setFinish] = useState(false)
+  // const [finish, setFinish] = useState(false)
   const [loadFicha, setLoadFicha] = useState(true)
   const [load, setLoad] = useState(false)
   const [show, setShow] = useState(false)
@@ -175,7 +175,7 @@ export default function NotaMedica() {
         response => {
           if (response.status === 200) {
             setErrorbd(false)
-            setFinish(true)
+            // setFinish(true)
           }
         },
         error => {
@@ -204,7 +204,7 @@ export default function NotaMedica() {
         response => {
           if (response.status === 200) {
             setErrorbd(false)
-            setFinish(true)
+            // setFinish(true)
           }
         },
         error => {

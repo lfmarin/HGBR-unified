@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import useStyles from '../Styles/detallesStyles'
 import { useParams, Redirect } from 'react-router'
 import axios from 'axios'
-import { TextField } from '@mui/material'
 import './editar.css'
 import {Button} from '@mui/material'
 import Alert from '@mui/material/Alert'
@@ -56,37 +55,7 @@ export default function EliminarDoctor() {
 	)
   }
 
-  const cargaPaciente = () => {
-    axios
-      .get(`${process.env.REACT_APP_DOCTORES}${noDoctor}`, {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-      })
-      .then(
-        response => {
-          if (response.status === 200) {
-            setDatos({
-			        IdDoctor: response.data.idDoctor,
-              Nombre: response.data.nombre,
-              ApPaterno: response.data.apPaterno,
-              ApMaterno: response.data.apMaterno,
-            })
-          }
-        },
-        error => {
-          // console.log(error.response)
-          if (error.response.status === 401) {
-            setToken("")
-            AutRedir(true)
-          }
-          setPermit(error.response.status === 403)
-        }
-      )
-  }
-
-  const cancelarOp = () => {
+  const cancelarOp = () => {
 	setCancelado(true);
 	confirmarFin(true);
   }
@@ -95,9 +64,38 @@ export default function EliminarDoctor() {
 	if( datos.IdDoctor !== '' )
 		setLoad(false)
     if (load) {
+      const cargaPaciente = () => {
+        axios
+          .get(`${process.env.REACT_APP_DOCTORES}${noDoctor}`, {
+            headers: {
+              'Content-type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+          })
+          .then(
+            response => {
+              if (response.status === 200) {
+                setDatos({
+                  IdDoctor: response.data.idDoctor,
+                  Nombre: response.data.nombre,
+                  ApPaterno: response.data.apPaterno,
+                  ApMaterno: response.data.apMaterno,
+                })
+              }
+            },
+            error => {
+              // console.log(error.response)
+              if (error.response.status === 401) {
+                setToken("")
+                AutRedir(true)
+              }
+              setPermit(error.response.status === 403)
+            }
+          )
+      }
       cargaPaciente()
     }
-  }, [load, datos.IdDoctor]);
+  }, [load, datos.IdDoctor, datos, noDoctor, token]);
 
   if (Finalizado) {
 	if(!cancelado)

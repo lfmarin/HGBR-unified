@@ -24,9 +24,8 @@ export default function Evolucion() {
     fechaElab: '',
   })
   const { noExpediente } = useParams()
-  const [isFail, setIsFail] = useState(false)
   const [errorbd, setErrorbd] = useState(false)
-  const [finish, setFinish] = useState(false)
+  // const [finish, setFinish] = useState(false)
   const [load, setLoad] = useState(true)
   const [loadEvolucion, setLoadEvolucion] = useState(false)
   const [show, setShow] = useState(false)
@@ -81,16 +80,18 @@ export default function Evolucion() {
       .then(
         response => {
           if (response.status === 200) {
+            var fecha1 = ""
+            var fecha2 = ""
             if (response.data.fecha1 != null) {
-              var fecha1 = response.data.fecha1.substring(0, response.data.fecha1.indexOf('T'))
+              fecha1 = response.data.fecha1.substring(0, response.data.fecha1.indexOf('T'))
             } else {
-              var fecha1 = response.data.fecha1
+              fecha1 = response.data.fecha1
             }
 
             if (response.data.fecha2 != null) {
-              var fecha2 = response.data.fecha2.substring(0, response.data.fecha2.indexOf('T'))
+              fecha2 = response.data.fecha2.substring(0, response.data.fecha2.indexOf('T'))
             } else {
-              var fecha2 = response.data.fecha2
+              fecha2 = response.data.fecha2
             }
 
             setDatos({
@@ -137,7 +138,7 @@ export default function Evolucion() {
         response => {
           if (response.status === 200) {
             setErrorbd(false)
-            setFinish(true)
+            // setFinish(true)
           }
         },
         error => {

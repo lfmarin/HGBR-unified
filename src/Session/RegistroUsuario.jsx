@@ -52,7 +52,12 @@ export default function RegistroUsuario() {
           }
         },
         error => {
-          if (!error.response) setErrorbd(true)
+          if (!error.response)
+            setErrorbd(true)
+          else{
+            if(error.response.status === 401)
+              setToken("")
+          }
         }
       )
   }

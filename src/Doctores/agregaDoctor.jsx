@@ -19,7 +19,7 @@ export default function RegistroDoctor() {
     ApPaterno: '',
     ApMaterno: '',
   })
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
+  const [token] = useState(sessionStorage.getItem('jwtToken'));
   const [NoPermitido, setPermit] = useState(false)
   const [errorbd, setErrorbd] = useState(false)
   const [finish, setFinish] = useState(false)

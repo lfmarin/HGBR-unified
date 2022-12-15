@@ -9,7 +9,6 @@ import ProcedimientoQuirurgico from './procQuirurgico'
 import EstudioAnato from './estudioAnato'
 import Evolucion from './evolucion'
 import useStyles from '../../Styles/mainHistorias'
-import GetHistoriaClinica from './getHistoriaClin'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props

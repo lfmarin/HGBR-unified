@@ -32,7 +32,7 @@ export default function MotivoSolicitud() {
   const [isFail, setIsFail] = useState(false)
   const [errorbd, setErrorbd] = useState(false)
   const [finish, setFinish] = useState(false)
-  const [delay, setDelay] = useState(false)
+  // const [delay, setDelay] = useState(false)
   const [load, setLoad] = useState(true)
   const [loadMotivo, setLoadMotivo] = useState(false)
   const [show, setShow] = useState(false)

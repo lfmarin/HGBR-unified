@@ -29,7 +29,7 @@ export default function ProcedimientoQuirurgico() {
   const { noExpediente } = useParams()
   const [isFail, setIsFail] = useState(false)
   const [errorbd, setErrorbd] = useState(false)
-  const [finish, setFinish] = useState(false)
+  // const [finish, setFinish] = useState(false)
   const [load, setLoad] = useState(true)
   const [loadProc, setLoadProc] = useState(false)
   const [show, setShow] = useState(false)
@@ -58,10 +58,15 @@ export default function ProcedimientoQuirurgico() {
           }
         },
         error => {
-          if (!error.response) setErrorbd(true)
+          if (!error.response)
+            setErrorbd(true)
+          else {
+            if (error.response.status === 401)
+              setToken("")
+          }
         }
       )
-  }, [])
+  }, [token])
 
   const cargaHC = () => {
     axios
@@ -108,10 +113,11 @@ export default function ProcedimientoQuirurgico() {
       .then(
         response => {
           if (response.status === 200) {
+            var fecha = ""
             if (response.data.fechaCirugia != null) {
-              var fecha = response.data.fechaCirugia.substring(0, response.data.fechaCirugia.indexOf('T'))
+              fecha = response.data.fechaCirugia.substring(0, response.data.fechaCirugia.indexOf('T'))
             } else {
-              var fecha = response.data.fechaCirugia
+              fecha = response.data.fechaCirugia
             }
             setDatos({
               fkHistoria: response.data.fkHistoria,
@@ -154,7 +160,7 @@ export default function ProcedimientoQuirurgico() {
         response => {
           if (response.status === 200) {
             setErrorbd(false)
-            setFinish(true)
+            // setFinish(true)
           }
         },
         error => {

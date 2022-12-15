@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { TextField } from '@material-ui/core'
 import clsx from 'clsx'
 import axios from 'axios'
@@ -15,7 +15,7 @@ export default function GetHistoriaClinica(props) {
     fkHospital: '',
     fechaElab: '',
   })
-  const [errorbd, setErrorbd] = useState(false)
+  // const [errorbd, setErrorbd] = useState(false)
   const [load, setLoad] = useState(true)
   const [show, setShow] = useState(false)
 
@@ -41,7 +41,7 @@ export default function GetHistoriaClinica(props) {
         },
         error => {
           if (!error.response) {
-            setErrorbd(true)
+            // setErrorbd(true)
             setShow(false)
           }
         }

@@ -23,7 +23,7 @@ export default function EstudioAnato() {
   const { noExpediente } = useParams()
   const [isFail, setIsFail] = useState(false)
   const [errorbd, setErrorbd] = useState(false)
-  const [finish, setFinish] = useState(false)
+  // const [finish, setFinish] = useState(false)
   const [load, setLoad] = useState(true)
   const [loadEst, setLoadEst] = useState(false)
   const [show, setShow] = useState(false)
@@ -78,10 +78,11 @@ export default function EstudioAnato() {
       .then(
         response => {
           if (response.status === 200) {
+            var fecha = ""
             if (response.data.fechaEnvio != null) {
-              var fecha = response.data.fechaEnvio.substring(0, response.data.fechaEnvio.indexOf('T'))
+              fecha = response.data.fechaEnvio.substring(0, response.data.fechaEnvio.indexOf('T'))
             } else {
-              var fecha = response.data.fechaEnvio
+              fecha = response.data.fechaEnvio
             }
             setDatos({
               fkHistoria: response.data.fkHistoria,
@@ -121,7 +122,7 @@ export default function EstudioAnato() {
         response => {
           if (response.status === 200) {
             setErrorbd(false)
-            setFinish(true)
+            // setFinish(true)
           }
         },
         error => {

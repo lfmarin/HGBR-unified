@@ -8,7 +8,7 @@ import './sesion.css'
  * Pagina de inicio de sesión.
  * @param {*} props 
  */
-export default function Login(props) {
+export default function Login({changeUser}) {
 	// Declara estados para verificar la sesion.
 	const [estado, setEstado] = useState(
 		{
@@ -49,7 +49,7 @@ export default function Login(props) {
 					{
 						// Hora de guardar el token.
 						sessionStorage.setItem('jwtToken',response.data.token);
-						props.changeUser(response.data.userName)
+						changeUser(response.data.userName)
 						sessionStorage.setItem('Dusername',response.data.userName)
 						setEstado( prev => ({
 							...prev,

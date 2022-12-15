@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Typography } from '@material-ui/core'
 import axios from 'axios'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { TextField, Grid } from '@mui/material'
 import useStyles from '../../Styles/formularioStyles'
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
@@ -50,7 +50,7 @@ export default function DatosIdentificacion() {
   const [delay, setDelay] = useState(false)
   const [load, setLoad] = useState(true)
   const [show, setShow] = useState(false)
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
+  const [token] = useState(sessionStorage.getItem('jwtToken'));
 
   const cargaPaciente = () => {
     axios
@@ -125,7 +125,7 @@ export default function DatosIdentificacion() {
           if (error.status === 401) setErrorbd(true)
         }
       )
-  }, [])
+  }, [token])
 
   useEffect(() => {
     axios

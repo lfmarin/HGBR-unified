@@ -35,6 +35,7 @@ export default function CartaConsentimiento({expediente, token}) {
       pacienteID: expediente,
       fam1: Testigo1.value,
       fam2: Testigo2.value,
+      personal: Personal.value,
       doc: Medico.value
     }
 

@@ -31,8 +31,7 @@ export default function MotivoSolicitud() {
   const { noExpediente } = useParams()
   const [isFail, setIsFail] = useState(false)
   const [errorbd, setErrorbd] = useState(false)
-  const [finish, setFinish] = useState(false)
-  const [delay, setDelay] = useState(false)
+  // const [finish, setFinish] = useState(false)
   const [load, setLoad] = useState(true)
   const [loadExploracion, setLoadExploracion] = useState(false)
   const [show, setShow] = useState(false)
@@ -141,7 +140,7 @@ export default function MotivoSolicitud() {
         response => {
           if (response.status === 200) {
             setErrorbd(false)
-            setFinish(true)
+            // setFinish(true)
           }
         },
         error => {

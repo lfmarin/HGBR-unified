@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from 'react-router-dom'
 import axios from "axios";
 
-export default function Login(props) {
-	const [token, setIsSubmitted] = useState(sessionStorage.getItem('jwtToken'));
+export default function Login(changeUser) {
+	const token = useState(sessionStorage.getItem('jwtToken'));
 	const [loggedOut, setlogout] = useState(false)
 	useEffect(() => {
-		props.changeUser("")
+		changeUser("")
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		axios
 		.post('https://localhost:5001/api/Users/logout',{},{
@@ -33,7 +33,7 @@ export default function Login(props) {
 				}
 			}
 		)
-	}, []);
+	}, [changeUser, token]);
 
 	if(loggedOut)
 		return <Redirect to="/login" />;

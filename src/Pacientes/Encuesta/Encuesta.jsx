@@ -48,7 +48,7 @@ export default function Encuesta() {
   const { noExpediente } = useParams()
   const [isFail, setIsFail] = useState(false)
   const [errorbd, setErrorbd] = useState(false)
-  const [finish, setFinish] = useState(false)
+  // const [finish, setFinish] = useState(false)
   const [load, setLoad] = useState(true)
   const [show, setShow] = useState(false)
 
@@ -69,25 +69,28 @@ export default function Encuesta() {
       .then(
         response => {
           if (response.status === 200) {
+            var fechaVasectomia = ""
+            var fechaNegativo = ""
+            var fechaEncuesta = ""
             if (response.data.fechaEncuesta != null) {
-              var fechaEncuesta = response.data.fechaEncuesta.substring(0, response.data.fechaEncuesta.indexOf('T'))
+              fechaEncuesta = response.data.fechaEncuesta.substring(0, response.data.fechaEncuesta.indexOf('T'))
             } else {
-              var fechaEncuesta = response.data.fechaEncuesta
+              fechaEncuesta = response.data.fechaEncuesta
             }
 
             if (response.data.fechaVasectomia != null) {
-              var fechaVasectomia = response.data.fechaVasectomia.substring(
+              fechaVasectomia = response.data.fechaVasectomia.substring(
                 0,
                 response.data.fechaVasectomia.indexOf('T')
               )
             } else {
-              var fechaVasectomia = response.data.fechaVasectomia
+              fechaVasectomia = response.data.fechaVasectomia
             }
 
             if (response.data.fechaNegativo != null) {
-              var fechaNegativo = response.data.fechaNegativo.substring(0, response.data.fechaNegativo.indexOf('T'))
+              fechaNegativo = response.data.fechaNegativo.substring(0, response.data.fechaNegativo.indexOf('T'))
             } else {
-              var fechaNegativo = response.data.fechaNegativo
+              fechaNegativo = response.data.fechaNegativo
             }
 
             setDatos({
@@ -246,7 +249,7 @@ export default function Encuesta() {
         response => {
           if (response.status === 200) {
             setErrorbd(false)
-            setFinish(true)
+            // setFinish(true)
           }
         },
         error => {
