@@ -105,7 +105,7 @@ export default function EstudioAnato() {
   const guardaEstudio = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/historiaClinica/estudioAnatomo/update',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/historiaClinica/estudioAnatomo/update',
         {
           FkHistoria: datos.fkHistoria,
           FechaEnvio: datos.fechaEnvio,

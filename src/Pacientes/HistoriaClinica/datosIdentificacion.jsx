@@ -108,7 +108,7 @@ export default function DatosIdentificacion() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/estadoCivil', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/estadoCivil', {
         headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -129,7 +129,7 @@ export default function DatosIdentificacion() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/escolaridad', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/escolaridad', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -149,7 +149,7 @@ export default function DatosIdentificacion() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/ocupacion', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/ocupacion', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -169,7 +169,7 @@ export default function DatosIdentificacion() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/religion', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/religion', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -189,7 +189,7 @@ export default function DatosIdentificacion() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/lugarReferencia', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/lugarReferencia', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -218,7 +218,7 @@ export default function DatosIdentificacion() {
   const guardaPaciente = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/pacientes/update',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/pacientes/update',
         {
           NoExpediente: datos.NoExpediente,
           Nombre: datos.Nombre,

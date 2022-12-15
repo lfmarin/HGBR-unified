@@ -68,7 +68,7 @@ export default function ListaNotas(props) {
   useEffect(() => {
     if (refresh) {
       axios
-        .get('https://localhost:5001/hospitalBoca/notasMedicas/paciente', {
+        .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/notasMedicas/paciente', {
           headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${token}`

@@ -98,7 +98,7 @@ export default function ListaConsejeria(props) {
   useEffect(() => {
     if (refresh) {
       axios
-        .get('https://localhost:5001/hospitalBoca/personalConsejeria/all', {
+        .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/personalConsejeria/all', {
           headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${token}`

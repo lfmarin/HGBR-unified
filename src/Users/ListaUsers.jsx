@@ -52,7 +52,7 @@ export default function DetalleCuenta(props) {
 		console.log(opcionesPOST)
 
 		axios
-		.post('https://localhost:5001/api/Users/cambiarpass', opcionesPOST,
+		.post(process.env.REACT_APP_SERVIDOR + '/api/Users/cambiarpass', opcionesPOST,
 		{
 			headers: {
 			  'Content-type': 'application/json',

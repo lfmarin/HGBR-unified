@@ -30,7 +30,7 @@ export default function RegistroUsuario() {
   const guardaDoctor = () => {
     axios
       .post(
-        'https://localhost:5001/api/Users/adduser',
+        process.env.REACT_APP_SERVIDOR + '/api/Users/adduser',
         {
           userName: datos.userName,
           Password: datos.pass,

@@ -101,7 +101,7 @@ export default function ListaDoctores(props) {
   useEffect(() => {
     if (refresh) {
       axios
-        .get('https://localhost:5001/hospitalBoca/doctores/all', {
+        .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/all', {
           headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${token}`

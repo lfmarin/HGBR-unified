@@ -56,7 +56,7 @@ export default function RegistroPaciente() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/hospitales/all', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/hospitales/all', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -76,7 +76,7 @@ export default function RegistroPaciente() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/estadoCivil', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/estadoCivil', {
         headers: {
           'Content-type': 'application/json',
           //'Authorization': `Bearer ${token}`
@@ -104,7 +104,7 @@ export default function RegistroPaciente() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/escolaridad', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/escolaridad', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -124,7 +124,7 @@ export default function RegistroPaciente() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/ocupacion', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/ocupacion', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -144,7 +144,7 @@ export default function RegistroPaciente() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/religion', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/religion', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -164,7 +164,7 @@ export default function RegistroPaciente() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/lugarReferencia', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/lugarReferencia', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -185,7 +185,7 @@ export default function RegistroPaciente() {
   const guardaPaciente = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/pacientes/save',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/pacientes/save',
         {
           paciente: {
             NoExpediente: datos.NoExpediente,

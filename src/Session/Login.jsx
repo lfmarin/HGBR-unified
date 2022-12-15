@@ -40,7 +40,7 @@ export default function Login({changeUser}) {
 		const opcionesPOST = {username: uname.value, password: pass.value}
 
 		axios
-		.post( process.env.REACT_APP_USUARIOS + 'authenticate', opcionesPOST)
+		.post( process.env.REACT_APP_SERVIDOR + process.env.REACT_APP_USUARIOS + 'authenticate', opcionesPOST)
 		.then(
 			response => {
 				if (response.status === 200) {
@@ -68,6 +68,9 @@ export default function Login({changeUser}) {
 			}
 		)
 	}
+
+	if(estado.isSubmitted)
+		return <Redirect to="/" />
 
 	// Hora de generar el formulario.
 	const Formulario = (
@@ -104,9 +107,6 @@ export default function Login({changeUser}) {
 			</form>
 		</div>
 	)
-
-	if(estado.isSubmitted)
-		return <Redirect to="/" />
 
 	return (
 		<div className="login">

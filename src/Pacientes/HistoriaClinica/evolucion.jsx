@@ -118,7 +118,7 @@ export default function Evolucion() {
   const guardaEvolucion = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/historiaClinica/evolucion/update',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/historiaClinica/evolucion/update',
         {
           FkHistoria: datos.fkHistoria,
           Complicaciones: datos.complicaciones,

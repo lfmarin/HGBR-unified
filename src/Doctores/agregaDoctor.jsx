@@ -29,7 +29,7 @@ export default function RegistroDoctor() {
   const guardaDoctor = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/doctores/save',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/save',
         {
           nombre: datos.Nombre,
           apPaterno: datos.ApPaterno,

@@ -46,7 +46,7 @@ export default function MotivoSolicitud() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/opinionPareja', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/opinionPareja', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -66,7 +66,7 @@ export default function MotivoSolicitud() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/metodoPlanificacion', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/metodoPlanificacion', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -148,7 +148,7 @@ export default function MotivoSolicitud() {
   const guardaMotivo = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/historiaClinica/motivoSolicitud/update',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/historiaClinica/motivoSolicitud/update',
         {
           FkHistoria: datos.FkHistoria,
           CausaNoHijos: datos.CausaNoHijos,

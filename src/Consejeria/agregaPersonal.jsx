@@ -26,7 +26,7 @@ export default function RegistroPersonal() {
   const guardaPersonal = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/personalConsejeria/save',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/personalConsejeria/save',
         {
           nombre: datos.Nombre,
           apPaterno: datos.ApPaterno,

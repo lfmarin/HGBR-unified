@@ -115,7 +115,7 @@ export default function MotivoSolicitud() {
   const guardaExploracion = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/historiaClinica/historiaExploracion/update',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/historiaClinica/historiaExploracion/update',
         {
           FkHistoria: datos.FkHistoria,
           AntFamiliares: datos.antFamiliares,

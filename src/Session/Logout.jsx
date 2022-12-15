@@ -9,7 +9,7 @@ export default function Login(changeUser) {
 		changeUser("")
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		axios
-		.post('https://localhost:5001/api/Users/logout',{},{
+		.post(process.env.REACT_APP_SERVIDOR + '/api/Users/logout',{},{
 			headers: {
 				'Content-type': 'application/json',
 				'Authorization': `Bearer ${token}`

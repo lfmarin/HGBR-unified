@@ -44,7 +44,7 @@ export default function ProcedimientoQuirurgico() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/doctores/all', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/all', {
         headers: {
           'Content-type': 'application/json',
           'Authentication': `Bearer ${token}`
@@ -141,7 +141,7 @@ export default function ProcedimientoQuirurgico() {
   const guardaProcedimiento = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/historiaClinica/procedimientoQuirurgico/update',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/historiaClinica/procedimientoQuirurgico/update',
         {
           FkHistoria: datos.fkHistoria,
           FechaCirugia: datos.fechaCirugia,

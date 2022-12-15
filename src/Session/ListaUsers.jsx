@@ -62,8 +62,8 @@ class ListaUsuarios extends React.Component {
 
 		this.classes = withStyles(useStyles)
 
-		this.Usuarios_URL = process.env.REACT_APP_USUARIOS + process.env.REACT_APP_GET_ALL
-		this.Doctores_URL = process.env.REACT_APP_DOCTORES + process.env.REACT_APP_GET_ALL
+		this.Usuarios_URL = process.env.REACT_APP_SERVIDOR + process.env.REACT_APP_USUARIOS + "all"
+		this.Doctores_URL = process.env.REACT_APP_SERVIDOR + process.env.REACT_APP_DOCTORES + "all"
 	}
 
 	ObtenerDoctor = ( id ) => {

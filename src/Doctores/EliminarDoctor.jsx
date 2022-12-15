@@ -32,7 +32,7 @@ export default function EliminarDoctor() {
 
 	// Envia el nuevo cambio al API.
 	axios
-	.post('https://localhost:5001/hospitalBoca/doctores/delete',
+	.post(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/delete',
 	datos.IdDoctor,
 	{
 		headers: {

@@ -74,7 +74,7 @@ export default function ListaPacientes(props) {
   useEffect(() => {
     if (refresh) {
       axios
-        .get('https://localhost:5001/hospitalBoca/pacientes/all', {
+        .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/pacientes/all', {
           headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${token}`

@@ -132,7 +132,7 @@ export default function Encuesta() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/hospitales/all', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/hospitales/all', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -152,7 +152,7 @@ export default function Encuesta() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/personalConsejeria/all', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/personalConsejeria/all', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -172,7 +172,7 @@ export default function Encuesta() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/calidadRelacion', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/calidadRelacion', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -192,7 +192,7 @@ export default function Encuesta() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/catalogos/calidadServicio', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/calidadServicio', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -213,7 +213,7 @@ export default function Encuesta() {
   const guardaEncuesta = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/EncuestaSeguimiento/update',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/EncuestaSeguimiento/update',
         {
           fkPaciente: datos.fkPaciente,
           fkHospital: datos.fkHospital,

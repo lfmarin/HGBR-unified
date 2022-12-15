@@ -40,7 +40,7 @@ export default function CartaConsentimiento({expediente, token}) {
     }
 
     axios
-		.post('https://localhost:5001/hospitalBoca/pacientes/consentimiento', opcionesPOST,{
+		.post(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/pacientes/consentimiento', opcionesPOST,{
       responseType: 'arraybuffer',
       headers: {
 			  'Content-type': 'application/json',

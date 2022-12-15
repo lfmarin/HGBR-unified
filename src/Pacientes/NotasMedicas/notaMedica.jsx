@@ -129,7 +129,7 @@ export default function NotaMedica() {
 
   useEffect(() => {
     axios
-      .get('https://localhost:5001/hospitalBoca/doctores/all', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/all', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -150,7 +150,7 @@ export default function NotaMedica() {
   const guardaNotaMedica = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/NotaMedica/update',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/NotaMedica/update',
         {
           fkFicha: datos.fkFicha,
           fechaHora: datos.fechaHora,
@@ -187,7 +187,7 @@ export default function NotaMedica() {
   const guardaFicha = () => {
     axios
       .post(
-        'https://localhost:5001/hospitalBoca/fichaIdent/update',
+        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/fichaIdent/update',
         {
           idFicha: ficha.idFicha,
           fkPaciente: ficha.fkPaciente,
