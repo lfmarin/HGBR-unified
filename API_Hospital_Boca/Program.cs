@@ -85,7 +85,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("MY_CORS", builder =>
     {
-        builder.WithOrigins("http://localhost:3000");
+        builder.WithOrigins("http://localhost:3000", "https://hbrapi.azurewebsites.net/");
         builder.AllowAnyMethod();
         builder.AllowAnyHeader();
     });
