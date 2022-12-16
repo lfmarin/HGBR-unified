@@ -5,13 +5,13 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
 import clsx from 'clsx'
 import axios from 'axios'
 import { useParams } from 'react-router'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { FormControl } from '@material-ui/core'
 import { InputLabel } from '@material-ui/core'
 import { Select } from '@material-ui/core'
 import { MenuItem } from '@material-ui/core'
 
-export default function ProcedimientoQuirurgico() {
+export default function ProcedimientoQuirurgico({token, changeToken}) {
   const style = useStyles()
   const [datos, setDatos] = useState({
     fkHistoria: '',
@@ -33,7 +33,6 @@ export default function ProcedimientoQuirurgico() {
   const [load, setLoad] = useState(true)
   const [loadProc, setLoadProc] = useState(false)
   const [show, setShow] = useState(false)
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
 
   const handleChange = event => {
     setDatos({
@@ -62,7 +61,7 @@ export default function ProcedimientoQuirurgico() {
             setErrorbd(true)
           else {
             if (error.response.status === 401)
-              setToken("")
+              changeToken("")
           }
         }
       )
@@ -70,7 +69,7 @@ export default function ProcedimientoQuirurgico() {
 
   const cargaHC = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/${noExpediente}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
           'Authentication': `Bearer ${token}`
@@ -99,12 +98,11 @@ export default function ProcedimientoQuirurgico() {
           }
         }
       )
-    setLoadProc(true)
   }
 
   const cargaProcedimiento = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/procedimientoQuirurgico/${datos.fkHistoria}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/procedimientoQuirurgico/${datos.fkHistoria}`, {
         headers: {
           'Content-type': 'application/json',
           'Authentication': `Bearer ${token}`
@@ -178,7 +176,7 @@ export default function ProcedimientoQuirurgico() {
     }
   }
 
-  if (errorbd) return <Redirect to="/error" />
+  if (errorbd) return <Navigate to="/error" />
 
   if (load) {
     cargaHC()

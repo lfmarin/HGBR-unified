@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import axios from "axios";
 
-export default function Login({changeUser}) {
-	const token = useState(sessionStorage.getItem('jwtToken'));
+export default function Login({token, changeUser}) {
 	const [loggedOut, setlogout] = useState(false)
 	useEffect(() => {
 		changeUser("")
@@ -12,23 +11,27 @@ export default function Login({changeUser}) {
 		.post(process.env.REACT_APP_SERVIDOR + '/api/Users/logout',{},{
 			headers: {
 				'Content-type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Authorization': `Bearer ${token()}`
 			},
 		})
 		.then(
 			response => {
 				if (response.status === 200) {
-					sessionStorage.removeItem('jwtToken');
-					sessionStorage.removeItem('Dusername');
+					localStorage.removeItem('jwtToken');
+					localStorage.removeItem('Dusername');
 					setlogout(true)
 				}
 			}
 		)
 		.catch(
 			err => {
-				if(err.response.status === 401) {
-					// Reporta el mensaje que los datos son incorrectos.
-					//setErrorMessages({ name: "pass", message: "Los datos son incorrectos."});
+				if( err.response )
+					if(err.response.status === 401) {
+						// Reporta el mensaje que los datos son incorrectos.
+						//setErrorMessages({ name: "pass", message: "Los datos son incorrectos."});
+						console.error("No se logró cerrar sesión.")
+					}
+				else {
 					console.error("No se logró cerrar sesión.")
 				}
 			}
@@ -36,7 +39,7 @@ export default function Login({changeUser}) {
 	}, [changeUser, token]);
 
 	if(loggedOut)
-		return <Redirect to="/login" />;
+		return <Navigate to="/login" />;
 	
 	return (
 		<div>

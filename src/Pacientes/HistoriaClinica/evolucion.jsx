@@ -5,7 +5,7 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
 import clsx from 'clsx'
 import axios from 'axios'
 import { useParams } from 'react-router'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 export default function Evolucion() {
   const style = useStyles()
@@ -39,7 +39,7 @@ export default function Evolucion() {
 
   const cargaHC = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/${noExpediente}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
         },
@@ -72,7 +72,7 @@ export default function Evolucion() {
 
   const cargaEvolucion = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/evolucion/${datos.fkHistoria}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/evolucion/${datos.fkHistoria}`, {
         headers: {
           'Content-type': 'application/json',
         },
@@ -151,7 +151,7 @@ export default function Evolucion() {
     guardaEvolucion()
   }
 
-  if (errorbd) return <Redirect to="/error" />
+  if (errorbd) return <Navigate to="/error" />
 
   if (load) {
     cargaHC()

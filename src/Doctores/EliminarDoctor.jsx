@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import useStyles from '../Styles/detallesStyles'
-import { useParams, Redirect } from 'react-router'
+import { useParams, Navigate } from 'react-router'
 import axios from 'axios'
 import './editar.css'
 import {Button} from '@mui/material'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 
-export default function EliminarDoctor() {
+export default function EliminarDoctor({token, revokeToken}) {
   const { noDoctor } = useParams()
   const classes = useStyles()
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   const [delay, setDelay] = useState(false)
   const [cancelado, setCancelado] = useState(false)
   const [NoPermitido, setPermit] = useState(false)
@@ -86,7 +85,7 @@ export default function EliminarDoctor() {
             error => {
               // console.log(error.response)
               if (error.response.status === 401) {
-                setToken("")
+                revokeToken("")
                 AutRedir(true)
               }
               setPermit(error.response.status === 403)
@@ -100,11 +99,11 @@ export default function EliminarDoctor() {
   if (Finalizado) {
 	if(!cancelado)
     	setTimeout(() => setDelay(true), 2000)
-    if (delay || cancelado) return <Redirect to="/doctores" />
+    if (delay || cancelado) return <Navigate to="/doctores" />
   }
 
   if( noAutorizado )
-    return <Redirect to="/login" />
+    return <Navigate to="/login" />
 
   return (
     <div className={classes.root}>

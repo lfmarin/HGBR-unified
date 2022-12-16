@@ -4,7 +4,7 @@
 */
 import React, { useState } from "react";
 import axios from 'axios'
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { TextField } from '@mui/material'
 import './sesion.css'
 import Alert from '@mui/material/Alert'
@@ -14,10 +14,9 @@ import Snackbar from '@mui/material/Snackbar'
  * Pagina de inicio de sesión.
  * @param {*} props 
  */
-export default function DetalleCuenta(props) {
+export default function DetalleCuenta({token}) {
 	// Declara estados para verificar la sesion.
 	const [errorMessages, setErrorMessages] = useState({});
-	const token = useState(sessionStorage.getItem('jwtToken'));
 	const [finish, setFinished] = useState(false);
 	const [delay, setDelay] = useState(false);
 
@@ -79,7 +78,7 @@ export default function DetalleCuenta(props) {
 
 	if (finish) {
 		setTimeout(() => setDelay(true), 2000)
-		if (delay) return <Redirect to="/" />
+		if (delay) return <Navigate to="/" />
 	}
 
 	// Hora de generar el formulario.

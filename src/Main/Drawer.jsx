@@ -23,24 +23,24 @@ const useStyles = makeStyles({
   },
 })
 
-export default function TempDrawer(props) {
+export default function TempDrawer({token, open, menuCallBack}) {
   const classes = useStyles()
-  const [token] = useState(sessionStorage.getItem('jwtToken'));
+  const hastoken = token !== null
 
   const toggleDrawer = open => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return
 
-    props.menuCallBack()
+    menuCallBack()
   }
 
   const SetLoginOrLogout = () => (
       <List>
-        <Link className={classes.enlace} to={!token ? "/login" : "/logout"}>
+        <Link className={classes.enlace} to={!hastoken ? "/login" : "/logout"}>
           <ListItem button key="salir">
             <ListItemIcon>
-              {!token && <ExitToAppIcon />}
+              {!hastoken && <ExitToAppIcon />}
             </ListItemIcon>
-            <ListItemText primary={!token ? "Iniciar Sesión" : "Salir"} />
+            <ListItemText primary={!hastoken ? "Iniciar Sesión" : "Salir"} />
           </ListItem>
         </Link>
       </List>
@@ -80,6 +80,32 @@ export default function TempDrawer(props) {
       <Divider />
 
       <List>
+        <Link className={classes.enlace} to="/consejeria">
+          <ListItem button key="consejeria">
+            <ListItemIcon>
+              <Usericon />
+            </ListItemIcon>
+            <ListItemText primary="Personal de Consejería" />
+          </ListItem>
+        </Link>
+      </List>
+
+      <Divider />
+
+      <List>
+        <Link className={classes.enlace} to="/usuarios">
+          <ListItem button key="usuarios">
+            <ListItemIcon>
+              <Usericon />
+            </ListItemIcon>
+            <ListItemText primary="Usuarios" />
+          </ListItem>
+        </Link>
+      </List>
+
+      <Divider />
+
+      <List>
         <Link className={classes.enlace} to="/cuenta">
           <ListItem button key="cuenta">
             <ListItemIcon>
@@ -99,7 +125,7 @@ export default function TempDrawer(props) {
   return (
     <div>
       <Fragment>
-        <Drawer open={props.open} onClose={toggleDrawer(false)}>
+        <Drawer open={open} onClose={toggleDrawer(false)}>
           {list()}
         </Drawer>
       </Fragment>

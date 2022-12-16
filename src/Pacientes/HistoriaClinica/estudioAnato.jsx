@@ -5,9 +5,9 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
 import clsx from 'clsx'
 import axios from 'axios'
 import { useParams } from 'react-router'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
-export default function EstudioAnato() {
+export default function EstudioAnato({token}) {
   const style = useStyles()
   const [datos, setDatos] = useState({
     fkHistoria: '',
@@ -37,9 +37,10 @@ export default function EstudioAnato() {
 
   const cargaHC = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/${noExpediente}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
       })
       .then(
@@ -70,9 +71,10 @@ export default function EstudioAnato() {
 
   const cargaEstudio = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/EstudioAnatomo/${datos.fkHistoria}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/EstudioAnatomo/${datos.fkHistoria}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
       })
       .then(
@@ -115,6 +117,7 @@ export default function EstudioAnato() {
         {
           headers: {
             'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
         }
       )
@@ -140,7 +143,7 @@ export default function EstudioAnato() {
     }
   }
 
-  if (errorbd) return <Redirect to="/error" />
+  if (errorbd) return <Navigate to="/error" />
 
   if (load) {
     cargaHC()

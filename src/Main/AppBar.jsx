@@ -19,14 +19,14 @@ const mostrarUsuario = (nombre) => {
   </div>
 }
 
-export default function NavBar(props) {
+export default function NavBar({userName, menuCallBack}) {
   const classes = useStyles()
   return (
     <div>
       <AppBar position="static">
         <Toolbar>
           <IconButton
-            onClick={() => props.menuCallBack()}
+            onClick={() => menuCallBack()}
             edge="start"
             sx={{ mr: 2 }}
             color="inherit"
@@ -36,11 +36,11 @@ export default function NavBar(props) {
           </IconButton>
           <img src="/media/logo.png" alt="logo" className={classes.logo} />
           <Link to="/" style={{ textDecoration: 'none', color: '#FFF' }}>
-            <Typography variant="title" color="inherit">
+            <Typography color="inherit">
               Hospital General de Boca del Río
             </Typography>
           </Link>
-          {mostrarUsuario(props.userName)}
+          {mostrarUsuario(userName())}
         </Toolbar>
       </AppBar>
     </div>

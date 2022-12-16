@@ -9,13 +9,12 @@ import CartaConsentimiento from './Secciones/CartaConsentimiento'
 import InstruccionesPost from './Secciones/InstruccionesPost'
 import SeccionEncuesta from './Secciones/Encuesta'
 import SeccionExamenes from './Secciones/Examenes'
-import { useParams, Redirect } from 'react-router'
+import { Navigate, useParams } from 'react-router'
 import axios from 'axios'
 
-export default function DetallesPaciente() {
+export default function DetallesPaciente({token}) {
   const { noExpediente } = useParams()
   const classes = useStyles()
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   const [datos, setDatos] = useState({
     NoExpediente: '',
     Nombre: '',
@@ -24,9 +23,10 @@ export default function DetallesPaciente() {
   })
   const [load, setLoad] = useState(true)
   const [noAutorizado, AutRedir] = useState(false)
+  const [errorDB, setDBerr] = useState(false)
   const cargaPaciente = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/pacientes/${noExpediente}`, {
+      .get( process.env.REACT_APP_SERVIDOR + `/hospitalBoca/pacientes/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -47,8 +47,11 @@ export default function DetallesPaciente() {
         error => {
           // console.log(error.response)
           if (error.response.status === 401) {
-            setToken("")
             AutRedir(true)
+          }
+
+          if (error.response.status === 404) {
+            setDBerr(true)
           }
         }
       )
@@ -60,8 +63,11 @@ export default function DetallesPaciente() {
     }
   });
 
+  if( errorDB )
+    return <Navigate to="/error" />
+
   if( noAutorizado )
-    return <Redirect to="/login" />
+    return <Navigate to="/login" />
 
   return (
     <div className={classes.root}>

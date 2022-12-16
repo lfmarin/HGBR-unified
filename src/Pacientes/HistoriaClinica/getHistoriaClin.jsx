@@ -6,7 +6,7 @@ import useStyles from '../../Styles/formularioStyles'
 import { Typography } from '@material-ui/core'
 import { useParams } from 'react-router'
 
-export default function GetHistoriaClinica(props) {
+export default function GetHistoriaClinica({token}) {
   const style = useStyles()
   const { noExpediente } = useParams()
   const [datos, setDatos] = useState({
@@ -21,9 +21,10 @@ export default function GetHistoriaClinica(props) {
 
   const cargaHC = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/${noExpediente}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authentication': `Bearer ${token}`
         },
       })
       .then(

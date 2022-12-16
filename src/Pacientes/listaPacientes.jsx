@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../Components/SortTable'
 import EnhancedTableHead from '../Components/HeadSortTable'
 import { visuallyHidden } from '@mui/utils'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import axios from 'axios'
 import useStyles from '../Styles/listaPacientesStyles'
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
@@ -25,7 +25,7 @@ const headCells = [
   { id: 'accion', numeric: false },
 ]
 
-export default function ListaPacientes(props) {
+export default function ListaPacientes({token}) {
   const [pacientes, setPacientes] = useState([])
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -33,8 +33,7 @@ export default function ListaPacientes(props) {
   const [orderBy, setOrderBy] = useState('noExpediente')
   const [errorbd, setErrorbd] = useState(false)
   const [refresh, setRefresh] = useState(true)
-
-  const [token] = useState(sessionStorage.getItem('jwtToken'));
+  
   //const location = useLocation();
   const [search, setSearch] = useState('')
   const classes = useStyles()
@@ -89,8 +88,8 @@ export default function ListaPacientes(props) {
             }
           },
           error => {
-            if (error.response.status){
-              sessionStorage.clear('jwtToken')
+            if (error.response.status === 401){
+              // localStorage.clear('jwtToken')
               setErrorbd(true)
             }
           }
@@ -110,7 +109,7 @@ export default function ListaPacientes(props) {
     return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25))
   }
 
-  if (errorbd) return <Redirect to="/login" />
+  if (errorbd) return <Navigate to="/login" />
 
   return (
     <div className={classes.root}>

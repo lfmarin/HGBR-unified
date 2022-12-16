@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../Components/SortTable'
 import EnhancedTableHead from '../Components/HeadSortTable'
 import { visuallyHidden } from '@mui/utils'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ListaDoctores(props) {
+export default function ListaDoctores({token, changeToken}) {
   const [doctores, setDoctores] = useState([])
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -62,7 +62,6 @@ export default function ListaDoctores(props) {
   const [noAutorizado, AutRedir] = useState(false)
   const [refresh, setRefresh] = useState(true)
 
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   //const location = useLocation();
   const [search, setSearch] = useState('')
   const classes = useStyles()
@@ -116,7 +115,7 @@ export default function ListaDoctores(props) {
           },
           error => {
             if (error.response.status === 401) {
-              setToken('');
+              changeToken('');
               AutRedir(true);
             }
           }
@@ -125,8 +124,8 @@ export default function ListaDoctores(props) {
     }
   }, [refresh, token])
 
-  if (noAutorizado) return <Redirect to="/login" />
-  if (errorbd) return <Redirect to="/error" />
+  if (noAutorizado) return <Navigate to="/login" />
+  if (errorbd) return <Navigate to="/error" />
 
   return (
     <div className={classes.root}>

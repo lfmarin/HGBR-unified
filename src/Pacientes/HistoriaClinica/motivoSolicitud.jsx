@@ -11,9 +11,9 @@ import { Select } from '@material-ui/core'
 import { MenuItem } from '@material-ui/core'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
-export default function MotivoSolicitud() {
+export default function MotivoSolicitud({token}) {
   const style = useStyles()
   const [datos, setDatos] = useState({
     FkHistoria: '',
@@ -79,16 +79,17 @@ export default function MotivoSolicitud() {
           }
         },
         error => {
-          if (!error.response) setErrorbd(true)
+          if (error.response) setErrorbd(true)
         }
       )
   }, [])
 
   const cargaHC = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/${noExpediente}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
       })
       .then(
@@ -108,20 +109,20 @@ export default function MotivoSolicitud() {
           }
         },
         error => {
-          if (!error.response) {
+          if (error.response) {
             setErrorbd(true)
             setLoadMotivo(false)
           }
         }
       )
-    setLoadMotivo(true)
   }
 
   const cargaMotivo = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/motivoSolicitud/${datos.FkHistoria}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/motivoSolicitud/${datos.FkHistoria}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
       })
       .then(
@@ -137,7 +138,7 @@ export default function MotivoSolicitud() {
           }
         },
         error => {
-          if (!error.response) {
+          if (error.response) {
             setErrorbd(true)
             setShow(false)
           }
@@ -158,6 +159,7 @@ export default function MotivoSolicitud() {
         {
           headers: {
             'Content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
         }
       )
@@ -169,7 +171,7 @@ export default function MotivoSolicitud() {
           }
         },
         error => {
-          if (!error.response) setErrorbd(true)
+          if (error.response) setErrorbd(true)
         }
       )
   }
@@ -183,7 +185,7 @@ export default function MotivoSolicitud() {
     }
   }
 
-  if (errorbd) return <Redirect to="/error" />
+  if (errorbd) return <Navigate to="/error" />
 
   if (load) {
     cargaHC()
