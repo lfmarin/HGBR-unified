@@ -5,7 +5,7 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
 import clsx from 'clsx'
 import axios from 'axios'
 import { useParams } from 'react-router'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { FormControl } from '@material-ui/core'
 import { InputLabel } from '@material-ui/core'
 import { Select } from '@material-ui/core'
@@ -267,7 +267,7 @@ export default function Encuesta() {
     }
   }
 
-  if (errorbd) return <Redirect to="/error" />
+  if (errorbd) return <Navigate to="/error" />
 
   if (load) {
     carga()

@@ -13,7 +13,7 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../Components/SortTable'
 import EnhancedTableHead from '../Components/HeadSortTable'
 import { visuallyHidden } from '@mui/utils'
-import { Link, Redirect, useLocation } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from '../Styles/listaPacientesStyles'
@@ -45,7 +45,7 @@ class ListaUsuarios extends React.Component {
 		super(props);
 
 		this.state = {
-			token : sessionStorage.getItem('jwtToken'),
+			token : localStorage.getItem('jwtToken'),
 			listaUsr : [],
 			doctoresLista : [],
 			page : 0,
@@ -143,7 +143,7 @@ class ListaUsuarios extends React.Component {
 	}
 
 	render() {
-		if (this.state.noAutorizado) return <Redirect to="/login" />
+		if (this.state.noAutorizado) return <Navigate to="/login" />
 
 		if (!this.state.isFetched) {
 			return (

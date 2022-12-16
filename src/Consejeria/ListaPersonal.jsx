@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../Components/SortTable'
 import EnhancedTableHead from '../Components/HeadSortTable'
 import { visuallyHidden } from '@mui/utils'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ListaConsejeria(props) {
+export default function ListaConsejeria({token}) {
   const [consejeria, setConsejeria] = useState([])
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -58,8 +58,6 @@ export default function ListaConsejeria(props) {
   const [orderBy, setOrderBy] = useState('idPersonal')
   const [errorbd, setErrorbd] = useState(false)
   const [refresh, setRefresh] = useState(true)
-
-  const [token] = useState(sessionStorage.getItem('jwtToken'));
   //const location = useLocation();
   const [search, setSearch] = useState('')
   const classes = useStyles()
@@ -101,7 +99,7 @@ export default function ListaConsejeria(props) {
         .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/personalConsejeria/all', {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token()}`
           },
         })
         .then(
@@ -113,24 +111,17 @@ export default function ListaConsejeria(props) {
           },
           error => {
             if (!error.response) setErrorbd(true)
-            /*else{
-            if (error.response.status === 401) {
-              localStorage.removeItem("ACCESS_TOKEN");
-              setToken('');
-              setErrorbd(false);
-            }
-          }*/
           }
         )
       setRefresh(false)
     }
   }, [refresh, token])
 
-  if (errorbd) return <Redirect to="/error" />
+  if (errorbd) return <Navigate to="/error" />
   /*if(!token){
     return(
       //console.log(location.pathname),
-      <Redirect to={
+      <Navigate to={
         {
           pathname:'/login',
           state:{

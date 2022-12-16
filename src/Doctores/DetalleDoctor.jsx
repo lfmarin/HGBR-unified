@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import useStyles from '../Styles/detallesStyles'
-import { useParams, Redirect } from 'react-router'
+import { useParams, Navigate } from 'react-router'
 import axios from 'axios'
 import { TextField } from '@mui/material'
 import './editar.css'
 
-export default function DetalleDoctor() {
+export default function DetalleDoctor({token, revokeToken}) {
   const { noDoctor } = useParams()
   const classes = useStyles()
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
   const [datos, setDatos] = useState({
 	IdDoctor: '',
 	Nombre: '',
@@ -32,7 +31,7 @@ export default function DetalleDoctor() {
 	{
 		headers: {
 			'Content-type': 'application/json',
-			'Authorization': `Bearer ${token}`
+			'Authorization': `Bearer ${token()}`
 		}
 	}
 	)
@@ -68,7 +67,7 @@ export default function DetalleDoctor() {
 			.get(`https://localhost:5001/hospitalBoca/doctores/${noDoctor}`, {
 			headers: {
 				'Content-type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Authorization': `Bearer ${token()}`
 			},
 			})
 			.then(
@@ -87,7 +86,7 @@ export default function DetalleDoctor() {
 			error => {
 				// console.log(error.response)
 				if (error.response.status === 401) {
-					setToken("")
+					revokeToken()
 					AutRedir(true)
 				}
 				setPermit(error.response.status === 403)
@@ -96,13 +95,13 @@ export default function DetalleDoctor() {
 		}
 		cargaPaciente()
 	}
-  }, [load, datos.IdDoctor, datos, noDoctor, token]);
+  }, [load, datos.IdDoctor, datos, noDoctor, revokeToken, token]);
 
   if( noAutorizado )
-	return <Redirect to="/login" />
+	return <Navigate to="/login" />
 
   if( Finalizado )
-  	return <Redirect to="/doctores" />
+  	return <Navigate to="/doctores" />
 
   return (
 	<div className={classes.root}>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios'
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { TextField } from '@mui/material'
 import './sesion.css'
 
@@ -8,16 +8,16 @@ import './sesion.css'
  * Pagina de inicio de sesión.
  * @param {*} props 
  */
-export default function Login({changeUser}) {
+export default function Login() {
+	const token = localStorage.getItem("jwtToken")
 	// Declara estados para verificar la sesion.
 	const [estado, setEstado] = useState(
 		{
 			errorMessages : {},
-			isSubmitted : sessionStorage.getItem('jwtToken')
 		}
 	)
 	// const [errorMessages, setErrorMessages] = useState({});
-	// const [isSubmitted, setIsSubmitted] = useState(sessionStorage.getItem('jwtToken'));
+	const [isSubmitted, setIsSubmitted] = useState(token !== null);
 
 	/**
 	 * Esta función se encarga de reportar al usuario que los datos introducidos son incorrectos
@@ -48,29 +48,26 @@ export default function Login({changeUser}) {
 					if( response.data.token && uname.value === response.data.userName )
 					{
 						// Hora de guardar el token.
-						sessionStorage.setItem('jwtToken',response.data.token);
-						changeUser(response.data.userName)
-						sessionStorage.setItem('Dusername',response.data.userName)
-						setEstado( prev => ({
-							...prev,
-							isSubmitted : true
-						}))
+						localStorage.setItem("jwtToken", response.data.token)
+						localStorage.setItem('Dusername', response.data.userName);
+						setIsSubmitted(true)
 					}
 				}
 			}
 		)
 		.catch(
 			err => {
-				if(err.response.status === 401) {
-					// Reporta el mensaje que los datos son incorrectos.
-					setEstado({errorMessages: { name: "pass", message: "Los datos son incorrectos."}})
-				}
+				if(err.response)
+					if(err.response.status === 401) {
+						// Reporta el mensaje que los datos son incorrectos.
+						setEstado({errorMessages: { name: "pass", message: "Los datos son incorrectos."}})
+					}
 			}
 		)
 	}
 
-	if(estado.isSubmitted)
-		return <Redirect to="/" />
+	if(isSubmitted)
+		return <Navigate to="/" />
 
 	// Hora de generar el formulario.
 	const Formulario = (
@@ -112,7 +109,7 @@ export default function Login({changeUser}) {
 		<div className="login">
 			<div className="login-form">
 				<h2 className="title">Inicio de sesión</h2>
-				{estado.isSubmitted ? null: Formulario}
+				{isSubmitted ? null: Formulario}
 			</div>
 		</div>
 	)

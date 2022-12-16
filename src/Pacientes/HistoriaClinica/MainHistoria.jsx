@@ -38,7 +38,7 @@ function a11yProps(index) {
   }
 }
 
-export default function MainHistoriaClinica() {
+export default function MainHistoriaClinica({token, changeToken}) {
   const classes = useStyles()
   const [value, setValue] = useState(0)
 
@@ -65,22 +65,22 @@ export default function MainHistoriaClinica() {
           <Tab label="VI. Evolución" {...a11yProps(5)} />
         </Tabs>
         <TabPanel className={classes.fullWidth} value={value} index={0}>
-          <DatosIdentificacion />
+          <DatosIdentificacion token={token} changeToken={changeToken} />
         </TabPanel>
         <TabPanel className={classes.fullWidth} value={value} index={1}>
-          <MotivoSolicitud />
+          <MotivoSolicitud token={token} changeToken={changeToken} />
         </TabPanel>
         <TabPanel className={classes.fullWidth} value={value} index={2}>
-          <ExploracionFisica />
+          <ExploracionFisica token={token} changeToken={changeToken} />
         </TabPanel>
         <TabPanel className={classes.fullWidth} value={value} index={3}>
-          <ProcedimientoQuirurgico />
+          <ProcedimientoQuirurgico token={token} changeToken={changeToken} />
         </TabPanel>
         <TabPanel className={classes.fullWidth} value={value} index={4}>
-          <EstudioAnato />
+          <EstudioAnato token={token} changeToken={changeToken} />
         </TabPanel>
         <TabPanel className={classes.fullWidth} value={value} index={5}>
-          <Evolucion />
+          <Evolucion token={token} changeToken={changeToken} />
         </TabPanel>
       </div>
     </div>

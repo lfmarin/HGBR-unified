@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Paper from '@material-ui/core/Paper'
 import { Typography } from '@material-ui/core'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { TextField } from '@mui/material'
 import useStyles from '../Styles/formularioStyles'
 import { FormControl } from '@material-ui/core'
@@ -263,11 +263,11 @@ export default function RegistroPaciente() {
     } else guardaPaciente()
   }
 
-  if (errorbd) return <Redirect to="/error" />
+  if (errorbd) return <Navigate to="/error" />
 
   if (finish) {
     setTimeout(() => setDelay(true), 2000)
-    if (delay) return <Redirect to="/pacientes" />
+    if (delay) return <Navigate to="/pacientes" />
   }
 
   return (

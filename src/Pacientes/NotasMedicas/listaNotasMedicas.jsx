@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../../Components/SortTable'
 import EnhancedTableToolbar from '../../Components/EnhancedTableToolbar'
 import { visuallyHidden } from '@mui/utils'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import axios from 'axios'
 import useStyles from '../../Styles/listaPacientesStyles'
 import EnhancedTableHead from '../../Components/HeadSortTable'
@@ -103,11 +103,11 @@ export default function ListaNotas(props) {
   }
   */
 
-  if (errorbd) return <Redirect to="/error" />
+  if (errorbd) return <Navigate to="/error" />
   /*if(!token){
     return(
       //console.log(location.pathname),
-      <Redirect to={
+      <Navigate to={
         {
           pathname:'/login',
           state:{

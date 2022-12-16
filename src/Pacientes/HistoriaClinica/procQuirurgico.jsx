@@ -5,13 +5,13 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
 import clsx from 'clsx'
 import axios from 'axios'
 import { useParams } from 'react-router'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { FormControl } from '@material-ui/core'
 import { InputLabel } from '@material-ui/core'
 import { Select } from '@material-ui/core'
 import { MenuItem } from '@material-ui/core'
 
-export default function ProcedimientoQuirurgico() {
+export default function ProcedimientoQuirurgico({token, changeToken}) {
   const style = useStyles()
   const [datos, setDatos] = useState({
     fkHistoria: '',
@@ -33,7 +33,7 @@ export default function ProcedimientoQuirurgico() {
   const [load, setLoad] = useState(true)
   const [loadProc, setLoadProc] = useState(false)
   const [show, setShow] = useState(false)
-  const [token, setToken] = useState(sessionStorage.getItem('jwtToken'));
+  const [loading, setloading] = useState(true)
 
   const handleChange = event => {
     setDatos({
@@ -43,11 +43,12 @@ export default function ProcedimientoQuirurgico() {
   }
 
   useEffect(() => {
+    console.log(token())
     axios
       .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/all', {
         headers: {
           'Content-type': 'application/json',
-          'Authentication': `Bearer ${token}`
+          'Authentication': `Bearer ${token()}`
         },
       })
       .then(
@@ -60,20 +61,16 @@ export default function ProcedimientoQuirurgico() {
         error => {
           if (!error.response)
             setErrorbd(true)
-          else {
-            if (error.response.status === 401)
-              setToken("")
-          }
         }
       )
-  }, [token])
+  }, [token, changeToken])
 
   const cargaHC = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/${noExpediente}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authentication': `Bearer ${token}`
+          'Authentication': `Bearer ${token()}`
         },
       })
       .then(
@@ -99,15 +96,14 @@ export default function ProcedimientoQuirurgico() {
           }
         }
       )
-    setLoadProc(true)
   }
 
   const cargaProcedimiento = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/historiaClinica/procedimientoQuirurgico/${datos.fkHistoria}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/procedimientoQuirurgico/${datos.fkHistoria}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authentication': `Bearer ${token}`
+          'Authentication': `Bearer ${token()}`
         },
       })
       .then(
@@ -127,6 +123,7 @@ export default function ProcedimientoQuirurgico() {
               patologia: response.data.patologia,
             })
             setShow(true)
+            setloading(false)
           }
         },
         error => {
@@ -152,7 +149,7 @@ export default function ProcedimientoQuirurgico() {
         {
           headers: {
             'Content-type': 'application/json',
-            'Authentication': `Bearer ${token}`
+            'Authentication': `Bearer ${token()}`
           },
         }
       )
@@ -178,7 +175,7 @@ export default function ProcedimientoQuirurgico() {
     }
   }
 
-  if (errorbd) return <Redirect to="/error" />
+  if (errorbd) return <Navigate to="/error" />
 
   if (load) {
     cargaHC()
@@ -190,7 +187,7 @@ export default function ProcedimientoQuirurgico() {
     setLoadProc(false)
   }
 
-  if (show) {
+  if (show && !loading) {
     return (
       <div className={style.fullWidth}>
         <TextField
@@ -295,6 +292,9 @@ export default function ProcedimientoQuirurgico() {
       </div>
     )
   } else {
-    return <Typography> Ha habido un problema cargando la información del usuario </Typography>
+    if( loading )
+      return <Typography> Cargando, por favor espere... </Typography>
+    else
+      return <Typography> Ha habido un problema cargando la información del usuario </Typography>
   }
 }

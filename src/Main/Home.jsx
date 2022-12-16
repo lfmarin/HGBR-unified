@@ -14,8 +14,7 @@ export default function Home() {
             imgText="Secretaria de Salud Pacientes"
             Title="Pacientes"
             link="/pacientes"
-            alineacion="center"
-            altura="100"
+            alignment="center"
           />
         </Grid>
       </Grid>
@@ -27,8 +26,7 @@ export default function Home() {
             imgText="Secretaria de Salud Doctores"
             Title="Doctores"
             link="/doctores"
-            alineacion="center"
-            altura="100"
+            alignment="center"
           />
         </Grid>
       </Grid>
@@ -40,8 +38,7 @@ export default function Home() {
             imgText="Secretaria de Salud Personal"
             Title="Personal de Consejería"
             link="/consejeria"
-            alineacion="center"
-            altura="100"
+            alignment="center"
           />
         </Grid>
       </Grid>

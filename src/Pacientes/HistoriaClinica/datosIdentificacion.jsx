@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Typography } from '@material-ui/core'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { TextField, Grid } from '@mui/material'
 import useStyles from '../../Styles/formularioStyles'
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
@@ -11,7 +11,7 @@ import { Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 
-export default function DatosIdentificacion() {
+export default function DatosIdentificacion({token}) {
   const { noExpediente } = useParams()
   const [isFail, setIsFail] = useState(false)
   const [datos, setDatos] = useState({
@@ -50,14 +50,13 @@ export default function DatosIdentificacion() {
   const [delay, setDelay] = useState(false)
   const [load, setLoad] = useState(true)
   const [show, setShow] = useState(false)
-  const [token] = useState(sessionStorage.getItem('jwtToken'));
 
   const cargaPaciente = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/pacientes/${noExpediente}`, {
+      .get( process.env.REACT_APP_SERVIDOR + `/hospitalBoca/pacientes/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -98,7 +97,7 @@ export default function DatosIdentificacion() {
           }
         },
         error => {
-          if (!error.response) {
+          if (error.response) {
             setErrorbd(true)
             setShow(false)
           }
@@ -111,7 +110,7 @@ export default function DatosIdentificacion() {
       .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/estadoCivil', {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -247,7 +246,7 @@ export default function DatosIdentificacion() {
         {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token()}`
           },
         }
       )
@@ -290,11 +289,11 @@ export default function DatosIdentificacion() {
 
   // Si hay un error en la base de datos, entonces significa que hay que
   // iniciar sesión. Sino, entonces hay que reportar.
-  if (errorbd) return <Redirect to="/login" />
+  if (errorbd) return <Navigate to="/error" />
 
   if (finish) {
     setTimeout(() => setDelay(true), 3500)
-    if (delay) return <Redirect to="/pacientes" />
+    if (delay) return <Navigate to="/pacientes" />
   }
 
   if (load) {
