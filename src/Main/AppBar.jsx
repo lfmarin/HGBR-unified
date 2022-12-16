@@ -34,7 +34,9 @@ export default function NavBar({userName, menuCallBack}) {
           >
             <MenuIcon />
           </IconButton>
-          <img src="/media/logo.png" alt="logo" className={classes.logo} />
+          <a href="/">
+            <img src="/media/logo.png" alt="logo" className={classes.logo} />
+          </a>
           <Link to="/" style={{ textDecoration: 'none', color: '#FFF' }}>
             <Typography color="inherit">
               Hospital General de Boca del Río

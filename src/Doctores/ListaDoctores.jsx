@@ -103,7 +103,7 @@ export default function ListaDoctores({token, changeToken}) {
         .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/all', {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token()}`
           },
         })
         .then(

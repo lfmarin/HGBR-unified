@@ -40,7 +40,7 @@ export default function EstudioAnato({token}) {
       .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -74,7 +74,7 @@ export default function EstudioAnato({token}) {
       .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/EstudioAnatomo/${datos.fkHistoria}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -117,7 +117,7 @@ export default function EstudioAnato({token}) {
         {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token()}`
           },
         }
       )

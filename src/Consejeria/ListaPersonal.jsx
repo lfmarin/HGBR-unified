@@ -99,7 +99,7 @@ export default function ListaConsejeria({token}) {
         .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/personalConsejeria/all', {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token()}`
           },
         })
         .then(
@@ -111,13 +111,6 @@ export default function ListaConsejeria({token}) {
           },
           error => {
             if (!error.response) setErrorbd(true)
-            /*else{
-            if (error.response.status === 401) {
-              localStorage.removeItem("ACCESS_TOKEN");
-              setToken('');
-              setErrorbd(false);
-            }
-          }*/
           }
         )
       setRefresh(false)

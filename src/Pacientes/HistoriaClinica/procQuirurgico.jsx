@@ -33,6 +33,7 @@ export default function ProcedimientoQuirurgico({token, changeToken}) {
   const [load, setLoad] = useState(true)
   const [loadProc, setLoadProc] = useState(false)
   const [show, setShow] = useState(false)
+  const [loading, setloading] = useState(true)
 
   const handleChange = event => {
     setDatos({
@@ -42,11 +43,12 @@ export default function ProcedimientoQuirurgico({token, changeToken}) {
   }
 
   useEffect(() => {
+    console.log(token())
     axios
       .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/all', {
         headers: {
           'Content-type': 'application/json',
-          'Authentication': `Bearer ${token}`
+          'Authentication': `Bearer ${token()}`
         },
       })
       .then(
@@ -59,10 +61,6 @@ export default function ProcedimientoQuirurgico({token, changeToken}) {
         error => {
           if (!error.response)
             setErrorbd(true)
-          else {
-            if (error.response.status === 401)
-              changeToken("")
-          }
         }
       )
   }, [token, changeToken])
@@ -72,7 +70,7 @@ export default function ProcedimientoQuirurgico({token, changeToken}) {
       .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authentication': `Bearer ${token}`
+          'Authentication': `Bearer ${token()}`
         },
       })
       .then(
@@ -105,7 +103,7 @@ export default function ProcedimientoQuirurgico({token, changeToken}) {
       .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/procedimientoQuirurgico/${datos.fkHistoria}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authentication': `Bearer ${token}`
+          'Authentication': `Bearer ${token()}`
         },
       })
       .then(
@@ -125,6 +123,7 @@ export default function ProcedimientoQuirurgico({token, changeToken}) {
               patologia: response.data.patologia,
             })
             setShow(true)
+            setloading(false)
           }
         },
         error => {
@@ -150,7 +149,7 @@ export default function ProcedimientoQuirurgico({token, changeToken}) {
         {
           headers: {
             'Content-type': 'application/json',
-            'Authentication': `Bearer ${token}`
+            'Authentication': `Bearer ${token()}`
           },
         }
       )
@@ -188,7 +187,7 @@ export default function ProcedimientoQuirurgico({token, changeToken}) {
     setLoadProc(false)
   }
 
-  if (show) {
+  if (show && !loading) {
     return (
       <div className={style.fullWidth}>
         <TextField
@@ -293,6 +292,9 @@ export default function ProcedimientoQuirurgico({token, changeToken}) {
       </div>
     )
   } else {
-    return <Typography> Ha habido un problema cargando la información del usuario </Typography>
+    if( loading )
+      return <Typography> Cargando, por favor espere... </Typography>
+    else
+      return <Typography> Ha habido un problema cargando la información del usuario </Typography>
   }
 }

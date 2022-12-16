@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 
 export default function TempDrawer({token, open, menuCallBack}) {
   const classes = useStyles()
-  const hastoken = token !== null
+  const hastoken = token() !== null
 
   const toggleDrawer = open => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return

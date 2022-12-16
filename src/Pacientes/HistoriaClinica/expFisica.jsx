@@ -48,7 +48,7 @@ export default function MotivoSolicitud({token}) {
       .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -82,7 +82,7 @@ export default function MotivoSolicitud({token}) {
       .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/historiaExploracion/${datos.FkHistoria}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -135,7 +135,7 @@ export default function MotivoSolicitud({token}) {
         {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token()}`
           },
         }
       )

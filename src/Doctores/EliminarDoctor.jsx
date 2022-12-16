@@ -36,7 +36,7 @@ export default function EliminarDoctor({token, revokeToken}) {
 	{
 		headers: {
 			'Content-type': 'application/json',
-			'Authorization': `Bearer ${token}`
+			'Authorization': `Bearer ${token()}`
 		}
 	}
 	)
@@ -68,7 +68,7 @@ export default function EliminarDoctor({token, revokeToken}) {
           .get(`${process.env.REACT_APP_DOCTORES}${noDoctor}`, {
             headers: {
               'Content-type': 'application/json',
-              'Authorization': `Bearer ${token}`
+              'Authorization': `Bearer ${token()}`
             },
           })
           .then(

@@ -76,7 +76,7 @@ export default function ListaPacientes({token, revokeToken}) {
         .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/pacientes/all', {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token()}`
           },
         })
         .then(

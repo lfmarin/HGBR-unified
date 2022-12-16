@@ -56,7 +56,7 @@ export default function DatosIdentificacion({token}) {
       .get( process.env.REACT_APP_SERVIDOR + `/hospitalBoca/pacientes/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -110,7 +110,7 @@ export default function DatosIdentificacion({token}) {
       .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/estadoCivil', {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -246,7 +246,7 @@ export default function DatosIdentificacion({token}) {
         {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token()}`
           },
         }
       )

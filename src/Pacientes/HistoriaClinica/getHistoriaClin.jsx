@@ -24,7 +24,7 @@ export default function GetHistoriaClinica({token}) {
       .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authentication': `Bearer ${token}`
+          'Authentication': `Bearer ${token()}`
         },
       })
       .then(

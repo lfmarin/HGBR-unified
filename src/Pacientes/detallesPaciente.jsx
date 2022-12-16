@@ -29,7 +29,7 @@ export default function DetallesPaciente({token}) {
       .get( process.env.REACT_APP_SERVIDOR + `/hospitalBoca/pacientes/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(

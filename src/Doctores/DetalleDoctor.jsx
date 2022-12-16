@@ -31,7 +31,7 @@ export default function DetalleDoctor({token, revokeToken}) {
 	{
 		headers: {
 			'Content-type': 'application/json',
-			'Authorization': `Bearer ${token}`
+			'Authorization': `Bearer ${token()}`
 		}
 	}
 	)
@@ -67,7 +67,7 @@ export default function DetalleDoctor({token, revokeToken}) {
 			.get(`https://localhost:5001/hospitalBoca/doctores/${noDoctor}`, {
 			headers: {
 				'Content-type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Authorization': `Bearer ${token()}`
 			},
 			})
 			.then(

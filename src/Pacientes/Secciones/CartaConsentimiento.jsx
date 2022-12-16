@@ -44,7 +44,7 @@ export default function CartaConsentimiento({expediente, token}) {
       responseType: 'arraybuffer',
       headers: {
 			  'Content-type': 'application/json',
-			  'Authorization': `Bearer ${token}`,
+			  'Authorization': `Bearer ${token()}`,
         // SOLO acepta PDFs.
         'Accept': 'application/pdf'
 			},

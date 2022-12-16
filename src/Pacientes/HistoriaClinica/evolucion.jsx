@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useParams } from 'react-router'
 import { Navigate } from 'react-router-dom'
 
-export default function Evolucion() {
+export default function Evolucion({token}) {
   const style = useStyles()
   const [datos, setDatos] = useState({
     fkHistoria: '',
@@ -42,22 +42,27 @@ export default function Evolucion() {
       .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
         response => {
           if (response.status === 200) {
-            var fecha = response.data.fechaElab.substring(0, response.data.fechaElab.indexOf('T'))
-            setDatosHC({
-              fkPaciente: response.data.fkPaciente,
-              fkHospital: response.data.fkHospital,
-              fechaElab: fecha,
-            })
-            setDatos({
-              ...datos,
-              fkHistoria: response.data.idHistoriaClinica,
-            })
-            setLoadEvolucion(true)
+            if( response.data.status )
+              setErrorbd(true)
+            else {
+              var fecha = response.data.fechaElab.substring(0, response.data.fechaElab.indexOf('T'))
+              setDatosHC({
+                fkPaciente: response.data.fkPaciente,
+                fkHospital: response.data.fkHospital,
+                fechaElab: fecha,
+              })
+              setDatos({
+                ...datos,
+                fkHistoria: response.data.idHistoriaClinica,
+              })
+              setLoadEvolucion(true)
+            }
           }
         },
         error => {
@@ -75,6 +80,7 @@ export default function Evolucion() {
       .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/historiaClinica/evolucion/${datos.fkHistoria}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -131,6 +137,7 @@ export default function Evolucion() {
         {
           headers: {
             'Content-type': 'application/json',
+            'Authorization': `Bearer ${token()}`
           },
         }
       )

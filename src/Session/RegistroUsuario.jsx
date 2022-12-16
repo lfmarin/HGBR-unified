@@ -39,7 +39,7 @@ export default function RegistroUsuario({token, revokeToken}) {
         {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token()}`
           },
         }
       )
@@ -66,7 +66,7 @@ export default function RegistroUsuario({token, revokeToken}) {
       .get(`https://localhost:5001/hospitalBoca/doctores/1`, {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(

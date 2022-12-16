@@ -11,7 +11,7 @@ import { InputLabel } from '@material-ui/core'
 import { Select } from '@material-ui/core'
 import { MenuItem } from '@material-ui/core'
 
-export default function NotaMedica() {
+export default function NotaMedica({token}) {
   const style = useStyles()
   const [datos, setDatos] = useState({
     fkFicha: '',
@@ -62,6 +62,7 @@ export default function NotaMedica() {
       .get(`https://localhost:5001/hospitalBoca/fichaIdent/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -87,9 +88,10 @@ export default function NotaMedica() {
 
   const carga = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/NotaMedica/${noExpediente}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/NotaMedica/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -132,6 +134,7 @@ export default function NotaMedica() {
       .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/all', {
         headers: {
           'Content-type': 'application/json',
+          'Authentication': `Bearer ${token()}`
         },
       })
       .then(
@@ -168,6 +171,7 @@ export default function NotaMedica() {
         {
           headers: {
             'Content-type': 'application/json',
+            'Authorization': `Bearer ${token()}`
           },
         }
       )
