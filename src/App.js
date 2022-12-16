@@ -23,6 +23,7 @@ import ListaUsuarios from './Session/ListaUsers'
 import RegistroUsuario from './Session/RegistroUsuario'
 import Home from './Main/Home';
 import Login from './Session/Login';
+import ProtectedRoute from './Session/ProtectedRoute';
 
 const theme = createTheme({
   palette: {
@@ -55,37 +56,68 @@ export default function App() {
     localStorage.removeItem("jwtToken")
   }
 
-  hasToken()
-
   const handleDrawer = () => {
     setIsOpen(!isOpen);
   }
 
   const RoutingPaths = () => {
-    if( !isTokenValid() )
-      return <Login token={hasToken()} changeToken={changeToken} changeUser = {changeUsername} />
-
     return (
       <Routes>
-        <Route path="/pacientes/detalles/:noExpediente/historia-clinica" element={<MainHistoriaClinica token={hasToken()} changeToken={changeToken} />}/>
-        <Route path="/pacientes/detalles/:noExpediente/encuesta" element={<Encuesta token={hasToken()} />}/>
-        <Route path="/pacientes/detalles/:noExpediente/nota-medica" element={<NotaMedica token={hasToken()} />}/>
-        <Route path="/pacientes/detalles/:noExpediente/nota-medica/lista" element={<ListaNotas token={hasToken()} />}/>
-        <Route path="/pacientes/detalles/:noExpediente" element={<DetallesPaciente token={hasToken()} />}/>
-        <Route path="/pacientes/registro" element={<RegistroPaciente token={hasToken()} />}/>
-        <Route path="/pacientes" element={<ListaPacientes token={hasToken()} />}/>
-        <Route path="/doctores/registro" element={<RegistroDoctor revokeToken={revokeToken} token={hasToken()} />}/>
-        <Route path="/doctores/detalles/:noDoctor" element={<DetalleDoctor revokeToken={revokeToken} token={hasToken()} />}/>
-        <Route path="/doctores/eliminar/:noDoctor" element={<EliminarDoctor revokeToken={revokeToken} token={hasToken()} />}/>
-        <Route path="/doctores" element={<ListaDoctores token={hasToken()} changeToken={changeToken} />}/>
-        <Route path="/consejeria/registro" element={<RegistroPersonal token={hasToken()} />}/>
-        <Route path="/consejeria" element={<ListaConsejeria token={hasToken()} />}/>
-        <Route path="/" element={<Home token={hasToken()} />}/>
-        <Route path="/cuenta" element={<DetalleCuenta token={hasToken()} />}/>
-        <Route path="/usuarios" element={<ListaUsuarios token={hasToken()} />}/>
-        <Route path="/usuarios/registrarusuario" element={<RegistroUsuario token={hasToken()} />}/>
-        <Route path="/login" element={<Login token={hasToken()} changeToken={changeToken} changeUser = {changeUsername}/>}/>
-        <Route path="/logout" element={<Logout token={hasToken()} changeUser = {changeUsername}/>}/>
+        <Route path="/pacientes/detalles/:noExpediente/historia-clinica" element={<ProtectedRoute/>}>
+          <Route path="/pacientes/detalles/:noExpediente/historia-clinica" element={<MainHistoriaClinica token={hasToken()} changeToken={changeToken} />}/>
+        </Route>
+        <Route path="/pacientes/detalles/:noExpediente/encuesta" element={<ProtectedRoute/>}>
+          <Route path="/pacientes/detalles/:noExpediente/encuesta" element={<Encuesta token={hasToken()} />}/>
+        </Route>
+        <Route path="/pacientes/detalles/:noExpediente/nota-medica" element={<ProtectedRoute/>}>
+          <Route path="/pacientes/detalles/:noExpediente/nota-medica" element={<NotaMedica token={hasToken()} />}/>
+        </Route>
+        <Route path="/pacientes/detalles/:noExpediente/nota-medica/lista" element={<ProtectedRoute/>}>
+          <Route path="/pacientes/detalles/:noExpediente/nota-medica/lista" element={<ListaNotas token={hasToken()} />}/>
+        </Route>
+        <Route path="/pacientes/detalles/:noExpediente" element={<ProtectedRoute/>}>
+          <Route path="/pacientes/detalles/:noExpediente" element={<DetallesPaciente token={hasToken()} />}/>
+        </Route>
+        <Route path="/pacientes/registro" element={<ProtectedRoute/>}>
+          <Route path="/pacientes/registro" element={<RegistroPaciente token={hasToken()} />}/>
+        </Route>
+        <Route path="/pacientes" element={<ProtectedRoute/>}>
+          <Route path="/pacientes" element={<ListaPacientes token={hasToken()} revokeToken={revokeToken} />}/>
+        </Route>
+        <Route path="/doctores/registro" element={<ProtectedRoute/>}>
+          <Route path="/doctores/registro" element={<RegistroDoctor revokeToken={revokeToken} token={hasToken()} />}/>
+        </Route>
+        <Route path="/doctores/detalles/:noDoctor" element={<ProtectedRoute/>}>
+          <Route path="/doctores/detalles/:noDoctor" element={<DetalleDoctor revokeToken={revokeToken} token={hasToken()} />}/>
+        </Route>
+        <Route path="/doctores/eliminar/:noDoctor" element={<ProtectedRoute/>}>
+          <Route path="/doctores/eliminar/:noDoctor" element={<EliminarDoctor revokeToken={revokeToken} token={hasToken()} />}/>
+        </Route>
+        <Route path="/doctores" element={<ProtectedRoute/>}>
+          <Route path="/doctores" element={<ListaDoctores token={hasToken()} changeToken={changeToken} />}/>
+        </Route>
+        <Route path="/consejeria/registro" element={<ProtectedRoute/>}>
+          <Route path="/consejeria/registro" element={<RegistroPersonal token={hasToken()} />}/>
+        </Route>
+        <Route path="/consejeria" element={<ProtectedRoute/>}>
+          <Route path="/consejeria" element={<ListaConsejeria token={hasToken()} />}/>
+        </Route>
+        <Route path="/" element={<ProtectedRoute/>}>
+          <Route path="/" element={<Home token={hasToken()} />}/>
+        </Route>
+        <Route path="/cuenta" element={<ProtectedRoute/>}>
+          <Route path="/cuenta" element={<DetalleCuenta token={hasToken()} />}/>
+        </Route>
+        <Route path="/usuarios" element={<ProtectedRoute/>}>
+          <Route path="/usuarios" element={<ListaUsuarios token={hasToken()} />}/>
+        </Route>
+        <Route path="/usuarios/registrarusuario" element={<ProtectedRoute/>}>
+          <Route path="/usuarios/registrarusuario" element={<RegistroUsuario token={hasToken()} />}/>
+        </Route>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/logout" element={<ProtectedRoute/>}>
+          <Route path="/logout" element={<Logout token={hasToken()} changeUser = {changeUsername}/>}/>
+        </Route>
         <Route path="*" element={
           <div>
             <h1>La página que buscas no existe.</h1>

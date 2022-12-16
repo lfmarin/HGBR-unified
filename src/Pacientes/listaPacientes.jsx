@@ -25,7 +25,7 @@ const headCells = [
   { id: 'accion', numeric: false },
 ]
 
-export default function ListaPacientes({token}) {
+export default function ListaPacientes({token, revokeToken}) {
   const [pacientes, setPacientes] = useState([])
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -88,8 +88,9 @@ export default function ListaPacientes({token}) {
             }
           },
           error => {
+            console.log(error.response)
             if (error.response.status === 401){
-              // localStorage.clear('jwtToken')
+              revokeToken()
               setErrorbd(true)
             }
           }

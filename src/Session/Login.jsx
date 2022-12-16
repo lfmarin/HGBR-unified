@@ -8,7 +8,8 @@ import './sesion.css'
  * Pagina de inicio de sesión.
  * @param {*} props 
  */
-export default function Login({token, changeToken, changeUser}) {
+export default function Login() {
+	const token = localStorage.getItem("jwtToken")
 	// Declara estados para verificar la sesion.
 	const [estado, setEstado] = useState(
 		{
@@ -47,8 +48,8 @@ export default function Login({token, changeToken, changeUser}) {
 					if( response.data.token && uname.value === response.data.userName )
 					{
 						// Hora de guardar el token.
-						changeToken(response.data.token)
-						changeUser(response.data.userName)
+						localStorage.setItem("jwtToken", response.data.token)
+						localStorage.setItem('Dusername', response.data.userName);
 						setIsSubmitted(true)
 					}
 				}
