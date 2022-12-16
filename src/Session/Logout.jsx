@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from 'react-router-dom'
 import axios from "axios";
 
-export default function Login(changeUser) {
+export default function Login({changeUser}) {
 	const token = useState(sessionStorage.getItem('jwtToken'));
 	const [loggedOut, setlogout] = useState(false)
 	useEffect(() => {
