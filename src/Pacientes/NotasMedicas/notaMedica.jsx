@@ -148,7 +148,7 @@ export default function NotaMedica({token}) {
           if (!error.response) setErrorbd(true)
         }
       )
-  }, [])
+  }, [token])
 
   const guardaNotaMedica = () => {
     axios
