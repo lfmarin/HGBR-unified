@@ -61,7 +61,7 @@ export default function Encuesta() {
 
   const carga = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/EncuestaSeguimiento/${noExpediente}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/EncuestaSeguimiento/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
         },

@@ -63,7 +63,7 @@ export default function RegistroUsuario({token, revokeToken}) {
 
   const cargaPaciente = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/doctores/1`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/doctores/1`, {
         headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${token()}`

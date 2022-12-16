@@ -59,7 +59,7 @@ export default function NotaMedica({token}) {
 
   const cargaFicha = () => {
     axios
-      .get(`https://localhost:5001/hospitalBoca/fichaIdent/${noExpediente}`, {
+      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/fichaIdent/${noExpediente}`, {
         headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${token()}`

@@ -64,7 +64,7 @@ export default function DetalleDoctor({token, revokeToken}) {
 	if (load) {
 		const cargaPaciente = () => {
 		axios
-			.get(`https://localhost:5001/hospitalBoca/doctores/${noDoctor}`, {
+			.get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/doctores/${noDoctor}`, {
 			headers: {
 				'Content-type': 'application/json',
 				'Authorization': `Bearer ${token()}`
