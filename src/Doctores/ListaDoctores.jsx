@@ -122,7 +122,7 @@ export default function ListaDoctores({token, changeToken}) {
         )
       setRefresh(false)
     }
-  }, [refresh, token])
+  }, [refresh, token, changeToken])
 
   if (noAutorizado) return <Navigate to="/login" />
   if (errorbd) return <Navigate to="/error" />

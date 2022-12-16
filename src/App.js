@@ -42,11 +42,6 @@ export default function App() {
 
   const hasToken = () => localStorage.getItem("jwtToken")
   const changeToken = (value) => localStorage.setItem("jwtToken", value)
-  function isTokenValid() {
-    const tkn = hasToken()
-    console.log(tkn)
-    return tkn !== null && tkn.length !== 0
-  }
   // const revokeToken = () => localStorage.removeItem("jwtToken");
   const curUserName = () => localStorage.getItem('Dusername');
   const changeUsername = (value) => localStorage.setItem('Dusername', value);

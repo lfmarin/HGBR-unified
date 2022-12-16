@@ -65,7 +65,7 @@ export default function ProcedimientoQuirurgico({token, changeToken}) {
           }
         }
       )
-  }, [token])
+  }, [token, changeToken])
 
   const cargaHC = () => {
     axios

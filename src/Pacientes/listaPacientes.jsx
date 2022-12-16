@@ -96,7 +96,7 @@ export default function ListaPacientes({token, revokeToken}) {
           }
         )
       }
-  })
+  }, [revokeToken, refresh, token])
 
   const dateFormatter = date => {
     var formatter = new Intl.DateTimeFormat('es-MX', 'dd-mm-yyyy')

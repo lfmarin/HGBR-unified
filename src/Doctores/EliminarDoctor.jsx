@@ -94,7 +94,7 @@ export default function EliminarDoctor({token, revokeToken}) {
       }
       cargaPaciente()
     }
-  }, [load, datos.IdDoctor, datos, noDoctor, token]);
+  }, [load, datos.IdDoctor, datos, noDoctor, token, revokeToken]);
 
   if (Finalizado) {
 	if(!cancelado)

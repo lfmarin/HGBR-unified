@@ -95,7 +95,7 @@ export default function DetalleDoctor({token, revokeToken}) {
 		}
 		cargaPaciente()
 	}
-  }, [load, datos.IdDoctor, datos, noDoctor, token]);
+  }, [load, datos.IdDoctor, datos, noDoctor, revokeToken, token]);
 
   if( noAutorizado )
 	return <Navigate to="/login" />
