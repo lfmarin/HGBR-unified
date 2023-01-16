@@ -1,6 +1,6 @@
 import React from 'react'
 import { AccordionDetails, Button } from '@material-ui/core'
-import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
+// import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
 import { Link } from 'react-router-dom'
 import useStyles from '../../Styles/formularioStyles'
 import { useParams } from 'react-router'
@@ -18,9 +18,9 @@ export default function SeccionHistoriaClinica() {
       >
         Abrir Historia Clinica
       </Button>
-      <Button variant="outlined" size="large" startIcon={<GetAppRoundedIcon />}>
+      {/* <Button variant="outlined" size="large" startIcon={<GetAppRoundedIcon />}>
         Descargar Historia Clinica
-      </Button>
+      </Button> */}
     </AccordionDetails>
   )
 }

@@ -4,12 +4,13 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableRow from '@material-ui/core/TableRow'
+import { Button } from '@mui/material'
 import Paper from '@material-ui/core/Paper'
 import TablePagination from '@mui/material/TablePagination'
 import SortTable from '../Components/SortTable'
 import EnhancedTableHead from '../Components/HeadSortTable'
 import { visuallyHidden } from '@mui/utils'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
@@ -18,6 +19,7 @@ const headCells = [
   { id: 'nombre', numeric: false, label: 'Nombre' },
   { id: 'apPaterno', numeric: false, label: 'Apellido Paterno' },
   { id: 'apMaterno', numeric: false, label: 'Apellido Materno' },
+  { id: 'edit', numeric: false, label: 'Accion' },
 ]
 
 const useStyles = makeStyles(theme => ({
@@ -163,6 +165,15 @@ export default function ListaConsejeria({token}) {
                       <TableCell>{item.nombre}</TableCell>
                       <TableCell>{item.apPaterno}</TableCell>
                       <TableCell>{item.apMaterno}</TableCell>
+                      <TableCell align='center' >
+                        <Button variant="contained" type="submit" component={Link} to={`/consejeria/detalles/${item.idPersonal}`}>
+                          Editar
+                        </Button>
+                        <text>&nbsp;&nbsp;&nbsp;&nbsp;</text>
+                        <Button variant="contained" type="submit" component={Link} to={`/consejeria/eliminar/${item.idPersonal}`}>
+                          Eliminar
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   )
                 })}
