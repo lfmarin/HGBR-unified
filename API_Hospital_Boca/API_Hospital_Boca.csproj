@@ -47,9 +47,6 @@
     <None Update="BaltimoreCyberTrustRoot.crt.pem">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="magick">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="vasectomia_exp.sh">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -72,16 +69,6 @@
     <Content Remove="publish\appsettings.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="_basectomia\vasectomia_exp.sh">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="_basectomia\p1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <_CustomFiles Include="_basectomia\**\*" />
-    <FilesForPackagingFromProject Include="%(_CustomFiles.Identity)">
-      <DestinationRelativePath>_basectomia\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
-    </FilesForPackagingFromProject>
     <Content Include="vas_p1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -97,6 +84,8 @@
     <Content Include="encuesta.sh">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="encuesta.png" />
+    <Content Include="encuesta.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

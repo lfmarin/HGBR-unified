@@ -74,8 +74,8 @@ namespace API_Hospital_Boca.Controllers
 				psi.FileName = $"/bin/sh";
 				psi.WorkingDirectory = "./";
 				// Crea el comando para correr la aplicación.
-				psi.Arguments = "-c \"./constancia.sh '" + nombre + " " + apMate + " " + apPate + "' " + infoCons.pacienteID
-					+ " '" + Famil1 + "' '" + Famil2 + "' '" + Doct + "' \"";
+				psi.Arguments = $"-c \"./constancia.sh '{info.NombreCompleto}' {infoCons.pacienteID}"
+					+ $" '{Famil1}' '{Famil2}' '{Doct}'";
 
 				psi.UseShellExecute = false;
 				psi.RedirectStandardOutput = true;

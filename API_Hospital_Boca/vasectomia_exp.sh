@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # GENERACION DOCUMENTO BASECTOMIA (PG1)
 # Este documento contiene dos paginas, que serán combinadas al terminar de procesar la información,

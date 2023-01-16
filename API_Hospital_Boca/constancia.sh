@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Convierte la primera imagen con la informacion que tenemos actualmente.
 NOMPACIENTE=$1
 IDPACIENTE=$2
@@ -31,7 +31,7 @@ convert $ARCHIVO.png -gravity West -pointsize 22 -annotate +628+440 "$TESTIGO2" 
 convert $ARCHIVO.png -gravity West -pointsize 22 -annotate +270+520 "$MEDICOENCARGADO" $ARCHIVO.png
 
 # Una vez hecho todo esto, convierte el resultado a un PDF.
-convert $ARCHIVO.png const_$2.pdf
+convert $ARCHIVO.png $ARCHIVO.pdf
 # Borra el archivo temporal, no lo necesitamos.
 rm $ARCHIVO.png
 

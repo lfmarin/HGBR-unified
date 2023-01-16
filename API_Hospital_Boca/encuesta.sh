@@ -1,3 +1,4 @@
+#!/bin/bash
 ##
 # Encuesta de seguimiento a pacientes
 ##
