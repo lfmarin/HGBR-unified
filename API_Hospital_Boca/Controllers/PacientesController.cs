@@ -142,7 +142,7 @@ namespace API_Hospital_Boca.Controllers
                 proc_Str += "--UNIDAD_TELEFONO '3719501438' \\";
                 proc_Str += $"--NOMPACIENTE '{info.NombreCompleto}' \\";
                 proc_Str += $"--EDAD {info.Edad()} \\";
-				proc_Str += $"--FECHA_NACIMIENTO {info.FechaNac.ToString("dd 'de' MMMM 'del' yyyy")} \\";
+				proc_Str += $"--FECHA_NACIMIENTO '{info.FechaNac.ToString("dd 'de' MMMM 'del' yyyy")}' \\";
 				proc_Str += $"--ESTADO_CIVIL '{info.FkEstadoCivilNavigation.NombreEstado}' \\";
                 proc_Str += $"--ESCOLARIDAD '{info.FkEscolaridadNavigation.NombreEscolaridad}' \\";
                 proc_Str += $"--OCUPACION '{info.FkOcupacionNavigation.NombreOcupacion}' \\";
