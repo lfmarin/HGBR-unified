@@ -207,7 +207,15 @@ namespace API_Hospital_Boca.Bussiness
         {
             try
             {
-                return context.Historiaclinicas.Where(h => h.FkPaciente == numExpe).Select(hi => new {
+                IQueryable<Historiaclinica> historias = context.Historiaclinicas.Where(h => h.FkPaciente == numExpe);
+
+                if (historias.Count() == 0)
+                    return new
+                    {
+                        status = "vacio"
+                    };
+
+				return historias.Select(hi => new {
                     IdHistoriaClinica = hi.IdHistoriaClinica,
                     FkHospital = hi.FkHospital,
                     FkPaciente = hi.FkPaciente,

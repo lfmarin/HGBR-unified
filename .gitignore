@@ -10,5 +10,11 @@ API_Hospital_Boca/docsh/gen
 # Para evitar problemas con documentos generados,
 # las bases de documentos requeridos son serán agregados al repositorio.
 API_Hospital_Boca/docsh/src
+API_Hospital_Boca/publish
+API_Hospital_Boca/vas_p1.png
+API_Hospital_Boca/encuesta.png
+API_Hospital_Boca/const.png
+API_Hospital_Boca/deploy.sh
+API_Hospital_Boca/publish.zip
 ControlUsuarios/obj
 ControlUsuarios/bin

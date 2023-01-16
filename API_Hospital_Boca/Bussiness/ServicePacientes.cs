@@ -57,6 +57,23 @@ namespace API_Hospital_Boca.Bussiness
             {
                 Console.WriteLine("Attempting to fetch the patient");
                 Paciente pa = context.Pacientes.Where(p => p.NoExpediente.Equals(numExpediente)).First();
+
+                // Ok, con el paciente obtenido, llenemos la información extra.
+                Escolaridad sco = context.Escolaridads.Where(p => p.IdEscolaridad.Equals(pa.FkEscolaridad)).First();
+                pa.FkEscolaridadNavigation = sco;
+
+                Estadocivil EC = context.Estadocivils.Where(p => p.IdEstadoCivil.Equals(pa.FkEstadoCivil)).First();
+                pa.FkEstadoCivilNavigation = EC;
+
+                Ocupacion Opc = context.Ocupacions.Where(p => p.IdOcupacion.Equals(pa.FkOcupacion)).First();
+                pa.FkOcupacionNavigation = Opc;
+
+                Lugarreferencium Ref = context.Lugarreferencia.Where(p => p.IdLugar.Equals(pa.FkLugarReferencia)).FirstOrDefault();
+                pa.FkLugarReferenciaNavigation = Ref;
+
+                Religion Reg = context.Religions.Where(p => p.IdReligion.Equals(pa.FkReligion)).First();
+                pa.FkReligionNavigation = Reg;
+
                 return pa;
             }
             catch (System.Exception e)

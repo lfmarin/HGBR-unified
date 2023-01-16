@@ -100,5 +100,72 @@ namespace API_Hospital_Boca.Bussiness
             }
         }
 
+        public Encuestaseguimiento getEncuestaClassSeguimientoByNumExp(string numExp)
+        {
+            try
+            {
+                Encuestaseguimiento ec = context.Encuestaseguimientos.Where(e => e.FkPaciente == numExp).First();
+
+                // Ok, con el elemento encontrado, llegna la información.
+                Paciente pc = context.Pacientes.Where(e => e.NoExpediente == numExp).First();
+
+                Escolaridad sco = context.Escolaridads.Where(p => p.IdEscolaridad.Equals(pc.FkEscolaridad)).First();
+                pc.FkEscolaridadNavigation = sco;
+
+                Estadocivil EC = context.Estadocivils.Where(p => p.IdEstadoCivil.Equals(pc.FkEstadoCivil)).First();
+                pc.FkEstadoCivilNavigation = EC;
+
+                Ocupacion Opc = context.Ocupacions.Where(p => p.IdOcupacion.Equals(pc.FkOcupacion)).First();
+                pc.FkOcupacionNavigation = Opc;
+
+                Lugarreferencium Ref = context.Lugarreferencia.Where(p => p.IdLugar.Equals(pc.FkLugarReferencia)).FirstOrDefault();
+                pc.FkLugarReferenciaNavigation = Ref;
+
+                Religion Reg = context.Religions.Where(p => p.IdReligion.Equals(pc.FkReligion)).First();
+                pc.FkReligionNavigation = Reg;
+
+                ec.FkPacienteNavigation = pc;
+
+                Hospitale hosp = context.Hospitales.Where(p => p.IdHospital.Equals(ec.FkHospital)).First();
+                ec.FkHospitalNavigation = hosp;
+
+                Hospitale h_ref = context.Hospitales.Where(p => p.IdHospital.Equals(ec.FkHospitalReferencia)).First();
+                ec.FkHospitalReferenciaNavigation = h_ref;
+                /*
+                return context.Encuestaseguimientos.Where(e => e.FkPaciente == numExp).Select(es => new {
+                    FkPaciente = es.FkPaciente,
+                    FkHospital = es.FkHospital,
+                    FechaEncuesta = es.FechaEncuesta,
+                    FechaVasectomia = es.FechaVasectomia,
+                    OrigenInfo = es.OrigenInfo,
+                    FkConsejeria = es.FkConsejeria,
+                    Referido = es.Referido,
+                    FkHospitalReferencia = es.FkHospitalReferencia,
+                    FkCalidad = es.FkCalidad,
+                    Satisfaccion = es.Satisfaccion,
+                    MotivoSatisfaccion = es.MotivoSatisfaccion,
+                    Complicacion = es.Complicacion,
+                    MotivoComplicacion = es.MotivoComplicacion,
+                    FkCalidadRelacion = es.FkCalidadRelacion,
+                    MotivoCalidad = es.MotivoCalidad,
+                    FechaNegativo = es.FechaNegativo,
+                    LugarEspermaconteo = es.LugarEspermaconteo,
+                    Recomendacion = es.Recomendacion,
+                    MotivoRecomendacion = es.MotivoRecomendacion,
+                    LugarVasectomia = es.LugarVasectomia,
+                    MotivoLugar = es.MotivoLugar,
+                    RecomendacionHospital = es.RecomendacionHospital,
+                    CualRecomendacion = es.CualRecomendacion
+                }).First();
+                */
+                return ec;
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+
     }
 }

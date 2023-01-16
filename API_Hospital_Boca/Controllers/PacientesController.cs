@@ -72,11 +72,11 @@ namespace API_Hospital_Boca.Controllers
 				var Doct = infoCons.doc;
 				ProcessStartInfo psi = new ProcessStartInfo();
 				psi.FileName = $"/bin/sh";
-				psi.WorkingDirectory = "./docsh/";
-				psi.Arguments = "-c \"pwd\"";
+				psi.WorkingDirectory = "./";
 				// Crea el comando para correr la aplicación.
 				psi.Arguments = "-c \"./constancia.sh '" + nombre + " " + apMate + " " + apPate + "' " + infoCons.pacienteID
 					+ " '" + Famil1 + "' '" + Famil2 + "' '" + Doct + "' \"";
+
 				psi.UseShellExecute = false;
 				psi.RedirectStandardOutput = true;
 				psi.RedirectStandardError = true;
@@ -89,7 +89,7 @@ namespace API_Hospital_Boca.Controllers
 				proc.Start();
 				proc.WaitForExit();
 
-				string createdFileName = $"./docsh/gen/const_{infoCons.pacienteID}.pdf";
+				string createdFileName = $"./const_{infoCons.pacienteID}.pdf";
 				if (!System.IO.File.Exists(createdFileName))
 				{
 					return NotFound();
@@ -97,7 +97,87 @@ namespace API_Hospital_Boca.Controllers
 				Response.Headers.ContentDisposition.Append("inline; filename=" + createdFileName);
 				var bytes = await System.IO.File.ReadAllBytesAsync(createdFileName);
 				System.IO.File.Delete(createdFileName);
-				return File(bytes, "application/pdf", "constancia.pdf");
+				return File(bytes, "application/pdf", $"constancia_{infoCons.pacienteID}.pdf");
+			}
+			catch (System.Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return NotFound();
+            }
+        }
+
+        [Authorize]
+        [HttpPost ("vasectomia")]
+        public async Task<ActionResult> generarVasectomia([FromBody] InfoHistorialVasectomia infoVas)
+        {
+            try
+			{
+				Paciente info = service.getClassPaciente(infoVas.pacienteID);
+
+				if (info == null)
+				{
+					Console.WriteLine("No encuentro el paciente con el ID " + infoVas.pacienteID);
+					return NotFound();
+				}
+
+				ProcessStartInfo psi = new ProcessStartInfo();
+				psi.FileName = $"/bin/sh";
+				psi.WorkingDirectory = "./";
+                // Crea el comando para correr la aplicación.
+                int numeroExpediente = 10;
+                string proc_Str = $"-c \"./vasectomia_exp.sh --NUMEXPEDIENTE {numeroExpediente} \\";
+				//proc_Str += $"--NUMEXPEDIENTE {numeroExpediente} \\";
+				// TODO: ¡Obtener unidad médica!
+				proc_Str += "--UNIDAD_MEDICA 20 \\";
+				// TODO: ¡Obtener Dirección!
+				proc_Str += "--UNIDAD_DIRECCION 'Boca del rio' \\";
+                // TODO: ¡Obtener numero telefónico!
+                proc_Str += "--UNIDAD_TELEFONO 3719501438 \\";
+                proc_Str += $"--NOMPACIENTE '{info.NombreCompleto}' \\";
+                proc_Str += $"--EDAD {info.Edad()} \\";
+				proc_Str += $"--FECHA_NACIMIENTO {info.FechaNac} \\";
+				proc_Str += $"--ESTADO_CIVIL '{info.FkEstadoCivilNavigation.NombreEstado}' \\";
+                proc_Str += $"--ESCOLARIDAD '{info.FkEscolaridadNavigation.NombreEscolaridad}' \\";
+                proc_Str += $"--OCUPACION '{info.FkOcupacionNavigation.NombreOcupacion}' \\";
+                proc_Str += $"--RELIGION '{info.FkReligionNavigation.NombreReligion}' \\";
+                proc_Str += $"--REFERENCIA '{info.FkLugarReferenciaNavigation.NombreLugar}' \\";
+                proc_Str += $"--NUM_HIJOS {info.NumHijosVivos} \\";
+                proc_Str += $"--EDAD_MENOR {info.EdadHijoMenor} \\";
+                proc_Str += $"--NOMBRE_ESPOSA '{info.NombreEsposa}' \\";
+                proc_Str += $"--DUR_RELACION {info.AosRelac} \\";
+                proc_Str += $"--DOMICILIO_ACTUAL '{info.CalleCasa}' \\";
+                proc_Str += $"--DOMICILIO_TELEFONO {info.TelCasa} \\";
+                proc_Str += $"--TRABAJO_ACTUAL {info.ColTrabajo} \\";
+                proc_Str += $"--TRABAJO_TELEFONO {info.TelTrabajo} \\";
+                proc_Str += $"--MOTIVO_CAUSA_INT_HIJOS {infoVas.causaHijos} \\";
+                proc_Str += $"--MOTIVO_CAUSA_OPN_PAREJA {infoVas.opinionPareja} \\";
+                proc_Str += $"--MOTIVO_CAUSA_PLA_FAMILIAR {infoVas.planificacionFamiliar}";
+
+				psi.Arguments = proc_Str;
+				psi.UseShellExecute = false;
+				psi.RedirectStandardOutput = true;
+				psi.RedirectStandardError = true;
+
+				Process proc = new Process
+				{
+					StartInfo = psi
+				};
+
+				proc.Start();
+				string output = proc.StandardOutput.ReadToEnd();
+				Console.WriteLine(output);
+				proc.WaitForExit();
+
+				string createdFileName = $"./vasec_{numeroExpediente}.pdf";
+				if (!System.IO.File.Exists(createdFileName))
+				{
+                    Console.WriteLine("Could not find the file to output.");
+					return NotFound();
+				}
+				Response.Headers.ContentDisposition.Append("inline; filename=" + createdFileName);
+				var bytes = await System.IO.File.ReadAllBytesAsync(createdFileName);
+				System.IO.File.Delete(createdFileName);
+				return File(bytes, "application/pdf", $"vasectomia_{numeroExpediente}.pdf");
 			}
 			catch (System.Exception e)
             {
@@ -201,6 +281,14 @@ namespace API_Hospital_Boca.Controllers
         public Paciente paciente { get; set; }
         public int hospital { get; set; }
     }
+
+    public class InfoHistorialVasectomia
+    {
+		public string pacienteID { get; set; }
+        public int causaHijos { get; set; }
+		public int opinionPareja { get; set; }
+		public int planificacionFamiliar { get; set; }
+	}
 
     public class InfoConsentimiento
     {

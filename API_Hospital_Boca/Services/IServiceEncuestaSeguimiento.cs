@@ -8,5 +8,6 @@ namespace API_Hospital_Boca.Services
         void saveEncuestaSeguimeinto(Encuestaseguimiento es);
         void updateEncuestaSeguimiento(Encuestaseguimiento es);
         object getEncuestaSeguimientoByNumExp(string numExp);
+        Encuestaseguimiento getEncuestaClassSeguimientoByNumExp(string numExp);
     }
 }

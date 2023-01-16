@@ -13,11 +13,22 @@ namespace API_Hospital_Boca.Models
             Historiaclinicas = new HashSet<Historiaclinica>();
         }
 
-        public string NoExpediente { get; set; }
+		public string NombreCompleto => $"{Nombre} {ApMaterno} {ApPaterno}";
+        public int Edad()
+        {
+            var today = DateTime.Today;
+            var age = today.Year - FechaNac.Year;
+			if (FechaNac.Date > today.AddYears(-age))
+                age--;
+
+            return age;
+		}
+
+		public string NoExpediente { get; set; }
         public string Nombre { get; set; }
         public string ApPaterno { get; set; }
         public string ApMaterno { get; set; }
-        public DateTime? FechaNac { get; set; }
+        public DateTime FechaNac { get; set; }
         public int? FkEstadoCivil { get; set; }
         public int? Ivs { get; set; }
         public int? FkEscolaridad { get; set; }
