@@ -134,7 +134,7 @@ export default function DetallesPaciente({token}) {
           >
             <Typography className={classes.heading}>Encuesta de seguimiento</Typography>
           </AccordionSummary>
-          <SeccionEncuesta />
+          <SeccionEncuesta expediente={datos.NoExpediente} token={token} />
         </Accordion>
 
         <Accordion>
@@ -146,7 +146,7 @@ export default function DetallesPaciente({token}) {
           >
             <Typography className={classes.heading}>Solicitud de exámenes de laboratorio</Typography>
           </AccordionSummary>
-          <SeccionExamenes />
+          <SeccionExamenes expediente={datos.NoExpediente} token={token} />
         </Accordion>
       </Paper>
     </div>
