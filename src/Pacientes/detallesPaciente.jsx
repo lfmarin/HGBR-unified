@@ -86,7 +86,7 @@ export default function DetallesPaciente({token}) {
           >
             <Typography className={classes.heading}>Historia clínica</Typography>
           </AccordionSummary>
-          <SeccionHistoriaClinica />
+          <SeccionHistoriaClinica expediente={datos.NoExpediente} token={token} />
         </Accordion>
 
         <Accordion>
@@ -98,7 +98,7 @@ export default function DetallesPaciente({token}) {
           >
             <Typography className={classes.heading}>Nota médica</Typography>
           </AccordionSummary>
-          <SeccionNotaMedica />
+          <SeccionNotaMedica expediente={datos.NoExpediente} token={token} />
         </Accordion>
 
         <Accordion>

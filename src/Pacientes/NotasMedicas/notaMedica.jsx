@@ -11,7 +11,7 @@ import { InputLabel } from '@material-ui/core'
 import { Select } from '@material-ui/core'
 import { MenuItem } from '@material-ui/core'
 
-export default function NotaMedica({token}) {
+export default function NotaMedica({expediente, token}) {
   const style = useStyles()
   const [datos, setDatos] = useState({
     fkFicha: '',
@@ -134,7 +134,7 @@ export default function NotaMedica({token}) {
       .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/all', {
         headers: {
           'Content-type': 'application/json',
-          'Authentication': `Bearer ${token()}`
+          'Authorization': `Bearer ${token()}`
         },
       })
       .then(

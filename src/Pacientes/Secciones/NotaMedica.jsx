@@ -14,16 +14,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function SeccionNotaMedica() {
+export default function SeccionNotaMedica({expediente, token}) {
   const styles = useStyles()
-  const { noExpediente } = useParams()
 
   return (
     <AccordionDetails className={styles.center}>
       <Button variant="outlined" size="large">
         Crear nota médica
       </Button>
-      <Button component={Link} to={`/pacientes/detalles/${noExpediente}/nota-medica`} variant="outlined" size="large">
+      <Button component={Link} to={`/pacientes/detalles/${expediente}/nota-medica`} variant="outlined" size="large">
         Ver nota médica
       </Button>
       {/*<Button component={Link} to={`/pacientes/detalles/${noExpediente}/nota-medica/lista`} variant="outlined" size="large">
