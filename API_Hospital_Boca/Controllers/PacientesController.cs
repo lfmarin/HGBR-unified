@@ -287,34 +287,38 @@ namespace API_Hospital_Boca.Controllers
         }
 
         [Authorize]
-        [HttpPost ("generarNotaMedica")]
-        public async Task<ActionResult> generarNotaMedica([FromBody] InfoPostOper infoVas)
+        [HttpGet ("generarNotaMedica/{numExp}")]
+        public async Task<ActionResult> generarNotaMedica(string numExp)
         {
             try
 			{
-				Paciente info = service.getClassPaciente(infoVas.pacienteID);
+				Paciente info = service.getClassPaciente(numExp);
 
 				if (info == null)
 				{
-					Console.WriteLine("No encuentro el paciente con el ID " + infoVas.pacienteID);
+					Console.WriteLine("No encuentro el paciente con el ID " + numExp);
 					return NotFound();
 				}
 
                 // ANTES DE TODO:
                 // Hay que encontrar si el paciente tiene un historial medico.
                 // Ya que este contendrá la información sobre sus opiniones del motivo de solicitud.
-                Historiaclinica historiaMedica = serviceHistoria.getHistoriaClassByNumExp(infoVas.pacienteID);
+                Console.WriteLine("Historia");
+                Historiaclinica historiaMedica = serviceHistoria.getHistoriaClassByNumExp(numExp);
+                Console.WriteLine("Motivo");
                 Motivosolicitud motivo = serviceHistoria.getClassMotivo(historiaMedica.IdHistoriaClinica);
-                Notamedica nota = serviceNotaMedica.geClassNotaMedicaByNumExp(infoVas.pacienteID);
-                Fichaidentificacion ficha = serviceFicha.getClassFichaByNumExp(infoVas.pacienteID);
+                Console.WriteLine("nota");
+                Notamedica nota = serviceNotaMedica.geClassNotaMedicaByNumExp(numExp);
+                Console.WriteLine("Ficha");
+                Fichaidentificacion ficha = serviceFicha.getClassFichaByNumExp(numExp);
 
 				ProcessStartInfo psi = new ProcessStartInfo();
 				psi.FileName = $"/bin/sh";
 				psi.WorkingDirectory = "./";
                 DateTime ahora = DateTime.Now;
                 // Crea el comando para correr la aplicación.
-                string numeroExpediente = infoVas.pacienteID;
-                string proc_Str = $"-c \"./post-inst.sh --NOMPACIENTE '{info.NombreCompleto}' \\";
+                string numeroExpediente = numExp;
+                string proc_Str = $"-c \"./nota_medica.sh --NOMPACIENTE '{info.NombreCompleto}' \\";
                 proc_Str += $"--NUMEXPEDIENTE {numeroExpediente} \\";
                 proc_Str += $"--DIA {ahora.Day} \\";
                 proc_Str += $"--MES {ahora.ToString("MMMM")} \\";

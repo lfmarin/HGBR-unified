@@ -79,6 +79,6 @@ convert								\
    $NOMTEMP.png
 
 echo "png -> pdf"
-convert $NOMTEMP.png $NOMTEMP.pdf
+convert $NOMTEMP.png nota-$NUMEXPEDIENTE.pdf
 rm $NOMTEMP.png
 echo "terminado"
