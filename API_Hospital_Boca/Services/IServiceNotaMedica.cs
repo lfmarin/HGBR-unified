@@ -8,5 +8,6 @@ namespace API_Hospital_Boca.Services
         void saveNotaMedica(Notamedica nota);
         void updateNotaMedica(Notamedica nota);
         object getNotaMedicaByNumExp(string numExp);
+        Notamedica geClassNotaMedicaByNumExp(string numExp);
     }
 }

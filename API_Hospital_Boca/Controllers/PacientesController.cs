@@ -281,6 +281,87 @@ namespace API_Hospital_Boca.Controllers
         }
 
         [Authorize]
+        [HttpPost ("generarNotaMedica")]
+        public async Task<ActionResult> generarNotaMedica([FromBody] InfoPostOper infoVas)
+        {
+            try
+			{
+				Paciente info = service.getClassPaciente(infoVas.pacienteID);
+
+				if (info == null)
+				{
+					Console.WriteLine("No encuentro el paciente con el ID " + infoVas.pacienteID);
+					return NotFound();
+				}
+
+                // ANTES DE TODO:
+                // Hay que encontrar si el paciente tiene un historial medico.
+                // Ya que este contendrá la información sobre sus opiniones del motivo de solicitud.
+                Historiaclinica historiaMedica = serviceHistoria.getHistoriaClassByNumExp(infoVas.pacienteID);
+                Motivosolicitud motivo = serviceHistoria.getClassMotivo(historiaMedica.IdHistoriaClinica);
+                Notamedica nota = serviceNotaMedica.geClassNotaMedicaByNumExp(infoVas.pacienteID);
+                Fichaidentificacion ficha = serviceFicha.getClassFichaByNumExp(infoVas.pacienteID);
+
+				ProcessStartInfo psi = new ProcessStartInfo();
+				psi.FileName = $"/bin/sh";
+				psi.WorkingDirectory = "./";
+                DateTime ahora = DateTime.Now;
+                // Crea el comando para correr la aplicación.
+                string numeroExpediente = infoVas.pacienteID;
+                string proc_Str = $"-c \"./post-inst.sh --NOMPACIENTE '{info.NombreCompleto}' \\";
+                proc_Str += $"--NUMEXPEDIENTE {numeroExpediente} \\";
+                proc_Str += $"--DIA {ahora.Day} \\";
+                proc_Str += $"--MES {ahora.ToString("MMMM")} \\";
+                proc_Str += $"--YEAR {ahora.Year} \\";
+                proc_Str += $"--EDAD {info.Edad()} \\";
+                proc_Str += $"--SERVICIO 'servicio' \\";
+                proc_Str += $"--DIAGNOSTICO_PRE '{nota.DiagnosticoPre}' \\";
+                proc_Str += $"--DIAGNOSTICO_POS '{nota.DiagnosticoPost}' \\";
+                proc_Str += $"--CIRUJANO '{nota.FkDoctorNavigation.NombreCompleto}' \\";
+                proc_Str += $"--COMPLICACION '{nota.Complicaciones}' \\";
+                proc_Str += $"--DESCRIPCION '{nota.Descripcion}' \\";
+                proc_Str += $"--PRRP '{nota.Preparacion}' \\";
+                proc_Str += $"--TIPO_ANES '{nota.TipoAnestesia}' \\";
+                proc_Str += $"--FECHA_CIR '{nota.FechaCirugia.ToString("dd 'de' MMMM 'del' yyyy")}' \\";
+                proc_Str += $"--GENERO 'Mas' \\";
+                proc_Str += $"--NUMSEGURO '12342134' \\";
+                proc_Str += $"--SERVICIO 'servicio' \\";
+                proc_Str += $"--DIAGNOSTICO '{ficha.Diagnostico}' \\";
+
+				psi.Arguments = proc_Str;
+				psi.UseShellExecute = false;
+				psi.RedirectStandardOutput = true;
+				psi.RedirectStandardError = true;
+
+				Process proc = new Process
+				{
+					StartInfo = psi
+				};
+
+				proc.Start();
+				string output = proc.StandardOutput.ReadToEnd();
+				Console.WriteLine(output);
+				proc.WaitForExit();
+
+				string createdFileName = $"./nota-{numeroExpediente}.pdf";
+				if (!System.IO.File.Exists(createdFileName))
+				{
+                    Console.WriteLine("Could not find the file to output.");
+					return NotFound();
+				}
+				Response.Headers.ContentDisposition.Append("inline; filename=" + createdFileName);
+				var bytes = await System.IO.File.ReadAllBytesAsync(createdFileName);
+				System.IO.File.Delete(createdFileName);
+				return File(bytes, "application/pdf", $"NotaMedica_{numeroExpediente}.pdf");
+			}
+			catch (System.Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return NotFound();
+            }
+        }
+
+        [Authorize]
         [HttpPost ("save")]
         public IActionResult savePaciente([FromBody] NuevoPaciente np) 
         {

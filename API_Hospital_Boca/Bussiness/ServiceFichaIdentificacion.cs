@@ -121,6 +121,19 @@ namespace API_Hospital_Boca.Bussiness
             }
         }
 
+        public Fichaidentificacion getClassFichaByNumExp(string expediente)
+        {
+            try
+            {
+                return context.Fichaidentificacions.Where(f => f.FkPaciente.Equals(expediente)).First();
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+
         public object getFichaMedica(string expediente)
         {
             try

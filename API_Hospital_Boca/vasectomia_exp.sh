@@ -43,13 +43,14 @@ echo "Comenzando creacion de imagen"
 CARPETA="_basectomia"
 NOMTEMP="temp$NUMEXPEDIENTE"
 
-convert vas_p1.png -gravity West -pointsize 22 -annotate +790-374 $NUMEXPEDIENTE $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +270-288 "$UNIDAD_MEDICA" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +320-248 "$UNIDAD_DIRECCION , $UNIDAD_TELEFONO" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +150-158 "$NOMPACIENTE" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +150-109 "$FECHA_COMPLETA" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +150-69 $EDAD $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +530-69 $FECHA_NACIMIENTO $NOMTEMP.png
+convert vas_p1.png \
+-gravity West -pointsize 22 -annotate +790-374 "$NUMEXPEDIENTE" \
+-gravity West -pointsize 22 -annotate +270-288 "$UNIDAD_MEDICA" \
+-gravity West -pointsize 22 -annotate +320-248 "$UNIDAD_DIRECCION , $UNIDAD_TELEFONO" \
+-gravity West -pointsize 22 -annotate +150-158 "$NOMPACIENTE" \
+-gravity West -pointsize 22 -annotate +150-109 "$FECHA_COMPLETA" \
+-gravity West -pointsize 22 -annotate +150-69 "$EDAD" \
+-gravity West -pointsize 22 -annotate +530-69 "$FECHA_NACIMIENTO" $NOMTEMP.png
 
 # Hora de generar el estado civil. Este es generado por un indice, que sera procesado
 # por el switch case.
@@ -68,20 +69,21 @@ if [[ $ESTADO_CIVIL == 1 ]]; then
 	DUR_RELACION="N./A."
 fi
 
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate $XPOS_PONT-44 "X" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +150+16 $ESCOLARIDAD $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +680+16 "$IVS" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+56 "$OCUPACION" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +680+56 "$RELIGION" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+98 $REFERENCIA $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+140 $NUM_HIJOS $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+182 $EDAD_MENOR $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+222 "$NOMBRE_ESPOSA" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+264 "$DUR_RELACION" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+306 "$DOMICILIO_ACTUAL" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+348 "$DOMICILIO_TELEFONO" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 18 -annotate +340+372 "$TRABAJO_ACTUAL" $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 18 -annotate +250+392 "$TRABAJO_TELEFONO" $NOMTEMP.png
+convert $NOMTEMP.png \
+-gravity West -pointsize 22 -annotate $XPOS_PONT-44 "X" \
+-gravity West -pointsize 22 -annotate +150+16 "$ESCOLARIDAD" \
+-gravity West -pointsize 22 -annotate +680+16 "$IVS" \
+-gravity West -pointsize 20 -annotate +150+56 "$OCUPACION" \
+-gravity West -pointsize 22 -annotate +680+56 "$RELIGION" \
+-gravity West -pointsize 20 -annotate +150+98 "$REFERENCIA" \
+-gravity West -pointsize 20 -annotate +150+140 "$NUM_HIJOS" \
+-gravity West -pointsize 20 -annotate +150+182 "$EDAD_MENOR" \
+-gravity West -pointsize 20 -annotate +150+222 "$NOMBRE_ESPOSA" \
+-gravity West -pointsize 20 -annotate +150+264 "$DUR_RELACION" \
+-gravity West -pointsize 20 -annotate +150+306 "$DOMICILIO_ACTUAL" \
+-gravity West -pointsize 20 -annotate +150+348 "$DOMICILIO_TELEFONO" \
+-gravity West -pointsize 18 -annotate +340+372 "$TRABAJO_ACTUAL" \
+-gravity West -pointsize 18 -annotate +250+392 "$TRABAJO_TELEFONO" $NOMTEMP.png
 
 ######
 # 2 MOTIVO DE SOLICITUD DE PROCEDIMIENTO
@@ -124,18 +126,18 @@ convert $NOMTEMP.png -gravity West -pointsize 18 -annotate "$XPOS_PONT+600" "X" 
 # 3 Historia Clinica y exploración física
 ######
 NOM2TEMP="temp-2-$NUMEXPEDIENTE"
-convert -quiet vas_p2.png -pointsize 22 -annotate +768+172 "$NUMEXPEDIENTE" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+300 "$ANTECEDENTES_HEREDOF" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+342 "$ANTECEDENTES_NOPAT" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+406 "$ANTECEDENTES_PAT" $NOM2TEMP.png
 
-
-convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +237+444 "$TA" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +325+444 "$PESO" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +444+444 "$TALLA" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +545+444 "$FC" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +630+444 "$FR" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +720+444 "$TEM" $NOM2TEMP.png
+convert -quiet vas_p2.png \
+-pointsize 22 -annotate +768+172 "$NUMEXPEDIENTE" \
+-pointsize 22 -annotate +196+300 "$ANTECEDENTES_HEREDOF" \
+-pointsize 22 -annotate +196+342 "$ANTECEDENTES_NOPAT" \
+-pointsize 22 -annotate +196+406 "$ANTECEDENTES_PAT" \
+-pointsize 16 -annotate +237+444 "$TA" \
+-pointsize 16 -annotate +325+444 "$PESO" \
+-pointsize 16 -annotate +444+444 "$TALLA" \
+-pointsize 16 -annotate +545+444 "$FC" \
+-pointsize 16 -annotate +630+444 "$FR" \
+-pointsize 16 -annotate +720+444 "$TEM" $NOM2TEMP.png
 
 #
 case $TIPO_PACIENTE in
@@ -155,10 +157,11 @@ convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+490 "$EXPLORACION_ORGA
 ######
 # 4 Procedimiento Quirurgico
 ######
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+615 "$FECHA_CIRUGIA" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+659 "$NOM_CIRUJANO" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+702 "$NOTA_QUIR" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+744 "$PAT_ENCONTRADA" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png \
+-pointsize 22 -annotate +133+615 "$FECHA_CIRUGIA" \
+-pointsize 22 -annotate +133+659 "$NOM_CIRUJANO" \
+-pointsize 22 -annotate +133+702 "$NOTA_QUIR" \
+-pointsize 22 -annotate +133+744 "$PAT_ENCONTRADA" $NOM2TEMP.png
 
 # Una vez hecho todo esto, convierte el resultado a un PDF.
 convert $NOMTEMP.png $NOM2TEMP.png vasec_$NUMEXPEDIENTE.pdf

@@ -27,18 +27,20 @@ NOMTEMP="post-temp-1-$NUMEXPEDIENTE"
 # --UNIDAD_DIRECCION
 # --NOMPACIENTE
 
-convert -quiet post-op_p1.png -gravity West -pointsize 22 -annotate +186+422 "$NOMPACIENTE" $NOMTEMP.png
-convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +453+533 "$NOMMEDICO" $NOMTEMP.png
+convert post-op_p1.png \
+-gravity West -pointsize 22 -annotate +186+422 "$NOMPACIENTE" \
+-gravity West -pointsize 22 -annotate +453+533 "$NOMMEDICO" $NOMTEMP.png
 
 ##############
 ## PAGINA 2 ##
 ##############
 NOM2TEMP="post-temp-2-$NUMEXPEDIENTE"
 
-convert -quiet post-op_p2.png -gravity West -pointsize 22 -annotate +181+229 "$NOMPACIENTE" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -gravity West -pointsize 22 -annotate +308+335 "$UNIDAD_MEDICA" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -gravity West -pointsize 22 -annotate +308+382 "$UNIDAD_DIRECCION" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -gravity West -pointsize 22 -annotate +448+502 "$NOMMEDICO" $NOM2TEMP.png
+convert post-op_p2.png \
+-gravity West -pointsize 22 -annotate +181+229 "$NOMPACIENTE" \
+-gravity West -pointsize 22 -annotate +308+335 "$UNIDAD_MEDICA" \
+-gravity West -pointsize 22 -annotate +308+382 "$UNIDAD_DIRECCION" \
+-gravity West -pointsize 22 -annotate +448+502 "$NOMMEDICO" $NOM2TEMP.png
 
 ################
 ## CONVERSION ##

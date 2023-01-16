@@ -33,6 +33,27 @@ namespace API_Hospital_Boca.Bussiness
             }).First();
         }
 
+        public Notamedica geClassNotaMedicaByNumExp(string numExp)
+        {
+            try
+            {
+                var ficha = context.Fichaidentificacions.Where(f => f.FkPaciente.Equals(numExp)).First();
+                var nota = context.Notamedicas.Where( f => f.FkFicha == ficha.IdFicha ).First();
+
+                nota.FkFichaNavigation = ficha;
+
+                Doctore doc = context.Doctores.Where(d => d.IdDoctor == nota.FkDoctor).First();
+                nota.FkDoctorNavigation = doc;
+
+                return nota;
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+
         public void saveNotaMedica(Notamedica nota)
         {
             try
