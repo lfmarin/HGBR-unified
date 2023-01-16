@@ -131,6 +131,9 @@ namespace API_Hospital_Boca.Bussiness
 
                 Hospitale h_ref = context.Hospitales.Where(p => p.IdHospital.Equals(ec.FkHospitalReferencia)).First();
                 ec.FkHospitalReferenciaNavigation = h_ref;
+
+                Personalconsejerium pers = context.Personalconsejeria.Where(p => p.IdPersonal.Equals(ec.FkConsejeria)).First();
+                ec.FkConsejeriaNavigation = pers;
                 /*
                 return context.Encuestaseguimientos.Where(e => e.FkPaciente == numExp).Select(es => new {
                     FkPaciente = es.FkPaciente,

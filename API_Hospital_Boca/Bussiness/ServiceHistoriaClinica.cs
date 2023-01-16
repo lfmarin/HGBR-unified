@@ -203,6 +203,26 @@ namespace API_Hospital_Boca.Bussiness
             return lastHist.IdHistoriaClinica;
         }
 
+        public Historiaclinica getHistoriaClassByNumExp(string numExpe)
+        {
+            try
+            {
+                Historiaclinica hs = context.Historiaclinicas.Where(h => h.FkPaciente == numExpe).FirstOrDefault();
+                
+                Hospitale hos = context.Hospitales.Where(p => p.IdHospital.Equals(hs.FkHospital)).First();
+                hs.FkHospitalNavigation = hos;
+
+                Paciente pc = context.Pacientes.Where(p => p.NoExpediente.Equals(hs.FkPaciente)).First();
+                hs.FkPacienteNavigation = pc;
+
+                return context.Historiaclinicas.Where(h => h.FkPaciente == numExpe).FirstOrDefault();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
         public object getHistoriaByNumExp(string numExpe)
         {
             try
@@ -224,6 +244,19 @@ namespace API_Hospital_Boca.Bussiness
             }
             catch (System.Exception)
             {
+                throw;
+            }
+        }
+
+        public Motivosolicitud getClassMotivo(int idHistoria)
+        {
+            try
+            {
+                return context.Motivosolicituds.Where(m => m.FkHistoria == idHistoria).FirstOrDefault();
+            }
+            catch (System.Exception)
+            {
+                
                 throw;
             }
         }

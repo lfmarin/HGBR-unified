@@ -16,7 +16,9 @@ namespace API_Hospital_Boca.Services
         void updateEstudioAnatomo(Estudioanatomo ea);
         void saveEvolucion(Evolucion ev);
         void updateEvolucion(Evolucion ev);
+        Historiaclinica getHistoriaClassByNumExp(string numExpe);
         object getHistoriaByNumExp(string numExpe);
+        Motivosolicitud getClassMotivo(int idHistoria);
         object getMotivoSolicitudByIdHist(int idHistoria);
         object getHistoriaexploracionByIdHist(int idHistoria);
         object getProcedimientoQuirurgicoByIdHist(int idHistoria);

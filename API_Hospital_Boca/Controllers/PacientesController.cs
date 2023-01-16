@@ -70,12 +70,13 @@ namespace API_Hospital_Boca.Controllers
 				var Famil1 = infoCons.fam1;
 				var Famil2 = infoCons.fam2;
 				var Doct = infoCons.doc;
+                var tiempoMes = DateTime.Now.ToString("MMMM");
 				ProcessStartInfo psi = new ProcessStartInfo();
 				psi.FileName = $"/bin/sh";
 				psi.WorkingDirectory = "./";
 				// Crea el comando para correr la aplicación.
 				psi.Arguments = $"-c \"./constancia.sh '{info.NombreCompleto}' {infoCons.pacienteID}"
-					+ $" '{Famil1}' '{Famil2}' '{Doct}'";
+					+ $" '{Famil1}' '{Famil2}' '{Doct}' '{tiempoMes}'";
 
 				psi.UseShellExecute = false;
 				psi.RedirectStandardOutput = true;
@@ -120,25 +121,32 @@ namespace API_Hospital_Boca.Controllers
 					return NotFound();
 				}
 
+                // ANTES DE TODO:
+                // Hay que encontrar si el paciente tiene un historial medico.
+                // Ya que este contendrá la información sobre sus opiniones del motivo de solicitud.
+                Historiaclinica historiaMedica = serviceHistoria.getHistoriaClassByNumExp(infoVas.pacienteID);
+                Motivosolicitud motivo = serviceHistoria.getClassMotivo(historiaMedica.IdHistoriaClinica);
+
 				ProcessStartInfo psi = new ProcessStartInfo();
 				psi.FileName = $"/bin/sh";
 				psi.WorkingDirectory = "./";
                 // Crea el comando para correr la aplicación.
-                int numeroExpediente = 10;
+                string numeroExpediente = infoVas.pacienteID;
                 string proc_Str = $"-c \"./vasectomia_exp.sh --NUMEXPEDIENTE {numeroExpediente} \\";
 				//proc_Str += $"--NUMEXPEDIENTE {numeroExpediente} \\";
 				// TODO: ¡Obtener unidad médica!
-				proc_Str += "--UNIDAD_MEDICA 20 \\";
+				proc_Str += $"--UNIDAD_MEDICA '{historiaMedica.FkHospitalNavigation.UMedica}' \\";
 				// TODO: ¡Obtener Dirección!
-				proc_Str += "--UNIDAD_DIRECCION 'Boca del rio' \\";
+				proc_Str += $"--UNIDAD_DIRECCION '{historiaMedica.FkHospitalNavigation.EntidadFederativa}' \\";
                 // TODO: ¡Obtener numero telefónico!
-                proc_Str += "--UNIDAD_TELEFONO 3719501438 \\";
+                proc_Str += "--UNIDAD_TELEFONO '3719501438' \\";
                 proc_Str += $"--NOMPACIENTE '{info.NombreCompleto}' \\";
                 proc_Str += $"--EDAD {info.Edad()} \\";
-				proc_Str += $"--FECHA_NACIMIENTO {info.FechaNac} \\";
+				proc_Str += $"--FECHA_NACIMIENTO {info.FechaNac.ToString("dd 'de' MMMM 'del' yyyy")} \\";
 				proc_Str += $"--ESTADO_CIVIL '{info.FkEstadoCivilNavigation.NombreEstado}' \\";
                 proc_Str += $"--ESCOLARIDAD '{info.FkEscolaridadNavigation.NombreEscolaridad}' \\";
                 proc_Str += $"--OCUPACION '{info.FkOcupacionNavigation.NombreOcupacion}' \\";
+                proc_Str += $"--IVS '{info.Ivs}' \\";
                 proc_Str += $"--RELIGION '{info.FkReligionNavigation.NombreReligion}' \\";
                 proc_Str += $"--REFERENCIA '{info.FkLugarReferenciaNavigation.NombreLugar}' \\";
                 proc_Str += $"--NUM_HIJOS {info.NumHijosVivos} \\";
@@ -149,9 +157,10 @@ namespace API_Hospital_Boca.Controllers
                 proc_Str += $"--DOMICILIO_TELEFONO {info.TelCasa} \\";
                 proc_Str += $"--TRABAJO_ACTUAL {info.ColTrabajo} \\";
                 proc_Str += $"--TRABAJO_TELEFONO {info.TelTrabajo} \\";
+                // TODO: Esto deberia ser un index, pero fue registrado como strings en la base de datos...
                 proc_Str += $"--MOTIVO_CAUSA_INT_HIJOS {infoVas.causaHijos} \\";
-                proc_Str += $"--MOTIVO_CAUSA_OPN_PAREJA {infoVas.opinionPareja} \\";
-                proc_Str += $"--MOTIVO_CAUSA_PLA_FAMILIAR {infoVas.planificacionFamiliar}";
+                proc_Str += $"--MOTIVO_CAUSA_OPN_PAREJA {motivo.FkOpinion} \\";
+                proc_Str += $"--MOTIVO_CAUSA_PLA_FAMILIAR {motivo.FkMetodoPlanificacion}";
 
 				psi.Arguments = proc_Str;
 				psi.UseShellExecute = false;
@@ -178,6 +187,70 @@ namespace API_Hospital_Boca.Controllers
 				var bytes = await System.IO.File.ReadAllBytesAsync(createdFileName);
 				System.IO.File.Delete(createdFileName);
 				return File(bytes, "application/pdf", $"vasectomia_{numeroExpediente}.pdf");
+			}
+			catch (System.Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return NotFound();
+            }
+        }
+
+        [Authorize]
+        [HttpPost ("instrucciones")]
+        public async Task<ActionResult> generarInstrucciones([FromBody] InfoPostOper infoVas)
+        {
+            try
+			{
+				Paciente info = service.getClassPaciente(infoVas.pacienteID);
+
+				if (info == null)
+				{
+					Console.WriteLine("No encuentro el paciente con el ID " + infoVas.pacienteID);
+					return NotFound();
+				}
+
+                // ANTES DE TODO:
+                // Hay que encontrar si el paciente tiene un historial medico.
+                // Ya que este contendrá la información sobre sus opiniones del motivo de solicitud.
+                Historiaclinica historiaMedica = serviceHistoria.getHistoriaClassByNumExp(infoVas.pacienteID);
+                Motivosolicitud motivo = serviceHistoria.getClassMotivo(historiaMedica.IdHistoriaClinica);
+
+				ProcessStartInfo psi = new ProcessStartInfo();
+				psi.FileName = $"/bin/sh";
+				psi.WorkingDirectory = "./";
+                // Crea el comando para correr la aplicación.
+                string numeroExpediente = infoVas.pacienteID;
+                string proc_Str = $"-c \"./post-inst.sh --NOMMEDICO '{infoVas.medicoResponsable}' \\";
+                proc_Str += $"--NUMEXPEDIENTE {numeroExpediente} \\";
+				proc_Str += $"--UNIDAD_MEDICA '{infoVas.unidadMedica}' \\";
+				proc_Str += $"--UNIDAD_DIRECCION '{historiaMedica.FkHospitalNavigation.EntidadFederativa}' \\";
+                proc_Str += $"--NOMPACIENTE '{info.NombreCompleto}'";
+
+				psi.Arguments = proc_Str;
+				psi.UseShellExecute = false;
+				psi.RedirectStandardOutput = true;
+				psi.RedirectStandardError = true;
+
+				Process proc = new Process
+				{
+					StartInfo = psi
+				};
+
+				proc.Start();
+				string output = proc.StandardOutput.ReadToEnd();
+				Console.WriteLine(output);
+				proc.WaitForExit();
+
+				string createdFileName = $"./post-{numeroExpediente}.pdf";
+				if (!System.IO.File.Exists(createdFileName))
+				{
+                    Console.WriteLine("Could not find the file to output.");
+					return NotFound();
+				}
+				Response.Headers.ContentDisposition.Append("inline; filename=" + createdFileName);
+				var bytes = await System.IO.File.ReadAllBytesAsync(createdFileName);
+				System.IO.File.Delete(createdFileName);
+				return File(bytes, "application/pdf", $"instrucciones_{numeroExpediente}.pdf");
 			}
 			catch (System.Exception e)
             {
@@ -280,6 +353,13 @@ namespace API_Hospital_Boca.Controllers
     {
         public Paciente paciente { get; set; }
         public int hospital { get; set; }
+    }
+
+    public class InfoPostOper
+    {
+        public string pacienteID { get; set; }
+        public string medicoResponsable { get; set; }
+        public string unidadMedica { get; set; }
     }
 
     public class InfoHistorialVasectomia

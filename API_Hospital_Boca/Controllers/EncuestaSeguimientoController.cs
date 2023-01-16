@@ -52,7 +52,7 @@ namespace API_Hospital_Boca.Controllers
 				psi.WorkingDirectory = "./";
 				psi.Arguments = "-c \"pwd\"";
                 // Crea el comando para correr la aplicación.
-                string proc_Str = $"-c \"./encuesta.sh --CENTRO_SALUD 'Hospital Yes' \\";
+                string proc_Str = $"-c \"./encuesta.sh --CENTRO_SALUD '{src.FkHospitalNavigation.UMedica}' \\";
 				// proc_Str += $"--CENTRO_SALUD 'Hospital Yes' \\";
                 proc_Str += $"--NUMEXPEDIENTE '{numExp}' \\";
                 proc_Str += $"--NOMBRE '{src.FkPacienteNavigation.NombreCompleto}' \\";
@@ -62,9 +62,9 @@ namespace API_Hospital_Boca.Controllers
                 proc_Str += $"--NUM_HIJOS {src.FkPacienteNavigation.NumHijosVivos} \\";
                 proc_Str += $"--EDAD_MENOR {src.FkPacienteNavigation.EdadHijoMenor} \\";
                 proc_Str += $"--RELIGION '{src.FkPacienteNavigation.FkReligionNavigation.NombreReligion}' \\";
-                proc_Str += $"--FECHA_VASECTOMIA '{src.FechaVasectomia.ToString()}' \\";
+                proc_Str += $"--FECHA_VASECTOMIA '{src.FechaVasectomia.ToString("dd 'de' MMMM 'del' yyyy")}' \\";
                 proc_Str += $"--INFO_VASECTOMIA '{src.OrigenInfo}' \\";
-                proc_Str += $"--ORIENT_VASECTOMIA '' \\";
+                proc_Str += $"--ORIENT_VASECTOMIA '{src.FkConsejeriaNavigation.NombreCompleto}' \\";
                 proc_Str += $"--CENTRO_REFERIDO {(src.Referido ? 1 : 0)} \\";
                 proc_Str += $"--CENTRO_DEF '{src.FkHospitalReferenciaNavigation.UMedica}' \\";
                 proc_Str += $"--TRATO_PERSONAL {src.FkCalidad} \\";
@@ -74,7 +74,7 @@ namespace API_Hospital_Boca.Controllers
                 proc_Str += $"--COMPLICACION_DESC '{src.MotivoComplicacion}' \\";
                 proc_Str += $"--RELACION_SEX {src.FkCalidadRelacion} \\";
                 proc_Str += $"--RELACION_PEOR {src.MotivoCalidad} \\";
-                proc_Str += $"--FECHA_NEGATIVIDAD '{src.FechaNegativo}' \\";
+                proc_Str += $"--FECHA_NEGATIVIDAD '{src.FechaNegativo.ToString("dd 'de' MMMM 'del' yyyy")}' \\";
                 proc_Str += $"--ESPERMA_LUGAR '{src.LugarEspermaconteo}' \\";
                 proc_Str += $"--RECOMENDAR_VASEC {(src.Recomendacion ? 1 : 0)} \\";
                 proc_Str += $"--RAZON_VASEC '{src.MotivoRecomendacion}' \\";

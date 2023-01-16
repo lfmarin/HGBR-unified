@@ -7,7 +7,7 @@ TESTIGO2=$4
 MEDICOENCARGADO=$5
 
 DIA=$(date +'%d')
-MES=$(date +'%h')
+MES=$6
 YEAR=$(date +'%Y')
 
 HORA=$(date +'%H')

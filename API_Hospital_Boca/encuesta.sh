@@ -28,7 +28,7 @@ NOMTEMP="encue_$NUMEXPEDIENTE"
 
 convert -quiet encuesta.png -gravity West -pointsize 22 -annotate +760-504 "$FECHA_COMPLETA" $NOMTEMP.png
 convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +460-504 "$JURISTICION" $NOMTEMP.png
-convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +700-478 "$CENTRO_SALUD" $NOMTEMP.png
+convert -quiet $NOMTEMP.png -gravity West -pointsize 16 -annotate +690-478 "$CENTRO_SALUD" $NOMTEMP.png
 
 convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +240-430 "$NOMBRE" $NOMTEMP.png
 
@@ -42,11 +42,11 @@ convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +750-382 $RELI
 
 convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +590-336 "$FECHA_VASECTOMIA" $NOMTEMP.png
 convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +590-284 "$INFO_VASECTOMIA" $NOMTEMP.png
-convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +750-234 "$ORIENT_VASECTOMIA" $NOMTEMP.png
+convert -quiet $NOMTEMP.png -gravity West -pointsize 20 -annotate +740-234 "$ORIENT_VASECTOMIA" $NOMTEMP.png
 
 if [[ $CENTRO_REFERIDO == 1 ]]; then
 	convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +186-160 "X" $NOMTEMP.png
-	convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +430-162 "$CENTRO_DEF" $NOMTEMP.png
+	convert -quiet $NOMTEMP.png -gravity West -pointsize 16 -annotate +430-162 "$CENTRO_DEF" $NOMTEMP.png
 else
 	convert -quiet $NOMTEMP.png -gravity West -pointsize 22 -annotate +760-160 "X" $NOMTEMP.png
 fi

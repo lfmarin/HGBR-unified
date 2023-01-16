@@ -44,11 +44,12 @@ CARPETA="_basectomia"
 NOMTEMP="temp$NUMEXPEDIENTE"
 
 convert vas_p1.png -gravity West -pointsize 22 -annotate +790-374 $NUMEXPEDIENTE $NOMTEMP.png
-convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +270-288 $UNIDAD_MEDICA $NOMTEMP.png
+convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +270-288 "$UNIDAD_MEDICA" $NOMTEMP.png
 convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +320-248 "$UNIDAD_DIRECCION , $UNIDAD_TELEFONO" $NOMTEMP.png
 convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +150-158 "$NOMPACIENTE" $NOMTEMP.png
 convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +150-109 "$FECHA_COMPLETA" $NOMTEMP.png
 convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +150-69 $EDAD $NOMTEMP.png
+convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +530-69 $FECHA_NACIMIENTO $NOMTEMP.png
 
 # Hora de generar el estado civil. Este es generado por un indice, que sera procesado
 # por el switch case.
@@ -69,7 +70,9 @@ fi
 
 convert $NOMTEMP.png -gravity West -pointsize 22 -annotate $XPOS_PONT-44 "X" $NOMTEMP.png
 convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +150+16 $ESCOLARIDAD $NOMTEMP.png
+convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +680+16 "$IVS" $NOMTEMP.png
 convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+56 "$OCUPACION" $NOMTEMP.png
+convert $NOMTEMP.png -gravity West -pointsize 22 -annotate +680+56 "$RELIGION" $NOMTEMP.png
 convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+98 $REFERENCIA $NOMTEMP.png
 convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+140 $NUM_HIJOS $NOMTEMP.png
 convert $NOMTEMP.png -gravity West -pointsize 20 -annotate +150+182 $EDAD_MENOR $NOMTEMP.png
