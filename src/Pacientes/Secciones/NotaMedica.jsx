@@ -3,7 +3,6 @@ import { AccordionDetails, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 // import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
 import { Link } from 'react-router-dom'
-import { useParams } from 'react-router'
 
 const useStyles = makeStyles(theme => ({
   center: {
@@ -14,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function SeccionNotaMedica({expediente, token}) {
+export default function SeccionNotaMedica({expediente}) {
   const styles = useStyles()
 
   return (
