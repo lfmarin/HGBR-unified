@@ -1,19 +1,31 @@
 #!/bin/bash
-# Convierte la primera imagen con la informacion que tenemos actualmente.
-NOMPACIENTE=$1
-IDPACIENTE=$2
-TESTIGO1=$3
-TESTIGO2=$4
-MEDICOENCARGADO=$5
+# Convierte la primera imagen con la informacion que tenemos actualmente.
+# NOMPACIENTE=$1
+# IDPACIENTE=$2
+# TESTIGO1=$3
+# TESTIGO2=$4
+# MEDICOENCARGADO=$5
+# MES=$6
+
+###
+# Declara los valores de argumentos.
+###
+while [ $# -gt 0 ]; do
+    if [[ $1 == "--"* ]]; then
+        v="${1/--/}"
+        declare "$v"="$2"
+		echo "$v=$2"
+        shift
+    fi
+    shift
+done
+###
 
 DIA=$(date +'%d')
-MES=$6
 YEAR=$(date +'%Y')
-
 HORA=$(date +'%H')
 MINUTO=$(date +'%M')
 echo "Comenzando creacion de imagen"
-echo $(pwd)
 
 ARCHIVO="const_$IDPACIENTE"
 
@@ -24,8 +36,6 @@ convert const.png \
 -gravity West -pointsize 22 -annotate +590-480 "$YEAR" \
 -gravity West -pointsize 22 -annotate +810-480 "$HORA" \
 -gravity West -pointsize 22 -annotate +920-480 "$MINUTO" \
-# Hora de imprimir la información dada de los testigos.
-# convert temp.png -gravity West -pointsize 22 -annotate +240+328 $TESTIGO1 temp.png
 -gravity West -pointsize 22 -annotate +230+430 "$TESTIGO1" \
 -gravity West -pointsize 22 -annotate +628+440 "$TESTIGO2" \
 -gravity West -pointsize 22 -annotate +270+520 "$MEDICOENCARGADO" $ARCHIVO.png
@@ -37,4 +47,4 @@ rm $ARCHIVO.png
 
 echo "terminado"
 
-# /etc/ImageMagick-6/policy.xml, remove PDF
+# /etc/ImageMagick-6/policy.xml, remove PDF

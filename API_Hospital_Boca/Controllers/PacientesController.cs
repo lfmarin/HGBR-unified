@@ -74,9 +74,15 @@ namespace API_Hospital_Boca.Controllers
 				ProcessStartInfo psi = new ProcessStartInfo();
 				psi.FileName = $"/bin/sh";
 				psi.WorkingDirectory = "./";
+
 				// Crea el comando para correr la aplicación.
-				psi.Arguments = $"-c \"./constancia.sh '{info.NombreCompleto}' {infoCons.pacienteID}"
-					+ $" '{Famil1}' '{Famil2}' '{Doct}' '{tiempoMes}'";
+                string proc_Str = $"-c \"./constancia.sh --NOMPACIENTE '{info.NombreCompleto}' \\";
+                proc_Str += $"--IDPACIENTE '{infoCons.pacienteID}' \\";
+                proc_Str += $"--TESTIGO1 '{Famil1}' \\";
+                proc_Str += $"--TESTIGO2 '{Famil2}' \\";
+                proc_Str += $"--MEDICOENCARGADO '{Doct}' \\";
+                proc_Str += $"--MES '{tiempoMes}' \\";
+                psi.Arguments = proc_Str;
 
 				psi.UseShellExecute = false;
 				psi.RedirectStandardOutput = true;
