@@ -139,7 +139,7 @@ export default function App() {
           </main>
           <footer>
             <div className='footerRight'>
-              <a href="https://www.uv.mx/veracruz/fiee/">Proveeido por FIEE</a>
+              <p>Realizado en acuerdo por FIEE-UV</p>
               <img alt="Logotipo de FIEE" src="media/fiee.jpg"></img>
             </div>
           </footer>
