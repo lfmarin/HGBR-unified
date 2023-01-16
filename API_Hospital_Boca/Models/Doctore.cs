@@ -16,6 +16,8 @@ namespace API_Hospital_Boca.Models
             Solicitudexamenes = new HashSet<Solicitudexamene>();
         }
 
+        public string NombreCompleto => $"{Nombre} {ApMaterno} {ApPaterno}";
+
         public int IdDoctor { get; set; }
         public string Nombre { get; set; }
         public string ApPaterno { get; set; }

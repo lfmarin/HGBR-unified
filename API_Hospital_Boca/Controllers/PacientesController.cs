@@ -167,8 +167,21 @@ namespace API_Hospital_Boca.Controllers
                 proc_Str += $"--ANTECEDENTES_HEREDOF {historiaMedica.Historiaexploracion.AntFamiliares} \\";
                 proc_Str += $"--ANTECEDENTES_NOPAT {historiaMedica.Historiaexploracion.AntPersonalesNoPat} \\";
                 proc_Str += $"--ANTECEDENTES_PAT {historiaMedica.Historiaexploracion.AntPersonalesPat} \\";
+
+                proc_Str += $"--TA '{historiaMedica.Historiaexploracion.Ta}' \\";
+                proc_Str += $"--PESO '{historiaMedica.Historiaexploracion.Peso}' \\";
+                proc_Str += $"--TALLA '{historiaMedica.Historiaexploracion.Talla}' \\";
+                proc_Str += $"--FC '{historiaMedica.Historiaexploracion.Fc}' \\";
+                proc_Str += $"--FR '{historiaMedica.Historiaexploracion.Fr}' \\";
+                proc_Str += $"--TEM '{historiaMedica.Historiaexploracion.Tem}' \\";
+
                 proc_Str += $"--EXPLORACION_ORGANOS {historiaMedica.Historiaexploracion.ExpOrganos} \\";
-                proc_Str += $"--TIPO_PACIENTE {historiaMedica.Historiaexploracion.TipoPaciente}";
+                proc_Str += $"--TIPO_PACIENTE {historiaMedica.Historiaexploracion.TipoPaciente} \\";
+
+                proc_Str += $"--FECHA_CIRUGIA '{historiaMedica.Procquirurgico.FechaCirugia.ToString("dd 'de' MMMM 'del' yyyy")}' \\";
+                proc_Str += $"--NOM_CIRUJANO '{historiaMedica.Procquirurgico.FkDoctorNavigation.NombreCompleto}' \\";
+                proc_Str += $"--NOTA_QUIR '{historiaMedica.Procquirurgico.NotaQuirurgica}' \\";
+                proc_Str += $"--PAT_ENCONTRADA '{historiaMedica.Procquirurgico.Patologia}'";
 
 				psi.Arguments = proc_Str;
 				psi.UseShellExecute = false;

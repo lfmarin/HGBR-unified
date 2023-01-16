@@ -129,6 +129,14 @@ convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+300 "$ANTECEDENTES_HER
 convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+342 "$ANTECEDENTES_NOPAT" $NOM2TEMP.png
 convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+406 "$ANTECEDENTES_PAT" $NOM2TEMP.png
 
+
+convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +237+444 "$TA" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +325+444 "$PESO" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +444+444 "$TALLA" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +545+444 "$FC" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +630+444 "$FR" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 16 -annotate +720+444 "$TEM" $NOM2TEMP.png
+
 #
 case $TIPO_PACIENTE in
 	'Sano' ) XPOS_PONT="+240";;
@@ -147,10 +155,10 @@ convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+490 "$EXPLORACION_ORGA
 ######
 # 4 Procedimiento Quirurgico
 ######
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+615 "$TIPO_PACIENTE" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+659 "$TIPO_PACIENTE" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+702 "$TIPO_PACIENTE" $NOM2TEMP.png
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+744 "$TIPO_PACIENTE" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+615 "$FECHA_CIRUGIA" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+659 "$NOM_CIRUJANO" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+702 "$NOTA_QUIR" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+744 "$PAT_ENCONTRADA" $NOM2TEMP.png
 
 # Una vez hecho todo esto, convierte el resultado a un PDF.
 convert $NOMTEMP.png $NOM2TEMP.png vasec_$NUMEXPEDIENTE.pdf

@@ -218,6 +218,13 @@ namespace API_Hospital_Boca.Bussiness
                 Historiaexploracion hex = context.Historiaexploracions.Where(p => p.FkHistoria == hs.IdHistoriaClinica).First();
                 hs.Historiaexploracion = hex;
 
+                Procquirurgico proc = context.Procquirurgicos.Where(p => p.FkHistoria == hs.IdHistoriaClinica).First();
+
+                Doctore doc = context.Doctores.Where(p => p.IdDoctor == proc.FkDoctor).First();
+                proc.FkDoctorNavigation = doc;
+
+                hs.Procquirurgico = proc;
+
                 return hs;
             }
             catch (System.Exception)
