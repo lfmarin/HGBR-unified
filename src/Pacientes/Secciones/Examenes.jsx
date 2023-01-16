@@ -1,5 +1,5 @@
-import React from 'react'
-import { AccordionDetails, Button } from '@material-ui/core'
+import React, {useState} from 'react'
+import { AccordionDetails, Button, CircularProgress } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
 import axios from 'axios'
@@ -14,10 +14,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function SeccionExamenes({expediente, token}) {
   const styles = useStyles()
+  const [isLoad, togLoad] = useState(false);
 
   const GenerarSolicitud = (event) => {
-    console.log("Gen encu")
     event.preventDefault();
+    togLoad(true)
 
     axios
 		.post(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/pacientes/vasectomia`,
@@ -52,15 +53,17 @@ export default function SeccionExamenes({expediente, token}) {
   }
 
   return (
-    <AccordionDetails className={styles.center}>
-      <form onSubmit={GenerarSolicitud} autoComplete="off" className={styles.fullWidth}>
-        <Button variant="outlined" size="large">
+    <form onSubmit={GenerarSolicitud} autoComplete="off" className={styles.fullWidth}>
+      <AccordionDetails className={styles.center}>
+        <Button disabled={isLoad} variant="outlined" size="large">
           Abrir Solicitud de Examenes
         </Button>
-        <Button type="submit" variant="outlined" size="large" startIcon={<GetAppRoundedIcon />}>
+        <Button disabled={isLoad} type="submit" variant="outlined" size="large" startIcon={
+          (isLoad ? <CircularProgress size={24} /> : <GetAppRoundedIcon />)
+        }>
           Descargar Solicitud de Examenes
         </Button>
-      </form>
-    </AccordionDetails>
+      </AccordionDetails>
+    </form>
   )
 }

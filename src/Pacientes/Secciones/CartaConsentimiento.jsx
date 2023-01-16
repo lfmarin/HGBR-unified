@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AccordionDetails, Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
 import axios from 'axios'
+import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
 import {CircularProgress, Box } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function CartaConsentimiento({expediente, token}) {
   const classes = useStyles()
+  const [isLoad, togLoad] = useState(false);
 
   /**
    * 
@@ -30,6 +31,8 @@ export default function CartaConsentimiento({expediente, token}) {
     event.preventDefault();
 
     var {Testigo1, Testigo2, Personal, Medico} = document.forms[0];
+
+    togLoad(true)
 
     const opcionesPOST = {
       pacienteID: expediente,
@@ -107,19 +110,11 @@ export default function CartaConsentimiento({expediente, token}) {
         </div>
         <div className={classes.center}>
           <Box sx={{ m: 1, position: 'relative'}} >
-            <Button variant="outlined" size="large" startIcon={<GetAppRoundedIcon />} type="submit">
+          <Button disabled={isLoad} type="submit" variant="outlined" size="large" startIcon={
+              (isLoad ? <CircularProgress size={24} /> : <GetAppRoundedIcon />)
+            }>
               Generar Carta
             </Button>
-            <CircularProgress
-              size={24}
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                marginTop: '-12px',
-                marginLeft: '-12px',
-              }}
-            />
           </Box>
         </div>
       </form>

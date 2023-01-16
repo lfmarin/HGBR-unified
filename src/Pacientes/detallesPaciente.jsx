@@ -122,7 +122,7 @@ export default function DetallesPaciente({token}) {
           >
             <Typography className={classes.heading}>Instrucciones Postoperatorias</Typography>
           </AccordionSummary>
-          <InstruccionesPost />
+          <InstruccionesPost expediente={datos.NoExpediente} token={token} />
         </Accordion>
 
         <Accordion>
