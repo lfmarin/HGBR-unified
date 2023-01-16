@@ -120,8 +120,40 @@ case $MOTIVO_CAUSA_PLA_FAMILIAR in
 esac
 convert $NOMTEMP.png -gravity West -pointsize 18 -annotate "$XPOS_PONT+600" "X" $NOMTEMP.png
 
+######
+# 3 Historia Clinica y exploración física
+######
+NOM2TEMP="temp-2-$NUMEXPEDIENTE"
+convert -quiet vas_p2.png -pointsize 22 -annotate +768+172 "$NUMEXPEDIENTE" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+300 "$ANTECEDENTES_HEREDOF" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+342 "$ANTECEDENTES_NOPAT" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+406 "$ANTECEDENTES_PAT" $NOM2TEMP.png
+
+#
+case $TIPO_PACIENTE in
+	'Sano' ) XPOS_PONT="+240";;
+	'Psiquiátrico' ) XPOS_PONT="+384";;
+	'Diabético' ) XPOS_PONT="+494";;
+	'Hipertenso' ) XPOS_PONT="+622";;
+	'Cardiópata' ) XPOS_PONT="+750";;
+	* ) XPOS_PONT="+2000";;
+esac
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate "$XPOS_PONT+529" "X" $NOM2TEMP.png
+
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+490 "$EXPLORACION_ORGANOS" $NOM2TEMP.png
+
+#
+
+######
+# 4 Procedimiento Quirurgico
+######
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+615 "$TIPO_PACIENTE" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+659 "$TIPO_PACIENTE" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+702 "$TIPO_PACIENTE" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +133+744 "$TIPO_PACIENTE" $NOM2TEMP.png
+
 # Una vez hecho todo esto, convierte el resultado a un PDF.
-convert $NOMTEMP.png vasec_$NUMEXPEDIENTE.pdf
+convert $NOMTEMP.png $NOM2TEMP.png vasec_$NUMEXPEDIENTE.pdf
 # Borra el archivo temporal, no lo necesitamos.
 rm $NOMTEMP.png
 

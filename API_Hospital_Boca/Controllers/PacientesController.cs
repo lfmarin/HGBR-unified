@@ -160,7 +160,15 @@ namespace API_Hospital_Boca.Controllers
                 // TODO: Esto deberia ser un index, pero fue registrado como strings en la base de datos...
                 proc_Str += $"--MOTIVO_CAUSA_INT_HIJOS {infoVas.causaHijos} \\";
                 proc_Str += $"--MOTIVO_CAUSA_OPN_PAREJA {motivo.FkOpinion} \\";
-                proc_Str += $"--MOTIVO_CAUSA_PLA_FAMILIAR {motivo.FkMetodoPlanificacion}";
+                proc_Str += $"--MOTIVO_CAUSA_PLA_FAMILIAR {motivo.FkMetodoPlanificacion} \\";
+
+                // Pagina 2
+
+                proc_Str += $"--ANTECEDENTES_HEREDOF {historiaMedica.Historiaexploracion.AntFamiliares} \\";
+                proc_Str += $"--ANTECEDENTES_NOPAT {historiaMedica.Historiaexploracion.AntPersonalesNoPat} \\";
+                proc_Str += $"--ANTECEDENTES_PAT {historiaMedica.Historiaexploracion.AntPersonalesPat} \\";
+                proc_Str += $"--EXPLORACION_ORGANOS {historiaMedica.Historiaexploracion.ExpOrganos} \\";
+                proc_Str += $"--TIPO_PACIENTE {historiaMedica.Historiaexploracion.TipoPaciente}";
 
 				psi.Arguments = proc_Str;
 				psi.UseShellExecute = false;

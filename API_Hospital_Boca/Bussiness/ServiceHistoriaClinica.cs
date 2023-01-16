@@ -215,7 +215,10 @@ namespace API_Hospital_Boca.Bussiness
                 Paciente pc = context.Pacientes.Where(p => p.NoExpediente.Equals(hs.FkPaciente)).First();
                 hs.FkPacienteNavigation = pc;
 
-                return context.Historiaclinicas.Where(h => h.FkPaciente == numExpe).FirstOrDefault();
+                Historiaexploracion hex = context.Historiaexploracions.Where(p => p.FkHistoria == hs.IdHistoriaClinica).First();
+                hs.Historiaexploracion = hex;
+
+                return hs;
             }
             catch (System.Exception)
             {

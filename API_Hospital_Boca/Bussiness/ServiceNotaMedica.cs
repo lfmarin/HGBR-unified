@@ -16,7 +16,7 @@ namespace API_Hospital_Boca.Bussiness
 
         public object getNotaMedicaByNumExp(string numExp)
         {
-            var ficha = context.Fichaidentificacions.Where(f => f.FkPaciente == numExp).First();
+            var ficha = context.Fichaidentificacions.Where(f => f.FkPaciente.Equals(numExp)).First();
             return context.Notamedicas.Where(n => n.FkFicha == ficha.IdFicha).Select(nm => new {
                 FkFicha = nm.FkFicha,
                 FechaHora = nm.FechaHora,
