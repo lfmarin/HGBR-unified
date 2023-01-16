@@ -29,17 +29,13 @@ export default function CartaConsentimiento({expediente, token}) {
    */
   const ConvertirImagen = (event) => {
     event.preventDefault();
-
-    var {Testigo1, Testigo2, Personal, Medico} = document.forms[0];
-
     togLoad(true)
 
     const opcionesPOST = {
       pacienteID: expediente,
-      fam1: Testigo1.value,
-      fam2: Testigo2.value,
-      personal: Personal.value,
-      doc: Medico.value
+      fam1: document.getElementById("Testigo1").value,
+      fam2: document.getElementById("Testigo2").value,
+      doc: document.getElementById("Medico").value
     }
 
     axios
@@ -72,18 +68,20 @@ export default function CartaConsentimiento({expediente, token}) {
       <form onSubmit={ConvertirImagen} autoComplete="off" className={classes.fullWidth}>
         <div className={classes.center}>
           <TextField
-            id="outlined-basic"
+            id="Testigo1"
             variant="outlined"
             name='Testigo1'
             fullWidth
+            disabled={isLoad}
             required
             label="Nombre del (la) Testigo 1"
           />
           <TextField
-            id="outlined-basic"
+            id="Testigo2"
             variant="outlined"
             name='Testigo2'
             fullWidth
+            disabled={isLoad}
             required
             className={classes.marginLeft}
             label="Nombre del (la) Testigo 2"
@@ -91,18 +89,20 @@ export default function CartaConsentimiento({expediente, token}) {
         </div>
         <div className={classes.center}>
           <TextField
-            id="outlined-basic"
+            id="Personal"
             variant="outlined"
             name='Personal'
             fullWidth
+            disabled={isLoad}
             required
             label="Personal que proporcionó la consejería"
           />
           <TextField
-            id="outlined-basic"
+            id="Medico"
             variant="outlined"
             name='Medico'
             fullWidth
+            disabled={isLoad}
             required
             className={classes.marginLeft}
             label="Nombre de la Médica o el Médico tratante que otorgó el método"

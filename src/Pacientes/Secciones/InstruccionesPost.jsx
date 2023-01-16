@@ -53,6 +53,8 @@ export default function InstruccionesPost({expediente, token}) {
 		)
 		.catch(
 			err => {
+        alert("Ocurrió un error al generar las instrucciones. El paciente no parece tener un Motivo registrado.")
+        togLoad(false)
         console.log(err)
 			}
 		)
@@ -66,6 +68,7 @@ export default function InstruccionesPost({expediente, token}) {
             variant="outlined"
             fullWidth
             required
+            disabled={isLoad}
             className={classes.marginTop}
             label="Médico responsable"
           />
@@ -75,6 +78,7 @@ export default function InstruccionesPost({expediente, token}) {
             variant="outlined"
             fullWidth
             required
+            disabled={isLoad}
             className={classes.marginTop}
             label="Unidad Médica"
           />

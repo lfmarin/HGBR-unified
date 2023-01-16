@@ -44,6 +44,8 @@ export default function SeccionNotaMedica({expediente, token}) {
 		)
 		.catch(
 			err => {
+        alert("Este usuario no tiene una Nota medica creada.")
+        togLoad(false)
         console.log(err)
 			}
 		)
@@ -52,13 +54,13 @@ export default function SeccionNotaMedica({expediente, token}) {
   return (
     <form onSubmit={GenerarNota} autoComplete="off" className={styles.fullWidth}>
       <AccordionDetails className={styles.center}>
-        <Button variant="outlined" size="large">
+        <Button disabled={isLoad} variant="outlined" size="large">
           Crear nota médica
         </Button>
-        <Button component={Link} to={`/pacientes/detalles/${expediente}/nota-medica`} variant="outlined" size="large">
+        <Button disabled={isLoad} component={Link} to={`/pacientes/detalles/${expediente}/nota-medica`} variant="outlined" size="large">
           Ver nota médica
         </Button>
-        <Button type="submit" variant="outlined" size="large" startIcon={
+        <Button disabled={isLoad} type="submit" variant="outlined" size="large" startIcon={
           (isLoad ? <CircularProgress size={24} /> : <GetAppRoundedIcon />)
         }>
           Descargar Nota Médica

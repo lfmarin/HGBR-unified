@@ -46,6 +46,8 @@ export default function SeccionEncuesta({expediente, token}) {
 		)
 		.catch(
 			err => {
+        alert("Este paciente no ha tomado su encuesta.")
+        togLoad(false)
         console.log(err)
 			}
 		)

@@ -47,6 +47,8 @@ export default function SeccionExamenes({expediente, token}) {
 		)
 		.catch(
 			err => {
+        alert("Ocurrió un error generando el examen.")
+        togLoad(false)
         console.log(err)
 			}
 		)
