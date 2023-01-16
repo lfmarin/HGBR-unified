@@ -137,6 +137,12 @@ export default function App() {
           <main className={classes.main}>
           { RoutingPaths() }
           </main>
+          <footer>
+            <div className='footerRight'>
+              <a href="https://www.uv.mx/veracruz/fiee/">Proveeido por FIEE</a>
+              <img alt="Logotipo de FIEE" src="media/fiee.jpg"></img>
+            </div>
+          </footer>
         </ThemeProvider>
       </div>
     </BrowserRouter>
