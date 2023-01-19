@@ -43,6 +43,18 @@ namespace API_Hospital_Boca.Bussiness
             throw new System.NotImplementedException();
         }
 
+        public Doctore getClassDoctor(int idDoctor)
+        {
+            try
+            {
+                return context.Doctores.Where(d => d.IdDoctor == idDoctor).First();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
         public object getDoctor(int idDoctor)
         {
             try

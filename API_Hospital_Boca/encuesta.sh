@@ -33,7 +33,7 @@ convert encuesta.png \
 -gravity West -pointsize 22 -annotate +240-430 "$NOMBRE" \
 -gravity West -pointsize 22 -annotate +250-406 "$EDAD" \
 -gravity West -pointsize 22 -annotate +470-406 "$ESCOLARIDAD" \
--gravity West -pointsize 22 -annotate +770-406 "$OCUPACION" \
+-gravity West -pointsize 14 -annotate +770-406 "$OCUPACION" \
 -gravity West -pointsize 22 -annotate +270-382 "$NUM_HIJOS" \
 -gravity West -pointsize 22 -annotate +540-382 "$EDAD_MENOR" \
 -gravity West -pointsize 22 -annotate +750-382 "$RELIGION" \

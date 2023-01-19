@@ -8,6 +8,7 @@ namespace API_Hospital_Boca.Services
         IQueryable<object> getAll();
 
         object getDoctor(int idDoctor);
+        Doctore getClassDoctor(int idDoctor);
         void saveDoctor(Doctore d);
         void updateDoctor(Doctore d);
         void deleteDoctor(int idDoctor);

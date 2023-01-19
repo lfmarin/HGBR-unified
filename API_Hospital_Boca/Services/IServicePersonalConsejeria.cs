@@ -8,6 +8,7 @@ namespace API_Hospital_Boca.Services
         IQueryable<object> getAllPersonalConsejeria();
         void savePersonalConsejeria(Personalconsejerium pc);
         object getOnePersonalConsejeria(int idPersonal);
+        Personalconsejerium getClassPersonalConsejeria(int idPersonal);
         void updatePersonalConsejeria(Personalconsejerium pc);
     }
 }

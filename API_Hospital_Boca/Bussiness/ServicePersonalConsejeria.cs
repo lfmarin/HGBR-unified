@@ -47,6 +47,18 @@ namespace API_Hospital_Boca.Bussiness
             }
         }
 
+        public Personalconsejerium getClassPersonalConsejeria(int idPersonal)
+        {
+            try
+            {
+                return context.Personalconsejeria.Where(p => p.IdPersonal == idPersonal).First();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
         public void savePersonalConsejeria(Personalconsejerium pc)
         {
             try

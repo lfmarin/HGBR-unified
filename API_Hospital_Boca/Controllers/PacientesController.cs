@@ -20,15 +20,20 @@ namespace API_Hospital_Boca.Controllers
         private readonly IServiceFichaIdentificacion serviceFicha;
         private readonly IServiceEncuestaSeguimeinto serviceEncuesta;
         private readonly IServiceNotaMedica serviceNotaMedica;
+        private readonly IServiceDoctores serviceDoctor;
+        private readonly IServicePersonalConsejeria serviceConsejeria;
         public PacientesController(IServicePacientes service, IServiceHistoriaClinica serviceHistoria, 
                                     IServiceFichaIdentificacion serviceFicha, IServiceEncuestaSeguimeinto serviceEncuesta,
-                                    IServiceNotaMedica notaMedica)
+                                    IServiceNotaMedica notaMedica, IServiceDoctores serviceDoctor,
+                                    IServicePersonalConsejeria serviceConsejeria)
         {
             this.service = service;
             this.serviceHistoria = serviceHistoria;
             this.serviceFicha = serviceFicha;
             this.serviceEncuesta = serviceEncuesta;
             this.serviceNotaMedica = notaMedica;
+            this.serviceDoctor = serviceDoctor;
+            this.serviceConsejeria = serviceConsejeria;
         }
 
 
@@ -64,13 +69,13 @@ namespace API_Hospital_Boca.Controllers
 					return NotFound();
 				}
 
-				var nombre = info.Nombre;
-				var apMate = info.ApMaterno;
-				var apPate = info.ApPaterno;
-				var Famil1 = infoCons.fam1;
-				var Famil2 = infoCons.fam2;
-				var Doct = infoCons.doc;
                 var tiempoMes = DateTime.Now.ToString("MMMM");
+                // Doctores y Personal son llaves foráneas, asi que hay que obtener los valores.
+                Doctore doc = serviceDoctor.getClassDoctor( infoCons.doc );
+                Personalconsejerium pc = serviceConsejeria.getClassPersonalConsejeria( infoCons.personal );
+                // Console.WriteLine( infoCons.personal );
+                // Console.WriteLine( infoCons.doc );
+
 				ProcessStartInfo psi = new ProcessStartInfo();
 				psi.FileName = $"/bin/sh";
 				psi.WorkingDirectory = "./";
@@ -78,9 +83,10 @@ namespace API_Hospital_Boca.Controllers
 				// Crea el comando para correr la aplicación.
                 string proc_Str = $"-c \"./constancia.sh --NOMPACIENTE '{info.NombreCompleto}' \\";
                 proc_Str += $"--IDPACIENTE '{infoCons.pacienteID}' \\";
-                proc_Str += $"--TESTIGO1 '{Famil1}' \\";
-                proc_Str += $"--TESTIGO2 '{Famil2}' \\";
-                proc_Str += $"--MEDICOENCARGADO '{Doct}' \\";
+                proc_Str += $"--TESTIGO1 '{infoCons.fam1}' \\";
+                proc_Str += $"--TESTIGO2 '{infoCons.fam2}' \\";
+                proc_Str += $"--PERSONAL '{pc.NombreCompleto}' \\";
+                proc_Str += $"--MEDICOENCARGADO '{doc.NombreCompleto}' \\";
                 proc_Str += $"--MES '{tiempoMes}' \\";
                 psi.Arguments = proc_Str;
 
@@ -487,6 +493,7 @@ namespace API_Hospital_Boca.Controllers
         public string pacienteID { get; set; }
         public string fam1 { get; set; }
         public string fam2 { get; set; }
-        public string doc { get; set; }
+        public int personal { get; set; }
+        public int doc { get; set; }
     }
 }

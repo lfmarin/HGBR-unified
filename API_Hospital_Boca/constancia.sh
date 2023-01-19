@@ -38,7 +38,10 @@ convert const.png \
 -gravity West -pointsize 22 -annotate +920-480 "$MINUTO" \
 -gravity West -pointsize 22 -annotate +230+430 "$TESTIGO1" \
 -gravity West -pointsize 22 -annotate +628+440 "$TESTIGO2" \
--gravity West -pointsize 22 -annotate +270+520 "$MEDICOENCARGADO" $ARCHIVO.png
+-gravity West -pointsize 22 -annotate +270+520 "$MEDICOENCARGADO" \
+-gravity West -pointsize 22 -annotate +628+340 "$PERSONAL" \
+-gravity West -pointsize 22 -annotate +220+326 "$NOMPACIENTE" \
+$ARCHIVO.png
 
 # Una vez hecho todo esto, convierte el resultado a un PDF.
 convert $ARCHIVO.png $ARCHIVO.pdf
