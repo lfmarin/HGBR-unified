@@ -88,7 +88,6 @@ export default function ListaPacientes({token, revokeToken}) {
             }
           },
           error => {
-            console.log(error.response)
             if (error.response.status === 401){
               revokeToken()
               setErrorbd(true)
