@@ -245,6 +245,7 @@ namespace API_Hospital_Boca.Controllers
                 // ANTES DE TODO:
                 // Hay que encontrar si el paciente tiene un historial medico.
                 // Ya que este contendrá la información sobre sus opiniones del motivo de solicitud.
+                Doctore doc = serviceDoctor.getClassDoctor( infoVas.medicoResponsable );
                 Historiaclinica historiaMedica = serviceHistoria.getHistoriaClassByNumExp(infoVas.pacienteID);
                 Motivosolicitud motivo = serviceHistoria.getClassMotivo(historiaMedica.IdHistoriaClinica);
 
@@ -253,7 +254,7 @@ namespace API_Hospital_Boca.Controllers
 				psi.WorkingDirectory = "./";
                 // Crea el comando para correr la aplicación.
                 string numeroExpediente = infoVas.pacienteID;
-                string proc_Str = $"-c \"./post-inst.sh --NOMMEDICO '{infoVas.medicoResponsable}' \\";
+                string proc_Str = $"-c \"./post-inst.sh --NOMMEDICO '{doc.NombreCompleto}' \\";
                 proc_Str += $"--NUMEXPEDIENTE {numeroExpediente} \\";
 				proc_Str += $"--UNIDAD_MEDICA '{infoVas.unidadMedica}' \\";
 				proc_Str += $"--UNIDAD_DIRECCION '{historiaMedica.FkHospitalNavigation.EntidadFederativa}' \\";
@@ -476,7 +477,7 @@ namespace API_Hospital_Boca.Controllers
     public class InfoPostOper
     {
         public string pacienteID { get; set; }
-        public string medicoResponsable { get; set; }
+        public int medicoResponsable { get; set; }
         public string unidadMedica { get; set; }
     }
 
