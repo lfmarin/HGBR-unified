@@ -22,10 +22,11 @@ namespace API_Hospital_Boca.Controllers
         private readonly IServiceNotaMedica serviceNotaMedica;
         private readonly IServiceDoctores serviceDoctor;
         private readonly IServicePersonalConsejeria serviceConsejeria;
+        private readonly IServiceHospitales serviceHospital;
         public PacientesController(IServicePacientes service, IServiceHistoriaClinica serviceHistoria, 
                                     IServiceFichaIdentificacion serviceFicha, IServiceEncuestaSeguimeinto serviceEncuesta,
                                     IServiceNotaMedica notaMedica, IServiceDoctores serviceDoctor,
-                                    IServicePersonalConsejeria serviceConsejeria)
+                                    IServicePersonalConsejeria serviceConsejeria, IServiceHospitales serviceHospital)
         {
             this.service = service;
             this.serviceHistoria = serviceHistoria;
@@ -34,6 +35,7 @@ namespace API_Hospital_Boca.Controllers
             this.serviceNotaMedica = notaMedica;
             this.serviceDoctor = serviceDoctor;
             this.serviceConsejeria = serviceConsejeria;
+            this.serviceHospital = serviceHospital;
         }
 
 
@@ -246,8 +248,9 @@ namespace API_Hospital_Boca.Controllers
                 // Hay que encontrar si el paciente tiene un historial medico.
                 // Ya que este contendrá la información sobre sus opiniones del motivo de solicitud.
                 Doctore doc = serviceDoctor.getClassDoctor( infoVas.medicoResponsable );
-                Historiaclinica historiaMedica = serviceHistoria.getHistoriaClassByNumExp(infoVas.pacienteID);
-                Motivosolicitud motivo = serviceHistoria.getClassMotivo(historiaMedica.IdHistoriaClinica);
+                Hospitale hopst = serviceHospital.getHospital( infoVas.unidadMedica );
+                // Historiaclinica historiaMedica = serviceHistoria.getHistoriaClassByNumExp(infoVas.pacienteID);
+                // Motivosolicitud motivo = serviceHistoria.getClassMotivo(historiaMedica.IdHistoriaClinica);
 
 				ProcessStartInfo psi = new ProcessStartInfo();
 				psi.FileName = $"/bin/sh";
@@ -256,8 +259,8 @@ namespace API_Hospital_Boca.Controllers
                 string numeroExpediente = infoVas.pacienteID;
                 string proc_Str = $"-c \"./post-inst.sh --NOMMEDICO '{doc.NombreCompleto}' \\";
                 proc_Str += $"--NUMEXPEDIENTE {numeroExpediente} \\";
-				proc_Str += $"--UNIDAD_MEDICA '{infoVas.unidadMedica}' \\";
-				proc_Str += $"--UNIDAD_DIRECCION '{historiaMedica.FkHospitalNavigation.EntidadFederativa}' \\";
+				proc_Str += $"--UNIDAD_MEDICA '{hopst.UMedica}' \\";
+				proc_Str += $"--UNIDAD_DIRECCION '{hopst.EntidadFederativa}' \\";
                 proc_Str += $"--NOMPACIENTE '{info.NombreCompleto}'";
 
 				psi.Arguments = proc_Str;
@@ -478,7 +481,7 @@ namespace API_Hospital_Boca.Controllers
     {
         public string pacienteID { get; set; }
         public int medicoResponsable { get; set; }
-        public string unidadMedica { get; set; }
+        public int unidadMedica { get; set; }
     }
 
     public class InfoHistorialVasectomia

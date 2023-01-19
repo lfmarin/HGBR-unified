@@ -10,6 +10,7 @@ namespace API_Hospital_Boca.Bussiness
         {
             this.context = context;
         }
+
         public IQueryable<object> getAll()
         {
             try
@@ -20,6 +21,18 @@ namespace API_Hospital_Boca.Bussiness
                     JurSanitaria = h.JurSanitaria,
                     UMedica = h.UMedica
                 });
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        public Hospitale getHospital(int idHospital)
+        {
+            try
+            {
+                return context.Hospitales.Where(p => p.IdHospital == idHospital).First();
             }
             catch (System.Exception)
             {
