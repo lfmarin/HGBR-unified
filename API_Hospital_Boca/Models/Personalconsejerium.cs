@@ -13,7 +13,7 @@ namespace API_Hospital_Boca.Models
             Encuestaseguimientos = new HashSet<Encuestaseguimiento>();
         }
 
-        public string NombreCompleto => $"{Nombre} {ApMaterno} {ApPaterno}";
+        public string NombreCompleto => $"{Nombre} {ApPaterno} {ApMaterno}";
 
         public int IdPersonal { get; set; }
         public string Nombre { get; set; }

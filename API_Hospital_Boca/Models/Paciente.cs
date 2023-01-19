@@ -13,7 +13,7 @@ namespace API_Hospital_Boca.Models
             Historiaclinicas = new HashSet<Historiaclinica>();
         }
 
-		public string NombreCompleto => $"{Nombre} {ApMaterno} {ApPaterno}";
+		public string NombreCompleto => $"{Nombre} {ApPaterno} {ApMaterno}";
         public int Edad()
         {
             var today = DateTime.Today;
