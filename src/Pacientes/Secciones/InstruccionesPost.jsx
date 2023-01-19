@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { AccordionDetails, TextField, Button, FormControl, MenuItem, InputLabel, Select, CircularProgress } from '@material-ui/core'
+import { AccordionDetails, Button, FormControl, MenuItem, InputLabel, Select, CircularProgress } from '@material-ui/core'
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
@@ -21,9 +21,10 @@ export default function InstruccionesPost({expediente, token}) {
   const classes = useStyles()
   const [isLoad, togLoad] = useState(false)
   const [doctores, setDoctores] = useState([])
+  const [hospitales, setHospitales] = useState([])
 
   const [datos, setDatos] = useState({
-    fkPersonal: '',
+    fkUnidad: '',
     fkMedico: ''
   })
 
@@ -38,16 +39,13 @@ export default function InstruccionesPost({expediente, token}) {
     event.preventDefault();
     togLoad(true)
 
-    // const med = document.getElementById("medico").value
-    const uni = document.getElementById("unidad").value
-
     axios
 		.post(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/pacientes/instrucciones`,
     {
       // TODO: Aplicar relación por medio de Historia Clinica.
       pacienteID: expediente,
       medicoResponsable: datos.fkMedico,
-      unidadMedica: uni,
+      unidadMedica: datos.fkUnidad,
     },{
       responseType: 'arraybuffer',
       headers: {
@@ -95,6 +93,28 @@ export default function InstruccionesPost({expediente, token}) {
       )
   }, [token])
 
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/hospitales/all', {
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${token()}`,
+        },
+      })
+      .then(
+        response => {
+          if (response.status === 200) {
+            console.log(response.data)
+            setHospitales(response.data)
+            // setErrorbd(false)
+          }
+        },
+        error => {
+          // if (!error.response) setErrorbd(true)
+        }
+      )
+  }, [token])
+
   return (
     <AccordionDetails>
       <form onSubmit={GenerarInstrucciones} autoComplete="off" className={classes.fullWidth}>
@@ -122,15 +142,29 @@ export default function InstruccionesPost({expediente, token}) {
             </Select>
           </FormControl>
 
-          <TextField
-            id="unidad"
-            variant="outlined"
-            fullWidth
-            required
-            disabled={isLoad}
-            className={classes.marginTop}
-            label="Unidad Médica"
-          />
+          <FormControl variant="outlined" fullWidth className={clsx(classes.input)}>
+            <InputLabel id="fkUnidad">Unidad Médica</InputLabel>
+            <Select
+              required
+              labelId="fkUnidad"
+              id="fkUnidad"
+              variant="outlined"
+              name='fkUnidad'
+              fullWidth
+              onChange={handleChange}
+              disabled={isLoad}
+              defaultValue=""
+              label="Unidad Médica"
+            >
+              {hospitales.map(n => {
+                return (
+                  <MenuItem value={n.idHospital}>
+                    {n.uMedica}, {n.entidadFederativa}
+                  </MenuItem>
+                )
+              })}
+            </Select>
+          </FormControl>
 
           <Button
             variant="outlined"
