@@ -22,11 +22,6 @@ done
 ##############
 NOMTEMP="post-temp-1-$NUMEXPEDIENTE"
 
-# --NOMMEDICO
-# --UNIDAD_MEDICA
-# --UNIDAD_DIRECCION
-# --NOMPACIENTE
-
 convert post-op_p1.png \
 -gravity West -pointsize 22 -annotate +186+422 "$NOMPACIENTE" \
 -gravity West -pointsize 22 -annotate +453+533 "$NOMMEDICO" $NOMTEMP.png

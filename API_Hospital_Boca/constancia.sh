@@ -1,11 +1,5 @@
 #!/bin/bash
 # Convierte la primera imagen con la informacion que tenemos actualmente.
-# NOMPACIENTE=$1
-# IDPACIENTE=$2
-# TESTIGO1=$3
-# TESTIGO2=$4
-# MEDICOENCARGADO=$5
-# MES=$6
 
 ###
 # Declara los valores de argumentos.
@@ -30,6 +24,7 @@ echo "Comenzando creacion de imagen"
 ARCHIVO="const_$IDPACIENTE"
 
 convert const.png \
+-gravity West -pointsize 22 -annotate +330-524 "Hospital General de Boca del Rio" \
 -gravity West -pointsize 22 -annotate +350-434 "$NOMPACIENTE" \
 -gravity West -pointsize 22 -annotate +270-480 "$DIA" \
 -gravity West -pointsize 22 -annotate +420-480 "$MES" \

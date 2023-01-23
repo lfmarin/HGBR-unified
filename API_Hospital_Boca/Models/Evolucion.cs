@@ -9,7 +9,7 @@ namespace API_Hospital_Boca.Models
     {
         public int FkHistoria { get; set; }
         public string Complicaciones { get; set; }
-        public bool? Espermaconteo { get; set; }
+        public short Espermaconteo { get; set; }
         public DateTime? Fecha1 { get; set; }
         public string Resultado1 { get; set; }
         public DateTime? Fecha2 { get; set; }
