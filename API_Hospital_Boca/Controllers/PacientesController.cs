@@ -141,23 +141,23 @@ namespace API_Hospital_Boca.Controllers
                 Historiaclinica historiaMedica = serviceHistoria.getHistoriaClassByNumExp(infoVas.pacienteID);
                 Motivosolicitud motivo = serviceHistoria.getClassMotivo(historiaMedica.IdHistoriaClinica);
 
-				ProcessStartInfo psi = new ProcessStartInfo();
-				psi.FileName = $"/bin/sh";
-				psi.WorkingDirectory = "./";
+		ProcessStartInfo psi = new ProcessStartInfo();
+		psi.FileName = $"/bin/sh";
+		psi.WorkingDirectory = "./";
                 // Crea el comando para correr la aplicación.
                 string numeroExpediente = infoVas.pacienteID;
                 string proc_Str = $"-c \"./vasectomia_exp.sh --NUMEXPEDIENTE {numeroExpediente} \\";
-				//proc_Str += $"--NUMEXPEDIENTE {numeroExpediente} \\";
-				// TODO: ¡Obtener unidad médica!
-				proc_Str += $"--UNIDAD_MEDICA '{historiaMedica.FkHospitalNavigation.UMedica}' \\";
-				// TODO: ¡Obtener Dirección!
-				proc_Str += $"--UNIDAD_DIRECCION '{historiaMedica.FkHospitalNavigation.EntidadFederativa}' \\";
+		//proc_Str += $"--NUMEXPEDIENTE {numeroExpediente} \\";
+		// TODO: ¡Obtener unidad médica!
+		proc_Str += $"--UNIDAD_MEDICA '{historiaMedica.FkHospitalNavigation.UMedica}' \\";
+		// TODO: ¡Obtener Dirección!
+		proc_Str += $"--UNIDAD_DIRECCION '{historiaMedica.FkHospitalNavigation.EntidadFederativa}' \\";
                 // TODO: ¡Obtener numero telefónico!
                 proc_Str += "--UNIDAD_TELEFONO '3719501438' \\";
                 proc_Str += $"--NOMPACIENTE '{info.NombreCompleto}' \\";
                 proc_Str += $"--EDAD {info.Edad()} \\";
-				proc_Str += $"--FECHA_NACIMIENTO '{info.FechaNac.ToString("dd 'de' MMMM 'del' yyyy")}' \\";
-				proc_Str += $"--ESTADO_CIVIL '{info.FkEstadoCivilNavigation.NombreEstado}' \\";
+		proc_Str += $"--FECHA_NACIMIENTO '{info.FechaNac.ToString("dd 'de' MMMM 'del' yyyy")}' \\";
+		proc_Str += $"--ESTADO_CIVIL '{info.FkEstadoCivilNavigation.NombreEstado}' \\";
                 proc_Str += $"--ESCOLARIDAD '{info.FkEscolaridadNavigation.NombreEscolaridad}' \\";
                 proc_Str += $"--OCUPACION '{info.FkOcupacionNavigation.NombreOcupacion}' \\";
                 proc_Str += $"--IVS '{info.Ivs}' \\";
@@ -195,7 +195,25 @@ namespace API_Hospital_Boca.Controllers
                 proc_Str += $"--FECHA_CIRUGIA '{historiaMedica.Procquirurgico.FechaCirugia.ToString("dd 'de' MMMM 'del' yyyy")}' \\";
                 proc_Str += $"--NOM_CIRUJANO '{historiaMedica.Procquirurgico.FkDoctorNavigation.NombreCompleto}' \\";
                 proc_Str += $"--NOTA_QUIR '{historiaMedica.Procquirurgico.NotaQuirurgica}' \\";
-                proc_Str += $"--PAT_ENCONTRADA '{historiaMedica.Procquirurgico.Patologia}'";
+                proc_Str += $"--PAT_ENCONTRADA '{historiaMedica.Procquirurgico.Patologia}' \\";
+
+                proc_Str += $"--EST_FECHA_ENVIO '{historiaMedica.Estudioanatomo.FechaEnvio.ToString("dd 'de' MMMM 'del' yyyy")}' \\";
+                proc_Str += $"--EST_CLAVE '{historiaMedica.Estudioanatomo.Clave}' \\";
+                proc_Str += $"--EST_RESULTADO '{historiaMedica.Estudioanatomo.Resultado}' \\";
+
+                // ???: Deberia ser un booleano?
+                proc_Str += $"--COMPLICACIONES '{(historiaMedica.Evolucion.Complicaciones.Equals("Ninguna") ? "0" : "1")}' \\";
+                proc_Str += $"--RESULTADO1 '{historiaMedica.Evolucion.Resultado1}' \\";
+                proc_Str += $"--ESPERMACONTEO '{historiaMedica.Evolucion.Espermaconteo}' \\"; 
+                
+                if( historiaMedica.Evolucion.Fecha1.HasValue )
+                    proc_Str += $"--FECHA1 '{historiaMedica.Evolucion.Fecha1.Value.ToString("dd/MMMM/yyyy")}' \\";
+                if( historiaMedica.Evolucion.Fecha2.HasValue )
+                    proc_Str += $"--FECHA2 '{historiaMedica.Evolucion.Fecha2.Value.ToString("dd/MMMM/yyyy")}' \\";
+
+                proc_Str += $"--RESULTADO1 '{historiaMedica.Evolucion.Resultado1}' \\";
+                proc_Str += $"--RESULTADO2 '{historiaMedica.Evolucion.Resultado2}' ";
+
 
 				psi.Arguments = proc_Str;
 				psi.UseShellExecute = false;
@@ -215,7 +233,7 @@ namespace API_Hospital_Boca.Controllers
 				string createdFileName = $"./vasec_{numeroExpediente}.pdf";
 				if (!System.IO.File.Exists(createdFileName))
 				{
-                    Console.WriteLine("Could not find the file to output.");
+					Console.WriteLine("Could not find the file to output.");
 					return NotFound();
 				}
 				Response.Headers.ContentDisposition.Append("inline; filename=" + createdFileName);
@@ -334,7 +352,6 @@ namespace API_Hospital_Boca.Controllers
                 proc_Str += $"--MES {ahora.ToString("MMMM")} \\";
                 proc_Str += $"--YEAR {ahora.Year} \\";
                 proc_Str += $"--EDAD {info.Edad()} \\";
-                proc_Str += $"--SERVICIO 'servicio' \\";
                 proc_Str += $"--DIAGNOSTICO_PRE '{nota.DiagnosticoPre}' \\";
                 proc_Str += $"--DIAGNOSTICO_POS '{nota.DiagnosticoPost}' \\";
                 proc_Str += $"--CIRUJANO '{nota.FkDoctorNavigation.NombreCompleto}' \\";
@@ -345,7 +362,7 @@ namespace API_Hospital_Boca.Controllers
                 proc_Str += $"--FECHA_CIR '{nota.FechaCirugia.ToString("dd 'de' MMMM 'del' yyyy")}' \\";
                 proc_Str += $"--GENERO 'Mas' \\";
                 proc_Str += $"--NUMSEGURO '12342134' \\";
-                proc_Str += $"--SERVICIO 'servicio' \\";
+                proc_Str += $"--SERVICIO '{ficha.Servicio}' \\";
                 proc_Str += $"--DIAGNOSTICO '{ficha.Diagnostico}' \\";
 
 				psi.Arguments = proc_Str;

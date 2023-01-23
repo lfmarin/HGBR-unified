@@ -141,14 +141,14 @@ convert -quiet vas_p2.png \
 
 #
 case $TIPO_PACIENTE in
-	'Sano' ) XPOS_PONT="+240";;
+	'Sano' ) XPOS_PONT="+248";;
 	'Psiquiátrico' ) XPOS_PONT="+384";;
 	'Diabético' ) XPOS_PONT="+494";;
 	'Hipertenso' ) XPOS_PONT="+622";;
 	'Cardiópata' ) XPOS_PONT="+750";;
 	* ) XPOS_PONT="+2000";;
 esac
-convert -quiet $NOM2TEMP.png -pointsize 22 -annotate "$XPOS_PONT+529" "X" $NOM2TEMP.png
+convert -quiet $NOM2TEMP.png -pointsize 22 -annotate "$XPOS_PONT+532" "X" $NOM2TEMP.png
 
 convert -quiet $NOM2TEMP.png -pointsize 22 -annotate +196+490 "$EXPLORACION_ORGANOS" $NOM2TEMP.png
 
@@ -163,10 +163,44 @@ convert -quiet $NOM2TEMP.png \
 -pointsize 22 -annotate +133+702 "$NOTA_QUIR" \
 -pointsize 22 -annotate +133+744 "$PAT_ENCONTRADA" $NOM2TEMP.png
 
+######
+# 5 Estudio anatomopatológico
+######
+convert -quiet $NOM2TEMP.png \
+	-pointsize 18 -annotate +332+848 "$EST_FECHA_ENVIO" \
+	-pointsize 18 -annotate +700+848 "$EST_CLAVE" \
+	-pointsize 20 -annotate +300+870 "$EST_RESULTADO" $NOM2TEMP.png
+
+######
+# 6 Evolucion
+######
+case $COMPLICACIONES in
+	0 ) XPOS_PONT="+748" ;;
+	1 ) XPOS_PONT="+460" ;;
+esac
+
+echo $COMPLICACIONES
+echo $XPOS_PONT
+
+convert $NOM2TEMP.png \
+	-pointsize 22 -annotate "$XPOS_PONT+954" "X" $NOM2TEMP.png
+
+convert $NOM2TEMP.png \
+	-pointsize 22 -annotate +310+1016 "$ESPERMACONTEO" \
+	-pointsize 18 -annotate +260+1054 "$FECHA1" \
+	-pointsize 18 -annotate +740+1054 "$RESULTADO1" \
+	-pointsize 18 -annotate +260+1076 "$FECHA2" \
+	-pointsize 18 -annotate +740+1076 "$RESULTADO2" $NOM2TEMP.png
+
+# El nombre del medico para firmar.
+convert $NOM2TEMP.png \
+	-pointsize 18 -annotate +800+1000 "$MEDICOENCARGADO" $NOM2TEMP.png
+
 # Una vez hecho todo esto, convierte el resultado a un PDF.
 convert $NOMTEMP.png $NOM2TEMP.png vasec_$NUMEXPEDIENTE.pdf
 # Borra el archivo temporal, no lo necesitamos.
 rm $NOMTEMP.png
+rm $NOM2TEMP.png
 
 echo "terminado"
 

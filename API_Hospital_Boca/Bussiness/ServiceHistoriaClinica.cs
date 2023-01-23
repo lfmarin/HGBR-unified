@@ -223,6 +223,12 @@ namespace API_Hospital_Boca.Bussiness
                 Doctore doc = context.Doctores.Where(p => p.IdDoctor == proc.FkDoctor).First();
                 proc.FkDoctorNavigation = doc;
 
+		        Evolucion evo = context.Evolucions.Where(p => p.FkHistoria == hs.IdHistoriaClinica).First();
+		        hs.Evolucion = evo;
+
+		        Estudioanatomo estudio = context.Estudioanatomos.Where(p => p.FkHistoria == hs.IdHistoriaClinica).First();
+		        hs.Estudioanatomo = estudio;
+
                 hs.Procquirurgico = proc;
 
                 return hs;
