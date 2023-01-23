@@ -19,7 +19,7 @@ const headCells = [
   { id: 'nombre', numeric: false, label: 'Nombre' },
   { id: 'apPaterno', numeric: false, label: 'Apellido Paterno' },
   { id: 'apMaterno', numeric: false, label: 'Apellido Materno' },
-  { id: 'edit', numeric: false, label: 'Accion' },
+  { id: 'edit', numeric: false, label: 'Acción' },
 ]
 
 const useStyles = makeStyles(theme => ({

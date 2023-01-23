@@ -147,7 +147,7 @@ export default function CartaConsentimiento({expediente, token}) {
         </div>
         <div className={classes.center}>
           <FormControl variant="outlined" fullWidth className={clsx(classes.input)}>
-            <InputLabel id="fkPersonal">Personal que proporcionó la consejería</InputLabel>
+            <InputLabel>Personal que proporcionó la consejería</InputLabel>
             <Select
               required
               labelId="fkPersonal"
@@ -171,7 +171,7 @@ export default function CartaConsentimiento({expediente, token}) {
           </FormControl>
           {/*  */}
           <FormControl variant="outlined" fullWidth className={clsx(classes.input)}>
-            <InputLabel id="fkMedico">Médica o el Médico tratante que otorgó el método</InputLabel>
+            <InputLabel>Médica o el Médico tratante que otorgó el método</InputLabel>
             <Select
               required
               labelId="fkMedico"

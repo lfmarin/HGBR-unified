@@ -53,7 +53,7 @@ export default function TempDrawer({token, open, menuCallBack}) {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <List>
+      {hastoken && <List>
         <Link className={classes.enlace} to="/pacientes">
           <ListItem button key="pacientes">
             <ListItemIcon>
@@ -62,11 +62,11 @@ export default function TempDrawer({token, open, menuCallBack}) {
             <ListItemText primary="Pacientes" />
           </ListItem>
         </Link>
-      </List>
+      </List>}
 
       <Divider />
 
-      <List>
+      {hastoken && <List>
         <Link className={classes.enlace} to="/doctores">
           <ListItem button key="doctores">
             <ListItemIcon>
@@ -75,11 +75,11 @@ export default function TempDrawer({token, open, menuCallBack}) {
             <ListItemText primary="Doctores" />
           </ListItem>
         </Link>
-      </List>
+      </List>}
 
       <Divider />
 
-      <List>
+      {hastoken && <List>
         <Link className={classes.enlace} to="/consejeria">
           <ListItem button key="consejeria">
             <ListItemIcon>
@@ -88,11 +88,11 @@ export default function TempDrawer({token, open, menuCallBack}) {
             <ListItemText primary="Personal de Consejería" />
           </ListItem>
         </Link>
-      </List>
+      </List>}
 
       <Divider />
 
-      <List>
+      {hastoken && <List>
         <Link className={classes.enlace} to="/usuarios">
           <ListItem button key="usuarios">
             <ListItemIcon>
@@ -101,11 +101,11 @@ export default function TempDrawer({token, open, menuCallBack}) {
             <ListItemText primary="Usuarios" />
           </ListItem>
         </Link>
-      </List>
+      </List>}
 
       <Divider />
 
-      <List>
+      {hastoken && <List>
         <Link className={classes.enlace} to="/cuenta">
           <ListItem button key="cuenta">
             <ListItemIcon>
@@ -114,7 +114,7 @@ export default function TempDrawer({token, open, menuCallBack}) {
             <ListItemText primary="Cuenta" />
           </ListItem>
         </Link>
-      </List>
+      </List>}
 
       <Divider />
 

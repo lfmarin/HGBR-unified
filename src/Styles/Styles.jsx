@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
       color: "white",
     },
     head: {
-      backgroundColor: "#0A043C",
+      backgroundColor: "#fff4ef",
       width: '100%',
       display: 'flex',
     },

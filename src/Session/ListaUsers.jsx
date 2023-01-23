@@ -33,7 +33,8 @@ const headCells = [
 	{ id: 'id', numeric: false, label: 'ID' },
 	{ id: 'userName', numeric: false, label: 'Nombre de Usuario' },
 	{ id: 'idDoctor', numeric: false, label: 'Doctor asignado' },
-	{ id: 'idRole', numeric: false, label: 'Rol asignado' }
+	{ id: 'idRole', numeric: false, label: 'Rol asignado' },
+	{ id: 'act', label: 'Acción' }
   ]
 
 /**
@@ -193,7 +194,7 @@ class ListaUsuarios extends React.Component {
 										variant="outlined"
 										sx={{ borderColor: '#AC3833', color: '#AC3833' }}
 									>
-									Expediente
+									Detalles
 									</Button>
 								</TableCell>
 							</TableRow>

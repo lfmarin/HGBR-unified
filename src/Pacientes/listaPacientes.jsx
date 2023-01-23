@@ -22,7 +22,7 @@ const headCells = [
   { id: 'apMaerno', numeric: false, label: 'Apellido Materno' },
   { id: 'fechaNacimiento', numeric: false, label: 'Edad' },
   { id: 'fechaNacimiento', numeric: false, label: 'Fecha de Nacimiento' },
-  { id: 'accion', numeric: false },
+  { id: 'accion', numeric: false, label: "Acción" },
 ]
 
 export default function ListaPacientes({token, revokeToken}) {

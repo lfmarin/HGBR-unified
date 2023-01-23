@@ -121,9 +121,9 @@ export default function NotaMedica({expediente, token}) {
           }
         },
         error => {
-          if (!error.response) {
-            setErrorbd(true)
-            setShow(false)
+          if (error.response) {
+            // setErrorbd(true)
+            setShow(true)
           }
         }
       )
