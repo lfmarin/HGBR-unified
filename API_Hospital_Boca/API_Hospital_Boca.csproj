@@ -29,8 +29,6 @@
     <None Remove="Serilog.Sinks.MariaDB" />
     <None Remove="Serilog.Sinks.Console" />
     <None Remove="PdfSharp" />
-    <None Remove="System.Drawing.Common, Version=0.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
-    <None Remove="System.Drawing.Common" />
     <None Remove="SkiaSharp" />
     <None Remove="_basectomia\.DS_Store" />
     <None Remove="vas_p1.png" />
@@ -45,9 +43,6 @@
     <None Remove="nota_medica.sh" />
     <None Remove="nota-p1.png" />
     <None Remove="nota-p2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Drawing.Common, Version=0.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
   </ItemGroup>
   <ItemGroup>
     <None Update="BaltimoreCyberTrustRoot.crt.pem">

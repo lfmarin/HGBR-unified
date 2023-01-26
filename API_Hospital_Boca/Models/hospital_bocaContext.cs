@@ -59,7 +59,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdCalidadRelacion)
                     .HasName("PRIMARY");
 
-                entity.ToTable("calidadrelacion");
+                entity.ToTable("CalidadRelacion");
 
                 entity.Property(e => e.IdCalidadRelacion).HasColumnName("idCalidadRelacion");
 
@@ -73,7 +73,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdCalidad)
                     .HasName("PRIMARY");
 
-                entity.ToTable("calidadservicio");
+                entity.ToTable("CalidadServicio");
 
                 entity.Property(e => e.IdCalidad).HasColumnName("idCalidad");
 
@@ -87,7 +87,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.FkFicha)
                     .HasName("PRIMARY");
 
-                entity.ToTable("cartaconsentimiento");
+                entity.ToTable("CartaConsentimiento");
 
                 entity.HasIndex(e => e.FkConsejeria, "fkConsejeria");
 
@@ -140,7 +140,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdDoctor)
                     .HasName("PRIMARY");
 
-                entity.ToTable("doctores");
+                entity.ToTable("Doctores");
 
                 entity.Property(e => e.IdDoctor).HasColumnName("idDoctor");
 
@@ -162,7 +162,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.FkPaciente)
                     .HasName("PRIMARY");
 
-                entity.ToTable("encuestaseguimiento");
+                entity.ToTable("EncuestaSeguimiento");
 
                 entity.HasIndex(e => e.FkCalidad, "fkCalidad");
 
@@ -277,7 +277,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdEscolaridad)
                     .HasName("PRIMARY");
 
-                entity.ToTable("escolaridad");
+                entity.ToTable("Escolaridad");
 
                 entity.Property(e => e.IdEscolaridad).HasColumnName("idEscolaridad");
 
@@ -291,7 +291,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdEstadoCivil)
                     .HasName("PRIMARY");
 
-                entity.ToTable("estadocivil");
+                entity.ToTable("EstadoCivil");
 
                 entity.Property(e => e.IdEstadoCivil).HasColumnName("idEstadoCivil");
 
@@ -305,7 +305,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.FkHistoria)
                     .HasName("PRIMARY");
 
-                entity.ToTable("estudioanatomo");
+                entity.ToTable("EstudioAnatomo");
 
                 entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
 
@@ -333,7 +333,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.FkHistoria)
                     .HasName("PRIMARY");
 
-                entity.ToTable("evolucion");
+                entity.ToTable("Evolucion");
 
                 entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
 
@@ -371,7 +371,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdFicha)
                     .HasName("PRIMARY");
 
-                entity.ToTable("fichaidentificacion");
+                entity.ToTable("FichaIdentificacion");
 
                 entity.HasIndex(e => e.FkPaciente, "fkPaciente");
 
@@ -400,7 +400,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdHistoriaClinica)
                     .HasName("PRIMARY");
 
-                entity.ToTable("historiaclinica");
+                entity.ToTable("HistoriaClinica");
 
                 entity.HasIndex(e => e.FkHospital, "fkHospital");
 
@@ -434,7 +434,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.FkHistoria)
                     .HasName("PRIMARY");
 
-                entity.ToTable("historiaexploracion");
+                entity.ToTable("HistoriaExploracion");
 
                 entity.Property(e => e.FkHistoria).HasColumnName("fkHistoria");
 
@@ -494,7 +494,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdHospital)
                     .HasName("PRIMARY");
 
-                entity.ToTable("hospitales");
+                entity.ToTable("Hospitales");
 
                 entity.Property(e => e.IdHospital).HasColumnName("idHospital");
 
@@ -516,7 +516,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.FkFicha)
                     .HasName("PRIMARY");
 
-                entity.ToTable("instruccionespost");
+                entity.ToTable("InstruccionesPost");
 
                 entity.HasIndex(e => e.FkDoctor, "fkDoctor");
 
@@ -550,7 +550,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdLugar)
                     .HasName("PRIMARY");
 
-                entity.ToTable("lugarreferencia");
+                entity.ToTable("LugarReferencia");
 
                 entity.Property(e => e.IdLugar).HasColumnName("idLugar");
 
@@ -564,7 +564,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdMetodo)
                     .HasName("PRIMARY");
 
-                entity.ToTable("metodoplanificacion");
+                entity.ToTable("MetodoPlanificacion");
 
                 entity.Property(e => e.IdMetodo).HasColumnName("idMetodo");
 
@@ -578,7 +578,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.FkHistoria)
                     .HasName("PRIMARY");
 
-                entity.ToTable("motivosolicitud");
+                entity.ToTable("MotivoSolicitud");
 
                 entity.HasIndex(e => e.FkMetodoPlanificacion, "fkMetodoPlanificacion");
 
@@ -616,7 +616,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.FkFicha)
                     .HasName("PRIMARY");
 
-                entity.ToTable("notamedica");
+                entity.ToTable("NotaMedica");
 
                 entity.HasIndex(e => e.FkDoctor, "fkDoctor");
 
@@ -677,7 +677,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdOcupacion)
                     .HasName("PRIMARY");
 
-                entity.ToTable("ocupacion");
+                entity.ToTable("Ocupacion");
 
                 entity.Property(e => e.IdOcupacion).HasColumnName("idOcupacion");
 
@@ -691,7 +691,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdOpinion)
                     .HasName("PRIMARY");
 
-                entity.ToTable("opinionpareja");
+                entity.ToTable("OpinionPareja");
 
                 entity.Property(e => e.IdOpinion).HasColumnName("idOpinion");
 
@@ -705,7 +705,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.NoExpediente)
                     .HasName("PRIMARY");
 
-                entity.ToTable("pacientes");
+                entity.ToTable("Pacientes");
 
                 entity.HasIndex(e => e.FkEscolaridad, "fkEscolaridad");
 
@@ -818,7 +818,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdPersonal)
                     .HasName("PRIMARY");
 
-                entity.ToTable("personalconsejeria");
+                entity.ToTable("PersonalConsejeria");
 
                 entity.Property(e => e.IdPersonal).HasColumnName("idPersonal");
 
@@ -840,7 +840,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.FkHistoria)
                     .HasName("PRIMARY");
 
-                entity.ToTable("procquirurgico");
+                entity.ToTable("ProcQuirurgico");
 
                 entity.HasIndex(e => e.FkDoctor, "fkDoctor");
 
@@ -877,7 +877,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.IdReligion)
                     .HasName("PRIMARY");
 
-                entity.ToTable("religion");
+                entity.ToTable("Religion");
 
                 entity.Property(e => e.IdReligion).HasColumnName("idReligion");
 
@@ -891,7 +891,7 @@ namespace API_Hospital_Boca.Models
                 entity.HasKey(e => e.FkFicha)
                     .HasName("PRIMARY");
 
-                entity.ToTable("solicitudexamenes");
+                entity.ToTable("SolicitudExamenes");
 
                 entity.HasIndex(e => e.FkDoctor, "fkDoctor");
 
