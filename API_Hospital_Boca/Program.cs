@@ -10,6 +10,7 @@ using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,13 @@ using System;
 using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
 var configuration = builder.Configuration;
 configuration.AddEnvironmentVariables();
 
@@ -85,7 +93,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("MY_CORS", builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "https://ashy-meadow-08cbc3810.2.azurestaticapps.net");
+        builder.AllowAnyOrigin();
         builder.AllowAnyMethod();
         builder.AllowAnyHeader();
     });
@@ -97,6 +105,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
+app.UseForwardedHeaders();
 
 app.UseHttpsRedirection();
 
