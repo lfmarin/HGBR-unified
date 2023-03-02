@@ -3,7 +3,7 @@ import { AccordionDetails, Button, CircularProgress } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
 import { Link } from 'react-router-dom'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 

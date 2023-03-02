@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import useStyles from '../Styles/detallesStyles'
-import { useParams, Navigate } from 'react-router'
+import { useParams, Navigate } from 'react-router-dom'
 import axios from 'axios'
 import { TextField } from '@mui/material'
 import './editar.css'

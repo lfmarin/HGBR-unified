@@ -4,7 +4,7 @@ import { Button, TextField, Typography } from '@material-ui/core'
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
 import clsx from 'clsx'
 import axios from 'axios'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
 
 export default function Evolucion({token}) {

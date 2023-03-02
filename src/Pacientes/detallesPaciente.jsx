@@ -9,7 +9,7 @@ import CartaConsentimiento from './Secciones/CartaConsentimiento'
 import InstruccionesPost from './Secciones/InstruccionesPost'
 import SeccionEncuesta from './Secciones/Encuesta'
 import SeccionExamenes from './Secciones/Examenes'
-import { Navigate, useParams } from 'react-router'
+import { Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 export default function DetallesPaciente({token}) {

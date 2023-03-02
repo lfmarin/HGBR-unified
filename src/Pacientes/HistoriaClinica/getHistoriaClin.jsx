@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import axios from 'axios'
 import useStyles from '../../Styles/formularioStyles'
 import { Typography } from '@material-ui/core'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 
 export default function GetHistoriaClinica({token}) {
   const style = useStyles()
