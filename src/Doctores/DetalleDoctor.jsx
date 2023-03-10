@@ -26,8 +26,7 @@ export default function DetalleDoctor({token, revokeToken}) {
 	console.log(datos)
 
 	// Envia el nuevo cambio al API.
-	axios
-	.post(`${process.env.REACT_APP_DOCTORES}update`, datos,
+	axios.post(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/doctores/update', datos,
 	{
 		headers: {
 			'Content-type': 'application/json',
@@ -51,7 +50,6 @@ export default function DetalleDoctor({token, revokeToken}) {
 
   const handleChange = event => {
 	//const {name, value} = e.target;
-	console.log("chabge")
 	setDatos({
 	  ...datos,
 	  [event.target.name]: event.target.value,
@@ -120,7 +118,7 @@ export default function DetalleDoctor({token, revokeToken}) {
 						id="box"
 						label="Nombre"
 						variant="outlined"
-						name="nombre"
+						name="Nombre"
 						defaultValue={datos.Nombre}
 						onChange={handleChange}
 						fullWidth
@@ -132,7 +130,7 @@ export default function DetalleDoctor({token, revokeToken}) {
 						id="box"
 						label="Apellido Paterno"
 						variant="outlined"
-						name="apPaterno"
+						name="ApPaterno"
 						defaultValue={datos.ApPaterno}
 						onChange={handleChange}
 						fullWidth
@@ -144,7 +142,7 @@ export default function DetalleDoctor({token, revokeToken}) {
 						id="box"
 						label="Apellido Materno"
 						variant="outlined"
-						name="apMaterno"
+						name="ApMaterno"
 						defaultValue={datos.ApMaterno}
 						onChange={handleChange}
 						fullWidth

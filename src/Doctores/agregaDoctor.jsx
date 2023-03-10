@@ -10,16 +10,14 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
 import { Grid } from '@mui/material'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
-import { useEffect } from 'react'
 
-export default function RegistroDoctor() {
+export default function RegistroDoctor({token}) {
   const [isFail, setIsFail] = useState(false)
   const [datos, setDatos] = useState({
     Nombre: '',
     ApPaterno: '',
     ApMaterno: '',
   })
-  const [token] = useState(sessionStorage.getItem('jwtToken'));
   const [NoPermitido, setPermit] = useState(false)
   const [errorbd, setErrorbd] = useState(false)
   const [finish, setFinish] = useState(false)
@@ -38,7 +36,7 @@ export default function RegistroDoctor() {
         {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token()}`
           },
         }
       )
@@ -50,30 +48,12 @@ export default function RegistroDoctor() {
           }
         },
         error => {
+          if (error.response && error.response.status === 401)
+              setPermit(true)
           if (!error.response) setErrorbd(true)
         }
       )
   }
-
-  const cargaPaciente = () => {
-    axios
-      .get(process.env.REACT_APP_SERVIDOR + `/hospitalBoca/doctores/1`, {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-      })
-      .then(
-        response => { /* No se hace nada, esto es solo para verificación. */ },
-        error => {
-          setPermit(error.response.status === 403)
-        }
-      )
-  }
-
-  useEffect(() => {
-    cargaPaciente()
-  })
 
   const handleChange = e => {
     const { name, value } = e.target

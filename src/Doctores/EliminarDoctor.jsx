@@ -65,7 +65,7 @@ export default function EliminarDoctor({token, revokeToken}) {
     if (load) {
       const cargaPaciente = () => {
         axios
-          .get(`${process.env.REACT_APP_DOCTORES}${noDoctor}`, {
+          .get(`${process.env.REACT_APP_SERVIDOR + process.env.REACT_APP_DOCTORES}${noDoctor}`, {
             headers: {
               'Content-type': 'application/json',
               'Authorization': `Bearer ${token()}`
