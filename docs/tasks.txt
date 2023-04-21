@@ -1,0 +1,18 @@
+-solo los usuarios con el rol de recepcionistas podran dar de alta, modificar y *eliminar* pacientes
+-hacer catalogos para listar sexo, turno, municipio, padecimietos**
+-colocar los enlaces en los campos de CURP, IMSS, ISSSTE, etc.
+-modificar los campos en la BD, todas las carpetas relacionadas en la API y en la webapp (previa autorizacion de la ing. y marin*)
+-CREAR la entidad admisiones y todo lo que esta conlleve
+	-crear bd, modelos y vistas
+		-vistas, opcion en la webapp principal, 
+
+COMENTAR CON LA ING. TERESA
+-los campos que estamos asumiendo
+-que nos proporcione el listado de padecimientos
+-en caso de usarse imagenes, colocar como INE la clave de elector y el numero de identificación
+-asi mismo, que el personal de recepcion agregue las claves o folios de los documentos da a entender que los pacientes ya pasaron por el proceso de verificación, por lo que no será necesario pedir dicho documentos a cada rato, esto va asociado a el hecho de que NADIE MÁS puede modificar esos datos, los doctores sólo podrán CONSULTAR
+-sera muy necesaria la tabla de configuracion???
+-los pacientes se van a relacionar por CURP o por No. de expediente
+
+IMPRIMIR CREDENCIAL EN BASE A FOTOS
+candados en el proceso
