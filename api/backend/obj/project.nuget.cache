@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "u4bnpufvtPD5h2EJ4hl2aK8UlU3a+bjG4quOqH9zwb2eHK1SYCzwEUVWcLos8rSodVuWlfX4uKRZwFEHuSacew==",
+  "dgSpecHash": "u+D7e9ChYaf+e3QcRH/tgtOawVoOVIESv56M784RfP4sufSYWgqsIEUk7KwqC8m+U1iuVk5+FmKMp0btu148nw==",
   "success": true,
-  "projectFilePath": "C:\\repo\\hgbr\\backend\\backend\\backend.csproj",
+  "projectFilePath": "C:\\repo\\hgbr\\api\\backend\\backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

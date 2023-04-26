@@ -229,11 +229,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\repo\\hgbr\\backend\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\repo\\hgbr\\api\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\repo\\hgbr\\backend\\backend\\backend.csproj",
+      "projectPath": "C:\\repo\\hgbr\\api\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\",
-      "outputPath": "C:\\repo\\hgbr\\backend\\backend\\obj\\",
+      "outputPath": "C:\\repo\\hgbr\\api\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\JOSUE TELLEZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
