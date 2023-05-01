@@ -1,18 +1,18 @@
 // import logo from './logo.svg';
 import './App.css';
 
-//import {React, useState} from 'react';
-// import NavBar from './Main/AppBar';
-// import { createTheme, ThemeProvider} from '@material-ui/core/styles';
-// import { BrowserRouter, Route, Routes } from 'react-router-dom';
-// import useStyles from './Styles/Styles';
-// import Drawer from './Main/Drawer';
-// import Home from './Main/Home';
+import {React, useState} from 'react';
+import NavBar from './Main/AppBar';
+import { createTheme, ThemeProvider} from '@mui/material/styles';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import useStyles from './Styles/Styles';
+import Drawer from './Main/Drawer';
+import Home from './Main/Home';
 import img_urgencias from './media/urgencias.png';
 import img_pacientes from "./media/pacientes.png";
 // import add_paciente from './components/pacientes/agregar_paciente';
 
-/* const theme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
       light: '#A3DDCB',
@@ -21,7 +21,7 @@ import img_pacientes from "./media/pacientes.png";
       contrastText: '#FFFFFF',
     },
   }
-}); */
+});
 
 function BotonConImagen(props) {
   return (

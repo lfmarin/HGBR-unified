@@ -1,12 +1,12 @@
 import React from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
 import { Link, } from 'react-router-dom'
-import { makeStyles, IconButton, Button } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
+import { styles, IconButton, Button } from '@mui/material'
+import Menu from '@mui/material/Menu'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styles(theme => ({
   logo: {
     height: 50,
     marginRight: theme.spacing(2),

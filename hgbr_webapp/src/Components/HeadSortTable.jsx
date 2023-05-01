@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TableCell, TableRow, TableSortLabel, TableHead } from '@material-ui/core'
+import { TableCell, TableRow, TableSortLabel, TableHead } from '@mui/material'
 
 export default function EnhancedTableHead(props) {
   const { order, orderBy, onRequestSort, headCells, visuallyHidden } = props

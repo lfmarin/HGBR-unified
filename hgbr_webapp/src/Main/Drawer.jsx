@@ -1,15 +1,15 @@
 import {React} from 'react'
 import clsx from 'clsx'
-import { makeStyles } from '@material-ui/core/styles'
-import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import { styles } from '@mui/material/styles'
+import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText } from '@mui/material'
+//import ExitToAppIcon from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
 import Usericon from '@mui/icons-material/Person3Outlined'
 import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 
-const useStyles = makeStyles({
+const useStyles = styles({
   list: {
     width: 250,
   },
