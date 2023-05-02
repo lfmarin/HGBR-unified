@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\repo\\hgbr\\api\\backend\\backend.csproj": {}
+    "C:\\repo\\hgbr\\hgbr_API\\backend\\backend.csproj": {}
   },
   "projects": {
-    "C:\\repo\\hgbr\\api\\backend\\backend.csproj": {
+    "C:\\repo\\hgbr\\hgbr_API\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repo\\hgbr\\api\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\repo\\hgbr\\hgbr_API\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\repo\\hgbr\\api\\backend\\backend.csproj",
+        "projectPath": "C:\\repo\\hgbr\\hgbr_API\\backend\\backend.csproj",
         "packagesPath": "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\",
-        "outputPath": "C:\\repo\\hgbr\\api\\backend\\obj\\",
+        "outputPath": "C:\\repo\\hgbr\\hgbr_API\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\JOSUE TELLEZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,16 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
