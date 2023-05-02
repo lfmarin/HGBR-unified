@@ -1,4 +1,4 @@
-USE hospital;
+USE hgbr;
 
 INSERT INTO Turno(idTurno, NombreTurno) VALUES
 ('M', 'Matutino'),
