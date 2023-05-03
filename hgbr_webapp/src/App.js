@@ -23,62 +23,93 @@ const theme = createTheme({
   }
 });
 
-function BotonConImagen(props) {
-  return (
-    <button
-      style={{
-        backgroundImage: `url(${props.img_urgencias})`,
-        backgroundSize: 'cover',
-        width: '200px',
-        height: '200px',
-        border: 'none',
-        borderRadius: '50%',
-        cursor: 'pointer',
-      }}
-      onClick={props.onClick}
-    />
-  );
-}
+// function BotonConImagen(props) {
+//   return (
+//     <button
+//       style={{
+//         backgroundImage: `url(${props.img_urgencias})`,
+//         backgroundSize: 'cover',
+//         width: '200px',
+//         height: '200px',
+//         border: 'none',
+//         borderRadius: '50%',
+//         cursor: 'pointer',
+//       }}
+//       onClick={props.onClick}
+//     />
+//   );
+// }
 
 // export default BotonConImagen;
 
 
-function App() {
-  // return (
-  //   <BrowserRouter>
-  //     <div className="App">
-  //       <ThemeProvider theme = {theme}>
-  //         <header>
-  //           <NavBar userName = {curUserName} menuCallBack = {handleDrawer}/>
-  //           <Drawer token={hasToken} open={isOpen} menuCallBack = {handleDrawer}/>
-  //         </header>
-  //         <main className={classes.main}>
-  //         { RoutingPaths() }
-  //         </main>
-  //         <footer>
-  //           <div className='footerRight'>
-  //             <p>Realizado en acuerdo por FIEE-UV</p>
-  //             <img alt="Logotipo de FIEE" src="media/fiee.jpg"></img>
-  //           </div>
-  //         </footer>
-  //       </ThemeProvider>
-  //     </div>
-  //   </BrowserRouter>
-  // );
+export default function App() {
+
+  const [isOpen, setIsOpen] = useState(false);
+  const classes = useStyles();
+
+  const handleDrawer = () => {
+    setIsOpen(!isOpen);
+  }
+
+  const RoutingPaths = () => {
+    return (
+      <Routes>
+        <Route path="/">
+          <Route path="/" element={<Home/>}/>
+        </Route>
+        {/* <Route path="/pacientes">
+          <Route path="/pacientes" element={<AgregarPaciente/>}/>
+        </Route>
+        <Route path="/admisiones">
+          <Route path="/" element={<AgregarAdmision/>}/>
+        </Route> */}
+        <Route path="*" element={
+          <div>
+            <h1>La página que buscas no existe.</h1>
+            <a href="/">Volver a inicio</a>
+          </div>
+          } 
+        />
+      </Routes>
+    );
+  }
+
   return (
-    <div className="App">
-      <center>
-        <img width='200px' src='./media/pacientes.png' className="opt1" />
-        <img width='200px' src="/media/urgencias.png" className="opt2" />
-      </center>
-      <footer>
-        <div className='footer'>
-          <p>Powered by FIEE-UV</p>
-          <img alt="Logo FIEE" src="/media/fiee.jpg"></img>
-        </div>
-      </footer>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <ThemeProvider theme = {theme}>
+          <header>
+            <NavBar menuCallBack = {handleDrawer}/>
+            <Drawer open={isOpen} menuCallBack = {handleDrawer}/>
+          </header>
+          <main className={classes.main}>
+          { RoutingPaths() }
+          </main>
+          <footer>
+            <div className='footerRight'>
+              <p>Powered by FIEE-UV</p>
+              <img alt="Logotipo de FIEE" src="media/fiee.jpg"></img>
+            </div>
+          </footer>
+        </ThemeProvider>
+      </div>
+    </BrowserRouter>
   );
+
+  // return (
+  //   <div className="App">
+  //     <center>
+  //       <img width='200px' src='./media/pacientes.png' className="opt1" />
+  //       <img width='200px' src="/media/urgencias.png" className="opt2" />
+  //     </center>
+  //     <footer>
+  //       <div className='footer'>
+  //         <p>Powered by FIEE-UV</p>
+  //         <img alt="Logo FIEE" src="/media/fiee.jpg"></img>
+  //       </div>
+  //     </footer>
+  //   </div>
+  // );
 }
 
-export default App;

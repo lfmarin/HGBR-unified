@@ -1,6 +1,6 @@
 import {React} from 'react'
 import clsx from 'clsx'
-import { styles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 //import ExitToAppIcon from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
@@ -9,7 +9,7 @@ import Usericon from '@mui/icons-material/Person3Outlined'
 import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 
-const useStyles = styles({
+const useStyles = makeStyles({
   list: {
     width: 250,
   },
@@ -23,28 +23,14 @@ const useStyles = styles({
   },
 })
 
-export default function TempDrawer({token, open, menuCallBack}) {
+export default function TempDrawer({open, menuCallBack}) {
   const classes = useStyles()
-  const hastoken = token() !== null
 
   const toggleDrawer = open => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return
 
     menuCallBack()
   }
-
-  const SetLoginOrLogout = () => (
-      <List>
-        <Link className={classes.enlace} to={!hastoken ? "/login" : "/logout"}>
-          <ListItem button key="salir">
-            <ListItemIcon>
-              {!hastoken && <ExitToAppIcon />}
-            </ListItemIcon>
-            <ListItemText primary={!hastoken ? "Iniciar Sesión" : "Salir"} />
-          </ListItem>
-        </Link>
-      </List>
-  )
 
   const list = () => (
     <div
@@ -53,7 +39,7 @@ export default function TempDrawer({token, open, menuCallBack}) {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      {hastoken && <List>
+      <List>
         <Link className={classes.enlace} to="/pacientes">
           <ListItem button key="pacientes">
             <ListItemIcon>
@@ -62,63 +48,23 @@ export default function TempDrawer({token, open, menuCallBack}) {
             <ListItemText primary="Pacientes" />
           </ListItem>
         </Link>
-      </List>}
+      </List>
 
       <Divider />
 
-      {hastoken && <List>
-        <Link className={classes.enlace} to="/doctores">
-          <ListItem button key="doctores">
+      <List>
+        <Link className={classes.enlace} to="/urgencias">
+          <ListItem button key="urgencias">
             <ListItemIcon>
-              <LocalHospitalIcon />
+              <PersonIcon />
             </ListItemIcon>
-            <ListItemText primary="Doctores" />
+            <ListItemText primary="Urgencias" />
           </ListItem>
         </Link>
-      </List>}
+      </List>
 
       <Divider />
-
-      {hastoken && <List>
-        <Link className={classes.enlace} to="/consejeria">
-          <ListItem button key="consejeria">
-            <ListItemIcon>
-              <Usericon />
-            </ListItemIcon>
-            <ListItemText primary="Personal de Consejería" />
-          </ListItem>
-        </Link>
-      </List>}
-
-      <Divider />
-
-      {hastoken && <List>
-        <Link className={classes.enlace} to="/usuarios">
-          <ListItem button key="usuarios">
-            <ListItemIcon>
-              <Usericon />
-            </ListItemIcon>
-            <ListItemText primary="Usuarios" />
-          </ListItem>
-        </Link>
-      </List>}
-
-      <Divider />
-
-      {hastoken && <List>
-        <Link className={classes.enlace} to="/cuenta">
-          <ListItem button key="cuenta">
-            <ListItemIcon>
-              <Usericon />
-            </ListItemIcon>
-            <ListItemText primary="Cuenta" />
-          </ListItem>
-        </Link>
-      </List>}
-
-      <Divider />
-
-      {SetLoginOrLogout()}
+      
     </div>
   )
 
