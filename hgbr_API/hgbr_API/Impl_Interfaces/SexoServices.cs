@@ -1,4 +1,3 @@
-using backend.Models;
 using hgbr_API.Interfaces;
 using hgbr_API.Models;
 namespace hgbr_API.ImplInterfaces
@@ -17,7 +16,7 @@ namespace hgbr_API.ImplInterfaces
 		{
 			try
 			{
-				var lista = context.Sexos.Where(p => (int) p.id == ID).FirstOrDefault();
+				var lista = context.Sexos.Where(p => (int) p.Id == ID).FirstOrDefault();
 				return lista;
 			} catch (System.Exception)
 			{
@@ -29,10 +28,10 @@ namespace hgbr_API.ImplInterfaces
 		{
 			try
 			{
-				var result = context.Sexos.Where(p => (int)p.id == ID).Select(sexo => new
+				var result = context.Sexos.Where(p => (int)p.Id == ID).Select(sexo => new
 				{
-					idSexo = sexo.id,
-					nombre = sexo.nombre
+					idSexo = sexo.Id,
+					nombre = sexo.Nombre
 				}).First();
 				return result;
 			} catch (System.Exception)

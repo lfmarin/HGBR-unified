@@ -1252,11 +1252,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\JOSUE TELLEZ\\Desktop\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
+      "projectUniqueName": "C:\\repo\\hgbr\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
       "projectName": "hgbr_API",
-      "projectPath": "C:\\Users\\JOSUE TELLEZ\\Desktop\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
+      "projectPath": "C:\\repo\\hgbr\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
       "packagesPath": "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\JOSUE TELLEZ\\Desktop\\hgbr_API\\hgbr_API\\obj\\",
+      "outputPath": "C:\\repo\\hgbr\\hgbr_API\\hgbr_API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\JOSUE TELLEZ\\AppData\\Roaming\\NuGet\\NuGet.Config",

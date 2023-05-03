@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UqFOTO4SVfKx55882eLY7m1MLCTbbi7HL1ylqRtamziqwLTQvuQDkSy90CYdvLnNIClveHjWrYAjLkLPxQv8ig==",
+  "dgSpecHash": "UYICoFzm/poQs6buTv45yrrufiXiaIZihym2pLAmCH9b2FHVlIGqAfmskoule4M0CrAfm7rHjRZ9Qgl9nYVVIw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\JOSUE TELLEZ\\Desktop\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
+  "projectFilePath": "C:\\repo\\hgbr\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.5\\microsoft.entityframeworkcore.7.0.5.nupkg.sha512",
