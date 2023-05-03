@@ -3,10 +3,11 @@ import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { Link, } from 'react-router-dom'
-import { styles, IconButton, Button } from '@mui/material'
+import { IconButton, Button } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import Menu from '@mui/material/Menu'
 
-const useStyles = styles(theme => ({
+const useStyles = makeStyles(theme => ({
   logo: {
     height: 50,
     marginRight: theme.spacing(2),
@@ -18,14 +19,14 @@ const useStyles = styles(theme => ({
  * @param {string} nombre 
  * @returns 
  */
-const mostrarUsuario = (nombre) => {
-  return <div style={{right: 30, display:'flex', justifyContent:'space-evenly', alignItems:'center', width: '300px', position: 'absolute', color: '#000'}}>
-    {nombre}
-    {(nombre && nombre.length !== 0) && <Button component={Link} to={`/logout`} variant="outlined" size="small">
-        Cerrar Sesión
-    </Button>}
-  </div>
-}
+// const mostrarUsuario = (nombre) => {
+//   return <div style={{right: 30, display:'flex', justifyContent:'space-evenly', alignItems:'center', width: '300px', position: 'absolute', color: '#000'}}>
+//     {nombre}
+//     {(nombre && nombre.length !== 0) && <Button component={Link} to={`/logout`} variant="outlined" size="small">
+//         Cerrar Sesión
+//     </Button>}
+//   </div>
+// }
 
 export default function NavBar({userName, menuCallBack}) {
   const classes = useStyles()
@@ -40,7 +41,7 @@ export default function NavBar({userName, menuCallBack}) {
             color="#000"
             aria-label="menu"
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
           <a href="/">
             <img src="/media/logo.png" alt="logo" className={classes.logo} />
@@ -50,7 +51,7 @@ export default function NavBar({userName, menuCallBack}) {
               Hospital General de Boca del Río
             </Typography>
           </Link>
-          {mostrarUsuario(userName())}
+          {/* {mostrarUsuario(userName())} */}
         </Toolbar>
       </AppBar>
     </div>

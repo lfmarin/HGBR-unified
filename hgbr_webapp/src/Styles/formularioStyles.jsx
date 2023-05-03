@@ -1,6 +1,6 @@
-import { styles } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
 
-const useStyles = styles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     fullWidth: {
       width: "100%",
     },
