@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "7/yvsnDRTixX0vVer35KSjS1HzfM4rGxA/gc1emwSdw=",
-  "Source": "backend",
-  "BasePath": "_content/backend",
+  "Hash": "RN1xYxO/iTyz7SgUfcHCIagq6lix0RPP7Ye3J4xctfk=",
+  "Source": "hgbr_API",
+  "BasePath": "_content/hgbr_API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

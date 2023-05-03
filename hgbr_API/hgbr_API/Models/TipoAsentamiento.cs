@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace backend.Models;
+namespace hgbr_API.Models;
 
 public partial class TipoAsentamiento
 {

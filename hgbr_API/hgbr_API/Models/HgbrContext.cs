@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend.Models;
+namespace hgbr_API.Models;
 
 public partial class HgbrContext : DbContext
 {

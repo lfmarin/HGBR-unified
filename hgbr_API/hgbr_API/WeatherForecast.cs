@@ -1,4 +1,4 @@
-namespace backend
+namespace hgbr_API
 {
     public class WeatherForecast
     {
