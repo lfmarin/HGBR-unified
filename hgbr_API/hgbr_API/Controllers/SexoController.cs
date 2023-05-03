@@ -29,11 +29,11 @@ public class SexoController : ControllerBase
 	}
 
 	/// <summary>
-	/// Obtén los datos de un conductor en particular.
+	/// Obtén los datos de un sexo en particular.
 	/// </summary>
-	/// <response code="404">No hay un conductor disponible que corresponda al ID. No lo confunda con el envio de un elemento no encontrado.</response>
-	/// <response code="200">El conductor fue encontrado.</response>
-	/// <returns>Conductor</returns>
+	/// <response code="404">No hay un sexo disponible que corresponda al ID. No lo confunda con el envio de un elemento no encontrado.</response>
+	/// <response code="200">El sexo fue encontrado.</response>
+	/// <returns>sexo</returns>
 	[HttpGet("get/{idSexo}")]
 	[ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
 	public IActionResult specificDriver(int idSexo)
