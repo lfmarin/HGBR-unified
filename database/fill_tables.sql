@@ -1,0 +1,90 @@
+USE hgbr;
+
+INSERT INTO sexo(nombre)
+VALUES
+('M'),
+('F');
+
+INSERT INTO estado_conyugal(nombre)
+VALUES
+('Soltero (a)'),
+('Casado (a)'),
+('Concubinato'),
+('Divorciado (a)'),
+('Viudo (a)'),
+('Prefiero no responder');
+
+INSERT INTO tipo_vialidad(nombre)
+VALUES
+('Aeropuerto'),
+('Ampliacion'),
+('Barrio'),
+('Canton'),
+('Ciudad'),
+('Ciudad industrial'),
+('Colonia'),
+('Condominio'),
+('Conjunto habitacional'),
+('Corredor industrial'),
+('Coto'),
+('Cuartel'),
+('Ejido'),
+('Exhacienda'),
+('Fraccion'),
+('Fraccionamiento'),
+('Granja'),
+('Hacienda'),
+('Ingenio'),
+('Manzana'),
+('Paraje'),
+('Parque industrial'),
+('Privada'),
+('Prolongacion'),
+('Pueblo'),
+('Puerto'),
+('Rancheria'),
+('Rancho'),
+('Region'),
+('Residencial'),
+('Rinconada'),
+('Seccion'),
+('Sector'),
+('Supermanzana'),
+('Unidad'),
+('Unidad habitacional'),
+('Villa'),
+('Zona federal'),
+('Zona industrial'),
+('Zona militar'),
+('Ninguno'),
+('Zona naval');
+
+INSERT INTO tipo_asentamiento(nombre)
+VALUES
+('Ampliacion'),
+('Andador'),
+('Avenida'),
+('Boulevard'),
+('Calle'),
+('Callejon'),
+('Calzada'),
+('Cerrada'),
+('Circuito'),
+('Circunvalacion'),
+('Continuacion'),
+('Corredor'),
+('Diagonal'),
+('Eje vial'),
+('Pasaje'),
+('Peatonal'),
+('Periferico'),
+('Privada'),
+('Prolongacion'),
+('Retorno'),
+('Viaducto'),
+('Ninguno'),
+('Carretera'),
+('Camino'),
+('Terraceria'),
+('Brecha'),
+('Vereda');

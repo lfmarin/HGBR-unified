@@ -1,4 +1,5 @@
 CREATE DATABASE hgbr; 
+
 USE hgbr;
 
 -- CATALOGOS
