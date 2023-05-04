@@ -1,11 +1,10 @@
 import React from 'react'
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
 import { Link, } from 'react-router-dom'
-import { IconButton, Button } from '@mui/material'
-import { makeStyles } from '@mui/styles'
-import Menu from '@mui/material/Menu'
+import { makeStyles, IconButton, Button } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
 
 const useStyles = makeStyles(theme => ({
   logo: {
@@ -41,7 +40,7 @@ export default function NavBar({userName, menuCallBack}) {
             color="#000"
             aria-label="menu"
           >
-            <Menu />
+            <MenuIcon />
           </IconButton>
           <a href="/">
             <img src="/media/logo.png" alt="logo" className={classes.logo} />

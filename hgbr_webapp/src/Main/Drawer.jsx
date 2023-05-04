@@ -1,8 +1,8 @@
 import {React} from 'react'
 import clsx from 'clsx'
-import { makeStyles } from '@mui/styles'
-import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText } from '@mui/material'
-//import ExitToAppIcon from '@mui/material'
+import { makeStyles } from '@material-ui/core/styles'
+import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import PersonIcon from '@mui/icons-material/Person'
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
 import Usericon from '@mui/icons-material/Person3Outlined'
@@ -56,7 +56,7 @@ export default function TempDrawer({open, menuCallBack}) {
         <Link className={classes.enlace} to="/urgencias">
           <ListItem button key="urgencias">
             <ListItemIcon>
-              <PersonIcon />
+              <LocalHospitalIcon />
             </ListItemIcon>
             <ListItemText primary="Urgencias" />
           </ListItem>

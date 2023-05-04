@@ -1,6 +1,6 @@
 import { React } from 'react'
 import ExtendedCard from '../Components/ExtendedCard'
-import { Grid } from '@mui/material'
+import { Grid } from '@material-ui/core'
 import useStyles from '../Styles/formularioStyles'
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
       <Grid container spacing={1} justifyContent="center">
         <Grid item xs margin={1}>
           <ExtendedCard
-            imgPath="media/pacientes.png"
+            imgPath="./media/pacientes.png"
             imgText="Secretaria de Salud Pacientes"
             Title="Pacientes"
             link="/pacientes"
