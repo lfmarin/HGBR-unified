@@ -11,14 +11,12 @@ public class EstadoConyugalController : ControllerBase
 {
     private readonly IEstadoConyugalServices _estadoConyugalService;
 
-    public EstadoConyugalController(ISexoService _estadoConyugalService)
+    public EstadoConyugalController(IEstadoConyugalServices estadoConyugalService)
     {
-        _estadoConyugalService = _estadoConyugalService;
+        _estadoConyugalService = estadoConyugalService;
     }
 
-    /// <summary>
-    /// Obtén todos los sexos registrados.
-    /// </summary>
+  
     [HttpGet("all")]
     // TODO: Una vez que terminemos de verificar que los datos de la base de datos
     [ProducesResponseType(typeof(IEnumerable<EstadoConyugal>), StatusCodes.Status200OK)]
