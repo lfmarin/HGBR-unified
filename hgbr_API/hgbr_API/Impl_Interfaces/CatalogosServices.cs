@@ -1,15 +1,20 @@
-﻿using System.Linq;
+﻿//  El problema posiblemente provenga de la inyeccion de depedencias para que jale el context, debo cehcar eso con 
+//  Varela
+using System.Linq;
+using hgbr_API.Interfaces;
 using hgbr_API.Models;
 
 namespace API_Hospital_Boca.Bussiness
 {
-    public class CatalogosServices : hgbr_API.Interfaces.ICatalogosServices
+    public class CatalogosServices : ICatalogosServices
     {
         private readonly HgbrContext context;
         public CatalogosServices(HgbrContext context)
         {
             this.context = context;
         }
+
+        //  Se esta intentando consumir la informacion de la BD con la implementacion de estos metodos
         public IQueryable<object> getAllEstadoConyugal()
         {
             try
