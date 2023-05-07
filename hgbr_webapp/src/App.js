@@ -10,7 +10,14 @@ import Drawer from './Main/Drawer';
 import Home from './Main/Home';
 import img_urgencias from './media/urgencias.png';
 import img_pacientes from "./media/pacientes.png";
-// import add_paciente from './components/pacientes/agregar_paciente';
+import AllPacientes from './Pacientes/listadoPacientes';
+import AddPaciente from './Pacientes/registrarPaciente';
+import DetailsPaciente from './Pacientes/infoPaciente';
+import EditPaciente from './Pacientes/modificarPaciente';
+import AllAdmisiones from './Admisiones/listadoAdmisiones';
+import AddAdmision from './Admisiones/registrarAdmision';
+import DetailsAdmision from './Admisiones/infoAdmision';
+import EditAdmision from './Admisiones/modificarAdmision';
 
 const theme = createTheme({
   palette: {
@@ -58,10 +65,10 @@ export default function App() {
         <Route path="/">
           <Route path="/" element={<Home/>}/>
         </Route>
-        {/* <Route path="/pacientes">
-          <Route path="/pacientes" element={<AgregarPaciente/>}/>
+        <Route path="/pacientes">
+          <Route path="/pacientes" element={<AllPacientes/>}/>
         </Route>
-        <Route path="/admisiones">
+        {/* <Route path="/admisiones">
           <Route path="/" element={<AgregarAdmision/>}/>
         </Route> */}
         <Route path="*" element={

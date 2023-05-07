@@ -1,6 +1,6 @@
-import { styles } from '@mui/material/styles';
+import { makeStyles } from '@material-ui/core';
 
-const useStyles = styles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     form: {
       width: '100%',
       border: "1px solid black",

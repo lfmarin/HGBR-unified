@@ -1,6 +1,6 @@
-import { styles } from '@mui/material/styles';
+import { makeStyles } from '@material-ui/core';
 
-const useStyles = styles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     paper: {
         width: '100%',
         marginBottom: theme.spacing(2),
