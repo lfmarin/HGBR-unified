@@ -1,12 +1,16 @@
 using System;
+using System.Linq;
 using hgbr_API.Models;
-namespace hgbr_API.Interfaces;
 
-public interface IPacienteService
+namespace hgbr_API.Interfaces
 {
-	IEnumerable<Paciente> GetAll();
-	bool Registrar(Paciente pac);
-	string Eliminar(string folio);  //curp
-	object? getPaciente(string folio);  //curp
-	Paciente getPacienteClass(string folio);    //curp
+    public interface IPacienteServices
+    {
+        IQueryable<object> getAll();
+        Paciente getClassPaciente(string numExpediente);
+        object getPaciente(string numExpediente);
+        void savePaciente(Paciente paciente);
+        void updatePaciente(Paciente paciente);
+        void deletePaciente(string numExpediente);
+    }
 }
