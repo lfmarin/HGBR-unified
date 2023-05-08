@@ -53,12 +53,12 @@ export default function TempDrawer({open, menuCallBack}) {
       <Divider />
 
       <List>
-        <Link className={classes.enlace} to="/urgencias">
-          <ListItem button key="urgencias">
+        <Link className={classes.enlace} to="/admisiones">
+          <ListItem button key="admisiones">
             <ListItemIcon>
               <LocalHospitalIcon />
             </ListItemIcon>
-            <ListItemText primary="Urgencias" />
+            <ListItemText primary="Urgencias y Admisiones" />
           </ListItem>
         </Link>
       </List>
