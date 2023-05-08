@@ -8,8 +8,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import useStyles from './Styles/Styles';
 import Drawer from './Main/Drawer';
 import Home from './Main/Home';
-import img_urgencias from './media/urgencias.png';
-import img_pacientes from "./media/pacientes.png";
 import AllPacientes from './Pacientes/listadoPacientes';
 import AddPaciente from './Pacientes/registrarPaciente';
 import DetailsPaciente from './Pacientes/infoPaciente';
@@ -62,19 +60,19 @@ export default function App() {
   const RoutingPaths = () => {
     return (
       <Routes>
-        <Route path="/">
-          <Route path="/" element={<Home/>}/>
-        </Route>
-        <Route path="/pacientes">
-          <Route path="/pacientes" element={<AllPacientes/>}/>
-        </Route>
-        {/* <Route path="/admisiones">
-          <Route path="/" element={<AgregarAdmision/>}/>
-        </Route> */}
+        <Route path="/" element={<Home/>} />
+        <Route path="/pacientes" element={<AllPacientes/>} />
+        <Route path='/pacientes/add' element={<AddPaciente/>} />
+        <Route path='/pacientes/details/:folio' element={<DetailsPaciente/>} />
+        <Route path='/pacientes/details/:folio/edit' element={<EditPaciente/>} />
+        <Route path='/admisiones' element={<AllAdmisiones/>} />
+        <Route path='/admisiones/add' element={<AddAdmision/>}/>
+        <Route path='/admisiones/details/:folio' element={<DetailsAdmision/>} />
+        <Route path='/admisiones/details/:folio/edit' element={<EditAdmision/>} />
         <Route path="*" element={
           <div>
             <h1>La página que buscas no existe.</h1>
-            <a href="/">Volver a inicio</a>
+            <a href="/">INICIO</a>
           </div>
           } 
         />
@@ -96,7 +94,7 @@ export default function App() {
           <footer>
             <div className='footerRight'>
               <p>Powered by FIEE-UV</p>
-              <img alt="Logotipo de FIEE" src="media/fiee.jpg"></img>
+              <img alt="Logotipo de FIEE" src="/media/fiee.jpg"></img>
             </div>
           </footer>
         </ThemeProvider>

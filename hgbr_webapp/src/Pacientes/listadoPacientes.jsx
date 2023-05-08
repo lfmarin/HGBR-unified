@@ -16,21 +16,22 @@ import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
 import Button from '@mui/material/Button'
 
 const headCells = [
-  { id: 'noExpediente', numeric: false, label: 'No. Expediente' },
+  { id: 'folio', numeric: false, label: 'No. Expediente' },
   { id: 'nombre', numeric: false, label: 'Nombre' },
-  { id: 'apPaterno', numeric: false, label: 'Apellido Paterno' },
-  { id: 'apMaerno', numeric: false, label: 'Apellido Materno' },
-  { id: 'fechaNacimiento', numeric: false, label: 'Edad' },
-  { id: 'fechaNacimiento', numeric: false, label: 'Fecha de Nacimiento' },
+  { id: 'primer_apellido', numeric: false, label: 'Apellido Paterno' },
+  { id: 'segundo_apellido', numeric: false, label: 'Apellido Materno' },
+  //estos campos se pueden cambiar
+  { id: 'edad', numeric: false, label: 'Edad' },
+  { id: 'fecha_nacimiento', numeric: false, label: 'Fecha de Nacimiento' },
   { id: 'accion', numeric: false, label: "Acción" },
 ]
 
-export default function AllPacientes({token, revokeToken}) {
+export default function AllPacientes({}) {
   const [pacientes, setPacientes] = useState([])
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const [order, setOrder] = useState('asc')
-  const [orderBy, setOrderBy] = useState('noExpediente')
+  const [orderBy, setOrderBy] = useState('folio')
   const [errorbd, setErrorbd] = useState(false)
   const [refresh, setRefresh] = useState(true)
   
@@ -76,7 +77,7 @@ export default function AllPacientes({token, revokeToken}) {
         .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/pacientes/all', {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token()}`
+            //'Authorization': `Bearer ${token()}`
           },
         })
         .then(
@@ -89,13 +90,13 @@ export default function AllPacientes({token, revokeToken}) {
           },
           error => {
             if (error.response.status === 401){
-              revokeToken()
+              //revokeToken()
               setErrorbd(true)
             }
           }
         )
       }
-  }, [revokeToken, refresh, token])
+  }, [refresh])
 
   const dateFormatter = date => {
     var formatter = new Intl.DateTimeFormat('es-MX', 'dd-mm-yyyy')
@@ -109,7 +110,7 @@ export default function AllPacientes({token, revokeToken}) {
     return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25))
   }
 
-  if (errorbd) return <Navigate to="/login" />
+  //if (errorbd) return <Navigate to="/login" />
 
   return (
     <div className={classes.root}>
@@ -121,7 +122,7 @@ export default function AllPacientes({token, revokeToken}) {
           handleCancelSearch={handleCancelSearch}
           title="Listado de pacientes"
           buttonTitle="AGREGA PACIENTE"
-          link="/pacientes/registro"
+          link="/pacientes/add"
         />
         <TableContainer>
           <Table className={classes.table} aria-labelledby="tableTitle" size="medium" aria-label="enhanced table">
@@ -138,17 +139,17 @@ export default function AllPacientes({token, revokeToken}) {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(item => {
                   return (
-                    <TableRow key={item.noExpediente}>
-                      <TableCell>{item.noExpediente}</TableCell>
+                    <TableRow key={item.folio}>
+                      <TableCell>{item.folio}</TableCell>
                       <TableCell>{item.nombre}</TableCell>
-                      <TableCell>{item.apPaterno}</TableCell>
-                      <TableCell>{item.apMaerno}</TableCell>
-                      <TableCell>{getAge(item.fechaNacimiento)} años</TableCell>
-                      <TableCell>{dateFormatter(item.fechaNacimiento)}</TableCell>
+                      <TableCell>{item.primer_apellido}</TableCell>
+                      <TableCell>{item.segundo_apellido}</TableCell>
+                      <TableCell>{getAge(item.fecha_nacimiento)} años</TableCell>
+                      <TableCell>{dateFormatter(item.fecha_nacimiento)}</TableCell>
                       <TableCell>
                         <Button
                           component={Link}
-                          to={`/pacientes/detalles/${item.noExpediente}`}
+                          to={`/pacientes/details/${item.folio}`}
                           variant="outlined"
                           sx={{ borderColor: '#AC3833', color: '#AC3833' }}
                         >

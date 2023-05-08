@@ -90,14 +90,15 @@ export default function AddPaciente() {
           }
         },
         error => {
-          if (!error.response) setErrorbd(true)
-          /*else{
+          if (!error.response)
+            setErrorbd(true)
+          else{
               if (error.response.status === 401) {
-                localStorage.removeItem("ACCESS_TOKEN");
-                setToken('');
+                /*localStorage.removeItem("ACCESS_TOKEN");
+                setToken('');*/
                 setErrorbd(false);
               }
-            }*/
+            }
         }
       )
   }, [])
@@ -338,7 +339,7 @@ export default function AddPaciente() {
           <Grid item xs margin={1}>
             <TextField
               required
-              id="apPaterno"
+              id="primer_apellido"
               label="Apellido paterno"
               variant="outlined"
               name="ApPaterno"

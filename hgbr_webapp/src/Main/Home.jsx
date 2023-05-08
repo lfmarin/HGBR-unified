@@ -12,7 +12,7 @@ export default function Home() {
           <ExtendedCard
             imgPath="./media/pacientes.png"
             imgText="Secretaria de Salud Pacientes"
-            Title="Pacientes"
+            Title="Registro de Pacientes"
             link="/pacientes"
             alignment="center"
           />
@@ -22,10 +22,10 @@ export default function Home() {
       <Grid container spacing={2}>
         <Grid item xs>
           <ExtendedCard
-            imgPath="media/urgencias.jpg"
+            imgPath="./media/urgencias.png"
             imgText="Secretaria de Salud Urgencias"
-            Title="Servico de Urgencias"
-            link="/urgencias"
+            Title="Servico de Urgencias y Admisiones"
+            link="/admisiones"
             alignment="center"
           />
         </Grid>
