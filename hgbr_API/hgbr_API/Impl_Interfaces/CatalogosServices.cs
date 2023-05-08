@@ -1,4 +1,4 @@
-﻿//  El problema posiblemente provenga de la inyeccion de depedencias para que jale el context, debo cehcar eso con 
+﻿//  El problema posiblemente provenga de la inyeccion de depedencias para que jale el context, debo checar eso con 
 //  Varela
 using System.Linq;
 using hgbr_API.Interfaces;
