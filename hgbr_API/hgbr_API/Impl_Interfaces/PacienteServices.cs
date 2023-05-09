@@ -48,16 +48,16 @@ namespace API_Hospital_Boca.Bussiness
 
                 // Ok, con el paciente obtenido, llenemos la información extra.
                 EstadoConyugal estado = context.EstadoConyugals.Where(p => p.Id.Equals(pa.FkEstadoConyugal)).First();
-                pa.FkEstadoConyugal = estado;
+                pa.FkEstadoConyugalNavigation = estado;
 
                 TipoAsentamiento asent = context.TipoAsentamientos.Where(p => p.Id.Equals(pa.FkTipoAsentamiento)).First();
-                pa.FkTipoAsentamiento = asent;
+                pa.FkTipoAsentamientoNavigation = asent;
 
                 TipoVialidad vial = context.TipoVialidads.Where(p => p.Id.Equals(pa.FkTipoVialidad)).FirstOrDefault();
-                pa.FkTipoVialidad = vial;
+                pa.FkTipoVialidadNavigation = vial;
 
                 Sexo sexo = context.Sexos.Where(p => p.Id.Equals(pa.FkSexo)).First();
-                pa.FkSexo = sexo;
+                pa.FkSexoNavigation = sexo;
 
                 return pa;
             }

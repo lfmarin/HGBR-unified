@@ -39,6 +39,7 @@ builder.Services.AddDbContext<hgbr_API.Models.HgbrContext>(options => {
 
 
 builder.Services.AddScoped<ICatalogosServices, CatalogosServices>();
+builder.Services.AddScoped<IPacienteServices, PacienteServices>();
 
 builder.Services.AddControllers();
 

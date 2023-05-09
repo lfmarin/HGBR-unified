@@ -88,3 +88,7 @@ VALUES
 ('Terraceria'),
 ('Brecha'),
 ('Vereda');
+
+
+INSERT INTO pacientes(folio, nombre, primer_apellido, segundo_apellido, curp, fecha_nacimiento, entidad_nacimiento, edad, nacido_hospital, fk_sexo, peso, talla, fk_estado_conyugal, insabi, gratuitidad, indigena, lengua_indigena, cual_lengua, fk_tipo_vialidad, nombre_vialidad, num_ext, num_int, fk_tipo_asentamiento, nombre_asentamiento, cp, localidad, municipio_deleg, entidad_federativa, pais, telefono) VALUES
+('ABCDEFGH', 'Josue', 'Tellez', 'Huerta', 'TEHJ000624HOCLRSA6', '2000-06-24', 'Oaxaca', 22, true, 1, 74, 174, 1, true, true, false, false, 'Ninguno', 1, 'Aeropuerto', 2, 133, 4, 'Boulevard', 94295, 'Boca del Rio', 'Boca del Rio', 'Veracruz', 'Mexico', '2741019045');

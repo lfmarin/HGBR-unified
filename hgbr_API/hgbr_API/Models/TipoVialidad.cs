@@ -12,4 +12,9 @@ public partial class TipoVialidad
     public virtual ICollection<Admisione> Admisiones { get; set; } = new List<Admisione>();
 
     public virtual ICollection<Paciente> Pacientes { get; set; } = new List<Paciente>();
+
+    //public static implicit operator object?(TipoVialidad? v)
+    //{
+    //    throw new NotImplementedException();
+    //}
 }
