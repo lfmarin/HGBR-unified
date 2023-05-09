@@ -17,7 +17,7 @@ import Button from '@mui/material/Button'
 
 const headCells = [
   { id: 'folio', numeric: false, label: 'No. Expediente' },
-  { id: 'nombre', numeric: false, label: 'Nombre' },
+  { id: 'nombre', numeric: false, label: 'nombre' },
   { id: 'primer_apellido', numeric: false, label: 'Apellido Paterno' },
   { id: 'segundo_apellido', numeric: false, label: 'Apellido Materno' },
   //estos campos se pueden cambiar

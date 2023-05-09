@@ -18,36 +18,42 @@ import Snackbar from '@mui/material/Snackbar'
 export default function AddPaciente() {
   const [isFail, setIsFail] = useState(false)
   const [hospital, setHospital] = useState([])
-  const [estadoCivil, setEstadoCivil] = useState([])
-  const [escolaridad, setEscolaridad] = useState([])
-  const [ocupacion, setOcupacion] = useState([])
-  const [religion, setReligion] = useState([])
+  const [estadoCivil, setEstadoConyugal] = useState([])
+  const [escolaridad, setSexo] = useState([])
+  const [ocupacion, setTipoVialidad] = useState([])
+  const [religion, setTipoAsentamiento] = useState([])
   const [lugar, setLugar] = useState([])
   const [datos, setDatos] = useState({
-    NoExpediente: '',
-    Nombre: '',
-    ApPaterno: '',
-    ApMaterno: '',
-    FechaNac: '',
-    FkEstadoCivil: '',
-    Ivs: 0,
-    FkEscolaridad: '',
-    FkOcupacion: '',
-    FkReligion: '',
-    FkLugarReferencia: '',
-    NumHijosVivos: 0,
-    EdadHijoMenor: 0,
-    NombreEsposa: '',
-    AosRelac: 0,
-    CalleCasa: '',
-    NumCasa: 0,
-    ColCasa: '',
-    TelCasa: '',
-    CalleTrabajo: '',
-    NumTrabajo: 0,
-    ColTrabajo: '',
-    TelTrabajo: '',
-    FkHospital: '',
+    folio: '',
+    nombre: '',
+    primer_apellido: '',
+    segundo_apellido: '',
+    curp: '',
+    fecha_nacimiento: '',
+    entidad_nacimiento: '',
+    edad: 0,
+    nacido_hospital: null,
+    fk_sexo: 0,
+    peso: 0.0,
+    talla: 0.0,
+    fk_estado_conyugal: 0,
+    insabi: null,
+    gratuitidad: null,
+    indigena: null,
+    lengua_indigena: null,
+    cual_lengua: '',
+    fk_tipo_vialidad: 0,
+    nombre_vialidad: '',
+    num_ext: 0,
+    num_int: 0,
+    fk_tipo_asentamiento: 0,
+    nombre_asentamiento: '',
+    cp: 0,
+    localidad: '',
+    municipio_deleg: '',
+    entidad_federativa: '',
+    pais: '',
+    telefono: '',
   })
   const [errorbd, setErrorbd] = useState(false)
   const [finish, setFinish] = useState(false)
@@ -76,7 +82,27 @@ export default function AddPaciente() {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/estadoCivil', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/sexo', {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(
+        response => {
+          if (response.status === 200) {
+            setSexo(response.data)
+            setErrorbd(false)
+          }
+        },
+        error => {
+          if (!error.response) setErrorbd(true)
+        }
+      )
+  }, [])
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/estadoConyugal', {
         headers: {
           'Content-type': 'application/json',
           //'Authorization': `Bearer ${token}`
@@ -85,7 +111,7 @@ export default function AddPaciente() {
       .then(
         response => {
           if (response.status === 200) {
-            setEstadoCivil(response.data)
+            setEstadoConyugal(response.data)
             setErrorbd(false)
           }
         },
@@ -105,7 +131,7 @@ export default function AddPaciente() {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/escolaridad', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/tipoVialidad', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -113,7 +139,7 @@ export default function AddPaciente() {
       .then(
         response => {
           if (response.status === 200) {
-            setEscolaridad(response.data)
+            setTipoVialidad(response.data)
             setErrorbd(false)
           }
         },
@@ -125,7 +151,7 @@ export default function AddPaciente() {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/ocupacion', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/tipoAsentamiento', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -133,7 +159,7 @@ export default function AddPaciente() {
       .then(
         response => {
           if (response.status === 200) {
-            setOcupacion(response.data)
+            setTipoAsentamiento(response.data)
             setErrorbd(false)
           }
         },
@@ -143,26 +169,7 @@ export default function AddPaciente() {
       )
   }, [])
 
-  useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/religion', {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
-      .then(
-        response => {
-          if (response.status === 200) {
-            setReligion(response.data)
-            setErrorbd(false)
-          }
-        },
-        error => {
-          if (!error.response) setErrorbd(true)
-        }
-      )
-  }, [])
-
+  //USAR PARA OBTENER LOS CATALOGOS DE LA API DE CC PP
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/lugarReferencia', {
@@ -189,31 +196,38 @@ export default function AddPaciente() {
         process.env.REACT_APP_SERVIDOR + '/hospitalBoca/pacientes/save',
         {
           paciente: {
-            NoExpediente: datos.NoExpediente,
-            Nombre: datos.Nombre,
-            ApPaterno: datos.ApPaterno,
-            ApMaterno: datos.ApMaterno,
-            FechaNac: datos.FechaNac,
-            FkEstadoCivil: datos.FkEstadoCivil,
-            Ivs: datos.Ivs,
-            FkEscolaridad: datos.FkEscolaridad,
-            FkOcupacion: datos.FkOcupacion,
-            FkReligion: datos.FkReligion,
-            FkLugarReferencia: datos.FkLugarReferencia,
-            NumHijosVivos: datos.NumHijosVivos,
-            EdadHijoMenor: datos.EdadHijoMenor,
-            NombreEsposa: datos.NombreEsposa,
-            AosRelac: datos.AosRelac,
-            CalleCasa: datos.CalleCasa,
-            NumCasa: datos.NumCasa,
-            ColCasa: datos.ColCasa,
-            TelCasa: datos.TelCasa,
-            CalleTrabajo: datos.CalleTrabajo,
-            NumTrabajo: datos.NumTrabajo,
-            ColTrabajo: datos.ColTrabajo,
-            TelTrabajo: datos.TelTrabajo,
+            folio: datos.folio,//ESTO HAY QUE CALCULARLO
+            nombre: datos.nombre,
+            primer_apellido: datos.primer_apellido,
+            segundo_apellido: datos.segundo_apellido,
+            curp: datos.curp,
+            fecha_nacimiento: datos.fecha_nacimiento,
+            entidad_nacimiento: datos.entidad_nacimiento,
+            edad: datos.edad, //CALCULAR
+            nacido_hospital: datos.nacido_hospital,
+            fk_sexo: datos.fk_sexo,
+            peso: datos.peso,
+            talla: datos.talla,
+            fk_estado_conyugal: datos.fk_estado_conyugal,
+            insabi: datos.insabi,
+            gratuitidad: datos.gratuitidad,
+            indigena: datos.indigena,
+            lengua_indigena: datos.lengua_indigena,
+            cual_lengua: datos.cual_lengua,
+            fk_tipo_vialidad: datos.fk_tipo_vialidad,
+            nombre_vialidad: datos.nombre_vialidad,
+            num_ext: datos.num_ext,
+            num_int: datos.num_int,
+            fk_tipo_asentamiento: datos.fk_tipo_asentamiento,
+            nombre_asentamiento: datos.nombre_asentamiento,
+            cp: datos.cp,
+            localidad: datos.localidad,
+            municipio_deleg: datos.municipio_deleg,
+            entidad_federativa: datos.entidad_federativa,
+            pais: datos.pais,
+            telefono: datos.telefono,
           },
-          hospital: datos.FkHospital,
+          // hospital: datos.FkHospital,
         },
         {
           headers: {
@@ -244,20 +258,16 @@ export default function AddPaciente() {
 
   const handleSave = () => {
     if (
-      datos.NoExpediente === '' ||
-      datos.Nombre === '' ||
-      datos.ApPaterno === '' ||
-      datos.ApMaterno === '' ||
-      datos.FechaNac === '' ||
-      datos.FkEstadoCivil === '' ||
-      datos.FkEscolaridad === '' ||
-      datos.FkOcupacion === '' ||
-      datos.FkReligion === '' ||
-      datos.FkLugarReferencia === '' ||
-      datos.TelCasa === '' ||
-      datos.CalleCasa === '' ||
-      datos.ColCasa === '' ||
-      datos.FkHospital === ''
+      //DEFINIR LOS DATOS QUE SERAN OBLIGATORIOS PARA GUARDAR
+      datos.folio === '' ||
+      datos.nombre === '' ||
+      datos.primer_apellido === '' ||
+      datos.segundo_apellido === '' ||
+      datos.fecha_nacimiento === '' ||
+      datos.fk_estado_conyugal === '' ||
+      datos.telefono === '' ||
+      datos.nombre_vialidad === '' ||
+      datos.nombre_asentamiento === ''
     ) {
       setIsFail(true)
       return
@@ -268,7 +278,7 @@ export default function AddPaciente() {
 
   if (finish) {
     setTimeout(() => setDelay(true), 2000)
-    if (delay) return <Navigate to="/pacientes" />
+    if (delay) return <Navigate to="/pacientes/all" />
   }
 
   return (
@@ -278,12 +288,12 @@ export default function AddPaciente() {
           <Grid item xs margin={1}>
             <TextField
               required
-              id="NoExpediente"
+              id="folio"
               label="No. de Expediente"
               variant="outlined"
-              name="NoExpediente"
-              error={datos.NoExpediente === '' && isFail}
-              defaultValue={datos.NoExpediente}
+              name="folio"
+              error={datos.folio === '' && isFail}
+              defaultValue={datos.folio}
               onChange={handleChange}
               fullWidth
               inputProps={{ maxLength: 15 }}
@@ -325,11 +335,11 @@ export default function AddPaciente() {
             <TextField
               required
               id="nombre"
-              label="Nombre del paciente"
+              label="nombre del paciente"
               variant="outlined"
-              name="Nombre"
-              error={datos.Nombre === '' && isFail}
-              defaultValue={datos.Nombre}
+              name="nombre"
+              error={datos.nombre === '' && isFail}
+              defaultValue={datos.nombre}
               onChange={handleChange}
               fullWidth
               inputProps={{ maxLength: 50 }}
@@ -342,9 +352,9 @@ export default function AddPaciente() {
               id="primer_apellido"
               label="Apellido paterno"
               variant="outlined"
-              name="ApPaterno"
-              error={datos.ApPaterno === '' && isFail}
-              defaultValue={datos.ApPaterno}
+              name="primer_apellido"
+              error={datos.primer_apellido === '' && isFail}
+              defaultValue={datos.primer_apellido}
               onChange={handleChange}
               fullWidth
               inputProps={{ maxLength: 50 }}
@@ -357,9 +367,9 @@ export default function AddPaciente() {
               id="apMaterno"
               label="Apellido materno"
               variant="outlined"
-              name="ApMaterno"
-              error={datos.ApMaterno === '' && isFail}
-              defaultValue={datos.ApMaterno}
+              name="segundo_apellido"
+              error={datos.segundo_apellido === '' && isFail}
+              defaultValue={datos.segundo_apellido}
               onChange={handleChange}
               fullWidth
               inputProps={{ maxLength: 50 }}
@@ -375,9 +385,9 @@ export default function AddPaciente() {
               label="Fecha de nacimiento"
               type="date"
               variant="outlined"
-              name="FechaNac"
-              defaultValue={datos.FechaNac}
-              error={datos.FechaNac === '' && isFail}
+              name="fecha_nacimiento"
+              defaultValue={datos.fecha_nacimiento}
+              error={datos.fecha_nacimiento === '' && isFail}
               onChange={handleChange}
               InputLabelProps={{ shrink: true }}
               fullWidth
@@ -399,16 +409,16 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="FkEstadoCivil">Estado Civil</InputLabel>
+              <InputLabel id="fk_estado_conyugal">Estado Civil</InputLabel>
               <Select
                 required
-                labelId="FkEstadoCivil"
-                id="FkEstadoCivil"
+                labelId="fk_estado_conyugal"
+                id="fk_estado_conyugal"
                 label="Estado Civil"
-                name="FkEstadoCivil"
-                defaultValue={datos.FkEstadoCivil}
+                name="fk_estado_conyugal"
+                defaultValue={datos.fk_estado_conyugal}
                 onChange={handleChange}
-                error={datos.FkEstadoCivil === '' && isFail}
+                error={datos.fk_estado_conyugal === '' && isFail}
               >
                 {estadoCivil.map(n => {
                   return <MenuItem value={n.idEstadoCivil}>{n.nombreEstado}</MenuItem>
@@ -511,10 +521,10 @@ export default function AddPaciente() {
           <Grid item xs margin={1}>
             <TextField
               id="nombreEsposa"
-              label="Nombre de la esposa"
+              label="nombre de la esposa"
               variant="outlined"
-              name="NombreEsposa"
-              defaultValue={datos.NombreEsposa}
+              name="nombreEsposa"
+              defaultValue={datos.nombreEsposa}
               onChange={handleChange}
               fullWidth
               inputProps={{ maxLength: 100 }}
@@ -578,41 +588,41 @@ export default function AddPaciente() {
         <Grid container spacing={1} justifyContent="center">
           <Grid item xs margin={1}>
             <TextField
-              id="CalleCasa"
+              id="nombre_vialidad"
               label="Calle"
               variant="outlined"
-              name="CalleCasa"
-              defaultValue={datos.CalleCasa}
+              name="nombre_vialidad"
+              defaultValue={datos.nombre_vialidad}
               onChange={handleChange}
               fullWidth
               required
-              error={datos.CalleCasa === '' && isFail}
+              error={datos.nombre_vialidad === '' && isFail}
               inputProps={{ maxLength: 50 }}
             />
           </Grid>
           <Grid item xs margin={1}>
             <TextField
-              id="NumCasa"
+              id="num_ext"
               label="Número"
               variant="outlined"
-              name="NumCasa"
+              name="num_ext"
               type="number"
-              defaultValue={datos.NumCasa}
+              defaultValue={datos.num_ext}
               onChange={handleChange}
               fullWidth
             />
           </Grid>
           <Grid item xs margin={1}>
             <TextField
-              id="ColCasa"
+              id="nombre_asentamiento"
               label="Colonia"
               variant="outlined"
-              name="ColCasa"
-              defaultValue={datos.ColCasa}
+              name="nombre_asentamiento"
+              defaultValue={datos.nombre_asentamiento}
               onChange={handleChange}
               fullWidth
               required
-              error={datos.ColCasa === '' && isFail}
+              error={datos.nombre_asentamiento === '' && isFail}
               inputProps={{ maxLength: 50 }}
             />
           </Grid>

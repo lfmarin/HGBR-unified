@@ -40,7 +40,7 @@ function Agregar_paciente(props) {
                         </Col>
                     </FormGroup>
                     <FormGroup row>
-                        <Label for="name" sm={2}>Nombre</Label>
+                        <Label for="name" sm={2}>nombre</Label>
                         <Col sm={2}>
                             <Input type="date" name="nombre"   />
                         </Col>
