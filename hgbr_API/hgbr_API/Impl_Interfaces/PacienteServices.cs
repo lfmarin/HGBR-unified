@@ -72,7 +72,7 @@ namespace API_Hospital_Boca.Bussiness
         {
             try
             {
-                return context.Pacientes.Where(p => p.Folio == numExpediente).Select(pa => new {
+                return context.Pacientes.Where(p => p.Folio.Equals(numExpediente)).Select(pa => new {
                     Folio = pa.Folio,
                     Nombre = pa.Nombre,
                     ApPaterno = pa.PrimerApellido,
