@@ -331,7 +331,7 @@ export default function AddPaciente() {
 
         <Grid container spacing={1} justifyContent="center">
           <Grid item xs margin={1}>
-            <Typography className={style.line} variant="h5" style={{ color: '#AC3833', fontWeight: 'bold' }}>
+            <Typography className={style.line} variant="h5" style={{ color: '#000000' }}>
               Datos personales
             </Typography>
           </Grid>
@@ -341,7 +341,7 @@ export default function AddPaciente() {
             <TextField
               required
               id="nombre"
-              label="Nombre del paciente"
+              label="Nombre"
               variant="outlined"
               name="nombre"
               error={datos.nombre === '' && isFail}
@@ -403,7 +403,7 @@ export default function AddPaciente() {
             <TextField
               required
               id="fecha_nacimiento"
-              label="Fecha de nacimiento"
+              label="Fecha de Nacimiento"
               type="datetime"
               variant="outlined"
               name="fecha_nacimiento"
@@ -417,7 +417,7 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="entidad_nacimiento">Estado Conyugal</InputLabel>
+              <InputLabel id="entidad_nacimiento">Entidad de Nacimiento</InputLabel>
               <Select
                 required
                 labelId="entidad_nacimiento"
@@ -571,7 +571,7 @@ export default function AddPaciente() {
 
         <Grid container spacing={1} justifyContent="center">
           <Grid item xs margin={1}>
-            <Typography className={style.line} variant="h5" style={{ color: '#AC3833', fontWeight: 'bold' }}>
+            <Typography className={style.line} variant="h5" style={{ color: '#000000' }}>
               Situación indígena
             </Typography>
           </Grid>
@@ -635,7 +635,7 @@ export default function AddPaciente() {
 
         <Grid container spacing={1} justifyContent="center">
           <Grid item xs margin={1}>
-            <Typography className={style.line} variant="h5" style={{ color: '#AC3833', fontWeight: 'bold' }}>
+            <Typography className={style.line} variant="h5" style={{ color: '#000000' }}>
               Domicilio y contacto
             </Typography>
           </Grid>
@@ -644,39 +644,19 @@ export default function AddPaciente() {
         <Grid container spacing={1} justifyContent="center">
         <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="FkOcupacion">Ocupación</InputLabel>
+              <InputLabel id="fk_tipo_vialidad">Tipo de Vialidad</InputLabel>
               <Select
                 required
-                labelId="FkOcupacion"
-                id="FkOcupacion"
-                label="Ocupacion"
-                name="FkOcupacion"
-                defaultValue={datos.FkOcupacion}
+                labelId="fk_tipo_vialidad"
+                id="fk_tipo_vialidad"
+                label="Tipo de Vialidad"
+                name="fk_tipo_vialidad"
+                defaultValue={datos.fk_tipo_vialidad}
                 onChange={handleChange}
-                error={datos.FkOcupacion === '' && isFail}
+                error={datos.fk_tipo_vialidad === '' && isFail}
               >
                 {tipoVialidad.map(n => {
-                  return <MenuItem value={n.idOcupacion}>{n.nombreOcupacion}</MenuItem>
-                })}
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs margin={1}>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel id="FkReligion">Religión</InputLabel>
-              <Select
-                required
-                labelId="FkReligion"
-                id="FkReligion"
-                label="Religion"
-                name="FkReligion"
-                defaultValue={datos.FkReligion}
-                onChange={handleChange}
-                error={datos.FkReligion === '' && isFail}
-              >
-                {tipoAsentamiento.map(n => {
-                  return <MenuItem value={n.idReligion}>{n.nombreReligion}</MenuItem>
+                  return <MenuItem value={n.id}>{n.nombre}</MenuItem>
                 })}
               </Select>
             </FormControl>
@@ -685,7 +665,7 @@ export default function AddPaciente() {
           <Grid item xs margin={1}>
             <TextField
               id="nombre_vialidad"
-              label="Calle"
+              label="Nombre de la Vialidad"
               variant="outlined"
               name="nombre_vialidad"
               defaultValue={datos.nombre_vialidad}
@@ -696,22 +676,63 @@ export default function AddPaciente() {
               inputProps={{ maxLength: 50 }}
             />
           </Grid>
+
           <Grid item xs margin={1}>
             <TextField
+              required
               id="num_ext"
-              label="Número"
+              label="Número Exterior"
               variant="outlined"
               name="num_ext"
               type="number"
               defaultValue={datos.num_ext}
               onChange={handleChange}
+              error={datos.nombre_vialidad === '' && isFail}
               fullWidth
             />
           </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              id="num_int"
+              label="Número Interior"
+              variant="outlined"
+              name="num_int"
+              type="number"
+              defaultValue={datos.num_int}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+
+          <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="fk_tipo_asentamiento">Tipo de Asentamiento Humano</InputLabel>
+              <Select
+                required
+                labelId="fk_tipo_asentamiento"
+                id="fk_tipo_asentamiento"
+                label="Tipo de Asentameinto Humano"
+                name="fk_tipo_asentamiento"
+                defaultValue={datos.fk_tipo_asentamiento}
+                onChange={handleChange}
+                error={datos.fk_tipo_asentamiento === '' && isFail}
+              >
+                {tipoAsentamiento.map(n => {
+                  return <MenuItem value={n.id}>{n.nombre}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
+          </Grid>
+
           <Grid item xs margin={1}>
             <TextField
               id="nombre_asentamiento"
-              label="Colonia"
+              label="Nombre del Asentamiento Humano"
               variant="outlined"
               name="nombre_asentamiento"
               defaultValue={datos.nombre_asentamiento}
@@ -722,78 +743,101 @@ export default function AddPaciente() {
               inputProps={{ maxLength: 50 }}
             />
           </Grid>
+          
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+
           <Grid item xs margin={1}>
             <TextField
-              id="TelCasa"
+              id="cp"
+              label="Código Postal"
+              variant="outlined"
+              name="cp"
+              defaultValue={datos.cp}
+              onChange={handleChange}
+              fullWidth
+              inputProps={{ maxLength: 5 }}
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              id="localidad"
+              label="Localidad"
+              variant="outlined"
+              name="localidad"
+              defaultValue={datos.localidad}
+              onChange={handleChange}
+              inputProps={{maxLength: 100}}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              id="municipio_deleg"
+              label="Municipio/Delegación"
+              variant="outlined"
+              name="municipio_deleg"
+              defaultValue={datos.municipio_deleg}
+              onChange={handleChange}
+              fullWidth
+              inputProps={{ maxLength: 100 }}
+            />
+          </Grid>
+
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+        <Grid item xs margin={1}>
+            <TextField
+              id="telefono"
               label="Teléfono"
               variant="outlined"
-              name="TelCasa"
-              defaultValue={datos.TelCasa}
+              name="telefono"
+              defaultValue={datos.telefono}
               onChange={handleChange}
               fullWidth
               required
               error={datos.TelCasa === '' && isFail}
-              inputProps={{ maxLength: 12 }}
+              inputProps={{ maxLength: 10 }}
             />
           </Grid>
-        </Grid>
 
-        <Grid container spacing={1} justifyContent="center">
           <Grid item xs margin={1}>
-            <Typography className={style.line} variant="h6" style={{ color: '#000000' }}>
-              Domicilio de trabajo
-            </Typography>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="entidad_federativa">Entidad Federativa</InputLabel>
+              <Select
+                required
+                labelId="entidad_federativa"
+                id="entidad_federativa"
+                label="Entidad Federativa"
+                name="entidad_federativa"
+                defaultValue={datos.entidad_federativa}
+                onChange={handleChange}
+                error={datos.entidad_federativa === '' && isFail}
+              >
+                {entidadFederativa.map(n => {
+                  return <MenuItem value={n.id}>{n.nombre}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
           </Grid>
-        </Grid>
-        <Grid container spacing={1} justifyContent="center">
-          <Grid item xs margin={1}>
-            <TextField
-              id="CalleTrabajo"
-              label="Calle"
-              variant="outlined"
-              name="CalleTrabajo"
-              defaultValue={datos.CalleTrabajo}
-              onChange={handleChange}
-              fullWidth
-              inputProps={{ maxLength: 50 }}
-            />
-          </Grid>
-          <Grid item xs margin={1}>
-            <TextField
-              id="NumTrabajo"
-              label="Número"
-              variant="outlined"
-              name="NumTrabajo"
-              type="number"
-              defaultValue={datos.NumTrabajo}
-              onChange={handleChange}
-              fullWidth
-            />
-          </Grid>
+
           <Grid item xs margin={1}>
             <TextField
-              id="ColTrabajo"
-              label="Colonia"
+              id="pais"
+              label="Pais"
               variant="outlined"
-              name="ColTrabajo"
-              defaultValue={datos.ColTrabajo}
+              name="pais"
+              defaultValue={datos.pais}
               onChange={handleChange}
+              inputProps={{maxLength: 100}}
               fullWidth
-              inputProps={{ maxLength: 50 }}
             />
           </Grid>
-          <Grid item xs margin={1}>
-            <TextField
-              id="TelTrabajo"
-              label="Teléfono"
-              variant="outlined"
-              name="TelTrabajo"
-              defaultValue={datos.TelTrabajo}
-              onChange={handleChange}
-              fullWidth
-              inputProps={{ maxLength: 12 }}
-            />
-          </Grid>
+          
         </Grid>
 
         <Grid>
@@ -813,7 +857,7 @@ export default function AddPaciente() {
 
       <Snackbar open={finish}>
         <Alert variant="filled" severity="success" sx={{ width: '100%' }}>
-          Paciente registrado con éxito, redirigiendo...
+          Se ha creado el expediente: {datos.folio}
         </Alert>
       </Snackbar>
     </div>
