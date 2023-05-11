@@ -19,7 +19,7 @@ const headCells = [
   { id: 'folio', numeric: false, label: 'No. Expediente' },
   { id: 'nombre', numeric: false, label: 'Nombre' },
   { id: 'apPaterno', numeric: false, label: 'Apellido Paterno' },
-  { id: 'apMaerno', numeric: false, label: 'Apellido Materno' },
+  { id: 'apMaterno', numeric: false, label: 'Apellido Materno' },
   { id: 'fechaNacimiento', numeric: false, label: 'Fecha de Nacimiento' },
   { id: 'accion', numeric: false, label: "Acción" },
 ]
@@ -81,7 +81,10 @@ export default function AllPacientes({}) {
         .then(
           response => {
             if (response.status === 200) {
+              console.log("RESPUESTA DE PACIENTES")
+              console.log(response.data)
               setPacientes(response.data)
+              console.log(pacientes);
               setErrorbd(false)
               setRefresh(false)
             }
@@ -135,19 +138,19 @@ export default function AllPacientes({}) {
             <TableBody>
               {SortTable.stableSort(pacientes, SortTable.getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(item => {
+                .map(p => {
                   return (
-                    <TableRow key={item.folio}>
-                      <TableCell>{item.folio}</TableCell>
-                      <TableCell>{item.nombre}</TableCell>
-                      <TableCell>{item.apPaterno}</TableCell>
-                      <TableCell>{item.apMaerno}</TableCell>
-                      {/* <TableCell>{getAge(item.fecha_nacimiento)} años</TableCell> */}
-                      <TableCell>{dateFormatter(item.fechaNacimiento)}</TableCell>
+                    <TableRow key={p.Folio}>
+                      <TableCell>{p.Folio}</TableCell>
+                      <TableCell>{p.Nombre}</TableCell>
+                      <TableCell>{p.ApPaterno}</TableCell>
+                      <TableCell>{p.ApMaterno}</TableCell>
+                      {/* <TableCell>{getAge(p.fecha_nacimiento)} años</TableCell> */}
+                      <TableCell>{dateFormatter(p.FechaNacimiento)}</TableCell>
                       <TableCell>
                         <Button
                           component={Link}
-                          to={`/pacientes/details/${item.folio}`}
+                          to={`/pacientes/details/${p.Folio}`}
                           variant="outlined"
                           sx={{ borderColor: '#AC3833', color: '#AC3833' }}
                         >
