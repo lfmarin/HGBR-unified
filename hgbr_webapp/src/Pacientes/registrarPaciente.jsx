@@ -17,16 +17,16 @@ import Snackbar from '@mui/material/Snackbar'
 
 export default function AddPaciente() {
   const [isFail, setIsFail] = useState(false)
-  const [hospital, setHospital] = useState([])
+  // const [hospital, setHospital] = useState([])
 
-  const [entidadNacimiento, setEntidadNacimiento] = useState([])
+  // const [entidadNacimiento, setEntidadNacimiento] = useState([])
   const [sexo, setSexo] = useState([])
   const [estadoConyugal, setEstadoConyugal] = useState([])
   const [tipoVialidad, setTipoVialidad] = useState([])
   const [tipoAsentamiento, setTipoAsentamiento] = useState([])
-  const [entidadFederativa, setEntidadFederativa] = useState([])
+  // const [entidadFederativa, setEntidadFederativa] = useState([])
 
-  const [lugar, setLugar] = useState([])
+  // const [lugar, setLugar] = useState([])
   const [datos, setDatos] = useState({
     folio: '',
     nombre: '',
@@ -64,49 +64,49 @@ export default function AddPaciente() {
   const style = useStyles()
   const [delay, setDelay] = useState(false)
 
-  useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/hospitales/all', {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
-      .then(
-        response => {
-          if (response.status === 200) {
-            setHospital(response.data)
-            setErrorbd(false)
-          }
-        },
-        error => {
-          if (!error.response) setErrorbd(true)
-        }
-      )
-  }, [])
+  // useEffect(() => {
+  //   axios
+  //     .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/hospitales/all', {
+  //       headers: {
+  //         'Content-type': 'application/json',
+  //       },
+  //     })
+  //     .then(
+  //       response => {
+  //         if (response.status === 200) {
+  //           setHospital(response.data)
+  //           setErrorbd(false)
+  //         }
+  //       },
+  //       error => {
+  //         if (!error.response) setErrorbd(true)
+  //       }
+  //     )
+  // }, [])
+
+  // useEffect(() => {
+  //   axios
+  //     .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/entidad_nacimiento', {
+  //       headers: {
+  //         'Content-type': 'application/json',
+  //       },
+  //     })
+  //     .then(
+  //       response => {
+  //         if (response.status === 200) {
+  //           setEntidadNacimiento(response.data)
+  //           setErrorbd(false)
+  //         }
+  //       },
+  //       error => {
+  //         if (!error.response) setErrorbd(true)
+  //       }
+  //     )
+  // }, [])
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/entidad_nacimiento', {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
-      .then(
-        response => {
-          if (response.status === 200) {
-            setEntidadNacimiento(response.data)
-            setErrorbd(false)
-          }
-        },
-        error => {
-          if (!error.response) setErrorbd(true)
-        }
-      )
-  }, [])
-
-  useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/sexo', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/sexo', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -126,7 +126,7 @@ export default function AddPaciente() {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/estadoConyugal', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/estadoConyugal', {
         headers: {
           'Content-type': 'application/json',
           //'Authorization': `Bearer ${token}`
@@ -155,7 +155,7 @@ export default function AddPaciente() {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/tipoVialidad', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/tipoVialidad', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -175,7 +175,7 @@ export default function AddPaciente() {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/tipoAsentamiento', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/tipoAsentamiento', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -193,51 +193,30 @@ export default function AddPaciente() {
       )
   }, [])
 
-  useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/entidad_federativa', {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
-      .then(
-        response => {
-          if (response.status === 200) {
-            setEntidadFederativa(response.data)
-            setErrorbd(false)
-          }
-        },
-        error => {
-          if (!error.response) setErrorbd(true)
-        }
-      )
-  }, [])
-
-  //USAR PARA OBTENER LOS CATALOGOS DE LA API DE CC PP
-  useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/lugarReferencia', {
-        headers: {
-          'Content-type': 'application/json',
-        },
-      })
-      .then(
-        response => {
-          if (response.status === 200) {
-            setLugar(response.data)
-            setErrorbd(false)
-          }
-        },
-        error => {
-          if (!error.response) setErrorbd(true)
-        }
-      )
-  }, [])
+  // useEffect(() => {
+  //   axios
+  //     .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/entidad_federativa', {
+  //       headers: {
+  //         'Content-type': 'application/json',
+  //       },
+  //     })
+  //     .then(
+  //       response => {
+  //         if (response.status === 200) {
+  //           setEntidadFederativa(response.data)
+  //           setErrorbd(false)
+  //         }
+  //       },
+  //       error => {
+  //         if (!error.response) setErrorbd(true)
+  //       }
+  //     )
+  // }, [])
 
   const guardaPaciente = () => {
     axios
       .post(
-        process.env.REACT_APP_SERVIDOR + '/hospitalBoca/pacientes/save',
+        process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/save',
         {
           paciente: {
             folio: datos.folio,//ESTO HAY QUE CALCULARLO
@@ -415,7 +394,7 @@ export default function AddPaciente() {
             />
           </Grid>
 
-          <Grid item xs margin={1}>
+          {/* <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="entidad_nacimiento">Entidad de Nacimiento</InputLabel>
               <Select
@@ -433,7 +412,7 @@ export default function AddPaciente() {
                 })}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
           
         </Grid>
 
@@ -475,7 +454,7 @@ export default function AddPaciente() {
                 error={datos.fk_sexo === '' && isFail}
               >
                 {sexo.map(n => {
-                  return <MenuItem value={n.id}>{n.nombre}</MenuItem>
+                  return <MenuItem value={n.idSexo}>{n.nombre}</MenuItem>
                 })}
               </Select>
             </FormControl>
@@ -521,7 +500,7 @@ export default function AddPaciente() {
                 error={datos.fk_estado_conyugal === '' && isFail}
               >
                 {estadoConyugal.map(n => {
-                  return <MenuItem value={n.idEstadoCivil}>{n.nombreEstado}</MenuItem>
+                  return <MenuItem value={n.idEstadoConyugal}>{n.nombre}</MenuItem>
                 })}
               </Select>
             </FormControl>
@@ -656,7 +635,7 @@ export default function AddPaciente() {
                 error={datos.fk_tipo_vialidad === '' && isFail}
               >
                 {tipoVialidad.map(n => {
-                  return <MenuItem value={n.id}>{n.nombre}</MenuItem>
+                  return <MenuItem value={n.idTipoVialidad}>{n.nombre}</MenuItem>
                 })}
               </Select>
             </FormControl>
@@ -723,7 +702,7 @@ export default function AddPaciente() {
                 error={datos.fk_tipo_asentamiento === '' && isFail}
               >
                 {tipoAsentamiento.map(n => {
-                  return <MenuItem value={n.id}>{n.nombre}</MenuItem>
+                  return <MenuItem value={n.idTipoAsentamiento}>{n.nombre}</MenuItem>
                 })}
               </Select>
             </FormControl>
@@ -805,7 +784,7 @@ export default function AddPaciente() {
             />
           </Grid>
 
-          <Grid item xs margin={1}>
+          {/* <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="entidad_federativa">Entidad Federativa</InputLabel>
               <Select
@@ -823,7 +802,7 @@ export default function AddPaciente() {
                 })}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
 
           <Grid item xs margin={1}>
             <TextField

@@ -17,12 +17,10 @@ import Button from '@mui/material/Button'
 
 const headCells = [
   { id: 'folio', numeric: false, label: 'No. Expediente' },
-  { id: 'nombre', numeric: false, label: 'nombre' },
-  { id: 'primer_apellido', numeric: false, label: 'Apellido Paterno' },
-  { id: 'segundo_apellido', numeric: false, label: 'Apellido Materno' },
-  //estos campos se pueden cambiar
-  { id: 'edad', numeric: false, label: 'Edad' },
-  { id: 'fecha_nacimiento', numeric: false, label: 'Fecha de Nacimiento' },
+  { id: 'nombre', numeric: false, label: 'Nombre' },
+  { id: 'apPaterno', numeric: false, label: 'Apellido Paterno' },
+  { id: 'apMaerno', numeric: false, label: 'Apellido Materno' },
+  { id: 'fechaNacimiento', numeric: false, label: 'Fecha de Nacimiento' },
   { id: 'accion', numeric: false, label: "Acción" },
 ]
 
@@ -74,7 +72,7 @@ export default function AllPacientes({}) {
   useEffect(() => {
     if (refresh) {
       axios
-        .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/pacientes/all', {
+        .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/all', {
           headers: {
             'Content-type': 'application/json',
             //'Authorization': `Bearer ${token()}`
@@ -142,10 +140,10 @@ export default function AllPacientes({}) {
                     <TableRow key={item.folio}>
                       <TableCell>{item.folio}</TableCell>
                       <TableCell>{item.nombre}</TableCell>
-                      <TableCell>{item.primer_apellido}</TableCell>
-                      <TableCell>{item.segundo_apellido}</TableCell>
-                      <TableCell>{getAge(item.fecha_nacimiento)} años</TableCell>
-                      <TableCell>{dateFormatter(item.fecha_nacimiento)}</TableCell>
+                      <TableCell>{item.apPaterno}</TableCell>
+                      <TableCell>{item.apMaerno}</TableCell>
+                      {/* <TableCell>{getAge(item.fecha_nacimiento)} años</TableCell> */}
+                      <TableCell>{dateFormatter(item.fechaNacimiento)}</TableCell>
                       <TableCell>
                         <Button
                           component={Link}
