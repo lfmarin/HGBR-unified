@@ -27,6 +27,12 @@ CREATE TABLE tipo_asentamiento(
     PRIMARY KEY(id)
 );
 
+CREATE TABLE estados(
+	id INTEGER AUTO_INCREMENT,
+    nombre VARCHAR(60),
+    PRIMARY KEY(id)
+);
+
 -- TABLAS
 
 CREATE TABLE pacientes(
