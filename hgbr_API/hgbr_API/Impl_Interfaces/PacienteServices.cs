@@ -22,7 +22,7 @@ namespace API_Hospital_Boca.Bussiness
                     Folio = p.Folio,
                     Nombre = p.Nombre,
                     ApPaterno = p.PrimerApellido,
-                    ApMaerno = p.SegundoApellido,
+                    ApMaterno = p.SegundoApellido,
                     FechaNacimiento = p.FechaNacimiento
                 });
             }
