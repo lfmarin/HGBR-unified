@@ -85,7 +85,7 @@ namespace API_Hospital_Boca.Bussiness
             try
             {
                 return context.Estados.Select(item => new {
-                    idSexo = item.Id,
+                    idEstado = item.Id,
                     nombre = item.Nombre
                 });
             }
