@@ -43,6 +43,16 @@ builder.Services.AddScoped<IPacienteServices, PacienteServices>();
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 // AQUI TERMINAN MIS LOCURAS
 var app = builder.Build();
@@ -55,6 +65,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
