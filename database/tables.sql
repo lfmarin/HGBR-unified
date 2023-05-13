@@ -43,6 +43,7 @@ CREATE TABLE pacientes(
     curp VARCHAR(18),
     fecha_nacimiento DATETIME,
     entidad_nacimiento VARCHAR(30),
+    -- fk_entidad_nacimiento INTEGER,
     edad INTEGER,
     nacido_hospital BOOLEAN,
     fk_sexo INTEGER, -- llave foranea
@@ -64,6 +65,7 @@ CREATE TABLE pacientes(
     localidad VARCHAR(50),
     municipio_deleg VARCHAR(50),
     entidad_federativa VARCHAR(50),
+    -- fk_entidad_federativa INTEGER,
     pais VARCHAR(50),
     telefono BIGINT,
     PRIMARY KEY(folio),
@@ -71,6 +73,8 @@ CREATE TABLE pacientes(
     FOREIGN KEY(fk_estado_conyugal) REFERENCES estado_conyugal(id),
     FOREIGN KEY(fk_tipo_vialidad) REFERENCES tipo_vialidad(id),
     FOREIGN KEY(fk_tipo_asentamiento) REFERENCES tipo_asentamiento(id)
+    -- FOREIGN KEY(fk_entidad_nacimiento) REFERENCES estados(id),
+	-- FOREIGN KEY(fk_entidad_federativa) REFERENCES estados(id)
 );
 
 CREATE TABLE admisiones(
@@ -81,6 +85,7 @@ CREATE TABLE admisiones(
     curp VARCHAR(18),
     fecha_nacimiento DATETIME,
     entidad_nacimiento VARCHAR(30),
+    -- fk_entidad_nacimiento INTEGER,
     edad INTEGER,
     fk_sexo INTEGER, -- llave foranea
     insabi BOOLEAN,
@@ -94,11 +99,14 @@ CREATE TABLE admisiones(
     cp BIGINT,
     localidad VARCHAR(50),
     municipio_deleg VARCHAR(50),
-    entidad_federativa VARCHAR(50),
+    -- entidad_federativa VARCHAR(50),
+	fk_entidad_federativa INTEGER,
     pais VARCHAR(50),
     telefono BIGINT,
     PRIMARY KEY(folio),
     FOREIGN KEY(fk_sexo) REFERENCES sexo(id),
     FOREIGN KEY(fk_tipo_vialidad) REFERENCES tipo_vialidad(id),
     FOREIGN KEY(fk_tipo_asentamiento) REFERENCES tipo_asentamiento(id)
+    -- FOREIGN KEY(fk_entidad_nacimiento) REFERENCES estados(id),
+	-- FOREIGN KEY(fk_entidad_federativa) REFERENCES estados(id)
 );

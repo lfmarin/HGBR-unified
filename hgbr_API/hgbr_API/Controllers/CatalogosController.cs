@@ -69,5 +69,19 @@ namespace hgbr_API.Controllers
                 throw;
             }
         }
+
+        [HttpGet("estado")]
+        public IActionResult getAllEstado()
+        {
+            try
+            {
+                var res = _service.getAllEstado();
+                return Ok(res);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }

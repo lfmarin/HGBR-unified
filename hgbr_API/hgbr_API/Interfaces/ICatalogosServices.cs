@@ -8,4 +8,5 @@ public interface ICatalogosServices
     IQueryable<object> getAllTipoAsentamiento();
     IQueryable<object> getAllTipoVialidad();
     IQueryable<object> getAllSexo();
+    IQueryable<object> getAllEstado();
 }

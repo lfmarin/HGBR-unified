@@ -79,5 +79,20 @@ namespace API_Hospital_Boca.Bussiness
                 throw;
             }
         }
+
+        public IQueryable<object> getAllEstado()
+        {
+            try
+            {
+                return context.Estados.Select(item => new {
+                    idSexo = item.Id,
+                    nombre = item.Nombre
+                });
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
     }
 }
