@@ -140,17 +140,17 @@ export default function AllPacientes({}) {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(p => {
                   return (
-                    <TableRow key={p.Folio}>
-                      <TableCell>{p.Folio}</TableCell>
-                      <TableCell>{p.Nombre}</TableCell>
-                      <TableCell>{p.ApPaterno}</TableCell>
-                      <TableCell>{p.ApMaterno}</TableCell>
+                    <TableRow key={p.folio}>
+                      <TableCell>{p.folio}</TableCell>
+                      <TableCell>{p.nombre}</TableCell>
+                      <TableCell>{p.apPaterno}</TableCell>
+                      <TableCell>{p.apMaterno}</TableCell>
                       {/* <TableCell>{getAge(p.fecha_nacimiento)} años</TableCell> */}
-                      <TableCell>{dateFormatter(p.FechaNacimiento)}</TableCell>
+                      <TableCell>{dateFormatter(p.fechaNacimiento)}</TableCell>
                       <TableCell>
                         <Button
                           component={Link}
-                          to={`/pacientes/details/${p.Folio}`}
+                          to={`/pacientes/details/${p.folio}`}
                           variant="outlined"
                           sx={{ borderColor: '#AC3833', color: '#AC3833' }}
                         >

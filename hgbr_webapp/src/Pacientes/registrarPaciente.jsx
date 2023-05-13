@@ -17,16 +17,13 @@ import Snackbar from '@mui/material/Snackbar'
 
 export default function AddPaciente() {
   const [isFail, setIsFail] = useState(false)
-  // const [hospital, setHospital] = useState([])
 
-  // const [entidadNacimiento, setEntidadNacimiento] = useState([])
   const [sexo, setSexo] = useState([])
   const [estadoConyugal, setEstadoConyugal] = useState([])
   const [tipoVialidad, setTipoVialidad] = useState([])
   const [tipoAsentamiento, setTipoAsentamiento] = useState([])
-  // const [entidadFederativa, setEntidadFederativa] = useState([])
+  const [estado, setEstado] = useState([])
 
-  // const [lugar, setLugar] = useState([])
   const [datos, setDatos] = useState({
     folio: '',
     nombre: '',
@@ -63,46 +60,6 @@ export default function AddPaciente() {
   const [finish, setFinish] = useState(false)
   const style = useStyles()
   const [delay, setDelay] = useState(false)
-
-  // useEffect(() => {
-  //   axios
-  //     .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/hospitales/all', {
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //     })
-  //     .then(
-  //       response => {
-  //         if (response.status === 200) {
-  //           setHospital(response.data)
-  //           setErrorbd(false)
-  //         }
-  //       },
-  //       error => {
-  //         if (!error.response) setErrorbd(true)
-  //       }
-  //     )
-  // }, [])
-
-  // useEffect(() => {
-  //   axios
-  //     .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/entidad_nacimiento', {
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //     })
-  //     .then(
-  //       response => {
-  //         if (response.status === 200) {
-  //           setEntidadNacimiento(response.data)
-  //           setErrorbd(false)
-  //         }
-  //       },
-  //       error => {
-  //         if (!error.response) setErrorbd(true)
-  //       }
-  //     )
-  // }, [])
 
   useEffect(() => {
     axios
@@ -193,25 +150,25 @@ export default function AddPaciente() {
       )
   }, [])
 
-  // useEffect(() => {
-  //   axios
-  //     .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/entidad_federativa', {
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //     })
-  //     .then(
-  //       response => {
-  //         if (response.status === 200) {
-  //           setEntidadFederativa(response.data)
-  //           setErrorbd(false)
-  //         }
-  //       },
-  //       error => {
-  //         if (!error.response) setErrorbd(true)
-  //       }
-  //     )
-  // }, [])
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/estado', {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      .then(
+        response => {
+          if (response.status === 200) {
+            setEstado(response.data)
+            setErrorbd(false)
+          }
+        },
+        error => {
+          if (!error.response) setErrorbd(true)
+        }
+      )
+  }, [])
 
   const guardaPaciente = () => {
     axios
@@ -394,7 +351,7 @@ export default function AddPaciente() {
             />
           </Grid>
 
-          {/* <Grid item xs margin={1}>
+          <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="entidad_nacimiento">Entidad de Nacimiento</InputLabel>
               <Select
@@ -407,12 +364,12 @@ export default function AddPaciente() {
                 onChange={handleChange}
                 error={datos.entidad_nacimiento === '' && isFail}
               >
-                {entidadNacimiento.map(n => {
-                  return <MenuItem value={n.id}>{n.nombre}</MenuItem>
+                {estado.map(n => {
+                  return <MenuItem value={n.nombre}>{n.nombre}</MenuItem>
                 })}
               </Select>
             </FormControl>
-          </Grid> */}
+          </Grid>
           
         </Grid>
 
@@ -769,22 +726,8 @@ export default function AddPaciente() {
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
-        <Grid item xs margin={1}>
-            <TextField
-              id="telefono"
-              label="Teléfono"
-              variant="outlined"
-              name="telefono"
-              defaultValue={datos.telefono}
-              onChange={handleChange}
-              fullWidth
-              required
-              error={datos.TelCasa === '' && isFail}
-              inputProps={{ maxLength: 10 }}
-            />
-          </Grid>
 
-          {/* <Grid item xs margin={1}>
+          <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="entidad_federativa">Entidad Federativa</InputLabel>
               <Select
@@ -797,12 +740,12 @@ export default function AddPaciente() {
                 onChange={handleChange}
                 error={datos.entidad_federativa === '' && isFail}
               >
-                {entidadFederativa.map(n => {
-                  return <MenuItem value={n.id}>{n.nombre}</MenuItem>
+                {estado.map(n => {
+                  return <MenuItem value={n.nombre}>{n.nombre}</MenuItem>
                 })}
               </Select>
             </FormControl>
-          </Grid> */}
+          </Grid>
 
           <Grid item xs margin={1}>
             <TextField
@@ -814,6 +757,21 @@ export default function AddPaciente() {
               onChange={handleChange}
               inputProps={{maxLength: 100}}
               fullWidth
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              id="telefono"
+              label="Teléfono"
+              variant="outlined"
+              name="telefono"
+              defaultValue={datos.telefono}
+              onChange={handleChange}
+              fullWidth
+              required
+              error={datos.TelCasa === '' && isFail}
+              inputProps={{ maxLength: 10 }}
             />
           </Grid>
           
