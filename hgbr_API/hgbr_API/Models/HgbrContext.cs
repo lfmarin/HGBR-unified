@@ -166,6 +166,9 @@ public partial class HgbrContext : DbContext
             entity.Property(e => e.FechaNacimiento)
                 .HasColumnType("datetime")
                 .HasColumnName("fecha_nacimiento");
+            entity.Property(e => e.HoraNacimiento)
+                .HasColumnType("timespan")
+                .HasColumnName("hora_nacimiento");
             entity.Property(e => e.FkEstadoConyugal).HasColumnName("fk_estado_conyugal");
             entity.Property(e => e.FkSexo).HasColumnName("fk_sexo");
             entity.Property(e => e.FkTipoAsentamiento).HasColumnName("fk_tipo_asentamiento");

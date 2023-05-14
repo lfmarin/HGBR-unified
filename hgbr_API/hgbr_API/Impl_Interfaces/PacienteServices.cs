@@ -79,6 +79,7 @@ namespace API_Hospital_Boca.Bussiness
                     ApMaterno = pa.SegundoApellido,
                     Curp = pa.Curp,
                     FechaNac = pa.FechaNacimiento,
+                    HoraNac = pa.HoraNacimiento,
                     EntidadNac = pa.EntidadNacimiento,
                     // Edad = pa.Edad,
                     EdadYears = pa.EdadYears,
@@ -139,6 +140,7 @@ namespace API_Hospital_Boca.Bussiness
                 if (!aux.SegundoApellido.Equals(paciente.SegundoApellido)) aux.SegundoApellido = paciente.SegundoApellido;
                 if (!aux.Curp.Equals(paciente.Curp)) aux.Curp = paciente.Curp;
                 if (!aux.FechaNacimiento.Equals(paciente.FechaNacimiento)) aux.FechaNacimiento = paciente.FechaNacimiento;
+                if (!aux.HoraNacimiento.Equals(paciente.HoraNacimiento)) aux.HoraNacimiento = paciente.HoraNacimiento;
                 if (!aux.EntidadNacimiento.Equals(paciente.EntidadNacimiento)) aux.EntidadNacimiento = paciente.EntidadNacimiento;
                 // if (aux.Edad != paciente.Edad) aux.Edad = paciente.Edad;
                 if (aux.EdadYears != paciente.EdadYears) aux.EdadYears = paciente.EdadYears;

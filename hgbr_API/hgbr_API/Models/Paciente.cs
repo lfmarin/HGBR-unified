@@ -15,7 +15,10 @@ public partial class Paciente
 
     public string? Curp { get; set; }
 
+    //  Me parece que no hay tipo Date ni Time por separado :/
     public DateTime? FechaNacimiento { get; set; }
+
+    public TimeSpan? HoraNacimiento { get; set; }
 
     public string? EntidadNacimiento { get; set; }
 
