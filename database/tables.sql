@@ -44,7 +44,11 @@ CREATE TABLE pacientes(
     fecha_nacimiento DATETIME,
     entidad_nacimiento VARCHAR(30),
     -- fk_entidad_nacimiento INTEGER,
-    edad INTEGER,
+    -- edad INTEGER,
+    edad_years INTEGER,
+    edad_mounths INTEGER,
+    edad_hours INTEGER,
+    edad_minutes INTEGER,
     nacido_hospital BOOLEAN,
     fk_sexo INTEGER, -- llave foranea
     peso FLOAT,

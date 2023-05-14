@@ -80,7 +80,11 @@ namespace API_Hospital_Boca.Bussiness
                     Curp = pa.Curp,
                     FechaNac = pa.FechaNacimiento,
                     EntidadNac = pa.EntidadNacimiento,
-                    Edad = pa.Edad,
+                    // Edad = pa.Edad,
+                    EdadYears = pa.EdadYears,
+                    EdadMounths = pa.EdadMounths,
+                    EdadHours = pa.EdadHours,
+                    EdadMinutes = pa.EdadMinutes,
                     NacidoHosp = pa.NacidoHospital,
                     FKSexo = pa.FkSexo,
                     Peso = pa.Peso,
@@ -136,7 +140,11 @@ namespace API_Hospital_Boca.Bussiness
                 if (!aux.Curp.Equals(paciente.Curp)) aux.Curp = paciente.Curp;
                 if (!aux.FechaNacimiento.Equals(paciente.FechaNacimiento)) aux.FechaNacimiento = paciente.FechaNacimiento;
                 if (!aux.EntidadNacimiento.Equals(paciente.EntidadNacimiento)) aux.EntidadNacimiento = paciente.EntidadNacimiento;
-                if (aux.Edad != paciente.Edad) aux.Edad = paciente.Edad;
+                // if (aux.Edad != paciente.Edad) aux.Edad = paciente.Edad;
+                if (aux.EdadYears != paciente.EdadYears) aux.EdadYears = paciente.EdadYears;
+                if (aux.EdadMounths != paciente.EdadMounths) aux.EdadMounths = paciente.EdadMounths;
+                if (aux.EdadHours != paciente.EdadMinutes) aux.EdadMinutes = paciente.EdadMinutes;
+                if (aux.EdadMinutes != paciente.EdadMinutes) aux.EdadMinutes = paciente.EdadMinutes;
                 if (aux.NacidoHospital != paciente.NacidoHospital) aux.NacidoHospital = paciente.NacidoHospital;
                 if (aux.FkSexo != paciente.FkSexo) aux.FkSexo = paciente.FkSexo;
                 if (aux.Peso != paciente.Peso) aux.Peso = paciente.Peso;

@@ -19,7 +19,15 @@ public partial class Paciente
 
     public string? EntidadNacimiento { get; set; }
 
-    public int? Edad { get; set; }
+    // public int? Edad { get; set; }
+
+    public int? EdadYears { get; set; }
+
+    public int? EdadMounths { get; set; }
+
+    public int? EdadHours { get; set; }
+
+    public int? EdadMinutes { get; set; }
 
     public bool? NacidoHospital { get; set; }
 
