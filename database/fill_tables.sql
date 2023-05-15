@@ -126,6 +126,6 @@ VALUES
 
 
 
-INSERT INTO pacientes(folio, nombre, primer_apellido, segundo_apellido, curp, fecha_nacimiento, hora_nacimiento, entidad_nacimiento, edad_years, edad_mounths, edad_hours, edad_minutes, nacido_hospital, fk_sexo, peso, talla, fk_estado_conyugal, insabi, gratuitidad, indigena, lengua_indigena, cual_lengua, fk_tipo_vialidad, nombre_vialidad, num_ext, num_int, fk_tipo_asentamiento, nombre_asentamiento, cp, localidad, municipio_deleg, entidad_federativa, pais, telefono) VALUES
+INSERT INTO pacientes(folio, nombre, primer_apellido, segundo_apellido, curp, fecha_nacimiento, hora_nacimiento, entidad_nacimiento, edad_years, edad_mounths, edad_days, edad_hours, nacido_hospital, fk_sexo, peso, talla, fk_estado_conyugal, insabi, gratuitidad, indigena, lengua_indigena, cual_lengua, fk_tipo_vialidad, nombre_vialidad, num_ext, num_int, fk_tipo_asentamiento, nombre_asentamiento, cp, localidad, municipio_deleg, entidad_federativa, pais, telefono) VALUES
 ('ABCDEFGH', 'Josue', 'Tellez', 'Huerta', 'TEHJ000624HOCLRSA6', '2000-06-24', '17:17', 'Oaxaca', 22, null, null, null, true, 1, 74, 174, 1, true, true, false, false, 'Ninguno', 1, 'Aeropuerto', 2, 133, 4, 'Boulevard', 94295, 'Boca del Rio', 'Boca del Rio', 'Veracruz', 'Mexico', '2741019045'),
 ('IJKLMNOP', 'Joel', 'Jacome', 'Pioquinto', 'JAPJ000628HVZCQNA2', '2000-06-28', '11:25', 'Veracruz', 22, null, null, null, true, 1, 77, 173, 1, true, true, false, false, 'Ninguno', 3, 'Barrio', 7, 28, 4, 'Boulevard', 94298, 'Boca del Rio', 'Boca del Rio', 'Veracruz', 'Mexico', '2294651314');

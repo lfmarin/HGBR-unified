@@ -28,9 +28,9 @@ public partial class Paciente
 
     public int? EdadMounths { get; set; }
 
-    public int? EdadHours { get; set; }
+    public int? EdadDays { get; set; }
 
-    public int? EdadMinutes { get; set; }
+    public int? EdadHours { get; set; }
 
     public bool? NacidoHospital { get; set; }
 

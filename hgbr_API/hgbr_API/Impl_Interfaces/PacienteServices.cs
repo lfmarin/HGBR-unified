@@ -84,8 +84,8 @@ namespace API_Hospital_Boca.Bussiness
                     // Edad = pa.Edad,
                     EdadYears = pa.EdadYears,
                     EdadMounths = pa.EdadMounths,
+                    EdadDays = pa.EdadDays,
                     EdadHours = pa.EdadHours,
-                    EdadMinutes = pa.EdadMinutes,
                     NacidoHosp = pa.NacidoHospital,
                     FKSexo = pa.FkSexo,
                     Peso = pa.Peso,
@@ -145,8 +145,8 @@ namespace API_Hospital_Boca.Bussiness
                 // if (aux.Edad != paciente.Edad) aux.Edad = paciente.Edad;
                 if (aux.EdadYears != paciente.EdadYears) aux.EdadYears = paciente.EdadYears;
                 if (aux.EdadMounths != paciente.EdadMounths) aux.EdadMounths = paciente.EdadMounths;
-                if (aux.EdadHours != paciente.EdadMinutes) aux.EdadMinutes = paciente.EdadMinutes;
-                if (aux.EdadMinutes != paciente.EdadMinutes) aux.EdadMinutes = paciente.EdadMinutes;
+                if (aux.EdadDays != paciente.EdadDays) aux.EdadDays = paciente.EdadDays;
+                if (aux.EdadHours != paciente.EdadHours) aux.EdadHours = paciente.EdadHours;
                 if (aux.NacidoHospital != paciente.NacidoHospital) aux.NacidoHospital = paciente.NacidoHospital;
                 if (aux.FkSexo != paciente.FkSexo) aux.FkSexo = paciente.FkSexo;
                 if (aux.Peso != paciente.Peso) aux.Peso = paciente.Peso;

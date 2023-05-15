@@ -155,8 +155,8 @@ public partial class HgbrContext : DbContext
             // entity.Property(e => e.Edad).HasColumnName("edad");
             entity.Property(e => e.EdadYears).HasColumnName("edad_years");
             entity.Property(e => e.EdadMounths).HasColumnName("edad_mounths");
+            entity.Property(e => e.EdadDays).HasColumnName("edad_days");
             entity.Property(e => e.EdadHours).HasColumnName("edad_hours");
-            entity.Property(e => e.EdadMinutes).HasColumnName("edad_minutes");
             entity.Property(e => e.EntidadFederativa)
                 .HasMaxLength(50)
                 .HasColumnName("entidad_federativa");
