@@ -70,7 +70,6 @@ CREATE TABLE pacientes(
     localidad VARCHAR(50),
     municipio_deleg VARCHAR(50),
     entidad_federativa VARCHAR(50),
-    -- fk_entidad_federativa INTEGER,
     pais VARCHAR(50),
     telefono BIGINT,
     PRIMARY KEY(folio),
@@ -78,9 +77,17 @@ CREATE TABLE pacientes(
     FOREIGN KEY(fk_estado_conyugal) REFERENCES estado_conyugal(id),
     FOREIGN KEY(fk_tipo_vialidad) REFERENCES tipo_vialidad(id),
     FOREIGN KEY(fk_tipo_asentamiento) REFERENCES tipo_asentamiento(id)
-    -- FOREIGN KEY(fk_entidad_nacimiento) REFERENCES estados(id),
-	-- FOREIGN KEY(fk_entidad_federativa) REFERENCES estados(id)
 );
+
+ALTER TABLE pacientes
+RENAME COLUMN edad TO edad_years,
+MODIFY COLUMN fecha_nacimiento DATE,
+ADD COLUMN hora_nacimiento TIME,
+ADD COLUMN edad_months INTEGER,
+ADD COLUMN edad_days INTEGER,
+-- RENAME COLUMN edad_minutes TO edad_days, COMANDO PARA JOSUE!!!
+ADD COLUMN edad_hours INTEGER;
+
 
 CREATE TABLE admisiones(
 	folio INTEGER AUTO_INCREMENT,
