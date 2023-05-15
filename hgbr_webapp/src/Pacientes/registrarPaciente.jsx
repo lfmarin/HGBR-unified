@@ -31,8 +31,12 @@ export default function AddPaciente() {
     segundo_apellido: '',
     curp: '',
     fecha_nacimiento: '',
+    hora_nacimiento: '',
     entidad_nacimiento: '',
-    edad: 0,
+    edad_years: 0,
+    edad_months: 0,
+    edad_days: 0,
+    edad_hours: 0,
     nacido_hospital: null,
     fk_sexo: '',
     peso: 0.0,
@@ -171,6 +175,13 @@ export default function AddPaciente() {
   }, [])
 
   const guardaPaciente = () => {
+    // AQUI CALCULAR LA EDAD Y EL FOLIO
+    const fNac = new Date(datos.fecha_nacimiento);
+    const hNac = new Time(datos.hora_nacimiento);
+    const yearNac = fNac.getFullYear();
+    const mesNac = fNac.getMonth()+1;
+    const diaNac = fNac.getDay();
+
     axios
       .post(
         process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/save',
@@ -182,8 +193,12 @@ export default function AddPaciente() {
             segundo_apellido: datos.segundo_apellido,
             curp: datos.curp,
             fecha_nacimiento: datos.fecha_nacimiento,
+            hora_nacimiento: datos.hora_nacimiento,
             entidad_nacimiento: datos.entidad_nacimiento,
-            edad: datos.edad, //CALCULAR
+            edad_years: datos.edad_years, //CALCULAR
+            edad_months: datos.edad_months,
+            edad_days: datos.edad_days,
+            edad_hours: datos.edad_hours,
             nacido_hospital: datos.nacido_hospital,
             fk_sexo: datos.fk_sexo,
             peso: datos.peso,
@@ -207,7 +222,6 @@ export default function AddPaciente() {
             pais: datos.pais,
             telefono: datos.telefono,
           },
-          // hospital: datos.FkHospital,
         },
         {
           headers: {
@@ -374,7 +388,7 @@ export default function AddPaciente() {
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
-                {/** ESTE GRID SERA PARA LA EDAD */}
+                {/** ESTE GRID SERA PARA LA edad_years */}
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
