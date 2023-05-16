@@ -174,13 +174,51 @@ export default function AddPaciente() {
       )
   }, [])
 
+  const getYears = d1 => {
+    d1 = new Date(d1.slice(0, 10))
+    const d2 = new Date()
+    const diff = d2.getTime() - d1.getTime()
+    return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25))
+  }
+
+  const getMonths = d1 => {
+    d1 = new Date(d1.slice(0, 10))
+    const d2 = new Date()
+    const diff = d2.getTime() - d1.getTime()
+    return Math.floor(diff / (1000 * 60 * 60 * 24 * 30.4375))
+  }
+
+  const getDays = d1 => {
+    d1 = new Date(d1.slice(0, 10))
+    const d2 = new Date()
+    const diff = d2.getTime() - d1.getTime()
+    return Math.floor(diff / (1000 * 60 * 60 * 24))
+  }
+
+  const getHours = d1 => {
+    d1 = new Date(d1.slice(0, 10))
+    const d2 = new Date()
+    const diff = d2.getTime() - d1.getTime()
+    return Math.floor(diff / (1000 * 60 * 60))
+  }
+
   const guardaPaciente = () => {
     // AQUI CALCULAR LA EDAD Y EL FOLIO
-    const fNac = new Date(datos.fecha_nacimiento);
-    const hNac = new Time(datos.hora_nacimiento);
+    const fNac = new Date(datos.fecha_nacimiento+" "+datos.hora_nacimiento);
+    console.log(fNac);
     const yearNac = fNac.getFullYear();
-    const mesNac = fNac.getMonth()+1;
-    const diaNac = fNac.getDay();
+    const monthNac = fNac.getMonth()+1;
+    const dayNac = fNac.getDate();
+    const hourNac = fNac.getTime();
+    const currentDate = new Date(Date.now());
+    const yearCurr = currentDate.getFullYear();
+    const monthCurr = currentDate.getMonth()+1;
+    const dayCurr = currentDate.getDate();
+    const hourCurr = currentDate.getTime();
+
+    if(yearCurr < yearNac) {
+      //usar el codigo del video
+    }
 
     axios
       .post(
@@ -253,15 +291,15 @@ export default function AddPaciente() {
   const handleSave = () => {
     if (
       //DEFINIR LOS DATOS QUE SERAN OBLIGATORIOS PARA GUARDAR
-      datos.folio === '' ||
+      // datos.folio === '' ||
       datos.nombre === '' ||
       datos.primer_apellido === '' ||
       datos.segundo_apellido === '' ||
-      datos.fecha_nacimiento === '' ||
-      datos.fk_estado_conyugal === '' ||
-      datos.telefono === '' ||
-      datos.nombre_vialidad === '' ||
-      datos.nombre_asentamiento === ''
+      datos.fecha_nacimiento === '' // ||
+      // datos.fk_estado_conyugal === '' ||
+      // datos.telefono === '' ||
+      // datos.nombre_vialidad === '' ||
+      // datos.nombre_asentamiento === ''
     ) {
       setIsFail(true)
       return
@@ -354,11 +392,27 @@ export default function AddPaciente() {
               required
               id="fecha_nacimiento"
               label="Fecha de Nacimiento"
-              type="datetime"
+              type="date"
               variant="outlined"
               name="fecha_nacimiento"
               defaultValue={datos.fecha_nacimiento}
               error={datos.fecha_nacimiento === '' && isFail}
+              onChange={handleChange}
+              InputLabelProps={{ shrink: true }}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              required
+              id="hora_nacimiento"
+              label="Hora de Nacimiento"
+              type="time"
+              variant="outlined"
+              name="hora_nacimiento"
+              defaultValue={datos.hora_nacimiento}
+              error={datos.hora_nacimiento === '' && isFail}
               onChange={handleChange}
               InputLabelProps={{ shrink: true }}
               fullWidth
