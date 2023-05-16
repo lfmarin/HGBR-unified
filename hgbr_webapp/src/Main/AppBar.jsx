@@ -18,14 +18,14 @@ const useStyles = makeStyles(theme => ({
  * @param {string} nombre 
  * @returns 
  */
-const mostrarUsuario = (nombre) => {
-  return <div style={{right: 30, display:'flex', justifyContent:'space-evenly', alignItems:'center', width: '300px', position: 'absolute', color: '#000'}}>
-    {nombre}
-    {(nombre && nombre.length !== 0) && <Button component={Link} to={`/logout`} variant="outlined" size="small">
-        Cerrar Sesión
-    </Button>}
-  </div>
-}
+// const mostrarUsuario = (nombre) => {
+//   return <div style={{right: 30, display:'flex', justifyContent:'space-evenly', alignItems:'center', width: '300px', position: 'absolute', color: '#000'}}>
+//     {nombre}
+//     {(nombre && nombre.length !== 0) && <Button component={Link} to={`/logout`} variant="outlined" size="small">
+//         Cerrar Sesión
+//     </Button>}
+//   </div>
+// }
 
 export default function NavBar({userName, menuCallBack}) {
   const classes = useStyles()
@@ -50,7 +50,7 @@ export default function NavBar({userName, menuCallBack}) {
               Hospital General de Boca del Río
             </Typography>
           </Link>
-          {mostrarUsuario(userName())}
+          {/* {mostrarUsuario(userName())} */}
         </Toolbar>
       </AppBar>
     </div>

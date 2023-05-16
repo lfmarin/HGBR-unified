@@ -1,0 +1,152 @@
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\appsettings.json
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.exe
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.deps.json
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.runtimeconfig.json
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.pdb
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Humanizer.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\MySqlConnector.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.csproj.AssemblyReference.cache
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.AssemblyInfoInputs.cache
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.AssemblyInfo.cs
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.csproj.CoreCompileInputs.cache
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\scopedcss\bundle\hgbr_API.styles.css
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.csproj.CopyComplete
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\refint\hgbr_API.dll
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.pdb
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.genruntimeconfig.cache
+C:\Users\JOSUE TELLEZ\Desktop\hgbr_API\hgbr_API\obj\Debug\net6.0\ref\hgbr_API.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.csproj.AssemblyReference.cache
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.GeneratedMSBuildEditorConfig.editorconfig
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.AssemblyInfoInputs.cache
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.AssemblyInfo.cs
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.csproj.CoreCompileInputs.cache
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.MvcApplicationPartsAssemblyInfo.cs
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.MvcApplicationPartsAssemblyInfo.cache
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\refint\hgbr_API.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.pdb
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\appsettings.Development.json
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\appsettings.json
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.exe
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.deps.json
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.runtimeconfig.json
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.pdb
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Humanizer.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\MySqlConnector.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\System.CodeDom.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\System.Text.Json.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets.build.json
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets.development.json
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\scopedcss\bundle\hgbr_API.styles.css
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.csproj.CopyComplete
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.genruntimeconfig.cache
+C:\repo\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\ref\hgbr_API.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\appsettings.json
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.exe
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.deps.json
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.runtimeconfig.json
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\hgbr_API.pdb
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Humanizer.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\MySqlConnector.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.csproj.AssemblyReference.cache
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.AssemblyInfoInputs.cache
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.AssemblyInfo.cs
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.csproj.CoreCompileInputs.cache
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets\msbuild.hgbr_API.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets\msbuild.build.hgbr_API.props
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.hgbr_API.props
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.hgbr_API.props
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\scopedcss\bundle\hgbr_API.styles.css
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.csproj.CopyComplete
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\refint\hgbr_API.dll
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.pdb
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.genruntimeconfig.cache
+C:\Users\joelj\Desktop\hgbr\hgbr_API\hgbr_API\obj\Debug\net6.0\ref\hgbr_API.dll

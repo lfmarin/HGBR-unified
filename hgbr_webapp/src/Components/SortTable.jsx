@@ -26,10 +26,10 @@ const SortTable = {
   searchTable: (array, search) => {
     const expedienteFilter = array.filter(element => {
       return (
-        element.noExpediente.toString().indexOf(search) !== -1 ||
+        element.folio.toString().indexOf(search) !== -1 ||
         element.nombre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        element.apPaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        element.apMaerno.toLowerCase().indexOf(search.toLowerCase()) !== -1
+        element.primer_apellido.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.segundo_apellido.toLowerCase().indexOf(search.toLowerCase()) !== -1
       )
     })
 
@@ -40,7 +40,7 @@ const SortTable = {
       return (
         element.idDoctor.toString().indexOf(search) !== -1 ||
         element.nombre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        element.apPaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.primer_apellido.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
         element.apMaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1
       )
     })
@@ -52,7 +52,7 @@ const SortTable = {
       return (
         element.idPersonal.toString().indexOf(search) !== -1 ||
         element.nombre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        element.apPaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.primer_apellido.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
         element.apMaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1
       )
     })
