@@ -1,0 +1,9 @@
+.input-container{
+	margin: 12px;
+	padding: 8px 0
+}
+
+.input-container #box{
+	left-margin: 0;
+	right-margin: 0
+}
