@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Configuration;
-using API_Hospital_Boca.Bussiness;
+using hgbr_API.ImplInterface;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
