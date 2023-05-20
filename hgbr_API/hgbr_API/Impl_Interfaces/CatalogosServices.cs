@@ -8,8 +8,8 @@ namespace API_Hospital_Boca.Bussiness
 {
     public class CatalogosServices : ICatalogosServices
     {
-        private readonly HgbrContext context;
-        public CatalogosServices(HgbrContext context)
+        private readonly HospitalBocaContext context;
+        public CatalogosServices(HospitalBocaContext context)
         {
             this.context = context;
         }
@@ -19,10 +19,10 @@ namespace API_Hospital_Boca.Bussiness
         {
             try
             {
-                return context.EstadoConyugals.Select(item => new
+                return context.Estadocivils.Select(item => new
                 {
-                    idEstadoConyugal = item.Id,
-                    nombre = item.Nombre
+                    idEstadoConyugal = item.IdEstadoCivil,
+                    nombre = item.NombreEstado
                 });
             }
             catch (System.Exception)
@@ -36,7 +36,7 @@ namespace API_Hospital_Boca.Bussiness
         {
             try
             {
-                return context.TipoAsentamientos.Select(item => new
+                return context.Tipoasentamientos.Select(item => new
                 {
                     idTipoAsentamiento = item.Id,
                     nombre = item.Nombre
@@ -53,7 +53,7 @@ namespace API_Hospital_Boca.Bussiness
         {
             try
             {
-                return context.TipoVialidads.Select(item => new {
+                return context.Tipovialidads.Select(item => new {
                     idTipoVialidad = item.Id,
                     nombre = item.Nombre
                 });

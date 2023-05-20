@@ -46,7 +46,7 @@ namespace API_Hospital_Boca.Controllers
 
 
         [HttpPost("save")]
-        public IActionResult savePaciente([FromBody] Paciente paciente)
+        public IActionResult savePaciente([FromBody] Pacientesarch paciente)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace API_Hospital_Boca.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult updatePaciente([FromBody] Paciente paciente)
+        public IActionResult updatePaciente([FromBody] Pacientesarch paciente)
         {
             try
             {

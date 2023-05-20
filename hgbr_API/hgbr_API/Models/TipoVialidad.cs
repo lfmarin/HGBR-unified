@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace hgbr_API.Models;
 
-public partial class TipoVialidad
+public partial class Tipovialidad
 {
     public int Id { get; set; }
 
@@ -11,10 +11,5 @@ public partial class TipoVialidad
 
     public virtual ICollection<Admisione> Admisiones { get; set; } = new List<Admisione>();
 
-    public virtual ICollection<Paciente> Pacientes { get; set; } = new List<Paciente>();
-
-    //public static implicit operator object?(TipoVialidad? v)
-    //{
-    //    throw new NotImplementedException();
-    //}
+    public virtual ICollection<Pacientesarch> Pacientesarches { get; set; } = new List<Pacientesarch>();
 }

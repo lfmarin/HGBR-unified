@@ -31,7 +31,7 @@ builder.Services.AddSwaggerGen(c => {
 });
 
 
-builder.Services.AddDbContext<hgbr_API.Models.HgbrContext>(options => {
+builder.Services.AddDbContext<hgbr_API.Models.HospitalBocaContext>(options => {
     var connectionString = configuration.GetConnectionString("HospitalBocaConnectionString");
     var version = ServerVersion.Parse("8.0.26-mysql");
     options.UseMySql(connectionString, version);
