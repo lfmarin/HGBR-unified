@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace hgbr_API.Models;
 
-public partial class EstadoConyugal
+public partial class Lugarreferencium
 {
-    public int Id { get; set; }
+    public int IdLugar { get; set; }
 
-    public string? Nombre { get; set; }
+    public string? NombreLugar { get; set; }
 
     public virtual ICollection<Paciente> Pacientes { get; set; } = new List<Paciente>();
 }

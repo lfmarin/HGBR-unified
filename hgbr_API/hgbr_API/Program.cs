@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Configuration;
-using hgbr_API.ImplInterface;
+using API_Hospital_Boca.Bussiness;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -31,7 +31,7 @@ builder.Services.AddSwaggerGen(c => {
 });
 
 
-builder.Services.AddDbContext<hgbr_API.Models.HgbrContext>(options => {
+builder.Services.AddDbContext<hgbr_API.Models.HospitalBocaContext>(options => {
     var connectionString = configuration.GetConnectionString("HospitalBocaConnectionString");
     var version = ServerVersion.Parse("8.0.26-mysql");
     options.UseMySql(connectionString, version);

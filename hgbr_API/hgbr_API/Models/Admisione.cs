@@ -15,11 +15,19 @@ public partial class Admisione
 
     public string? Curp { get; set; }
 
-    public DateTime? FechaNacimiento { get; set; }
+    public DateOnly? FechaNacimiento { get; set; }
+
+    public TimeOnly? HoraNacimiento { get; set; }
 
     public string? EntidadNacimiento { get; set; }
 
-    public int? Edad { get; set; }
+    public int? EdadYears { get; set; }
+
+    public int? EdadMonths { get; set; }
+
+    public int? EdadDays { get; set; }
+
+    public int? EdadHours { get; set; }
 
     public int? FkSexo { get; set; }
 
@@ -43,7 +51,7 @@ public partial class Admisione
 
     public string? Localidad { get; set; }
 
-    public string? MunicipioDeleg { get; set; }
+    public string? Municipio { get; set; }
 
     public string? EntidadFederativa { get; set; }
 
@@ -53,7 +61,7 @@ public partial class Admisione
 
     public virtual Sexo? FkSexoNavigation { get; set; }
 
-    public virtual TipoAsentamiento? FkTipoAsentamientoNavigation { get; set; }
+    public virtual Tipoasentamiento? FkTipoAsentamientoNavigation { get; set; }
 
-    public virtual TipoVialidad? FkTipoVialidadNavigation { get; set; }
+    public virtual Tipovialidad? FkTipoVialidadNavigation { get; set; }
 }

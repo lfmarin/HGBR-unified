@@ -3,12 +3,12 @@ using hgbr_API.Models;
 using hgbr_API.Interfaces;
 using System;
 
-namespace hgbr_API.ImplInterface
+namespace API_Hospital_Boca.Bussiness
 {
     public class PacienteServices : IPacienteServices
     {
-        private readonly HgbrContext context;
-        public PacienteServices(HgbrContext context)
+        private readonly HospitalBocaContext context;
+        public PacienteServices(HospitalBocaContext context)
         {
             this.context = context;
         }
@@ -18,12 +18,12 @@ namespace hgbr_API.ImplInterface
         {
             try
             {
-                return context.Pacientes.Select(p => new {
-                    Folio = p.Folio,
+                return context.Pacientesarches.Select(p => new {
+                    Folio = p.NoExpediente,
                     Nombre = p.Nombre,
-                    ApPaterno = p.PrimerApellido,
-                    ApMaterno = p.SegundoApellido,
-                    FechaNacimiento = p.FechaNacimiento
+                    ApPaterno = p.ApPaterno,
+                    ApMaterno = p.ApMaterno,
+                    FechaNacimiento = p.FechaNac
                 });
             }
             catch (System.Exception)
@@ -39,22 +39,22 @@ namespace hgbr_API.ImplInterface
          * no me deja colocarlo en nulo, aun que puede ocurrir casos donde
          * puede ser nulo, justo como este.
         */
-        public Paciente getClassPaciente(string numExpediente)
+        public Pacientesarch getClassPaciente(string numExpediente)
         {
             try
             {
                 Console.WriteLine("Attempting to fetch the patient");
-                Paciente pa = context.Pacientes.Where(p => p.Folio.Equals(numExpediente)).First();
+                Pacientesarch pa = context.Pacientesarches.Where(p => p.NoExpediente.Equals(numExpediente)).First();
 
                 // Ok, con el paciente obtenido, llenemos la información extra.
-                EstadoConyugal estado = context.EstadoConyugals.Where(p => p.Id.Equals(pa.FkEstadoConyugal)).First();
-                pa.FkEstadoConyugalNavigation = estado;
+                Estadocivil estado = context.Estadocivils.Where(p => p.IdEstadoCivil.Equals(pa.FkEstadoCivil)).First();
+                pa.FkEstadoCivilNavigation = estado;
 
-                TipoAsentamiento asent = context.TipoAsentamientos.Where(p => p.Id.Equals(pa.FkTipoAsentamiento)).First();
-                pa.FkTipoAsentamientoNavigation = asent;
+                Tipoasentamiento asent = context.Tipoasentamientos.Where(p => p.Id.Equals(pa.FkTipoColCasa)).First();
+                pa.FkTipoColCasaNavigation = asent;
 
-                TipoVialidad vial = context.TipoVialidads.Where(p => p.Id.Equals(pa.FkTipoVialidad)).FirstOrDefault();
-                pa.FkTipoVialidadNavigation = vial;
+                Tipovialidad vial = context.Tipovialidads.Where(p => p.Id.Equals(pa.FkTipoCalleCasa)).FirstOrDefault();
+                pa.FkTipoCalleCasaNavigation = vial;
 
                 Sexo sexo = context.Sexos.Where(p => p.Id.Equals(pa.FkSexo)).First();
                 pa.FkSexoNavigation = sexo;
@@ -72,42 +72,42 @@ namespace hgbr_API.ImplInterface
         {
             try
             {
-                return context.Pacientes.Where(p => p.Folio.Equals(numExpediente)).Select(pa => new {
-                    Folio = pa.Folio,
+                return context.Pacientesarches.Where(p => p.NoExpediente.Equals(numExpediente)).Select(pa => new {
+                    Folio = pa.NoExpediente,
                     Nombre = pa.Nombre,
-                    ApPaterno = pa.PrimerApellido,
-                    ApMaterno = pa.SegundoApellido,
+                    ApPaterno = pa.ApPaterno,
+                    ApMaterno = pa.ApMaterno,
                     Curp = pa.Curp,
-                    FechaNac = pa.FechaNacimiento,
-                    HoraNac = pa.HoraNacimiento,
-                    EntidadNac = pa.EntidadNacimiento,
+                    FechaNac = pa.FechaNac,
+                    HoraNac = pa.HoraNac,
+                    EntidadNac = pa.EntidadNac,
                     // Edad = pa.Edad,
                     EdadYears = pa.EdadYears,
-                    EdadMounths = pa.EdadMounths,
+                    EdadMounths = pa.EdadMonths,
                     EdadDays = pa.EdadDays,
                     EdadHours = pa.EdadHours,
                     NacidoHosp = pa.NacidoHospital,
                     FKSexo = pa.FkSexo,
                     Peso = pa.Peso,
                     Talla = pa.Talla,
-                    FKEstadoConyugal = pa.FkEstadoConyugal,
+                    FKEstadoConyugal = pa.FkEstadoCivil,
                     Insabi = pa.Insabi,
                     Gratuitidad = pa.Gratuitidad,
                     Indigena = pa.Indigena,
                     LenguaIndigena = pa.LenguaIndigena,
                     CualLengua = pa.CualLengua,
-                    FKTipoVialidad = pa.FkTipoVialidad,
-                    NombreVialidad = pa.NombreVialidad,
-                    NumExt = pa.NumExt,
-                    NumInt = pa.NumInt,
-                    FKTipoAsentamiento = pa.FkTipoAsentamientoNavigation,
-                    NombreAsentamiento = pa.NombreAsentamiento,
+                    FKTipoVialidad = pa.FkTipoCalleCasa,
+                    NombreVialidad = pa.CalleCasa,
+                    NumExt = pa.NumCasa,
+                    NumInt = pa.NumCasaInt,
+                    FKTipoAsentamiento = pa.FkTipoColCasa,
+                    NombreAsentamiento = pa.ColCasa,
                     Cp = pa.Cp,
                     Localidad = pa.Localidad,
-                    MunicipioDeleg = pa.MunicipioDeleg,
+                    MunicipioDeleg = pa.Municipio,
                     Entidad = pa.EntidadFederativa,
                     Pais = pa.Pais,
-                    Telefono = pa.Telefono
+                    Telefono = pa.TelCasa
                 }).First();
             }
             catch (System.Exception)
@@ -116,11 +116,11 @@ namespace hgbr_API.ImplInterface
             }
         }
 
-        public void savePaciente(Paciente paciente)
+        public void savePaciente(Pacientesarch paciente)
         {
             try
             {
-                context.Pacientes.Add(paciente);
+                context.Pacientesarches.Add(paciente);
                 context.SaveChanges();
             }
             catch (System.Exception)
@@ -129,46 +129,46 @@ namespace hgbr_API.ImplInterface
             }
         }
 
-        public void updatePaciente(Paciente paciente)
+        public void updatePaciente(Pacientesarch paciente)
         {
             try
             {
-                Paciente aux = context.Pacientes.Where(p => p.Folio == paciente.Folio).First();
+                Pacientesarch aux = context.Pacientesarches.Where(p => p.NoExpediente == paciente.NoExpediente).First();
 
                 if (!aux.Nombre.Equals(paciente.Nombre)) aux.Nombre = paciente.Nombre;
-                if (!aux.PrimerApellido.Equals(paciente.PrimerApellido)) aux.PrimerApellido = paciente.PrimerApellido;
-                if (!aux.SegundoApellido.Equals(paciente.SegundoApellido)) aux.SegundoApellido = paciente.SegundoApellido;
+                if (!aux.ApPaterno.Equals(paciente.ApPaterno)) aux.ApPaterno = paciente.ApPaterno;
+                if (!aux.ApMaterno.Equals(paciente.ApMaterno)) aux.ApMaterno = paciente.ApMaterno;
                 if (!aux.Curp.Equals(paciente.Curp)) aux.Curp = paciente.Curp;
-                if (!aux.FechaNacimiento.Equals(paciente.FechaNacimiento)) aux.FechaNacimiento = paciente.FechaNacimiento;
-                if (!aux.HoraNacimiento.Equals(paciente.HoraNacimiento)) aux.HoraNacimiento = paciente.HoraNacimiento;
-                if (!aux.EntidadNacimiento.Equals(paciente.EntidadNacimiento)) aux.EntidadNacimiento = paciente.EntidadNacimiento;
+                if (!aux.FechaNac.Equals(paciente.FechaNac)) aux.FechaNac = paciente.FechaNac;
+                if (!aux.HoraNac.Equals(paciente.HoraNac)) aux.HoraNac = paciente.HoraNac;
+                if (!aux.EntidadNac.Equals(paciente.EntidadNac)) aux.EntidadNac = paciente.EntidadNac;
                 // if (aux.Edad != paciente.Edad) aux.Edad = paciente.Edad;
                 if (aux.EdadYears != paciente.EdadYears) aux.EdadYears = paciente.EdadYears;
-                if (aux.EdadMounths != paciente.EdadMounths) aux.EdadMounths = paciente.EdadMounths;
+                if (aux.EdadMonths != paciente.EdadMonths) aux.EdadMonths = paciente.EdadMonths;
                 if (aux.EdadDays != paciente.EdadDays) aux.EdadDays = paciente.EdadDays;
                 if (aux.EdadHours != paciente.EdadHours) aux.EdadHours = paciente.EdadHours;
                 if (aux.NacidoHospital != paciente.NacidoHospital) aux.NacidoHospital = paciente.NacidoHospital;
                 if (aux.FkSexo != paciente.FkSexo) aux.FkSexo = paciente.FkSexo;
                 if (aux.Peso != paciente.Peso) aux.Peso = paciente.Peso;
                 if (aux.Talla != paciente.Talla) aux.Talla = paciente.Talla;
-                if (aux.FkEstadoConyugal != paciente.FkEstadoConyugal) aux.FkEstadoConyugal = paciente.FkEstadoConyugal;
+                if (aux.FkEstadoCivil != paciente.FkEstadoCivil) aux.FkEstadoCivil = paciente.FkEstadoCivil;
                 if (aux.Insabi != paciente.Insabi) aux.Insabi = paciente.Insabi;
                 if (aux.Gratuitidad != paciente.Gratuitidad) aux.Gratuitidad = paciente.Gratuitidad;
                 if (aux.Indigena != paciente.Indigena) aux.Indigena = paciente.Indigena;
                 if (aux.LenguaIndigena != paciente.LenguaIndigena) aux.LenguaIndigena = paciente.LenguaIndigena;
                 if (!aux.CualLengua.Equals(paciente.CualLengua)) aux.CualLengua = paciente.CualLengua;
-                if (aux.FkTipoVialidad != paciente.FkTipoVialidad) aux.FkTipoVialidad = paciente.FkTipoVialidad;
-                if (!aux.NombreVialidad.Equals(paciente.NombreVialidad)) aux.NombreVialidad = paciente.NombreVialidad;
-                if (!aux.NumExt.Equals(paciente.NumExt)) aux.NumExt = paciente.NumExt;
-                if (!aux.NumInt.Equals(paciente.NumInt)) aux.NumInt = paciente.NumInt;
-                if (aux.FkTipoAsentamiento != paciente.FkTipoAsentamiento) aux.FkTipoAsentamiento = paciente.FkTipoAsentamiento;
-                if (!aux.NombreAsentamiento.Equals(paciente.NombreAsentamiento)) aux.NombreAsentamiento = paciente.NombreAsentamiento;
+                if (aux.FkTipoCalleCasa != paciente.FkTipoCalleCasa) aux.FkTipoCalleCasa = paciente.FkTipoCalleCasa;
+                if (!aux.CalleCasa.Equals(paciente.CalleCasa)) aux.CalleCasa = paciente.CalleCasa;
+                if (!aux.NumCasa.Equals(paciente.NumCasa)) aux.NumCasa = paciente.NumCasa;
+                if (!aux.NumCasaInt.Equals(paciente.NumCasaInt)) aux.NumCasaInt = paciente.NumCasaInt;
+                if (aux.FkTipoColCasa != paciente.FkTipoColCasa) aux.FkTipoColCasa = paciente.FkTipoColCasa;
+                if (!aux.ColCasa.Equals(paciente.ColCasa)) aux.ColCasa = paciente.ColCasa;
                 if (aux.Cp != paciente.Cp) aux.Cp = paciente.Cp;
                 if (!aux.Localidad.Equals(paciente.Localidad)) aux.Localidad = paciente.Localidad;
-                if (!aux.MunicipioDeleg.Equals(paciente.MunicipioDeleg)) aux.MunicipioDeleg = paciente.MunicipioDeleg;
+                if (!aux.Municipio.Equals(paciente.Municipio)) aux.Municipio = paciente.Municipio;
                 if (!aux.EntidadFederativa.Equals(paciente.EntidadFederativa)) aux.EntidadFederativa = paciente.EntidadFederativa;
                 if (!aux.Pais.Equals(paciente.Pais)) aux.Pais = paciente.Pais;
-                if (!aux.Telefono.Equals(paciente.Telefono)) aux.Telefono = paciente.Telefono;
+                if (!aux.TelCasa.Equals(paciente.TelCasa)) aux.TelCasa = paciente.TelCasa;
 
                 context.SaveChanges();
             }
@@ -183,8 +183,8 @@ namespace hgbr_API.ImplInterface
         {
             try
             {
-                Paciente pa = context.Pacientes.Where(p => p.Folio.Equals(numExpediente)).First();
-                context.Pacientes.Remove(pa);
+                Pacientesarch pa = context.Pacientesarches.Where(p => p.NoExpediente.Equals(numExpediente)).First();
+                context.Pacientesarches.Remove(pa);
                 context.SaveChanges();
             }
             catch (System.Exception)

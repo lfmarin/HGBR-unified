@@ -2,7 +2,7 @@
 using hgbr_API.Interfaces;
 using hgbr_API.Models;
 
-namespace hgbr_API.Controllers
+namespace API_Hospital_Boca.Controllers
 {
     [Route("hgbr_api/paciente")]
     public class PacienteController : ControllerBase
@@ -46,7 +46,7 @@ namespace hgbr_API.Controllers
 
 
         [HttpPost("save")]
-        public IActionResult savePaciente([FromBody] Paciente paciente)
+        public IActionResult savePaciente([FromBody] Pacientesarch paciente)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace hgbr_API.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult updatePaciente([FromBody] Paciente paciente)
+        public IActionResult updatePaciente([FromBody] Pacientesarch paciente)
         {
             try
             {

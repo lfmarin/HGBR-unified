@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JYZpb/Wji/pGXV+S7PkYKYZ5dqTrtObSFZk4U795tvF3jsGH7zkYX0IGvCA/k2Rp1Z4TRHRNk7VgsMMeWQfymg==",
+  "dgSpecHash": "13rUXH8x958faSCIfUER1+jR0q8eZZAe6jOQXoaQ+L2N4Dhq22GS31UA2xFJpLv4iIxiDI++g7YdxFUhEedUew==",
   "success": true,
-  "projectFilePath": "C:\\Users\\joelj\\Desktop\\hgbr\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
+  "projectFilePath": "C:\\Users\\joelj\\Desktop\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joelj\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\joelj\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
