@@ -3,7 +3,7 @@ using hgbr_API.Models;
 using hgbr_API.Interfaces;
 using System;
 
-namespace API_Hospital_Boca.Bussiness
+namespace hgbr_API.ImplInterface
 {
     public class PacienteServices : IPacienteServices
     {

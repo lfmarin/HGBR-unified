@@ -69,6 +69,40 @@ CREATE TABLE pacientesArch(
     FOREIGN KEY(fkTipoColCasa) REFERENCES tipoasentamiento(id)
 );
 
+CREATE TABLE admisiones(
+	folio INTEGER AUTO_INCREMENT,
+    nombre VARCHAR(50),
+    primerApellido VARCHAR(50),
+    segundoApellido VARCHAR(50),
+    curp VARCHAR(18),
+    fechaNacimiento DATE,
+    horaNacimiento TIME,
+    entidadNacimiento VARCHAR(30),
+    edadYears INTEGER,
+    edadMonths INTEGER,
+    edadDays INTEGER,
+    edadHours INTEGER,
+    fkSexo INTEGER, -- llave foranea
+    insabi BOOLEAN,
+    gratuitidad BOOLEAN,
+    fkTipoVialidad INTEGER, -- llave foranea
+    nombreVialidad VARCHAR(30),
+    numExt VARCHAR(10),
+    numInt VARCHAR(10),
+    fkTipoAsentamiento INTEGER, -- llave foranea
+    nombreAsentamiento VARCHAR(50),
+    cp BIGINT,
+    localidad VARCHAR(50),
+    municipio VARCHAR(50),
+    entidadFederativa VARCHAR(50),
+    pais VARCHAR(50),
+    telefono BIGINT,
+    PRIMARY KEY(folio),
+    FOREIGN KEY(fkSexo) REFERENCES sexo(id),
+    FOREIGN KEY(fkTipoVialidad) REFERENCES tipovialidad(id),
+    FOREIGN KEY(fkTipoAsentamiento) REFERENCES tipoasentamiento(id)
+);
+
 -- LLENADO
 
 INSERT INTO sexo(nombre)
@@ -76,7 +110,7 @@ VALUES
 ('M'),
 ('F');
 
-INSERT INTO tipovialidad(nombre)
+INSERT INTO tipoasentamiento(nombre)
 VALUES
 ('Aeropuerto'),
 ('Ampliacion'),
@@ -121,7 +155,7 @@ VALUES
 ('Ninguno'),
 ('Zona naval');
 
-INSERT INTO tipoasentamiento(nombre)
+INSERT INTO tipovialidad(nombre)
 VALUES
 ('Ampliacion'),
 ('Andador'),
@@ -185,3 +219,8 @@ VALUES
 ('Veracruz'),
 ('Yucatán'),
 ('Zacatecas');
+
+INSERT INTO pacientesArch(noExpediente, nombre, apPaterno, apMaterno, curp, fechaNac, horaNac, entidadNac, edadYears, edadMonths, edadDays, edadHours, nacidoHospital, fkSexo, peso, talla, fkEstadoCivil, insabi, gratuitidad, indigena, lenguaIndigena, cualLengua, fkTipoCalleCasa, calleCasa, numCasa, numCasaInt, fkTipoColCasa, colCasa, cp, localidad, municipio, entidadFederativa, pais, telCasa)
+VALUES
+('202300062801H', 'Josue', 'Tellez', 'Huerta', 'TEHJ000624HOCLRSA6', '2000-06-24', '17:17', 'Oaxaca', 22, null, null, null, true, 1, 74, 174, 1, true, true, false, false, 'Ninguno', 1, 'Aeropuerto', 2, 133, 4, 'Boulevard', 94295, 'Boca del Rio', 'Boca del Rio', 'Veracruz', 'Mexico', '2741019045'),
+('202300062401H', 'Joel', 'Jacome', 'Pioquinto', 'JAPJ000628HVZCQLA2', '2000-06-28', '11:25', 'Veracruz', 22, null, null, null, true, 1, 77, 173, 1, true, true, false, false, 'Ninguno', 3, 'Barrio', 7, 28, 4, 'Boulevard', 94298, 'Boca del Rio', 'Boca del Rio', 'Veracruz', 'Mexico', '2294651314');

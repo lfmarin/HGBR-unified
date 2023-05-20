@@ -2,7 +2,7 @@
 using hgbr_API.Interfaces;
 using hgbr_API.Models;
 
-namespace API_Hospital_Boca.Controllers
+namespace hgbr_API.Controllers
 {
     [Route("hgbr_api/paciente")]
     public class PacienteController : ControllerBase

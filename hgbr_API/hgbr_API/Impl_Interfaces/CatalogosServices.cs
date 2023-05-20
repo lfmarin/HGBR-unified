@@ -4,7 +4,7 @@ using System.Linq;
 using hgbr_API.Interfaces;
 using hgbr_API.Models;
 
-namespace API_Hospital_Boca.Bussiness
+namespace hgbr_API.ImplInterface
 {
     public class CatalogosServices : ICatalogosServices
     {
