@@ -216,13 +216,22 @@ export default function AddPaciente() {
     const dayCurr = currentDate.getDate();
     const hourCurr = currentDate.getTime();
 
-    if(yearCurr < yearNac) {
-      //usar el codigo del video
+    const edad = yearCurr - yearNac;
+
+    if(monthCurr < monthNac) {
+      edad--;
+    }else{
+      if (monthCurr === monthNac) {
+        if (dayCurr < dayNac) {
+          edad--;
+        }
+      }
     }
+    //edad
 
     axios
       .post(
-        process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/save',
+        process.env.REACT_APP_SERVIDOR + '/hgbr_api/pacientesarch/save',
         {
           paciente: {
             folio: datos.folio,//ESTO HAY QUE CALCULARLO
