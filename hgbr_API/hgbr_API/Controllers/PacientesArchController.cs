@@ -4,7 +4,7 @@ using hgbr_API.Models;
 
 namespace hgbr_API.Controllers
 {
-    [Route("hgbr_api/pacientesarch")]
+    [Route("hgbr_api/paciente")]
     public class PacienteController : ControllerBase
     {
         private readonly IPacientesArchServices _service;
