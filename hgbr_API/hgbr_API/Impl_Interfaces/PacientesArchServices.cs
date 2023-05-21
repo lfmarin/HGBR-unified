@@ -84,10 +84,10 @@ namespace hgbr_API.ImplInterfaces
                     EntidadNac = pa.EntidadNac,
                     // Edad = pa.Edad,
                     EdadYears = pa.EdadYears,
-                    EdadMounths = pa.EdadMonths,
+                    EdadMonths = pa.EdadMonths,
                     EdadDays = pa.EdadDays,
                     EdadHours = pa.EdadHours,
-                    NacidoHosp = pa.NacidoHospital,
+                    NacidoHospital = pa.NacidoHospital,
                     FKSexo = pa.FkSexo,
                     Peso = pa.Peso,
                     Talla = pa.Talla,
@@ -106,7 +106,7 @@ namespace hgbr_API.ImplInterfaces
                     Cp = pa.Cp,
                     Localidad = pa.Localidad,
                     Municipio = pa.Municipio,
-                    Entidad = pa.EntidadFederativa,
+                    EntidadFederativa = pa.EntidadFederativa,
                     Pais = pa.Pais,
                     TelCasa = pa.TelCasa
                 }).First();
@@ -142,7 +142,8 @@ namespace hgbr_API.ImplInterfaces
                 // Realizar la consulta LINQ
                 try
                 {
-                    Pacientesarch aux = context.Pacientesarches.Where(p => p.NoExpediente.Equals(paciente.NoExpediente)).First();
+                    Pacientesarch aux = context.Pacientesarches.FirstOrDefault(p => p.NoExpediente.Equals(paciente.NoExpediente));
+                //Pacientesarch aux = context.Pacientesarches.Where(p => p.NoExpediente.Equals(paciente.NoExpediente)).First();
                     if (!aux.Nombre.Equals(paciente.Nombre)) aux.Nombre = paciente.Nombre;
                     if (!aux.ApPaterno.Equals(paciente.ApPaterno)) aux.ApPaterno = paciente.ApPaterno;
                     if (!aux.ApMaterno.Equals(paciente.ApMaterno)) aux.ApMaterno = paciente.ApMaterno;
