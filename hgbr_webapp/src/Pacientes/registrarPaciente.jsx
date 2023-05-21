@@ -231,7 +231,7 @@ export default function AddPaciente() {
 
     axios
       .post(
-        process.env.REACT_APP_SERVIDOR + '/hgbr_api/pacientesarch/save',
+        process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/save',
         {
           paciente: {
             folio: datos.folio,//ESTO HAY QUE CALCULARLO

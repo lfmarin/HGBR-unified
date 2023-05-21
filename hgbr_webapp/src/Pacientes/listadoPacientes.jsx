@@ -72,7 +72,7 @@ export default function AllPacientes({}) {
   useEffect(() => {
     if (refresh) {
       axios
-        .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/pacientesarch/all', {
+        .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/all', {
           headers: {
             'Content-type': 'application/json',
             //'Authorization': `Bearer ${token()}`
