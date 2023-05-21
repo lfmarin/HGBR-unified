@@ -4,7 +4,7 @@ namespace hgbr_API.Interfaces;
 
 public interface ICatalogosServices
 {
-    IQueryable<object> getAllEstadoConyugal();
+    IQueryable<object> getAllEstadoCivil();
     IQueryable<object> getAllTipoAsentamiento();
     IQueryable<object> getAllTipoVialidad();
     IQueryable<object> getAllSexo();

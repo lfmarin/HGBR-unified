@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Configuration;
-using API_Hospital_Boca.Bussiness;
+using hgbr_API.ImplInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -39,7 +39,7 @@ builder.Services.AddDbContext<hgbr_API.Models.HospitalBocaContext>(options => {
 
 
 builder.Services.AddScoped<ICatalogosServices, CatalogosServices>();
-builder.Services.AddScoped<IPacienteServices, PacienteServices>();
+builder.Services.AddScoped<IPacientesArchServices, PacientesArchServices>();
 
 builder.Services.AddControllers();
 

@@ -4,7 +4,7 @@ using System.Linq;
 using hgbr_API.Interfaces;
 using hgbr_API.Models;
 
-namespace API_Hospital_Boca.Bussiness
+namespace hgbr_API.ImplInterfaces
 {
     public class CatalogosServices : ICatalogosServices
     {
@@ -15,13 +15,13 @@ namespace API_Hospital_Boca.Bussiness
         }
 
         //  Se esta intentando consumir la informacion de la BD con la implementacion de estos metodos
-        public IQueryable<object> getAllEstadoConyugal()
+        public IQueryable<object> getAllEstadoCivil()
         {
             try
             {
                 return context.Estadocivils.Select(item => new
                 {
-                    idEstadoConyugal = item.IdEstadoCivil,
+                    idEstadoCivil = item.IdEstadoCivil,
                     nombre = item.NombreEstado
                 });
             }

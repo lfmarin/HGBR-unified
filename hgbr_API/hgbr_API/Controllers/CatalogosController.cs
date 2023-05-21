@@ -14,12 +14,12 @@ namespace hgbr_API.Controllers
             this._service = service;
         }
 
-        [HttpGet("estadoConyugal")]
+        [HttpGet("estadoCivil")]
         public IActionResult getAllEstadoConyugal()
         {
             try
             {
-                var res = _service.getAllEstadoConyugal();
+                var res = _service.getAllEstadoCivil();
                 return Ok(res);
             }
             catch (System.Exception)

@@ -2,14 +2,14 @@
 using hgbr_API.Interfaces;
 using hgbr_API.Models;
 
-namespace API_Hospital_Boca.Controllers
+namespace hgbr_API.Controllers
 {
-    [Route("hgbr_api/paciente")]
+    [Route("hgbr_api/pacientesarch")]
     public class PacienteController : ControllerBase
     {
-        private readonly IPacienteServices _service;
+        private readonly IPacientesArchServices _service;
 
-        public PacienteController(IPacienteServices service)
+        public PacienteController(IPacientesArchServices service)
         {
             this._service = service;
         }
@@ -30,12 +30,12 @@ namespace API_Hospital_Boca.Controllers
 
 
         [HttpGet("{numExpediente}")]
-        public object getPaciente(string numExpediente)
+        public object getPacientesarch(string numExpediente)
         {
             try
             {
 
-                var res = _service.getPaciente(numExpediente);
+                var res = _service.getPacientesarch(numExpediente);
                 return Ok(res);
             }
             catch (System.Exception)
@@ -46,11 +46,11 @@ namespace API_Hospital_Boca.Controllers
 
 
         [HttpPost("save")]
-        public IActionResult savePaciente([FromBody] Pacientesarch paciente)
+        public IActionResult savePacientesarch([FromBody] Pacientesarch paciente)
         {
             try
             {
-                _service.savePaciente(paciente);
+                _service.savePacientesarch(paciente);
                 return Ok(true);
             }
             catch (System.Exception)
@@ -60,11 +60,11 @@ namespace API_Hospital_Boca.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult updatePaciente([FromBody] Pacientesarch paciente)
+        public IActionResult updatePacientesarch([FromBody] Pacientesarch paciente)
         {
             try
             {
-                _service.updatePaciente(paciente);
+                _service.updatePacientesarch(paciente);
                 return Ok();
             }
             catch
@@ -75,12 +75,12 @@ namespace API_Hospital_Boca.Controllers
 
 
         [HttpDelete("delete")]
-        public IActionResult deletePaciente([FromBody] string numExpediente)
+        public IActionResult deletePacientesarch([FromBody] string numExpediente)
         {
             try
             {
 
-                _service.deletePaciente(numExpediente);
+                _service.deletePacientesarch(numExpediente);
                 return Ok(true);
             }
             catch (System.Exception)
