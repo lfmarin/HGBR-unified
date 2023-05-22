@@ -125,13 +125,15 @@ namespace hgbr_API.ImplInterfaces
                 string currentYear = DateTime.Now.Year.ToString();
                 string bornYear = paciente.FechaNac.ToString().Substring(2, 4);
                 string bornMonth = paciente.FechaNac.ToString().Substring(5, 7);
-                string bornDay = paciente.FechaNac.ToString().Substring(8, (paciente.FechaNac.ToString().Length-1));
+                string bornDay = paciente.FechaNac.ToString().Substring(8, (paciente.FechaNac.ToString().Length));
 
-                string gender = (paciente.FkSexo == 1) ? 'M'.ToString() : 'H'.ToString();
+                string gender = (paciente.FkSexo == 1) ? 'M'.ToString() : 'F'.ToString();
+                //  Me falta ver como le hare con el contador por si las CURPs se repiten
 
-                string folio = currentYear + bornYear + bornMonth + bornDay + gender;
+                string folio = currentYear + bornYear + bornMonth + bornDay + gender; // Aqui alojaria el folio
 
-                paciente.NoExpediente = folio;
+
+                paciente.NoExpediente = folio;  //  El folio se alojaria a la BD
 
                 context.Pacientesarches.Add(paciente);
                 context.SaveChanges();
