@@ -121,6 +121,18 @@ namespace hgbr_API.ImplInterfaces
         {
             try
             {
+                // En esta parte vamos a generar el folio del paciente con base a informacion de la BD y convertirlo en strings
+                string currentYear = DateTime.Now.Year.ToString();
+                string bornYear = paciente.FechaNac.ToString().Substring(2, 4);
+                string bornMonth = paciente.FechaNac.ToString().Substring(5, 7);
+                string bornDay = paciente.FechaNac.ToString().Substring(8, (paciente.FechaNac.ToString().Length-1));
+
+                string gender = (paciente.FkSexo == 1) ? 'M'.ToString() : 'H'.ToString();
+
+                string folio = currentYear + bornYear + bornMonth + bornDay + gender;
+
+                paciente.NoExpediente = folio;
+
                 context.Pacientesarches.Add(paciente);
                 context.SaveChanges();
             }
