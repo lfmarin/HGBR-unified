@@ -121,11 +121,19 @@ namespace hgbr_API.ImplInterfaces
         {
             try
             {
-                // En esta parte vamos a generar el folio del paciente con base a informacion de la BD y convertirlo en strings
+                //En esta parte vamos a generar el folio del paciente con base a informacion de la BD y convertirlo en strings
                 string currentYear = DateTime.Now.Year.ToString();
-                string bornYear = paciente.FechaNac.ToString().Substring(2, 4);
-                string bornMonth = paciente.FechaNac.ToString().Substring(5, 7);
-                string bornDay = paciente.FechaNac.ToString().Substring(8, (paciente.FechaNac.ToString().Length));
+                Console.WriteLine("ACTUAL: " + currentYear);
+                string bornYear = paciente.FechaNac.ToString("yy");
+                Console.WriteLine("YEAR: " + bornYear);
+                string bornMonth = paciente.FechaNac.ToString("MM");
+                Console.WriteLine("MONTH: " + bornMonth);
+                string bornDay = paciente.FechaNac.ToString("dd");
+                Console.WriteLine("DAY: " + bornDay);
+
+                //int count = 0;
+                //Pacientesarch aux = context.Pacientesarches.FirstOrDefault(p => p.Curp.Equals(paciente.Curp));
+                //if (!aux.NoExpediente.Equals(paciente.NoExpediente)) aux.NoExpediente = paciente.NoExpediente;
 
                 string gender = (paciente.FkSexo == 1) ? 'M'.ToString() : 'F'.ToString();
                 //  Me falta ver como le hare con el contador por si las CURPs se repiten
