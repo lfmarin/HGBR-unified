@@ -28,8 +28,8 @@ const SortTable = {
       return (
         element.folio.toString().indexOf(search) !== -1 ||
         element.nombre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        element.primer_apellido.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        element.segundo_apellido.toLowerCase().indexOf(search.toLowerCase()) !== -1
+        element.primerApellido.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.segundoApellido.toLowerCase().indexOf(search.toLowerCase()) !== -1
       )
     })
 
@@ -40,7 +40,7 @@ const SortTable = {
       return (
         element.idDoctor.toString().indexOf(search) !== -1 ||
         element.nombre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        element.primer_apellido.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.primerApellido.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
         element.apMaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1
       )
     })
@@ -52,7 +52,7 @@ const SortTable = {
       return (
         element.idPersonal.toString().indexOf(search) !== -1 ||
         element.nombre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        element.primer_apellido.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.primerApellido.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
         element.apMaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1
       )
     })

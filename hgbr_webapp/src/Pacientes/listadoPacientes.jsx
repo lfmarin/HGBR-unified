@@ -145,7 +145,7 @@ export default function AllPacientes({}) {
                       <TableCell>{p.nombre}</TableCell>
                       <TableCell>{p.apPaterno}</TableCell>
                       <TableCell>{p.apMaterno}</TableCell>
-                      {/* <TableCell>{getAge(p.fecha_nacimiento)} años</TableCell> */}
+                      {/* <TableCell>{getAge(p.fechaNacimiento)} años</TableCell> */}
                       <TableCell>{dateFormatter(p.fechaNacimiento)}</TableCell>
                       <TableCell>
                         <Button

@@ -27,36 +27,36 @@ export default function AddPaciente() {
   const [datos, setDatos] = useState({
     folio: '',
     nombre: '',
-    primer_apellido: '',
-    segundo_apellido: '',
+    primerApellido: '',
+    segundoApellido: '',
     curp: '',
-    fecha_nacimiento: '',
-    hora_nacimiento: '',
-    entidad_nacimiento: '',
-    edad_years: '',
-    edad_months: '',
-    edad_days: '',
-    edad_hours: '',
-    nacido_hospital: null,
-    fk_sexo: '',
+    fechaNacimiento: '',
+    horaNacimiento: '',
+    entidadNacimiento: '',
+    edadYears: '',
+    edadMonths: '',
+    edadDays: '',
+    edadHours: '',
+    nacidoHospital: null,
+    fkSexo: '',
     peso: '',
     talla: '',
-    fk_estado_conyugal: '',
+    fkEstadoConyugal: '',
     insabi: null,
     gratuitidad: null,
     indigena: null,
-    lengua_indigena: null,
-    cual_lengua: '',
-    fk_tipo_vialidad: '',
-    nombre_vialidad: '',
-    num_ext: '',
-    num_int: '',
-    fk_tipo_asentamiento: '',
-    nombre_asentamiento: '',
+    lenguaIndigena: null,
+    cualLengua: '',
+    fkTipoVialidad: '',
+    nombreVialidad: '',
+    numExt: '',
+    numInt: '',
+    fkTipoAsentamiento: '',
+    nombreAsentamiento: '',
     cp: '',
     localidad: '',
     municipio: '',
-    entidad_federativa: '',
+    entidadFederativa: '',
     pais: '',
     telefono: '',
   })
@@ -203,8 +203,8 @@ export default function AddPaciente() {
   }
 
   const guardaPaciente = () => {
-    // AQUI CALCULAR LA EDAD Y EL FOLIO
-    const fNac = new Date(datos.fecha_nacimiento+" "+datos.hora_nacimiento);
+    // AQUI CALCULAR LA EDAD
+    const fNac = new Date(datos.fechaNacimiento+" "+datos.horaNacimiento);
     console.log(fNac);
     const yearNac = fNac.getFullYear();
     const monthNac = fNac.getMonth()+1;
@@ -236,36 +236,36 @@ export default function AddPaciente() {
           paciente: {
             noExpediente: '123456',//ESTO HAY QUE CALCULARLO
             nombre: datos.nombre,
-            apPaterno: datos.primer_apellido,
-            apMaterno: datos.segundo_apellido,
+            apPaterno: datos.primerApellido,
+            apMaterno: datos.segundoApellido,
             curp: datos.curp,
-            fechaNac: datos.fecha_nacimiento,
-            horaNac: datos.hora_nacimiento,
-            entidadNac: datos.entidad_nacimiento,
-            edadYears: datos.edad_years, //CALCULAR
-            edadMonths: datos.edad_months,
-            edadDays: datos.edad_days,
-            edadHours: datos.edad_hours,
-            nacidoHospital: datos.nacido_hospital,
-            fkSexo: datos.fk_sexo,
+            fechaNac: datos.fechaNacimiento,
+            horaNac: datos.horaNacimiento,
+            entidadNac: datos.entidadNacimiento,
+            edadYears: datos.edadYears, //CALCULAR
+            edadMonths: datos.edadMonths,
+            edadDays: datos.edadDays,
+            edadHours: datos.edadHours,
+            nacidoHospital: datos.nacidoHospital,
+            fkSexo: datos.fkSexo,
             peso: datos.peso,
             talla: datos.talla,
-            fkEstadoCivil: datos.fk_estado_conyugal,
+            fkEstadoCivil: datos.fkEstadoConyugal,
             insabi: datos.insabi,
             gratuitidad: datos.gratuitidad,
             indigena: datos.indigena,
-            lenguaIndigena: datos.lengua_indigena,
-            cualLengua: datos.cual_lengua,
-            fkTipoCalleCasa: datos.fk_tipo_vialidad,
-            calleCasa: datos.nombre_vialidad,
-            numCasa: datos.num_ext,
-            numCasaInt: datos.num_int,
-            fkTipoColCasa: datos.fk_tipo_asentamiento,
-            colCasa: datos.nombre_asentamiento,
+            lenguaIndigena: datos.lenguaIndigena,
+            cualLengua: datos.cualLengua,
+            fkTipoCalleCasa: datos.fkTipoVialidad,
+            calleCasa: datos.nombreVialidad,
+            numCasa: datos.numExt,
+            numCasaInt: datos.numInt,
+            fkTipoColCasa: datos.fkTipoAsentamiento,
+            colCasa: datos.nombreAsentamiento,
             cp: datos.cp,
             localidad: datos.localidad,
             municipio: datos.municipio,
-            entidadFederativa: datos.entidad_federativa,
+            entidadFederativa: datos.entidadFederativa,
             pais: datos.pais,
             tecCasa: datos.telefono,
           },
@@ -302,20 +302,20 @@ export default function AddPaciente() {
       //DEFINIR LOS DATOS QUE SERAN OBLIGATORIOS PARA GUARDAR
       // datos.folio === '' ||
       datos.nombre === '' ||
-      datos.primer_apellido === '' ||
-      datos.segundo_apellido === '' ||
-      datos.fecha_nacimiento === '' ||
-      datos.fk_sexo === '' ||
+      datos.primerApellido === '' ||
+      datos.segundoApellido === '' ||
+      datos.fechaNacimiento === '' ||
+      datos.fkSexo === '' ||
       datos.insabi === null ||
       datos.gratuitidad === null ||
-      datos.fk_tipo_vialidad === '' ||
-      datos.nombre_vialidad === '' ||
-      datos.num_ext === '' ||
-      datos.fk_tipo_asentamiento === '' ||
-      datos.nombre_asentamiento === '' ||
+      datos.fkTipoVialidad === '' ||
+      datos.nombreVialidad === '' ||
+      datos.numExt === '' ||
+      datos.fkTipoAsentamiento === '' ||
+      datos.nombreAsentamiento === '' ||
       datos.localidad === '' ||
       datos.municipio === '' ||
-      datos.entidad_federativa === '' ||
+      datos.entidadFederativa === '' ||
       datos.pais === '' ||
       datos.telefono === ''
     ) {
@@ -361,12 +361,12 @@ export default function AddPaciente() {
           <Grid item xs margin={1}>
             <TextField
               required
-              id="primer_apellido"
+              id="primerApellido"
               label="Primer Apellido"
               variant="outlined"
-              name="primer_apellido"
-              error={datos.primer_apellido === '' && isFail}
-              defaultValue={datos.primer_apellido}
+              name="primerApellido"
+              error={datos.primerApellido === '' && isFail}
+              defaultValue={datos.primerApellido}
               onChange={handleChange}
               fullWidth
               inputProps={{ maxLength: 50 }}
@@ -376,12 +376,12 @@ export default function AddPaciente() {
           <Grid item xs margin={1}>
             <TextField
               required
-              id="segundo_apellido"
+              id="segundoApellido"
               label="Segundo Apellido"
               variant="outlined"
-              name="segundo_apellido"
-              error={datos.segundo_apellido === '' && isFail}
-              defaultValue={datos.segundo_apellido}
+              name="segundoApellido"
+              error={datos.segundoApellido === '' && isFail}
+              defaultValue={datos.segundoApellido}
               onChange={handleChange}
               fullWidth
               inputProps={{ maxLength: 50 }}
@@ -407,13 +407,13 @@ export default function AddPaciente() {
           <Grid item xs margin={1}>
             <TextField
               required
-              id="fecha_nacimiento"
+              id="fechaNacimiento"
               label="Fecha de Nacimiento"
               type="date"
               variant="outlined"
-              name="fecha_nacimiento"
-              defaultValue={datos.fecha_nacimiento}
-              error={datos.fecha_nacimiento === '' && isFail}
+              name="fechaNacimiento"
+              defaultValue={datos.fechaNacimiento}
+              error={datos.fechaNacimiento === '' && isFail}
               onChange={handleChange}
               InputLabelProps={{ shrink: true }}
               fullWidth
@@ -422,13 +422,13 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <TextField
-              id="hora_nacimiento"
+              id="horaNacimiento"
               label="Hora de Nacimiento (Si tiene menos de 24 hrs de nacido)"
               type="time"
               variant="outlined"
-              name="hora_nacimiento"
-              defaultValue={datos.hora_nacimiento}
-              // error={datos.hora_nacimiento === '' && isFail}
+              name="horaNacimiento"
+              defaultValue={datos.horaNacimiento}
+              // error={datos.horaNacimiento === '' && isFail}
               onChange={handleChange}
               InputLabelProps={{ shrink: true }}
               fullWidth
@@ -437,15 +437,15 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="entidad_nacimiento">Entidad de Nacimiento</InputLabel>
+              <InputLabel id="entidadNacimiento">Entidad de Nacimiento</InputLabel>
               <Select
-                labelId="entidad_nacimiento"
-                id="entidad_nacimiento"
+                labelId="entidadNacimiento"
+                id="entidadNacimiento"
                 label="Entidad de Nacimiento"
-                name="entidad_nacimiento"
-                defaultValue={datos.entidad_nacimiento}
+                name="entidadNacimiento"
+                defaultValue={datos.entidadNacimiento}
                 onChange={handleChange}
-                // error={datos.entidad_nacimiento === '' && isFail}
+                // error={datos.entidadNacimiento === '' && isFail}
               >
                 {estado.map(n => {
                   return <MenuItem value={n.nombre}>{n.nombre}</MenuItem>
@@ -457,21 +457,21 @@ export default function AddPaciente() {
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
-                {/** ESTE GRID SERA PARA LA edad_years */}
+                {/** ESTE GRID SERA PARA LA edadYears */}
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="nacido_hospital">¿Nació en el Hospital?</InputLabel>
+              <InputLabel id="nacidoHospital">¿Nació en el Hospital?</InputLabel>
               <Select
-                labelId='nacido_hospital'
-                id='nacido_hospital'
+                labelId='nacidoHospital'
+                id='nacidoHospital'
                 label='¿Nació en el Hospital?'
-                name='nacido_hospital'
-                defaultValue={datos.nacido_hospital}
+                name='nacidoHospital'
+                defaultValue={datos.nacidoHospital}
                 onChange={handleChange}
-                // error={datos.nacido_hospital === null && isFail}
+                // error={datos.nacidoHospital === null && isFail}
               >
                 <MenuItem value={true}>Sí</MenuItem>
                 <MenuItem value={false}>No</MenuItem>
@@ -481,16 +481,16 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="fk_sexo">Sexo</InputLabel>
+              <InputLabel id="fkSexo">Sexo</InputLabel>
               <Select
                 required
-                labelId="fk_sexo"
-                id="fk_sexo"
+                labelId="fkSexo"
+                id="fkSexo"
                 label="Sexo"
-                name="fk_sexo"
-                defaultValue={datos.fk_sexo}
+                name="fkSexo"
+                defaultValue={datos.fkSexo}
                 onChange={handleChange}
-                error={datos.fk_sexo === '' && isFail}
+                error={datos.fkSexo === '' && isFail}
               >
                 {sexo.map(n => {
                   return <MenuItem value={n.idSexo}>{n.nombre}</MenuItem>
@@ -527,15 +527,15 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="fk_estado_conyugal">Estado Conyugal</InputLabel>
+              <InputLabel id="fkEstadoConyugal">Estado Conyugal</InputLabel>
               <Select
-                labelId="fk_estado_conyugal"
-                id="fk_estado_conyugal"
+                labelId="fkEstadoConyugal"
+                id="fkEstadoConyugal"
                 label="Estado Conyugal"
-                name="fk_estado_conyugal"
-                defaultValue={datos.fk_estado_conyugal}
+                name="fkEstadoConyugal"
+                defaultValue={datos.fkEstadoConyugal}
                 onChange={handleChange}
-                // error={datos.fk_estado_conyugal === '' && isFail}
+                // error={datos.fkEstadoConyugal === '' && isFail}
               >
                 {estadoConyugal.map(n => {
                   return <MenuItem value={n.idEstadoConyugal}>{n.nombre}</MenuItem>
@@ -548,6 +548,7 @@ export default function AddPaciente() {
 
         <Grid container spacing={1} justifyContent="center">
         <Grid item xs margin={1}>
+            {/** espacio para el elemento para el link de coonsulta insabi */}
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="insabi">Afiliacion INSABI</InputLabel>
               <Select
@@ -615,15 +616,15 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="lengua_indigena">¿Habla alguna lengua indígena?</InputLabel>
+              <InputLabel id="lenguaIndigena">¿Habla alguna lengua indígena?</InputLabel>
               <Select
-                labelId='lengua_indigena'
-                id='lengua_indigena'
+                labelId='lenguaIndigena'
+                id='lenguaIndigena'
                 label='¿Habla alguna lengua indígena?'
-                name='lengua_indigena'
-                defaultValue={datos.lengua_indigena}
+                name='lenguaIndigena'
+                defaultValue={datos.lenguaIndigena}
                 onChange={handleChange}
-                // error={datos.lengua_indigena === null && isFail}
+                // error={datos.lenguaIndigena === null && isFail}
               >
                 <MenuItem value={true}>Sí</MenuItem>
                 <MenuItem value={false}>No</MenuItem>
@@ -633,14 +634,14 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <TextField
-              id="cual_lengua"
+              id="cualLengua"
               label="¿Cual lengua?"
               variant="outlined"
-              name="cual_lengua"
-              defaultValue={datos.cual_lengua}
+              name="cualLengua"
+              defaultValue={datos.cualLengua}
               onChange={handleChange}
               fullWidth
-              // error={datos.cual_lengua === '' && isFail}
+              // error={datos.cualLengua === '' && isFail}
               inputProps={{ maxLength: 100 }}
             />
           </Grid>
@@ -658,16 +659,16 @@ export default function AddPaciente() {
         <Grid container spacing={1} justifyContent="center">
         <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="fk_tipo_vialidad">Tipo de Vialidad</InputLabel>
+              <InputLabel id="fkTipoVialidad">Tipo de Vialidad</InputLabel>
               <Select
                 required
-                labelId="fk_tipo_vialidad"
-                id="fk_tipo_vialidad"
+                labelId="fkTipoVialidad"
+                id="fkTipoVialidad"
                 label="Tipo de Vialidad"
-                name="fk_tipo_vialidad"
-                defaultValue={datos.fk_tipo_vialidad}
+                name="fkTipoVialidad"
+                defaultValue={datos.fkTipoVialidad}
                 onChange={handleChange}
-                error={datos.fk_tipo_vialidad === '' && isFail}
+                error={datos.fkTipoVialidad === '' && isFail}
               >
                 {tipoVialidad.map(n => {
                   return <MenuItem value={n.idTipoVialidad}>{n.nombre}</MenuItem>
@@ -678,15 +679,15 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <TextField
-              id="nombre_vialidad"
+              id="nombreVialidad"
               label="Nombre de la Vialidad"
               variant="outlined"
-              name="nombre_vialidad"
-              defaultValue={datos.nombre_vialidad}
+              name="nombreVialidad"
+              defaultValue={datos.nombreVialidad}
               onChange={handleChange}
               fullWidth
               required
-              error={datos.nombre_vialidad === '' && isFail}
+              error={datos.nombreVialidad === '' && isFail}
               inputProps={{ maxLength: 50 }}
             />
           </Grid>
@@ -694,26 +695,26 @@ export default function AddPaciente() {
           <Grid item xs margin={1}>
             <TextField
               required
-              id="num_ext"
+              id="numExt"
               label="Número Exterior"
               variant="outlined"
-              name="num_ext"
+              name="numExt"
               type="number"
-              defaultValue={datos.num_ext}
+              defaultValue={datos.numExt}
               onChange={handleChange}
-              error={datos.nombre_vialidad === '' && isFail}
+              error={datos.nombreVialidad === '' && isFail}
               fullWidth
             />
           </Grid>
 
           <Grid item xs margin={1}>
             <TextField
-              id="num_int"
+              id="numInt"
               label="Número Interior"
               variant="outlined"
-              name="num_int"
+              name="numInt"
               type="number"
-              defaultValue={datos.num_int}
+              defaultValue={datos.numInt}
               onChange={handleChange}
               fullWidth
             />
@@ -725,16 +726,16 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="fk_tipo_asentamiento">Tipo de Asentamiento Humano</InputLabel>
+              <InputLabel id="fkTipoAsentamiento">Tipo de Asentamiento Humano</InputLabel>
               <Select
                 required
-                labelId="fk_tipo_asentamiento"
-                id="fk_tipo_asentamiento"
+                labelId="fkTipoAsentamiento"
+                id="fkTipoAsentamiento"
                 label="Tipo de Asentameinto Humano"
-                name="fk_tipo_asentamiento"
-                defaultValue={datos.fk_tipo_asentamiento}
+                name="fkTipoAsentamiento"
+                defaultValue={datos.fkTipoAsentamiento}
                 onChange={handleChange}
-                error={datos.fk_tipo_asentamiento === '' && isFail}
+                error={datos.fkTipoAsentamiento === '' && isFail}
               >
                 {tipoAsentamiento.map(n => {
                   return <MenuItem value={n.idTipoAsentamiento}>{n.nombre}</MenuItem>
@@ -745,15 +746,15 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <TextField
-              id="nombre_asentamiento"
+              id="nombreAsentamiento"
               label="Nombre del Asentamiento Humano"
               variant="outlined"
-              name="nombre_asentamiento"
-              defaultValue={datos.nombre_asentamiento}
+              name="nombreAsentamiento"
+              defaultValue={datos.nombreAsentamiento}
               onChange={handleChange}
               fullWidth
               required
-              error={datos.nombre_asentamiento === '' && isFail}
+              error={datos.nombreAsentamiento === '' && isFail}
               inputProps={{ maxLength: 50 }}
             />
           </Grid>
@@ -813,16 +814,16 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
-              <InputLabel id="entidad_federativa">Entidad Federativa</InputLabel>
+              <InputLabel id="entidadFederativa">Entidad Federativa</InputLabel>
               <Select
                 required
-                labelId="entidad_federativa"
-                id="entidad_federativa"
+                labelId="entidadFederativa"
+                id="entidadFederativa"
                 label="Entidad Federativa"
-                name="entidad_federativa"
-                defaultValue={datos.entidad_federativa}
+                name="entidadFederativa"
+                defaultValue={datos.entidadFederativa}
                 onChange={handleChange}
-                error={datos.entidad_federativa === '' && isFail}
+                error={datos.entidadFederativa === '' && isFail}
               >
                 {estado.map(n => {
                   return <MenuItem value={n.nombre}>{n.nombre}</MenuItem>
