@@ -123,23 +123,27 @@ namespace hgbr_API.ImplInterfaces
             {
                 //En esta parte vamos a generar el folio del paciente con base a informacion de la BD y convertirlo en strings
                 string currentYear = DateTime.Now.Year.ToString();
-                Console.WriteLine("ACTUAL: " + currentYear);
                 string bornYear = Convert.ToDateTime(paciente.FechaNac).ToString("yy");
-                Console.WriteLine("YEAR: " + bornYear);
                 string bornMonth = Convert.ToDateTime(paciente.FechaNac).ToString("MM");
-                Console.WriteLine("MONTH: " + bornMonth);
                 string bornDay = Convert.ToDateTime(paciente.FechaNac).ToString("dd");
-                Console.WriteLine("DAY: " + bornDay);
-
-                //int count = 0;
-                //Pacientesarch aux = context.Pacientesarches.FirstOrDefault(p => p.Curp.Equals(paciente.Curp));
-                //if (!aux.NoExpediente.Equals(paciente.NoExpediente)) aux.NoExpediente = paciente.NoExpediente;
 
                 string gender = (paciente.FkSexo == 1) ? 'M'.ToString() : 'F'.ToString();
-                //  Me falta ver como le hare con el contador por si las CURPs se repiten
+                //  Me falta ver como le hare con el contador por si las CURPs se repiten, sigo sin que funcione el contador
 
-                string folio = currentYear + bornYear + bornMonth + bornDay + gender; // Aqui alojaria el folio
+                //string folio = currentYear + bornYear + bornMonth + bornDay + gender; // Aqui alojaria el folio
+                string folio = "";
 
+                // Verificar si ya existe un paciente con la misma CURP
+                Pacientesarch item = context.Pacientesarches.FirstOrDefault(p => p.Curp.Equals(paciente.Curp));
+                if (item != null)
+                {
+                    // Si existe, obtener el siguiente contador disponible
+                    int contador = GetSiguienteContador(context, folio);
+                    string contadorStr = contador.ToString("D2");
+                    folio = currentYear + bornYear + bornMonth + bornDay + contadorStr + gender; // Agregar el contador al folio base
+                }
+                else
+                    folio = currentYear + bornYear + bornMonth + bornDay + "01" + gender; ; // Agregar contador inicial si no existe
 
                 paciente.NoExpediente = folio;  //  El folio se alojaria a la BD
 
@@ -151,6 +155,30 @@ namespace hgbr_API.ImplInterfaces
                 throw;
             }
         }
+
+
+        private int GetSiguienteContador(HospitalBocaContext context, string folio)
+        {
+            int siguienteContador = 1;
+
+            // Buscar el máximo contador para el folio base en la base de datos
+            Pacientesarch pacienteMaxContador = context.Pacientesarches
+                .Where(p => p.NoExpediente.StartsWith(folio))
+                .OrderByDescending(p => p.NoExpediente)
+                .FirstOrDefault();
+
+            if (pacienteMaxContador != null)
+            {
+                // Obtener el contador del último folio generado
+                string ultimoFolio = pacienteMaxContador.NoExpediente;
+                string contadorStr = ultimoFolio.Substring(folio.Length);
+                if (int.TryParse(contadorStr, out int contador))
+                    siguienteContador = contador + 1;
+            }
+
+            return siguienteContador;
+        }
+
 
         public void updatePacientesarch(Pacientesarch paciente)
         {
