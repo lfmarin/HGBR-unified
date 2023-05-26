@@ -69,6 +69,7 @@ namespace hgbr_API.ImplInterfaces
             }
         }
 
+
         public object getPacientesarch(string numExpediente)
         {
             try
@@ -116,6 +117,7 @@ namespace hgbr_API.ImplInterfaces
                 return null;
             }
         }
+
 
         public void savePacientesarch(Pacientesarch paciente)
         {
@@ -240,5 +242,3 @@ namespace hgbr_API.ImplInterfaces
         }
     }
 }
-
-
