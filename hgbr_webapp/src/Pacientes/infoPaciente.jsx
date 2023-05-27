@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
 import { TextField, Grid } from '@mui/material'
-import useStyles from '../../Styles/formularioStyles'
+import useStyles from '../Styles/formularioStyles'
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
 import { useParams } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper'
@@ -11,39 +11,53 @@ import { Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 
-export default function DatosIdentificacion({token}) {
-  const { noExpediente } = useParams()
+export default function DetailsPaciente() {
+  const { folio } = useParams()
   const [isFail, setIsFail] = useState(false)
+
+  const [sexo, setSexo] = useState([])
+  const [estadoConyugal, setEstadoConyugal] = useState([])
+  const [tipoVialidad, setTipoVialidad] = useState([])
+  const [tipoAsentamiento, setTipoAsentamiento] = useState([])
+  const [estado, setEstado] = useState([])
+
   const [datos, setDatos] = useState({
-    NoExpediente: '',
-    Nombre: '',
-    ApPaterno: '',
-    ApMaterno: '',
-    FechaNac: '',
-    FkEstadoCivil: '',
-    Ivs: 0,
-    FkEscolaridad: '',
-    FkOcupacion: '',
-    FkReligion: '',
-    FkLugarReferencia: '',
-    NumHijosVivos: 0,
-    EdadHijoMenor: 0,
-    NombreEsposa: '',
-    AosRelac: 0,
-    CalleCasa: '',
-    NumCasa: 0,
-    ColCasa: '',
-    TelCasa: '',
-    CalleTrabajo: '',
-    NumTrabajo: 0,
-    ColTrabajo: '',
-    TelTrabajo: '',
+    folio: '',
+    nombre: '',
+    primerApellido: '',
+    segundoApellido: '',
+    curp: '',
+    fechaNacimiento: '',
+    horaNacimiento: '',
+    entidadNacimiento: '',
+    edadYears: '',
+    edadMonths: '',
+    edadDays: '',
+    edadHours: '',
+    nacidoHospital: null,
+    fkSexo: '',
+    peso: '',
+    talla: '',
+    fkEstadoConyugal: '',
+    insabi: null,
+    gratuitidad: null,
+    indigena: null,
+    lenguaIndigena: null,
+    cualLengua: '',
+    fkTipoVialidad: '',
+    nombreVialidad: '',
+    numExt: '',
+    numInt: '',
+    fkTipoAsentamiento: '',
+    nombreAsentamiento: '',
+    cp: '',
+    localidad: '',
+    municipio: '',
+    entidadFederativa: '',
+    pais: '',
+    telefono: '',
   })
-  const [estadoCivil, setEstadoCivil] = useState([])
-  const [escolaridad, setEscolaridad] = useState([])
-  const [ocupacion, setOcupacion] = useState([])
-  const [religion, setReligion] = useState([])
-  const [lugar, setLugar] = useState([])
+  
   const [errorbd, setErrorbd] = useState(false)
   const [finish, setFinish] = useState(false)
   const style = useStyles()
@@ -53,10 +67,10 @@ export default function DatosIdentificacion({token}) {
 
   const cargaPaciente = () => {
     axios
-      .get( process.env.REACT_APP_SERVIDOR + `/hospitalBoca/pacientes/${noExpediente}`, {
+      .get( process.env.REACT_APP_SERVIDOR + `/hgbr_api/paciente/${folio}`, {
         headers: {
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token()}`
+          // 'Authorization': `Bearer ${token()}`
         },
       })
       .then(
@@ -64,29 +78,40 @@ export default function DatosIdentificacion({token}) {
           if (response.status === 200) {
             var fecha = response.data.fechaNac.substring(0, response.data.fechaNac.indexOf('T'))
             setDatos({
-              NoExpediente: response.data.noExpediente,
-              Nombre: response.data.nombre,
-              ApPaterno: response.data.apPaterno,
-              ApMaterno: response.data.apMaterno,
-              FechaNac: fecha,
-              FkEstadoCivil: response.data.fkEstadoCivil,
-              Ivs: response.data.ivs,
-              FkEscolaridad: response.data.fkEscolaridad,
-              FkOcupacion: response.data.fkOcupacion,
-              FkReligion: response.data.fkReligion,
-              FkLugarReferencia: response.data.fkLugarReferencia,
-              NumHijosVivos: response.data.numHijosVivos,
-              EdadHijoMenor: response.data.edadHijoMenor,
-              NombreEsposa: response.data.nombreEsposa,
-              AosRelac: response.data.aosRelac,
-              CalleCasa: response.data.calleCasa,
-              NumCasa: response.data.numCasa,
-              ColCasa: response.data.colCasa,
-              TelCasa: response.data.telCasa,
-              CalleTrabajo: response.data.calleTrabajo,
-              NumTrabajo: response.data.numTrabajo,
-              ColTrabajo: response.data.colTrabajo,
-              TelTrabajo: response.data.telTrabajo,
+              folio: response.data.noExpediente,
+              nombre: response.data.nobre,
+              primerApellido: response.data.apPaterno,
+              segundoApellido: response.data.apMaterno,
+              curp: response.data.curp,
+              fechaNacimiento: response.data.fechaNac,
+              horaNacimiento: response.data.horaNac,
+              entidadNacimiento: response.data.entidadNac,
+              edadYears: response.data.edadYears,
+              edadMonths: response.data.edadMonths,
+              edadDays: response.data.edadDays,
+              edadHours: response.data.edadHours,
+              nacidoHospital: response.data.nacidoHospital,
+              fkSexo: response.data.fkSexo,
+              peso: response.data.peso,
+              talla: response.data.talla,
+              fkEstadoConyugal: response.data.fkEstadoCivil,
+              insabi: response.data.insabi,
+              gratuitidad: response.data.gratuitidad,
+              indigena: response.data.indigena,
+              lenguaIndigena: response.data.lenuaIndigena,
+              cualLengua: response.data.cualLengua,
+              fkTipoVialidad: response.data.fkTipoCalleCassa,
+              nombreVialidad: response.data.nombreVialidad,
+              numExt: response.data.numCasa,
+              numInt: response.data.numCasaInt,
+              fkTipoAsentamiento: response.data.fkTipoColCasa,
+              nombreAsentamiento: response.data.colCasa,
+              cp: response.data.cp,
+              localidad: response.data.localidad,
+              municipio: response.data.municipio,
+              entidadFederativa: response.data.entidadFederativa,
+              pais: response.data.pais,
+              telefono: response.data.telCasa,
             })
             setShow(true)
           }
@@ -107,28 +132,7 @@ export default function DatosIdentificacion({token}) {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/estadoCivil', {
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': `Bearer ${token()}`
-        },
-      })
-      .then(
-        response => {
-          if (response.status === 200) {
-            setEstadoCivil(response.data)
-            setErrorbd(false)
-          }
-        },
-        error => {
-          if (error.status === 401) setErrorbd(true)
-        }
-      )
-  }, [token])
-
-  useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/escolaridad', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/sexo', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -136,7 +140,7 @@ export default function DatosIdentificacion({token}) {
       .then(
         response => {
           if (response.status === 200) {
-            setEscolaridad(response.data)
+            setSexo(response.data)
             setErrorbd(false)
           }
         },
@@ -148,7 +152,36 @@ export default function DatosIdentificacion({token}) {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/ocupacion', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/estadoCivil', {
+        headers: {
+          'Content-type': 'application/json',
+          //'Authorization': `Bearer ${token}`
+        },
+      })
+      .then(
+        response => {
+          if (response.status === 200) {
+            setEstadoConyugal(response.data)
+            setErrorbd(false)
+          }
+        },
+        error => {
+          if (!error.response)
+            setErrorbd(true)
+          else{
+              if (error.response.status === 401) {
+                /*localStorage.removeItem("ACCESS_TOKEN");
+                setToken('');*/
+                setErrorbd(false);
+              }
+            }
+        }
+      )
+  }, [])
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/tipoVialidad', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -156,7 +189,7 @@ export default function DatosIdentificacion({token}) {
       .then(
         response => {
           if (response.status === 200) {
-            setOcupacion(response.data)
+            setTipoVialidad(response.data)
             setErrorbd(false)
           }
         },
@@ -168,7 +201,7 @@ export default function DatosIdentificacion({token}) {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/religion', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/tipoAsentamiento', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -176,7 +209,7 @@ export default function DatosIdentificacion({token}) {
       .then(
         response => {
           if (response.status === 200) {
-            setReligion(response.data)
+            setTipoAsentamiento(response.data)
             setErrorbd(false)
           }
         },
@@ -188,7 +221,7 @@ export default function DatosIdentificacion({token}) {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hospitalBoca/catalogos/lugarReferencia', {
+      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/estado', {
         headers: {
           'Content-type': 'application/json',
         },
@@ -196,7 +229,7 @@ export default function DatosIdentificacion({token}) {
       .then(
         response => {
           if (response.status === 200) {
-            setLugar(response.data)
+            setEstado(response.data)
             setErrorbd(false)
           }
         },
@@ -219,34 +252,46 @@ export default function DatosIdentificacion({token}) {
       .post(
         process.env.REACT_APP_SERVIDOR + '/hospitalBoca/pacientes/update',
         {
-          NoExpediente: datos.NoExpediente,
-          Nombre: datos.Nombre,
-          ApPaterno: datos.ApPaterno,
-          ApMaterno: datos.ApMaterno,
-          FechaNac: datos.FechaNac,
-          FkEstadoCivil: datos.FkEstadoCivil,
-          Ivs: datos.Ivs,
-          FkEscolaridad: datos.FkEscolaridad,
-          FkOcupacion: datos.FkOcupacion,
-          FkReligion: datos.FkReligion,
-          FkLugarReferencia: datos.FkLugarReferencia,
-          NumHijosVivos: datos.NumHijosVivos,
-          EdadHijoMenor: datos.EdadHijoMenor,
-          NombreEsposa: datos.NombreEsposa,
-          AosRelac: datos.AosRelac,
-          CalleCasa: datos.CalleCasa,
-          NumCasa: datos.NumCasa,
-          ColCasa: datos.ColCasa,
-          TelCasa: datos.TelCasa,
-          CalleTrabajo: datos.CalleTrabajo,
-          NumTrabajo: datos.NumTrabajo,
-          ColTrabajo: datos.ColTrabajo,
-          TelTrabajo: datos.TelTrabajo,
+          paciente: {// OJO CON ESTA LINEA
+            nombre: datos.nombre,
+            apPaterno: datos.primerApellido,
+            apMaterno: datos.segundoApellido,
+            curp: datos.curp,
+            fechaNac: datos.fechaNacimiento,
+            horaNac: datos.horaNacimiento,
+            entidadNac: datos.entidadNacimiento,
+            edadYears: datos.edadYears, //CALCULAR
+            edadMonths: datos.edadMonths,
+            edadDays: datos.edadDays,
+            edadHours: datos.edadHours,
+            nacidoHospital: datos.nacidoHospital,
+            fkSexo: datos.fkSexo,
+            peso: datos.peso,
+            talla: datos.talla,
+            fkEstadoCivil: datos.fkEstadoConyugal,
+            insabi: datos.insabi,
+            gratuitidad: datos.gratuitidad,
+            indigena: datos.indigena,
+            lenguaIndigena: datos.lenguaIndigena,
+            cualLengua: datos.cualLengua,
+            fkTipoCalleCasa: datos.fkTipoVialidad,
+            calleCasa: datos.nombreVialidad,
+            numCasa: datos.numExt,
+            numCasaInt: datos.numInt,
+            fkTipoColCasa: datos.fkTipoAsentamiento,
+            colCasa: datos.nombreAsentamiento,
+            cp: datos.cp,
+            localidad: datos.localidad,
+            municipio: datos.municipio,
+            entidadFederativa: datos.entidadFederativa,
+            pais: datos.pais,
+            tecCasa: datos.telefono,
+          },
         },
         {
           headers: {
             'Content-type': 'application/json',
-            'Authorization': `Bearer ${token()}`
+            // 'Authorization': `Bearer ${token()}`
           },
         }
       )
@@ -265,20 +310,23 @@ export default function DatosIdentificacion({token}) {
 
   const handleSave = () => {
     if (
-      datos.NoExpediente === '' ||
-      datos.Nombre === '' ||
-      datos.ApPaterno === '' ||
-      datos.ApMaterno === '' ||
-      datos.FechaNac === '' ||
-      datos.FkEstadoCivil === '' ||
-      datos.FkEscolaridad === '' ||
-      datos.FkOcupacion === '' ||
-      datos.FkReligion === '' ||
-      datos.FkLugarReferencia === '' ||
-      datos.TelCasa === '' ||
-      datos.CalleCasa === '' ||
-      datos.ColCasa === '' ||
-      datos.FkHospital === ''
+      datos.nombre === '' ||
+      datos.primerApellido === '' ||
+      datos.segundoApellido === '' ||
+      datos.fechaNacimiento === '' ||
+      datos.fkSexo === '' ||
+      datos.insabi === null ||
+      datos.gratuitidad === null ||
+      datos.fkTipoVialidad === '' ||
+      datos.nombreVialidad === '' ||
+      datos.numExt === '' ||
+      datos.fkTipoAsentamiento === '' ||
+      datos.nombreAsentamiento === '' ||
+      datos.localidad === '' ||
+      datos.municipio === '' ||
+      datos.entidadFederativa === '' ||
+      datos.pais === '' ||
+      datos.telefono === ''
     ) {
       setIsFail(true)
       return
@@ -313,7 +361,7 @@ export default function DatosIdentificacion({token}) {
                 label="No. de Expediente"
                 variant="outlined"
                 name="NoExpediente"
-                defaultValue={datos.NoExpediente}
+                defaultValue={datos.folio}
                 fullWidth
                 inputProps={{ readOnly: true }}
               />
@@ -323,381 +371,533 @@ export default function DatosIdentificacion({token}) {
           </Grid>
 
           <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <Typography className={style.line} variant="h6" style={{ color: '#AC3833', fontWeight: 'bold' }}>
-                Información básica
-              </Typography>
-            </Grid>
+          <Grid item xs margin={1}>
+            <Typography className={style.line} variant="h5" style={{ color: '#000000' }}>
+              Datos personales
+            </Typography>
           </Grid>
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <TextField
+        </Grid>
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs margin={1}>
+            <TextField
+              required
+              id="nombre"
+              label="Nombre"
+              variant="outlined"
+              name="nombre"
+              error={datos.nombre === '' && isFail}
+              defaultValue={datos.nombre}
+              onChange={handleChange}
+              fullWidth
+              inputProps={{ maxLength: 50 }}
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              required
+              id="primerApellido"
+              label="Primer Apellido"
+              variant="outlined"
+              name="primerApellido"
+              error={datos.primerApellido === '' && isFail}
+              defaultValue={datos.primerApellido}
+              onChange={handleChange}
+              fullWidth
+              inputProps={{ maxLength: 50 }}
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              required
+              id="segundoApellido"
+              label="Segundo Apellido"
+              variant="outlined"
+              name="segundoApellido"
+              error={datos.segundoApellido === '' && isFail}
+              defaultValue={datos.segundoApellido}
+              onChange={handleChange}
+              fullWidth
+              inputProps={{ maxLength: 50 }}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs margin={1}>
+            <TextField
+              id="curp"
+              label="CURP"
+              variant="outlined"
+              name="curp"
+              defaultValue={datos.curp}
+              // error={datos.curp === '' && isFail}
+              onChange={handleChange}
+              InputLabelProps={{ maxLength: 18}}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              required
+              id="fechaNacimiento"
+              label="Fecha de Nacimiento"
+              type="date"
+              variant="outlined"
+              name="fechaNacimiento"
+              defaultValue={datos.fechaNacimiento}
+              error={datos.fechaNacimiento === '' && isFail}
+              onChange={handleChange}
+              InputLabelProps={{ shrink: true }}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              id="horaNacimiento"
+              label="Hora de Nacimiento (Si tiene menos de 24 hrs de nacido)"
+              type="time"
+              variant="outlined"
+              name="horaNacimiento"
+              defaultValue={datos.horaNacimiento}
+              // error={datos.horaNacimiento === '' && isFail}
+              onChange={handleChange}
+              InputLabelProps={{ shrink: true }}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="entidadNacimiento">Entidad de Nacimiento</InputLabel>
+              <Select
+                labelId="entidadNacimiento"
+                id="entidadNacimiento"
+                label="Entidad de Nacimiento"
+                name="entidadNacimiento"
+                defaultValue={datos.entidadNacimiento}
+                onChange={handleChange}
+                // error={datos.entidadNacimiento === '' && isFail}
+              >
+                {estado.map(n => {
+                  return <MenuItem value={n.nombre}>{n.nombre}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
+          </Grid>
+          
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+                {/** ESTE GRID SERA PARA LA edadYears */}
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="nacidoHospital">¿Nació en el Hospital?</InputLabel>
+              <Select
+                labelId='nacidoHospital'
+                id='nacidoHospital'
+                label='¿Nació en el Hospital?'
+                name='nacidoHospital'
+                defaultValue={datos.nacidoHospital}
+                onChange={handleChange}
+                // error={datos.nacidoHospital === null && isFail}
+              >
+                <MenuItem value={true}>Sí</MenuItem>
+                <MenuItem value={false}>No</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="fkSexo">Sexo</InputLabel>
+              <Select
                 required
-                id="nombre"
-                label="Nombre del paciente"
-                variant="outlined"
-                name="Nombre"
-                error={datos.Nombre === '' && isFail}
-                defaultValue={datos.Nombre}
+                labelId="fkSexo"
+                id="fkSexo"
+                label="Sexo"
+                name="fkSexo"
+                defaultValue={datos.fkSexo}
                 onChange={handleChange}
-                fullWidth
-                inputProps={{ maxLength: 50 }}
-              />
-            </Grid>
+                error={datos.fkSexo === '' && isFail}
+              >
+                {sexo.map(n => {
+                  return <MenuItem value={n.idSexo}>{n.nombre}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
+          </Grid>
 
-            <Grid item xs margin={1}>
-              <TextField
+          <Grid item xs margin={1}>
+            <TextField
+              id="peso"
+              label="Peso (kg.gr)"
+              type='decimal'
+              variant="outlined"
+              name="peso"
+              defaultValue={datos.peso}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              id="talla"
+              label="Talla (cm)"
+              type='number'
+              variant="outlined"
+              name="talla"
+              defaultValue={datos.talla}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="fkEstadoConyugal">Estado Conyugal</InputLabel>
+              <Select
+                labelId="fkEstadoConyugal"
+                id="fkEstadoConyugal"
+                label="Estado Conyugal"
+                name="fkEstadoConyugal"
+                defaultValue={datos.fkEstadoConyugal}
+                onChange={handleChange}
+                // error={datos.fkEstadoConyugal === '' && isFail}
+              >
+                {estadoConyugal.map(n => {
+                  return <MenuItem value={n.idEstadoConyugal}>{n.nombre}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
+          </Grid>
+
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+        <Grid item xs margin={1}>
+            {/** espacio para el elemento para el link de coonsulta insabi */}
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="insabi">Afiliacion INSABI</InputLabel>
+              <Select
                 required
-                id="apPaterno"
-                label="Apellido paterno"
-                variant="outlined"
-                name="ApPaterno"
-                error={datos.ApPaterno === '' && isFail}
-                defaultValue={datos.ApPaterno}
+                labelId='insabi'
+                id='insabi'
+                label='Afiliacion INSABI'
+                name='insabi'
+                defaultValue={datos.insabi}
                 onChange={handleChange}
-                fullWidth
-                inputProps={{ maxLength: 50 }}
-              />
-            </Grid>
+                error={datos.insabi === null && isFail}
+              >
+                <MenuItem value={true}>Sí</MenuItem>
+                <MenuItem value={false}>No</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
 
-            <Grid item xs margin={1}>
-              <TextField
+          <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="gratuitidad">Gratuitidad</InputLabel>
+              <Select
                 required
-                id="apMaterno"
-                label="Apellido materno"
-                variant="outlined"
-                name="ApMaterno"
-                error={datos.ApMaterno === '' && isFail}
-                defaultValue={datos.ApMaterno}
+                labelId='gratuitidad'
+                id='gratuitidad'
+                label='Gratuitidad'
+                name='gratuitidad'
+                defaultValue={datos.gratuitidad}
                 onChange={handleChange}
-                fullWidth
-                inputProps={{ maxLength: 50 }}
-              />
-            </Grid>
+                error={datos.gratuitidad === null && isFail}
+              >
+                <MenuItem value={true}>Sí</MenuItem>
+                <MenuItem value={false}>No</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs margin={1}>
+            <Typography className={style.line} variant="h5" style={{ color: '#000000' }}>
+              Situación indígena
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+        <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="indigena">¿Se considera indígena?</InputLabel>
+              <Select
+                labelId='indigena'
+                id='indigena'
+                label='¿Se considera indígena?'
+                name='indigena'
+                defaultValue={datos.indigena}
+                onChange={handleChange}
+                // error={datos.indigena === null && isFail}
+              >
+                <MenuItem value={true}>Sí</MenuItem>
+                <MenuItem value={false}>No</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
 
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <TextField
+          <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="lenguaIndigena">¿Habla alguna lengua indígena?</InputLabel>
+              <Select
+                labelId='lenguaIndigena'
+                id='lenguaIndigena'
+                label='¿Habla alguna lengua indígena?'
+                name='lenguaIndigena'
+                defaultValue={datos.lenguaIndigena}
+                onChange={handleChange}
+                // error={datos.lenguaIndigena === null && isFail}
+              >
+                <MenuItem value={true}>Sí</MenuItem>
+                <MenuItem value={false}>No</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              id="cualLengua"
+              label="¿Cual lengua?"
+              variant="outlined"
+              name="cualLengua"
+              defaultValue={datos.cualLengua}
+              onChange={handleChange}
+              fullWidth
+              // error={datos.cualLengua === '' && isFail}
+              inputProps={{ maxLength: 100 }}
+            />
+          </Grid>
+
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs margin={1}>
+            <Typography className={style.line} variant="h5" style={{ color: '#000000' }}>
+              Domicilio y contacto
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+        <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="fkTipoVialidad">Tipo de Vialidad</InputLabel>
+              <Select
                 required
-                id="FechaNac"
-                label="Fecha de nacimiento"
-                type="date"
-                variant="outlined"
-                name="FechaNac"
-                defaultValue={datos.FechaNac}
-                error={datos.FechaNac === '' && isFail}
+                labelId="fkTipoVialidad"
+                id="fkTipoVialidad"
+                label="Tipo de Vialidad"
+                name="fkTipoVialidad"
+                defaultValue={datos.fkTipoVialidad}
                 onChange={handleChange}
-                InputLabelProps={{ shrink: true }}
-                fullWidth
-              />
-            </Grid>
-
-            <Grid item xs margin={1}>
-              <TextField
-                id="Ivs"
-                label="IVS"
-                type="number"
-                variant="outlined"
-                name="Ivs"
-                defaultValue={datos.Ivs}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-
-            <Grid item xs margin={1}>
-              <FormControl variant="outlined" fullWidth>
-                <InputLabel id="FkEstadoCivil">Estado Civil</InputLabel>
-                <Select
-                  required
-                  labelId="FkEstadoCivil"
-                  id="FkEstadoCivil"
-                  label="Estado Civil"
-                  name="FkEstadoCivil"
-                  defaultValue={datos.FkEstadoCivil}
-                  onChange={handleChange}
-                  error={datos.FkEstadoCivil === '' && isFail}
-                >
-                  {estadoCivil.map(n => {
-                    return <MenuItem value={n.idEstadoCivil}>{n.nombreEstado}</MenuItem>
-                  })}
-                </Select>
-              </FormControl>
-            </Grid>
+                error={datos.fkTipoVialidad === '' && isFail}
+              >
+                {tipoVialidad.map(n => {
+                  return <MenuItem value={n.idTipoVialidad}>{n.nombre}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
           </Grid>
 
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <FormControl variant="outlined" fullWidth>
-                <InputLabel id="FkEscolaridad">Escolaridad</InputLabel>
-                <Select
-                  required
-                  labelId="FkEscolaridad"
-                  id="FkEscolaridad"
-                  label="Escolaridad"
-                  name="FkEscolaridad"
-                  defaultValue={datos.FkEscolaridad}
-                  onChange={handleChange}
-                  error={datos.FkEscolaridad === '' && isFail}
-                >
-                  {escolaridad.map(n => {
-                    return <MenuItem value={n.idEscolaridad}>{n.nombreEscolaridad}</MenuItem>
-                  })}
-                </Select>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs margin={1}>
-              <FormControl variant="outlined" fullWidth>
-                <InputLabel id="FkOcupacion">Ocupación</InputLabel>
-                <Select
-                  required
-                  labelId="FkOcupacion"
-                  id="FkOcupacion"
-                  label="Ocupacion"
-                  name="FkOcupacion"
-                  defaultValue={datos.FkOcupacion}
-                  onChange={handleChange}
-                  error={datos.FkOcupacion === '' && isFail}
-                >
-                  {ocupacion.map(n => {
-                    return <MenuItem value={n.idOcupacion}>{n.nombreOcupacion}</MenuItem>
-                  })}
-                </Select>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs margin={1}>
-              <FormControl variant="outlined" fullWidth>
-                <InputLabel id="FkReligion">Religión</InputLabel>
-                <Select
-                  required
-                  labelId="FkReligion"
-                  id="FkReligion"
-                  label="Religion"
-                  name="FkReligion"
-                  defaultValue={datos.FkReligion}
-                  onChange={handleChange}
-                  error={datos.FkReligion === '' && isFail}
-                >
-                  {religion.map(n => {
-                    return <MenuItem value={n.idReligion}>{n.nombreReligion}</MenuItem>
-                  })}
-                </Select>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs margin={1}>
-              <FormControl variant="outlined" fullWidth>
-                <InputLabel id="FkLugarReferencia">Lugar de referencia</InputLabel>
-                <Select
-                  required
-                  labelId="FkLugarReferencia"
-                  id="FkLugarReferencia"
-                  label="Lugar de Referencia"
-                  name="FkLugarReferencia"
-                  defaultValue={datos.FkLugarReferencia}
-                  onChange={handleChange}
-                  error={datos.FkLugarReferencia === '' && isFail}
-                >
-                  {lugar.map(n => {
-                    return <MenuItem value={n.idLugar}>{n.nombreLugar}</MenuItem>
-                  })}
-                </Select>
-              </FormControl>
-            </Grid>
+          <Grid item xs margin={1}>
+            <TextField
+              id="nombreVialidad"
+              label="Nombre de la Vialidad"
+              variant="outlined"
+              name="nombreVialidad"
+              defaultValue={datos.nombreVialidad}
+              onChange={handleChange}
+              fullWidth
+              required
+              error={datos.nombreVialidad === '' && isFail}
+              inputProps={{ maxLength: 50 }}
+            />
           </Grid>
 
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <Typography className={style.line} variant="h6" style={{ color: '#AC3833', fontWeight: 'bold' }}>
-                Información familiar
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <TextField
-                id="nombreEsposa"
-                label="Nombre de la esposa"
-                variant="outlined"
-                name="NombreEsposa"
-                defaultValue={datos.NombreEsposa}
-                onChange={handleChange}
-                fullWidth
-                inputProps={{ maxLength: 100 }}
-              />
-            </Grid>
-
-            <Grid item xs margin={1}>
-              <TextField
-                id="AosRelac"
-                label="Años de relación"
-                variant="outlined"
-                name="AosRelac"
-                defaultValue={datos.AosRelac}
-                onChange={handleChange}
-                type="number"
-                fullWidth
-              />
-            </Grid>
-          </Grid>
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <TextField
-                id="NumHijosVivos"
-                label="Hijos vivos"
-                variant="outlined"
-                name="NumHijosVivos"
-                defaultValue={datos.NumHijosVivos}
-                onChange={handleChange}
-                type="number"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs margin={1}>
-              <TextField
-                id="EdadHijoMenor"
-                label="Edad del hijo menor"
-                variant="outlined"
-                name="EdadHijoMenor"
-                defaultValue={datos.EdadHijoMenor}
-                onChange={handleChange}
-                type="number"
-                fullWidth
-              />
-            </Grid>
+          <Grid item xs margin={1}>
+            <TextField
+              required
+              id="numExt"
+              label="Número Exterior"
+              variant="outlined"
+              name="numExt"
+              type="number"
+              defaultValue={datos.numExt}
+              onChange={handleChange}
+              error={datos.nombreVialidad === '' && isFail}
+              fullWidth
+            />
           </Grid>
 
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <Typography className={style.line} variant="h6" style={{ color: '#AC3833', fontWeight: 'bold' }}>
-                Información de contacto
-              </Typography>
-            </Grid>
+          <Grid item xs margin={1}>
+            <TextField
+              id="numInt"
+              label="Número Interior"
+              variant="outlined"
+              name="numInt"
+              type="number"
+              defaultValue={datos.numInt}
+              onChange={handleChange}
+              fullWidth
+            />
           </Grid>
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <Typography className={style.line} variant="h6" style={{ color: '#000000' }}>
-                Domicilio particular
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <TextField
-                id="CalleCasa"
-                label="Calle"
-                variant="outlined"
-                name="CalleCasa"
-                defaultValue={datos.CalleCasa}
-                onChange={handleChange}
-                fullWidth
+
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+
+          <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="fkTipoAsentamiento">Tipo de Asentamiento Humano</InputLabel>
+              <Select
                 required
-                error={datos.CalleCasa === '' && isFail}
-                inputProps={{ maxLength: 50 }}
-              />
-            </Grid>
-            <Grid item xs margin={1}>
-              <TextField
-                id="NumCasa"
-                label="Número"
-                variant="outlined"
-                name="NumCasa"
-                type="number"
-                defaultValue={datos.NumCasa}
+                labelId="fkTipoAsentamiento"
+                id="fkTipoAsentamiento"
+                label="Tipo de Asentameinto Humano"
+                name="fkTipoAsentamiento"
+                defaultValue={datos.fkTipoAsentamiento}
                 onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs margin={1}>
-              <TextField
-                id="ColCasa"
-                label="Colonia"
-                variant="outlined"
-                name="ColCasa"
-                defaultValue={datos.ColCasa}
-                onChange={handleChange}
-                fullWidth
-                required
-                error={datos.ColCasa === '' && isFail}
-                inputProps={{ maxLength: 50 }}
-              />
-            </Grid>
-            <Grid item xs margin={1}>
-              <TextField
-                id="TelCasa"
-                label="Teléfono"
-                variant="outlined"
-                name="TelCasa"
-                defaultValue={datos.TelCasa}
-                onChange={handleChange}
-                fullWidth
-                required
-                error={datos.TelCasa === '' && isFail}
-                inputProps={{ maxLength: 12 }}
-              />
-            </Grid>
+                error={datos.fkTipoAsentamiento === '' && isFail}
+              >
+                {tipoAsentamiento.map(n => {
+                  return <MenuItem value={n.idTipoAsentamiento}>{n.nombre}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
           </Grid>
 
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <Typography className={style.line} variant="h6" style={{ color: '#000000' }}>
-                Domicilio de trabajo
-              </Typography>
-            </Grid>
+          <Grid item xs margin={1}>
+            <TextField
+              id="nombreAsentamiento"
+              label="Nombre del Asentamiento Humano"
+              variant="outlined"
+              name="nombreAsentamiento"
+              defaultValue={datos.nombreAsentamiento}
+              onChange={handleChange}
+              fullWidth
+              required
+              error={datos.nombreAsentamiento === '' && isFail}
+              inputProps={{ maxLength: 50 }}
+            />
           </Grid>
-          <Grid container spacing={1} justifyContent="center">
-            <Grid item xs margin={1}>
-              <TextField
-                id="CalleTrabajo"
-                label="Calle"
-                variant="outlined"
-                name="CalleTrabajo"
-                defaultValue={datos.CalleTrabajo}
-                onChange={handleChange}
-                fullWidth
-                inputProps={{ maxLength: 50 }}
-              />
-            </Grid>
-            <Grid item xs margin={1}>
-              <TextField
-                id="NumTrabajo"
-                label="Número"
-                variant="outlined"
-                name="NumTrabajo"
-                type="number"
-                defaultValue={datos.NumTrabajo}
-                onChange={handleChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs margin={1}>
-              <TextField
-                id="ColTrabajo"
-                label="Colonia"
-                variant="outlined"
-                name="ColTrabajo"
-                defaultValue={datos.ColTrabajo}
-                onChange={handleChange}
-                fullWidth
-                inputProps={{ maxLength: 50 }}
-              />
-            </Grid>
-            <Grid item xs margin={1}>
-              <TextField
-                id="TelTrabajo"
-                label="Teléfono"
-                variant="outlined"
-                name="TelTrabajo"
-                defaultValue={datos.TelTrabajo}
-                onChange={handleChange}
-                fullWidth
-                inputProps={{ maxLength: 12 }}
-              />
-            </Grid>
+          
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+
+          <Grid item xs margin={1}>
+            <TextField
+              required
+              id="cp"
+              label="Código Postal"
+              variant="outlined"
+              name="cp"
+              defaultValue={datos.cp}
+              onChange={handleChange}
+              fullWidth
+              error={datos.cp === '' && isFail}
+              inputProps={{ maxLength: 5 }}
+            />
           </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              required
+              id="localidad"
+              label="Localidad"
+              variant="outlined"
+              name="localidad"
+              defaultValue={datos.localidad}
+              error={datos.localidad === '' && isFail}
+              onChange={handleChange}
+              inputProps={{maxLength: 100}}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              required
+              id="municipio"
+              label="Municipio/Alcaldía"
+              variant="outlined"
+              name="municipio"
+              defaultValue={datos.municipio}
+              onChange={handleChange}
+              fullWidth
+              error={datos.municipio === '' && isFail}
+              inputProps={{ maxLength: 100 }}
+            />
+          </Grid>
+
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+
+          <Grid item xs margin={1}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="entidadFederativa">Entidad Federativa</InputLabel>
+              <Select
+                required
+                labelId="entidadFederativa"
+                id="entidadFederativa"
+                label="Entidad Federativa"
+                name="entidadFederativa"
+                defaultValue={datos.entidadFederativa}
+                onChange={handleChange}
+                error={datos.entidadFederativa === '' && isFail}
+              >
+                {estado.map(n => {
+                  return <MenuItem value={n.nombre}>{n.nombre}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              required
+              id="pais"
+              label="Pais"
+              variant="outlined"
+              name="pais"
+              defaultValue={datos.pais}
+              error={datos.pais === '' && isFail}
+              onChange={handleChange}
+              inputProps={{maxLength: 100}}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              id="telefono"
+              label="Teléfono"
+              variant="outlined"
+              name="telefono"
+              defaultValue={datos.telefono}
+              onChange={handleChange}
+              fullWidth
+              required
+              error={datos.telefono === '' && isFail}
+              inputProps={{ maxLength: 10 }}
+            />
+          </Grid>
+          
+        </Grid>
 
           <Grid>
             <Button

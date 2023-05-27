@@ -2,8 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Tabs, Tab, Box } from '@material-ui/core'
-import DatosIdentificacion from './datosIdentificacion'
-import useStyles from '../../Styles/mainHistorias'
+import DetailsPaciente from './infoPaciente'
+import useStyles from '../Styles/archivoStyles'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -33,7 +33,7 @@ function a11yProps(index) {
   }
 }
 
-export default function NavPaciente({token, changeToken}) {
+export default function ArchivePaciente({token, changeToken}) {
   const classes = useStyles()
   const [value, setValue] = useState(0)
 
@@ -58,7 +58,7 @@ export default function NavPaciente({token, changeToken}) {
           <Tab label="Tablero de indicadores" {...a11yProps(3)} />
         </Tabs>
         <TabPanel className={classes.fullWidth} value={value} index={0}>
-          <DatosIdentificacion /* token={token} changeToken={changeToken} */ />
+          <DetailsPaciente /* token={token} changeToken={changeToken} */ />
         </TabPanel>
       </div>
     </div>

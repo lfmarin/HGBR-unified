@@ -150,11 +150,11 @@ export default function AllPacientes({}) {
                       <TableCell>
                         <Button
                           component={Link}
-                          to={`/pacientes/details/${p.folio}`}
+                          to={`/pacientes/archive/${p.folio}`}
                           variant="outlined"
                           sx={{ borderColor: '#AC3833', color: '#AC3833' }}
                         >
-                          Expediente
+                          ARCHIVO
                         </Button>
                       </TableCell>
                     </TableRow>

@@ -233,8 +233,7 @@ export default function AddPaciente() {
       .post(
         process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/save',
         {
-          paciente: {
-            noExpediente: '123456',//ESTO HAY QUE CALCULARLO
+          paciente: {// OJO CON ESTA LINEA
             nombre: datos.nombre,
             apPaterno: datos.primerApellido,
             apMaterno: datos.segundoApellido,

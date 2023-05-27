@@ -9,6 +9,7 @@ import useStyles from './Styles/Styles';
 import Drawer from './Main/Drawer';
 import Home from './Main/Home';
 import AllPacientes from './Pacientes/listadoPacientes';
+import ArchivePaciente from './Pacientes/archivoPaciente';
 import AddPaciente from './Pacientes/registrarPaciente';
 import DetailsPaciente from './Pacientes/infoPaciente';
 import EditPaciente from './Pacientes/modificarPaciente';
@@ -63,6 +64,7 @@ export default function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/pacientes" element={<AllPacientes/>} />
         <Route path='/pacientes/add' element={<AddPaciente/>} />
+        <Route path='/pacientes/archive/:folio' element={<ArchivePaciente/>}/>
         <Route path='/pacientes/details/:folio' element={<DetailsPaciente/>} />
         <Route path='/pacientes/details/:folio/edit' element={<EditPaciente/>} />
         <Route path='/admisiones' element={<AllAdmisiones/>} />
