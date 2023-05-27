@@ -15,7 +15,7 @@ public partial class Admisione
 
     public string? Curp { get; set; }
 
-    public DateOnly? FechaNacimiento { get; set; }
+    public DateTime? FechaNacimiento { get; set; }
 
     public TimeOnly? HoraNacimiento { get; set; }
 

@@ -15,7 +15,7 @@ public partial class Pacientesarch
 
     public string? Curp { get; set; }
 
-    public DateOnly? FechaNac { get; set; }
+    public DateTime? FechaNac { get; set; }
 
     public TimeOnly? HoraNac { get; set; }
 
