@@ -228,6 +228,7 @@ export default function AddPaciente() {
       }
     } */
     //edad
+    console.log(datos.fechaNacimiento);
 
     axios
       .post(
@@ -256,7 +257,7 @@ export default function AddPaciente() {
           lenguaIndigena: datos.lenguaIndigena,
           cualLengua: datos.cualLengua,
           fkTipoCalleCasa: datos.fkTipoVialidad,
-          nombreVialidad: datos.nombreVialidad,
+          calleCasa: datos.nombreVialidad,
           numCasa: datos.numExt,
           numCasaInt: datos.numInt,
           fkTipoColCasa: datos.fkTipoAsentamiento,
@@ -266,7 +267,7 @@ export default function AddPaciente() {
           municipio: datos.municipio,
           entidadFederativa: datos.entidadFederativa,
           pais: datos.pais,
-          telCasa: datos.telefono
+          telCasa: datos.telefono,
         },
         {
           headers: {

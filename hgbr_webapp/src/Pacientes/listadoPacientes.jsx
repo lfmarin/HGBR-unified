@@ -164,7 +164,7 @@ export default function AllPacientes({}) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 50]}
+          rowsPerPageOptions={[25, 50, 100]}
           component="div"
           count={pacientes.length}
           rowsPerPage={rowsPerPage}

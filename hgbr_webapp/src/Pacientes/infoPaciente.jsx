@@ -285,7 +285,7 @@ export default function DetailsPaciente() {
           municipio: datos.municipio,
           entidadFederativa: datos.entidadFederativa,
           pais: datos.pais,
-          tecCasa: datos.telefono,
+          telCasa: datos.telefono,
         },
         {
           headers: {
