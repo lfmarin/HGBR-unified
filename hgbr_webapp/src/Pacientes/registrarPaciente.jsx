@@ -218,7 +218,7 @@ export default function AddPaciente() {
 
     const edad = yearCurr - yearNac;
 
-    if(monthCurr < monthNac) {
+    /* if(monthCurr < monthNac) {
       edad--;
     }else{
       if (monthCurr === monthNac) {
@@ -226,48 +226,47 @@ export default function AddPaciente() {
           edad--;
         }
       }
-    }
+    } */
     //edad
 
     axios
       .post(
         process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/save',
         {
-          paciente: {// OJO CON ESTA LINEA
-            nombre: datos.nombre,
-            apPaterno: datos.primerApellido,
-            apMaterno: datos.segundoApellido,
-            curp: datos.curp,
-            fechaNac: datos.fechaNacimiento,
-            horaNac: datos.horaNacimiento,
-            entidadNac: datos.entidadNacimiento,
-            edadYears: datos.edadYears, //CALCULAR
-            edadMonths: datos.edadMonths,
-            edadDays: datos.edadDays,
-            edadHours: datos.edadHours,
-            nacidoHospital: datos.nacidoHospital,
-            fkSexo: datos.fkSexo,
-            peso: datos.peso,
-            talla: datos.talla,
-            fkEstadoCivil: datos.fkEstadoConyugal,
-            insabi: datos.insabi,
-            gratuitidad: datos.gratuitidad,
-            indigena: datos.indigena,
-            lenguaIndigena: datos.lenguaIndigena,
-            cualLengua: datos.cualLengua,
-            fkTipoCalleCasa: datos.fkTipoVialidad,
-            calleCasa: datos.nombreVialidad,
-            numCasa: datos.numExt,
-            numCasaInt: datos.numInt,
-            fkTipoColCasa: datos.fkTipoAsentamiento,
-            colCasa: datos.nombreAsentamiento,
-            cp: datos.cp,
-            localidad: datos.localidad,
-            municipio: datos.municipio,
-            entidadFederativa: datos.entidadFederativa,
-            pais: datos.pais,
-            tecCasa: datos.telefono,
-          },
+          noExpediente: datos.folio,
+          nombre: datos.nombre,
+          apPaterno: datos.primerApellido,
+          apMaterno: datos.segundoApellido,
+          curp: datos.curp,
+          fechaNac: datos.fechaNacimiento,
+          horaNac: datos.horaNacimiento,
+          entidadNac: datos.entidadNacimiento,
+          edadYears: datos.edadYears, //CALCULAR
+          edadMonths: datos.edadMonths,
+          edadDays: datos.edadDays,
+          edadHours: datos.edadHours,
+          nacidoHospital: datos.nacidoHospital,
+          fkSexo: datos.fkSexo,
+          peso: datos.peso,
+          talla: datos.talla,
+          fkEstadoCivil: datos.fkEstadoConyugal,
+          insabi: datos.insabi,
+          gratuitidad: datos.gratuitidad,
+          indigena: datos.indigena,
+          lenguaIndigena: datos.lenguaIndigena,
+          cualLengua: datos.cualLengua,
+          fkTipoCalleCasa: datos.fkTipoVialidad,
+          nombreVialidad: datos.nombreVialidad,
+          numCasa: datos.numExt,
+          numCasaInt: datos.numInt,
+          fkTipoColCasa: datos.fkTipoAsentamiento,
+          colCasa: datos.nombreAsentamiento,
+          cp: datos.cp,
+          localidad: datos.localidad,
+          municipio: datos.municipio,
+          entidadFederativa: datos.entidadFederativa,
+          pais: datos.pais,
+          telCasa: datos.telefono
         },
         {
           headers: {
