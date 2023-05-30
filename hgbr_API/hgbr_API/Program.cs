@@ -40,6 +40,7 @@ builder.Services.AddDbContext<hgbr_API.Models.HospitalBocaContext>(options => {
 
 builder.Services.AddScoped<ICatalogosServices, CatalogosServices>();
 builder.Services.AddScoped<IPacientesArchServices, PacientesArchServices>();
+builder.Services.AddScoped<IAdmisionesServices, AdmisionesServices>();
 
 builder.Services.AddControllers();
 
