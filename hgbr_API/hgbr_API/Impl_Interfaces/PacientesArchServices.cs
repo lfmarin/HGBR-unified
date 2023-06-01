@@ -20,11 +20,11 @@ namespace hgbr_API.ImplInterfaces
             try
             {
                 return context.Pacientesarches.Select(p => new {
-                    Folio = p.NoExpediente,
-                    Nombre = p.Nombre,
-                    ApPaterno = p.ApPaterno,
-                    ApMaterno = p.ApMaterno,
-                    FechaNacimiento = p.FechaNac
+                    folio = p.NoExpediente,
+                    nombre = p.Nombre,
+                    apPaterno = p.ApPaterno,
+                    apMaterno = p.ApMaterno,
+                    fechaNacimiento = p.FechaNac
                 });
             }
             catch (System.Exception)
@@ -75,41 +75,41 @@ namespace hgbr_API.ImplInterfaces
             try
             {
                 return context.Pacientesarches.Where(p => p.NoExpediente.Equals(numExpediente)).Select(pa => new {
-                    NoExpediente = pa.NoExpediente,
-                    Nombre = pa.Nombre,
-                    ApPaterno = pa.ApPaterno,
-                    ApMaterno = pa.ApMaterno,
-                    Curp = pa.Curp,
-                    FechaNac = pa.FechaNac,
-                    HoraNac = pa.HoraNac,
-                    EntidadNac = pa.EntidadNac,
+                    noExpediente = pa.NoExpediente,
+                    nombre = pa.Nombre,
+                    apPaterno = pa.ApPaterno,
+                    apMaterno = pa.ApMaterno,
+                    curp = pa.Curp,
+                    fechaNac = pa.FechaNac,
+                    horaNac = pa.HoraNac,
+                    entidadNac = pa.EntidadNac,
                     // Edad = pa.Edad,
-                    EdadYears = pa.EdadYears,
-                    EdadMonths = pa.EdadMonths,
-                    EdadDays = pa.EdadDays,
-                    EdadHours = pa.EdadHours,
-                    NacidoHospital = pa.NacidoHospital,
-                    FKSexo = pa.FkSexo,
-                    Peso = pa.Peso,
-                    Talla = pa.Talla,
-                    FKEstadoCivil = pa.FkEstadoCivil,
-                    Insabi = pa.Insabi,
-                    Gratuitidad = pa.Gratuitidad,
-                    Indigena = pa.Indigena,
-                    LenguaIndigena = pa.LenguaIndigena,
-                    CualLengua = pa.CualLengua,
+                    edadYears = pa.EdadYears,
+                    edadMonths = pa.EdadMonths,
+                    edadDays = pa.EdadDays,
+                    edadHours = pa.EdadHours,
+                    nacidoHospital = pa.NacidoHospital,
+                    fkSexo = pa.FkSexo,
+                    peso = pa.Peso,
+                    talla = pa.Talla,
+                    fkEstadoCivil = pa.FkEstadoCivil,
+                    insabi = pa.Insabi,
+                    gratuitidad = pa.Gratuitidad,
+                    indigena = pa.Indigena,
+                    lenguaIndigena = pa.LenguaIndigena,
+                    cualLengua = pa.CualLengua,
                     fkTipoCalleCasa = pa.FkTipoCalleCasa,
-                    NombreVialidad = pa.CalleCasa,
-                    NumCasa = pa.NumCasa,
-                    NumCasaInt = pa.NumCasaInt,
-                    FKTipoColCasa = pa.FkTipoColCasa,
-                    ColCasa = pa.ColCasa,
-                    Cp = pa.Cp,
-                    Localidad = pa.Localidad,
-                    Municipio = pa.Municipio,
-                    EntidadFederativa = pa.EntidadFederativa,
-                    Pais = pa.Pais,
-                    TelCasa = pa.TelCasa
+                    nombreVialidad = pa.CalleCasa,
+                    numCasa = pa.NumCasa,
+                    numCasaInt = pa.NumCasaInt,
+                    fkTipoColCasa = pa.FkTipoColCasa,
+                    colCasa = pa.ColCasa,
+                    cp = pa.Cp,
+                    localidad = pa.Localidad,
+                    municipio = pa.Municipio,
+                    entidadFederativa = pa.EntidadFederativa,
+                    pais = pa.Pais,
+                    telCasa = pa.TelCasa
                 }).First();
             }
             catch (System.Exception)
