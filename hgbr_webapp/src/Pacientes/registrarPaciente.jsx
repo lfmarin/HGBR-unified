@@ -25,7 +25,7 @@ export default function AddPaciente() {
   const [estado, setEstado] = useState([])
 
   const [datos, setDatos] = useState({
-    folio: '',
+    // folio: '',
     nombre: '',
     primerApellido: '',
     segundoApellido: '',
@@ -103,13 +103,13 @@ export default function AddPaciente() {
         error => {
           if (!error.response)
             setErrorbd(true)
-          else{
+          /* else{
               if (error.response.status === 401) {
                 /*localStorage.removeItem("ACCESS_TOKEN");
-                setToken('');*/
+                setToken('');
                 setErrorbd(false);
               }
-            }
+            }*/
         }
       )
   }, [])
@@ -218,6 +218,12 @@ export default function AddPaciente() {
 
     const edad = yearCurr - yearNac;
 
+    //esto es solo de prueba
+    datos.edadYears = edad;
+    datos.edadMonths = edad;
+    datos.edadDays = edad;
+    datos.edadHours = edad;
+
     /* if(monthCurr < monthNac) {
       edad--;
     }else{
@@ -229,6 +235,8 @@ export default function AddPaciente() {
     } */
     //edad
     console.log(datos.fechaNacimiento);
+    console.log("Todos los datos");
+    console.log(datos);
 
     axios
       .post(
@@ -537,7 +545,7 @@ export default function AddPaciente() {
                 // error={datos.fkEstadoConyugal === '' && isFail}
               >
                 {estadoConyugal.map(n => {
-                  return <MenuItem value={n.idEstadoConyugal}>{n.nombre}</MenuItem>
+                  return <MenuItem value={n.idEstadoCivil}>{n.nombre}</MenuItem>
                 })}
               </Select>
             </FormControl>
