@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Tabs, Tab, Box } from '@material-ui/core'
-import DetailsPaciente from './infoPaciente'
+import DetailsAdmision from './infoAdmision'
 import useStyles from '../Styles/archivoStyles'
 
 function TabPanel(props) {
@@ -33,7 +33,7 @@ function a11yProps(index) {
   }
 }
 
-export default function ArchivePaciente({token, changeToken}) {
+export default function ArchiveAdmision({token, changeToken}) {
   const classes = useStyles()
   const [value, setValue] = useState(0)
 
@@ -53,12 +53,10 @@ export default function ArchivePaciente({token, changeToken}) {
           centered={true}
         >
           <Tab label="Datos personales" {...a11yProps(0)} />
-          <Tab label="Hoja médica y expediente electrónico" {...a11yProps(1)} />
-          <Tab label="Control de insumos" {...a11yProps(2)} />
-          <Tab label="Tablero de indicadores" {...a11yProps(3)} />
+          <Tab label="Control de insumos" {...a11yProps(1)} />
         </Tabs>
         <TabPanel className={classes.fullWidth} value={value} index={0}>
-          <DetailsPaciente /* token={token} changeToken={changeToken} */ />
+          <DetailsAdmision /* token={token} changeToken={changeToken} */ />
         </TabPanel>
       </div>
     </div>

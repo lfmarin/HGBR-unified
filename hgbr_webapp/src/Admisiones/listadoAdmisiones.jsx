@@ -24,7 +24,7 @@ const headCells = [
   { id: 'accion', numeric: false, label: "Acción" },
 ]
 
-export default function AllPacientes({}) {
+export default function AllAdmisiones({}) {
   const [pacientes, setPacientes] = useState([])
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -123,7 +123,7 @@ export default function AllPacientes({}) {
           handleCancelSearch={handleCancelSearch}
           title="Listado de pacientes"
           buttonTitle="AGREGA PACIENTE"
-          link="/pacientes/add"
+          link="/admisiones/add"
         />
         <TableContainer>
           <Table className={classes.table} aria-labelledby="tableTitle" size="medium" aria-label="enhanced table">

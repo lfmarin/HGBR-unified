@@ -25,7 +25,7 @@ export default function AddPaciente() {
   const [estado, setEstado] = useState([])
 
   const [datos, setDatos] = useState({
-    // folio: '',
+    folio: '',
     nombre: '',
     primerApellido: '',
     segundoApellido: '',

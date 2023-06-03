@@ -15,17 +15,16 @@ import { Grid } from '@mui/material'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 
-export default function AddPaciente() {
+export default function AddAdmision() {
   const [isFail, setIsFail] = useState(false)
 
   const [sexo, setSexo] = useState([])
-  const [estadoConyugal, setEstadoConyugal] = useState([])
   const [tipoVialidad, setTipoVialidad] = useState([])
   const [tipoAsentamiento, setTipoAsentamiento] = useState([])
   const [estado, setEstado] = useState([])
 
   const [datos, setDatos] = useState({
-    // folio: '',
+    folio: '',
     nombre: '',
     primerApellido: '',
     segundoApellido: '',
@@ -37,16 +36,9 @@ export default function AddPaciente() {
     edadMonths: '',
     edadDays: '',
     edadHours: '',
-    nacidoHospital: null,
     fkSexo: '',
-    peso: '',
-    talla: '',
-    fkEstadoConyugal: '',
     insabi: null,
     gratuitidad: null,
-    indigena: null,
-    lenguaIndigena: null,
-    cualLengua: '',
     fkTipoVialidad: '',
     nombreVialidad: '',
     numExt: '',
@@ -81,35 +73,6 @@ export default function AddPaciente() {
         },
         error => {
           if (!error.response) setErrorbd(true)
-        }
-      )
-  }, [])
-
-  useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/catalogos/estadoCivil', {
-        headers: {
-          'Content-type': 'application/json',
-          //'Authorization': `Bearer ${token}`
-        },
-      })
-      .then(
-        response => {
-          if (response.status === 200) {
-            setEstadoConyugal(response.data)
-            setErrorbd(false)
-          }
-        },
-        error => {
-          if (!error.response)
-            setErrorbd(true)
-          /* else{
-              if (error.response.status === 401) {
-                /*localStorage.removeItem("ACCESS_TOKEN");
-                setToken('');
-                setErrorbd(false);
-              }
-            }*/
         }
       )
   }, [])
@@ -202,7 +165,7 @@ export default function AddPaciente() {
     return Math.floor(diff / (1000 * 60 * 60))
   }
 
-  const guardaPaciente = () => {
+  const guardaAdmision = () => {
     // AQUI CALCULAR LA EDAD
     const fNac = new Date(datos.fechaNacimiento+" "+datos.horaNacimiento);
     console.log(fNac);
@@ -234,13 +197,12 @@ export default function AddPaciente() {
       }
     } */
     //edad
-    console.log(datos.fechaNacimiento);
     console.log("Todos los datos");
     console.log(datos);
 
     axios
       .post(
-        process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/save',
+        process.env.REACT_APP_SERVIDOR + '/hgbr_api/admisiones/save',
         {
           noExpediente: datos.folio,
           nombre: datos.nombre,
@@ -254,16 +216,9 @@ export default function AddPaciente() {
           edadMonths: datos.edadMonths,
           edadDays: datos.edadDays,
           edadHours: datos.edadHours,
-          nacidoHospital: datos.nacidoHospital,
           fkSexo: datos.fkSexo,
-          peso: datos.peso,
-          talla: datos.talla,
-          fkEstadoCivil: datos.fkEstadoConyugal,
           insabi: datos.insabi,
           gratuitidad: datos.gratuitidad,
-          indigena: datos.indigena,
-          lenguaIndigena: datos.lenguaIndigena,
-          cualLengua: datos.cualLengua,
           fkTipoCalleCasa: datos.fkTipoVialidad,
           calleCasa: datos.nombreVialidad,
           numCasa: datos.numExt,
@@ -328,14 +283,14 @@ export default function AddPaciente() {
     ) {
       setIsFail(true)
       return
-    } else guardaPaciente()
+    } else guardaAdmision()
   }
 
   if (errorbd) return <Navigate to="/error" />
 
   if (finish) {
     setTimeout(() => setDelay(true), 2000)
-    if (delay) return <Navigate to="/pacientes/all" />
+    if (delay) return <Navigate to="/admisiones/all" />
   }
 
   return (
@@ -468,23 +423,6 @@ export default function AddPaciente() {
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
-          <Grid item xs margin={1}>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel id="nacidoHospital">¿Nació en el Hospital?</InputLabel>
-              <Select
-                labelId='nacidoHospital'
-                id='nacidoHospital'
-                label='¿Nació en el Hospital?'
-                name='nacidoHospital'
-                defaultValue={datos.nacidoHospital}
-                onChange={handleChange}
-                // error={datos.nacidoHospital === null && isFail}
-              >
-                <MenuItem value={true}>Sí</MenuItem>
-                <MenuItem value={false}>No</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
@@ -501,51 +439,6 @@ export default function AddPaciente() {
               >
                 {sexo.map(n => {
                   return <MenuItem value={n.idSexo}>{n.nombre}</MenuItem>
-                })}
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs margin={1}>
-            <TextField
-              id="peso"
-              label="Peso (kg.gr)"
-              type='decimal'
-              variant="outlined"
-              name="peso"
-              defaultValue={datos.peso}
-              onChange={handleChange}
-              fullWidth
-            />
-          </Grid>
-
-          <Grid item xs margin={1}>
-            <TextField
-              id="talla"
-              label="Talla (cm)"
-              type='number'
-              variant="outlined"
-              name="talla"
-              defaultValue={datos.talla}
-              onChange={handleChange}
-              fullWidth
-            />
-          </Grid>
-
-          <Grid item xs margin={1}>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel id="fkEstadoConyugal">Estado Conyugal</InputLabel>
-              <Select
-                labelId="fkEstadoConyugal"
-                id="fkEstadoConyugal"
-                label="Estado Conyugal"
-                name="fkEstadoConyugal"
-                defaultValue={datos.fkEstadoConyugal}
-                onChange={handleChange}
-                // error={datos.fkEstadoConyugal === '' && isFail}
-              >
-                {estadoConyugal.map(n => {
-                  return <MenuItem value={n.idEstadoCivil}>{n.nombre}</MenuItem>
                 })}
               </Select>
             </FormControl>
@@ -592,67 +485,6 @@ export default function AddPaciente() {
               </Select>
             </FormControl>
           </Grid>
-        </Grid>
-
-        <Grid container spacing={1} justifyContent="center">
-          <Grid item xs margin={1}>
-            <Typography className={style.line} variant="h5" style={{ color: '#000000' }}>
-              Situación indígena
-            </Typography>
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={1} justifyContent="center">
-        <Grid item xs margin={1}>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel id="indigena">¿Se considera indígena?</InputLabel>
-              <Select
-                labelId='indigena'
-                id='indigena'
-                label='¿Se considera indígena?'
-                name='indigena'
-                defaultValue={datos.indigena}
-                onChange={handleChange}
-                // error={datos.indigena === null && isFail}
-              >
-                <MenuItem value={true}>Sí</MenuItem>
-                <MenuItem value={false}>No</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs margin={1}>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel id="lenguaIndigena">¿Habla alguna lengua indígena?</InputLabel>
-              <Select
-                labelId='lenguaIndigena'
-                id='lenguaIndigena'
-                label='¿Habla alguna lengua indígena?'
-                name='lenguaIndigena'
-                defaultValue={datos.lenguaIndigena}
-                onChange={handleChange}
-                // error={datos.lenguaIndigena === null && isFail}
-              >
-                <MenuItem value={true}>Sí</MenuItem>
-                <MenuItem value={false}>No</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs margin={1}>
-            <TextField
-              id="cualLengua"
-              label="¿Cual lengua?"
-              variant="outlined"
-              name="cualLengua"
-              defaultValue={datos.cualLengua}
-              onChange={handleChange}
-              fullWidth
-              // error={datos.cualLengua === '' && isFail}
-              inputProps={{ maxLength: 100 }}
-            />
-          </Grid>
-
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
@@ -888,7 +720,7 @@ export default function AddPaciente() {
 
       <Snackbar open={finish}>
         <Alert variant="filled" severity="success" sx={{ width: '100%' }}>
-          Se ha creado el expediente: {datos.folio}
+          Se ha registrado con el folio: {datos.folio}
         </Alert>
       </Snackbar>
     </div>

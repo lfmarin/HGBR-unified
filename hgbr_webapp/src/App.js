@@ -12,11 +12,10 @@ import AllPacientes from './Pacientes/listadoPacientes';
 import ArchivePaciente from './Pacientes/archivoPaciente';
 import AddPaciente from './Pacientes/registrarPaciente';
 import DetailsPaciente from './Pacientes/infoPaciente';
-import EditPaciente from './Pacientes/modificarPaciente';
 import AllAdmisiones from './Admisiones/listadoAdmisiones';
+import ArchiveAdmision from './Admisiones/archivoAdmision';
 import AddAdmision from './Admisiones/registrarAdmision';
 import DetailsAdmision from './Admisiones/infoAdmision';
-import EditAdmision from './Admisiones/modificarAdmision';
 
 const theme = createTheme({
   palette: {
@@ -66,15 +65,15 @@ export default function App() {
         <Route path='/pacientes/add' element={<AddPaciente/>} />
         <Route path='/pacientes/archive/:folio' element={<ArchivePaciente/>}/>
         <Route path='/pacientes/details/:folio' element={<DetailsPaciente/>} />
-        <Route path='/pacientes/details/:folio/edit' element={<EditPaciente/>} />
         <Route path='/admisiones' element={<AllAdmisiones/>} />
         <Route path='/admisiones/add' element={<AddAdmision/>}/>
+        <Route path='/admisiones/archive/:folio' element={<ArchiveAdmision/>} />
         <Route path='/admisiones/details/:folio' element={<DetailsAdmision/>} />
-        <Route path='/admisiones/details/:folio/edit' element={<EditAdmision/>} />
         <Route path="*" element={
           <div>
-            <h1>La página que buscas no existe.</h1>
-            <a href="/">INICIO</a>
+            <h1>Oh no!</h1>
+            <h2>Se ha produciodo un error</h2>
+            <a href="/">Home</a>
           </div>
           } 
         />
