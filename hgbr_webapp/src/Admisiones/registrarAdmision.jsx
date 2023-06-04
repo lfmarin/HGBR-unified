@@ -24,7 +24,7 @@ export default function AddAdmision() {
   const [estado, setEstado] = useState([])
 
   const [datos, setDatos] = useState({
-    folio: '',
+    folio: 0,
     nombre: '',
     primerApellido: '',
     segundoApellido: '',
@@ -204,14 +204,14 @@ export default function AddAdmision() {
       .post(
         process.env.REACT_APP_SERVIDOR + '/hgbr_api/admisiones/save',
         {
-          noExpediente: datos.folio,
+          folio: datos.folio,
           nombre: datos.nombre,
-          apPaterno: datos.primerApellido,
-          apMaterno: datos.segundoApellido,
+          primerApellido: datos.primerApellido,
+          segundoApellido: datos.segundoApellido,
           curp: datos.curp,
-          fechaNac: datos.fechaNacimiento,
-          horaNac: datos.horaNacimiento,
-          entidadNac: datos.entidadNacimiento,
+          fechaNacimiento: datos.fechaNacimiento,
+          horaNacimeinto: datos.horaNacimiento,
+          entidadNacimiento: datos.entidadNacimiento,
           edadYears: datos.edadYears, //CALCULAR
           edadMonths: datos.edadMonths,
           edadDays: datos.edadDays,
@@ -219,18 +219,18 @@ export default function AddAdmision() {
           fkSexo: datos.fkSexo,
           insabi: datos.insabi,
           gratuitidad: datos.gratuitidad,
-          fkTipoCalleCasa: datos.fkTipoVialidad,
-          calleCasa: datos.nombreVialidad,
-          numCasa: datos.numExt,
-          numCasaInt: datos.numInt,
-          fkTipoColCasa: datos.fkTipoAsentamiento,
-          colCasa: datos.nombreAsentamiento,
+          fkTipoVialidad: datos.fkTipoVialidad,
+          nombreVialidad: datos.nombreVialidad,
+          numExt: datos.numExt,
+          numInt: datos.numInt,
+          fkTipoAsentamiento: datos.fkTipoAsentamiento,
+          nombreAsentamiento: datos.nombreAsentamiento,
           cp: datos.cp,
           localidad: datos.localidad,
           municipio: datos.municipio,
           entidadFederativa: datos.entidadFederativa,
           pais: datos.pais,
-          telCasa: datos.telefono,
+          telefono: datos.telefono,
         },
         {
           headers: {

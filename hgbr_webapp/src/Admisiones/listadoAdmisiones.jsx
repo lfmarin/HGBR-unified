@@ -16,16 +16,16 @@ import EnhancedTableToolbar from '../Components/EnhancedTableToolbar'
 import Button from '@mui/material/Button'
 
 const headCells = [
-  { id: 'folio', numeric: false, label: 'No. Expediente' },
+  { id: 'folio', numeric: false, label: 'Folio' },
   { id: 'nombre', numeric: false, label: 'Nombre' },
-  { id: 'apPaterno', numeric: false, label: 'Apellido Paterno' },
-  { id: 'apMaterno', numeric: false, label: 'Apellido Materno' },
+  { id: 'primerApellido', numeric: false, label: 'Apellido Paterno' },
+  { id: 'segundoApellido', numeric: false, label: 'Apellido Materno' },
   { id: 'fechaNacimiento', numeric: false, label: 'Fecha de Nacimiento' },
-  { id: 'accion', numeric: false, label: "Acción" },
+  { id: 'accion', numeric: false, label: "Acciones" },
 ]
 
 export default function AllAdmisiones({}) {
-  const [pacientes, setPacientes] = useState([])
+  const [admisiones, setAdmisiones] = useState([])
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const [order, setOrder] = useState('asc')
@@ -54,7 +54,7 @@ export default function AllAdmisiones({}) {
 
   const handleEnterSearch = event => {
     if (event.key === 'Enter') {
-      setPacientes(SortTable.searchTable(pacientes, search))
+      setAdmisiones(SortTable.searchTable(admisiones, search))
     }
   }
 
@@ -63,16 +63,16 @@ export default function AllAdmisiones({}) {
   }
 
   const handleCancelSearch = event => {
-    // console.log(pacientes)
+    // console.log(admisiones)
     setRefresh(true)
-    //setPacientes(pacientes);
+    //setAdmisiones(admisiones);
     setSearch('')
   }
 
   useEffect(() => {
     if (refresh) {
       axios
-        .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/all', {
+        .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/admisiones/all', {
           headers: {
             'Content-type': 'application/json',
             //'Authorization': `Bearer ${token()}`
@@ -81,10 +81,10 @@ export default function AllAdmisiones({}) {
         .then(
           response => {
             if (response.status === 200) {
-              console.log("RESPUESTA DE PACIENTES")
+              console.log("RESPUESTA DE ADMISIONES")
               console.log(response.data)
-              setPacientes(response.data)
-              console.log(pacientes);
+              setAdmisiones(response.data)
+              console.log(admisiones);
               setErrorbd(false)
               setRefresh(false)
             }
@@ -121,8 +121,8 @@ export default function AllAdmisiones({}) {
           search={search}
           handleSearch={handleSearch}
           handleCancelSearch={handleCancelSearch}
-          title="Listado de pacientes"
-          buttonTitle="AGREGA PACIENTE"
+          title="Registro de admisiones"
+          buttonTitle="NUEVO INGRESO"
           link="/admisiones/add"
         />
         <TableContainer>
@@ -136,25 +136,25 @@ export default function AllAdmisiones({}) {
             />
 
             <TableBody>
-              {SortTable.stableSort(pacientes, SortTable.getComparator(order, orderBy))
+              {SortTable.stableSort(admisiones, SortTable.getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(p => {
                   return (
                     <TableRow key={p.folio}>
                       <TableCell>{p.folio}</TableCell>
                       <TableCell>{p.nombre}</TableCell>
-                      <TableCell>{p.apPaterno}</TableCell>
-                      <TableCell>{p.apMaterno}</TableCell>
+                      <TableCell>{p.primerApellido}</TableCell>
+                      <TableCell>{p.segundoApellido}</TableCell>
                       {/* <TableCell>{getAge(p.fechaNacimiento)} años</TableCell> */}
                       <TableCell>{dateFormatter(p.fechaNacimiento)}</TableCell>
                       <TableCell>
                         <Button
                           component={Link}
-                          to={`/pacientes/archive/${p.folio}`}
+                          to={`/admisiones/archive/${p.folio}`}
                           variant="outlined"
                           sx={{ borderColor: '#AC3833', color: '#AC3833' }}
                         >
-                          ARCHIVO
+                          DETALLES
                         </Button>
                       </TableCell>
                     </TableRow>
@@ -166,7 +166,7 @@ export default function AllAdmisiones({}) {
         <TablePagination
           rowsPerPageOptions={[25, 50, 100]}
           component="div"
-          count={pacientes.length}
+          count={admisiones.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
