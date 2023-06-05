@@ -256,8 +256,8 @@ export default function AddPaciente() {
           edadHours: datos.edadHours,
           nacidoHospital: datos.nacidoHospital,
           fkSexo: datos.fkSexo,
-          peso: datos.peso,
-          talla: datos.talla,
+          peso: parseInt(datos.peso),
+          talla: parseInt(datos.talla),
           fkEstadoCivil: datos.fkEstadoConyugal,
           insabi: datos.insabi,
           gratuitidad: datos.gratuitidad,
@@ -270,12 +270,12 @@ export default function AddPaciente() {
           numCasaInt: datos.numInt,
           fkTipoColCasa: datos.fkTipoAsentamiento,
           colCasa: datos.nombreAsentamiento,
-          cp: datos.cp,
+          cp: parseInt(datos.cp),
           localidad: datos.localidad,
           municipio: datos.municipio,
           entidadFederativa: datos.entidadFederativa,
           pais: datos.pais,
-          telCasa: datos.telefono,
+          telCasa: parseInt(datos.telefono),
         },
         {
           headers: {
@@ -510,7 +510,7 @@ export default function AddPaciente() {
             <TextField
               id="peso"
               label="Peso (kg.gr)"
-              type='decimal'
+              type='number'
               variant="outlined"
               name="peso"
               defaultValue={datos.peso}
