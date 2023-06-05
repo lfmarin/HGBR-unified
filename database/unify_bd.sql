@@ -224,3 +224,9 @@ INSERT INTO pacientesArch(noExpediente, nombre, apPaterno, apMaterno, curp, fech
 VALUES
 ('202300062801H', 'Josue', 'Tellez', 'Huerta', 'TEHJ000624HOCLRSA6', '2000-06-24', '17:17', 'Oaxaca', 22, null, null, null, true, 1, 74, 174, 1, true, true, false, false, 'Ninguno', 1, 'Aeropuerto', 2, 133, 4, 'Boulevard', 94295, 'Boca del Rio', 'Boca del Rio', 'Veracruz', 'Mexico', '2741019045'),
 ('202300062401H', 'Joel', 'Jacome', 'Pioquinto', 'JAPJ000628HVZCQLA2', '2000-06-28', '11:25', 'Veracruz', 22, null, null, null, true, 1, 77, 173, 1, true, true, false, false, 'Ninguno', 3, 'Barrio', 7, 28, 4, 'Boulevard', 94298, 'Boca del Rio', 'Boca del Rio', 'Veracruz', 'Mexico', '2294651314');
+
+
+INSERT INTO admisiones(nombre, primerApellido, segundoApellido, curp, fechaNacimiento, horaNacimiento, entidadNacimiento, edadYears, edadMonths, edadDays, edadHours, fkSexo, insabi, gratuitidad, fkTipoVialidad, nombreVialidad, numExt, numInt, fkTipoAsentamiento, nombreAsentamiento, cp, localidad, municipio, entidadFederativa, pais, telefono)
+VALUES
+('Josue', 'Tellez', 'Huerta', 'TEHJ000624HOCLRSA6', '2000-06-24', '17:17', 'Oaxaca', 22, null, null, null, 1, true, true, 1, 'Aeropuerto', 2, 133, 4, 'Boulevard', 94295, 'Boca del Rio', 'Boca del Rio', 'Veracruz', 'Mexico', '2741019045'),
+('Joel', 'Jacome', 'Pioquinto', 'JAPJ000628HVZCQLA2', '2000-06-18', '11:25', 'Veracruz', 22, null, null, null, 1, true, true, 3, 'Barrio', 7, 28, 4, 'Boulevard', 94298, 'Boca del Rio', 'Boca del Rio', 'Veracruz', 'Mexico', '2294651314');
