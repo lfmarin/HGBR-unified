@@ -572,7 +572,7 @@ export default function DetailsPaciente() {
                 // error={datos.fkEstadoConyugal === '' && isFail}
               >
                 {estadoConyugal.map(n => {
-                  return <MenuItem value={n.idEstadoConyugal}>{n.nombre}</MenuItem>
+                  return <MenuItem value={n.idEstadoCivil}>{n.nombre}</MenuItem>
                 })}
               </Select>
             </FormControl>
