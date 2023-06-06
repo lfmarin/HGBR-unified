@@ -3,6 +3,7 @@ using hgbr_API.Models;
 using hgbr_API.Interfaces;
 using System;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.Arm;
 
 namespace hgbr_API.ImplInterfaces
 {
@@ -20,11 +21,11 @@ namespace hgbr_API.ImplInterfaces
             try
             {
                 return context.Admisiones.Select(a => new {
-                    Folio = a.Folio,
-                    Nombre = a.Nombre,
-                    ApPaterno = a.PrimerApellido,
-                    ApMaterno = a.SegundoApellido,
-                    FechaNacimiento = a.FechaNacimiento
+                    folio = a.Folio,
+                    nombre = a.Nombre,
+                    primerApellido = a.PrimerApellido,
+                    segundoApellido = a.SegundoApellido,
+                    fechaNacimiento = a.FechaNacimiento,
                 });
             }
             catch (System.Exception)
@@ -65,41 +66,41 @@ namespace hgbr_API.ImplInterfaces
             try
             {
                 return context.Admisiones.Where(a => a.Folio.Equals(folio)).Select(adm => new {
-                    Folio = adm.Folio,
-                    Nombre = adm.Nombre,
-                    ApPaterno = adm.PrimerApellido,
-                    ApMaterno = adm.SegundoApellido,
-                    Curp = adm.Curp,
-                    FechaNac = adm.FechaNacimiento,
-                    HoraNac = adm.HoraNacimiento,
-                    EntidadNac = adm.EntidadNacimiento,
+                    folio = adm.Folio,
+                    nombre = adm.Nombre,
+                    primerApellido = adm.PrimerApellido,
+                    segundoApellido = adm.SegundoApellido,
+                    curp = adm.Curp,
+                    fechaNacimiento = adm.FechaNacimiento,
+                    horaNacimiento = adm.HoraNacimiento,
+                    entidadNacimiento = adm.EntidadNacimiento,
                     // Edad = adm.Edad,
-                    EdadYears = adm.EdadYears,
-                    EdadMonths = adm.EdadMonths,
-                    EdadDays = adm.EdadDays,
-                    EdadHours = adm.EdadHours,
+                    edadYears = adm.EdadYears,
+                    edadMonths = adm.EdadMonths,
+                    edadDays = adm.EdadDays,
+                    edadHours = adm.EdadHours,
                     //NacidoHospital = adm.NacidoHospital,
-                    FKSexo = adm.FkSexo,
+                    fkSexo = adm.FkSexo,
                     //Peso = adm.Peso,
                     //Talla = adm.Talla,
                     //FKEstadoCivil = adm.FkEstadoCivil,
-                    Insabi = adm.Insabi,
-                    Gratuitidad = adm.Gratuitidad,
+                    insabi = adm.Insabi,
+                    gratuitidad = adm.Gratuitidad,
                     //Indigena = adm.Indigena,
                     //LenguaIndigena = adm.LenguaIndigena,
                     //CualLengua = adm.CualLengua,
                     fkTipoVialidad = adm.FkTipoVialidad,
-                    NombreVialidad = adm.NombreVialidad,
-                    NumExterior = adm.NumExt,
-                    NumInterior = adm.NumInt,
+                    nombreVialidad = adm.NombreVialidad,
+                    numExt = adm.NumExt,
+                    numInt = adm.NumInt,
                     fkTipoAsentamiento = adm.FkTipoAsentamiento,
-                    NombreAsentamiento = adm.NombreAsentamiento,
-                    Cp = adm.Cp,
-                    Localidad = adm.Localidad,
-                    Municipio = adm.Municipio,
-                    EntidadFederativa = adm.EntidadFederativa,
-                    Pais = adm.Pais,
-                    Telefono = adm.Telefono
+                    nombreAsentamiento = adm.NombreAsentamiento,
+                    cp = adm.Cp,
+                    localidad = adm.Localidad,
+                    municipio = adm.Municipio,
+                    entidadFederativa = adm.EntidadFederativa,
+                    pais = adm.Pais,
+                    telefono = adm.Telefono
                 }).First();
             }
             catch (System.Exception)
@@ -132,7 +133,7 @@ namespace hgbr_API.ImplInterfaces
             {
                 try
                 {
-                    Admisione aux = context.Admisiones.FirstOrDefault(a => a.Folio.Equals(admision.Folio));
+                    Admisione aux = context.Admisiones.FirstOrDefault(p => p.Folio.Equals(admision.Folio));
                     if (!aux.Nombre.Equals(admision.Nombre)) aux.Nombre = admision.Nombre;
                     if (!aux.PrimerApellido.Equals(admision.PrimerApellido)) aux.PrimerApellido = admision.PrimerApellido;
                     if (!aux.SegundoApellido.Equals(admision.SegundoApellido)) aux.SegundoApellido = admision.SegundoApellido;
