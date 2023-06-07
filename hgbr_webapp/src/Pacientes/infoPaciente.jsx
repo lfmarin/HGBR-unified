@@ -67,7 +67,7 @@ export default function DetailsPaciente() {
 
   const cargaPaciente = () => {
     axios
-      .get( process.env.REACT_APP_SERVIDOR + `/hgbr_api/paciente/${folio}`, {
+      .get( process.env.REACT_APP_SERVIDOR + `/hgbr_api/pacientes/${folio}`, {
         headers: {
           'Content-type': 'application/json',
           // 'Authorization': `Bearer ${token()}`
@@ -250,7 +250,7 @@ export default function DetailsPaciente() {
   const guardaPaciente = () => {
     axios
       .post(
-        process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/update',
+        process.env.REACT_APP_SERVIDOR + '/hgbr_api/pacientes/update',
         {
           noExpediente: datos.folio,
           nombre: datos.nombre,
@@ -340,7 +340,7 @@ export default function DetailsPaciente() {
 
   if (finish) {
     setTimeout(() => setDelay(true), 3500)
-    if (delay) return <Navigate to="/pacientes" />
+    if (delay) return <Navigate to="/pacientes/all" />
   }
 
   if (load) {

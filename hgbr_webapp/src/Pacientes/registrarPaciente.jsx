@@ -260,23 +260,35 @@ export default function AddPaciente() {
         if (months < 0) {
           months = 12 - months;
         }
-        if (meses === 0) {
+        if (months === 0) {
           if (days < 0) {
-            
+            months = 11;
+          }
+          if (days === 1) {
+            hours = (24 - hourNac) + hourCurr;
+            if (hours < 24) {
+              days = 0;
+            }
+            if (hours >= 24) {
+              days = 1;
+            }
           }
         }
       } 
     }
 
     
-    //years
+    console.log("EDAD")
+    console.log("Años: "+years);
+    console.log("Meses: "+months);
+    console.log("Dias: "+days);
+    console.log("Horas: "+hours);
+
     console.log(datos.fechaNacimiento);
-    console.log("Todos los datos");
-    console.log(datos);
 
     axios
       .post(
-        process.env.REACT_APP_SERVIDOR + '/hgbr_api/paciente/save',
+        process.env.REACT_APP_SERVIDOR + '/hgbr_api/pacientes/save',
         {
           noExpediente: datos.folio,
           nombre: datos.nombre,

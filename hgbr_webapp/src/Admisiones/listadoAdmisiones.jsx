@@ -72,7 +72,7 @@ export default function AllAdmisiones({}) {
   useEffect(() => {
     if (refresh) {
       axios
-        .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/admision/all', {
+        .get(process.env.REACT_APP_SERVIDOR + '/hgbr_api/admisiones/all', {
           headers: {
             'Content-type': 'application/json',
             //'Authorization': `Bearer ${token()}`

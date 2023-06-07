@@ -59,7 +59,7 @@ export default function DetailsAdmision() {
 
   const cargaAdmision = () => {
     axios
-      .get( process.env.REACT_APP_SERVIDOR + `/hgbr_api/admision/${folio}`, {
+      .get( process.env.REACT_APP_SERVIDOR + `/hgbr_api/admisiones/${folio}`, {
         headers: {
           'Content-type': 'application/json',
           // 'Authorization': `Bearer ${token()}`
@@ -206,7 +206,7 @@ export default function DetailsAdmision() {
   const guardaAdmision = () => {
     axios
       .post(
-        process.env.REACT_APP_SERVIDOR + '/hgbr_api/admision/update',
+        process.env.REACT_APP_SERVIDOR + '/hgbr_api/admisiones/update',
         {
           folio: datos.folio,
           nombre: datos.nombre,
