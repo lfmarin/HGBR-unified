@@ -216,24 +216,32 @@ export default function AddPaciente() {
     const dayCurr = currentDate.getDate();
     const hourCurr = currentDate.getTime();
 
-    const edad = yearCurr - yearNac;
+    const years = yearCurr - yearNac;
+    const months = monthCurr - monthNac;
+    const days = dayCurr - dayNac;
+    const hours = hourCurr - hourNac;
 
     //esto es solo de prueba
-    datos.edadYears = edad;
-    datos.edadMonths = edad;
-    datos.edadDays = edad;
-    datos.edadHours = edad;
+    datos.edadYears = years;
+    datos.edadMonths = years;
+    datos.edadDays = years;
+    datos.edadHours = years;
 
-    /* if(monthCurr < monthNac) {
-      edad--;
+    if(monthCurr < monthNac) {
+      years--;
     }else{
       if (monthCurr === monthNac) {
         if (dayCurr < dayNac) {
-          edad--;
+          years--;
         }
       }
-    } */
-    //edad
+    }
+
+    if (years === 0) {
+      monthCurr
+    }
+
+    //years
     console.log(datos.fechaNacimiento);
     console.log("Todos los datos");
     console.log(datos);
