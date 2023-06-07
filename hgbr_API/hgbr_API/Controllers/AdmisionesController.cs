@@ -4,7 +4,7 @@ using hgbr_API.Models;
 
 namespace hgbr_API.Controllers
 {
-    [Route("hgbr_api/admision")]
+    [Route("hgbr_api/admisiones")]
     public class AdmisionesController : ControllerBase
     {
         private readonly IAdmisionesServices _service;
