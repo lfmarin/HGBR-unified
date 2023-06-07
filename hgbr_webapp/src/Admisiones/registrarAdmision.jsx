@@ -202,7 +202,7 @@ export default function AddAdmision() {
 
     axios
       .post(
-        process.env.REACT_APP_SERVIDOR + '/hgbr_api/admisiones/save',
+        process.env.REACT_APP_SERVIDOR + '/hgbr_api/admision/save',
         {
           folio: datos.folio,
           nombre: datos.nombre,
