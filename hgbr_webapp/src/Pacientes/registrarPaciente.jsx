@@ -202,10 +202,29 @@ export default function AddPaciente() {
     return Math.floor(diff / (1000 * 60 * 60))
   }
 
+  function daysEnd(year, month){
+    var aux = year;
+    var nextMonth;
+    if (year === 12) {
+      nextMonth = parseInt(month) + 1;
+    }else{
+      nextMonth = 1;
+      aux = year + 1;
+    }
+
+    var date = aux+"-"+nextMonth+"-01";
+
+    var ms = Date.parse(date);
+    var date2 = new Date(ms);
+    date2.setDate(date2.getDate() - 1);
+    var days = date2.getDate();
+
+    return days;
+  }
+
   const guardaPaciente = () => {
     // AQUI CALCULAR LA EDAD
     const fNac = new Date(datos.fechaNacimiento+" "+datos.horaNacimiento);
-    console.log(fNac);
     const yearNac = fNac.getFullYear();
     const monthNac = fNac.getMonth()+1;
     const dayNac = fNac.getDate();
@@ -216,24 +235,41 @@ export default function AddPaciente() {
     const dayCurr = currentDate.getDate();
     const hourCurr = currentDate.getTime();
 
-    const edad = yearCurr - yearNac;
+    const years = yearCurr - yearNac;
+    const months = monthCurr - monthNac;
+    const days = dayCurr - dayNac;
+    const hours = hourCurr - hourNac;
+
+
 
     //esto es solo de prueba
-    datos.edadYears = edad;
-    datos.edadMonths = edad;
-    datos.edadDays = edad;
-    datos.edadHours = edad;
+    /* datos.edadYears = years;
+    datos.edadMonths = years;
+    datos.edadDays = years;
+    datos.edadHours = years; */
 
-    /* if(monthCurr < monthNac) {
-      edad--;
+    if(monthCurr < monthNac) {
+      years--; 
     }else{
       if (monthCurr === monthNac) {
         if (dayCurr < dayNac) {
-          edad--;
+          years--;
         }
       }
-    } */
-    //edad
+      if (years === 0) {
+        if (months < 0) {
+          months = 12 - months;
+        }
+        if (meses === 0) {
+          if (days < 0) {
+            
+          }
+        }
+      } 
+    }
+
+    
+    //years
     console.log(datos.fechaNacimiento);
     console.log("Todos los datos");
     console.log(datos);

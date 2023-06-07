@@ -179,30 +179,30 @@ export default function AddAdmision() {
     const dayCurr = currentDate.getDate();
     const hourCurr = currentDate.getTime();
 
-    const edad = yearCurr - yearNac;
+    const years = yearCurr - yearNac;
 
     //esto es solo de prueba
-    datos.edadYears = edad;
-    datos.edadMonths = edad;
-    datos.edadDays = edad;
-    datos.edadHours = edad;
+    datos.edadYears = years;
+    datos.edadMonths = years;
+    datos.edadDays = years;
+    datos.edadHours = years;
 
     /* if(monthCurr < monthNac) {
-      edad--;
+      years--;
     }else{
       if (monthCurr === monthNac) {
         if (dayCurr < dayNac) {
-          edad--;
+          years--;
         }
       }
     } */
-    //edad
+    //years
     console.log("Todos los datos");
     console.log(datos);
 
     axios
       .post(
-        process.env.REACT_APP_SERVIDOR + '/hgbr_api/admisiones/save',
+        process.env.REACT_APP_SERVIDOR + '/hgbr_api/admision/save',
         {
           folio: datos.folio,
           nombre: datos.nombre,
