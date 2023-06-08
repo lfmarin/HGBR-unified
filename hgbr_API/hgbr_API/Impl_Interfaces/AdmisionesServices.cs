@@ -114,6 +114,7 @@ namespace hgbr_API.ImplInterfaces
         {
             try
             {
+                Console.WriteLine("LA ADMISION QUE SE RECIBE");
                 Console.WriteLine(admision.ToString());
                 context.Admisiones.Add(admision);
                 context.SaveChanges();

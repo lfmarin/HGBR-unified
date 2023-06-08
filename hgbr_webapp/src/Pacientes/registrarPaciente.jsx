@@ -383,7 +383,7 @@ export default function AddPaciente() {
 
   if (finish) {
     setTimeout(() => setDelay(true), 2000)
-    if (delay) return <Navigate to="/pacientes/all" />
+    if (delay) return <Navigate to="/pacientes" />
   }
 
   return (
