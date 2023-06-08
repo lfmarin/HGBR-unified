@@ -123,6 +123,7 @@ namespace hgbr_API.ImplInterfaces
         {
             try
             {
+                Console.WriteLine(paciente.ToString());
                 //En esta parte vamos a generar el folio del paciente con base a informacion de la BD y convertirlo en strings
                 string currentYear = DateTime.Now.Year.ToString();
                 string bornYear = Convert.ToDateTime(paciente.FechaNac).ToString("yy");
