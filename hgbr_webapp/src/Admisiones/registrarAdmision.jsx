@@ -210,7 +210,8 @@ export default function AddAdmision() {
           segundoApellido: datos.segundoApellido,
           curp: datos.curp,
           fechaNacimiento: datos.fechaNacimiento,
-          horaNacimeinto: datos.horaNacimiento,
+          horaNacimiento: datos.horaNacimiento,
+          // horaNacimeinto: datos.horaNacimiento,
           entidadNacimiento: datos.entidadNacimiento,
           edadYears: datos.edadYears, //CALCULAR
           edadMonths: datos.edadMonths,
