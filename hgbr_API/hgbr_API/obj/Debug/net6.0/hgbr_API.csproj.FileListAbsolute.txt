@@ -253,3 +253,8 @@ C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\refint\hgbr_API.dll
 C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.pdb
 C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.genruntimeconfig.cache
 C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\ref\hgbr_API.dll
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets\msbuild.hgbr_API.Microsoft.AspNetCore.StaticWebAssets.props
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets\msbuild.build.hgbr_API.props
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.hgbr_API.props
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.hgbr_API.props
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\staticwebassets.pack.json

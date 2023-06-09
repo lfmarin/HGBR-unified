@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6Tcb2Z0rQ1gGdcAUW2BqDb00DJhCRb9Om98xUw61N5JdUgBSRH5UCK6lR63paKTJ5H85wJHSTGwG/w5FY/FZjg==",
+  "dgSpecHash": "jDbE3gGYjHTREdv0uogJqMMh/KNJT2jQb+zH0aNU4QymY5N0rBKLxnB/ciMqPricFPpZd7Vx6G2qVF7Oxna2OA==",
   "success": true,
   "projectFilePath": "C:\\repo\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
   "expectedPackageFiles": [
@@ -39,7 +39,11 @@
     "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
+    "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
+    "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.16\\microsoft.netcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.16\\microsoft.windowsdesktop.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.16\\microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.16\\microsoft.netcore.app.host.win-x64.6.0.16.nupkg.sha512"
   ],
   "logs": []
 }
