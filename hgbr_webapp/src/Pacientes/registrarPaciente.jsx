@@ -224,23 +224,35 @@ export default function AddPaciente() {
 
   const guardaPaciente = () => {
     // AQUI CALCULAR LA EDAD
-    const fNac = new Date(datos.fechaNacimiento+" "+datos.horaNacimiento);
+    const fNac = new Date(datos.fechaNacimiento);
     const yearNac = fNac.getFullYear();
-    const monthNac = fNac.getMonth()+1;
+    const monthNac = fNac.getMonth();
     const dayNac = fNac.getDate();
-    const hourNac = fNac.getTime();
+
+    var anio = fNac.getFullYear();
+    var mes = ("0" + (fNac.getMonth() + 1)).slice(-2);
+    var dia = ("0" + fNac.getDate()).slice(-2);
+    var fechaFormateada = anio + "-" + mes + "-" + dia + "T00:00:00.000Z";
+    datos.fechaNacimiento = fechaFormateada;
+
+    monthNac = monthNac + 1;
+    const hourNac = datos.horaNacimiento;
+
     const currentDate = new Date(Date.now());
     const yearCurr = currentDate.getFullYear();
     const monthCurr = currentDate.getMonth()+1;
     const dayCurr = currentDate.getDate();
     const hourCurr = currentDate.getTime();
 
-    const years = yearCurr - yearNac;
-    const months = monthCurr - monthNac;
-    const days = dayCurr - dayNac;
-    const hours = hourCurr - hourNac;
+    var partesHora = datos.horaNacimiento.split(":");
+    var horas = partesHora[0];
+    var minutos = partesHora[1];
+    datos.horaNacimiento = horas + ":" + minutos + ":00";
 
-
+    var years = yearCurr - yearNac;
+    var months = monthCurr - monthNac;
+    var days = dayCurr - dayNac;
+    var hours = hourCurr - hourNac;
 
     //esto es solo de prueba
     /* datos.edadYears = years;
@@ -298,10 +310,10 @@ export default function AddPaciente() {
           fechaNac: datos.fechaNacimiento,
           horaNac: datos.horaNacimiento,
           entidadNac: datos.entidadNacimiento,
-          edadYears: datos.edadYears, //CALCULAR
-          edadMonths: datos.edadMonths,
-          edadDays: datos.edadDays,
-          edadHours: datos.edadHours,
+          edadYears: years, //CALCULAR
+          edadMonths: months,
+          edadDays: days,
+          edadHours: hours,
           nacidoHospital: datos.nacidoHospital,
           fkSexo: datos.fkSexo,
           peso: parseInt(datos.peso),
