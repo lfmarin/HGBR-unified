@@ -114,7 +114,6 @@ namespace hgbr_API.ImplInterfaces
         {
             try
             {
-<<<<<<< HEAD
                 //DateTime fecha = Convert.ToDateTime(admision.FechaNacimiento);
                 //admision.FechaNacimiento = fecha;
 
@@ -131,10 +130,8 @@ namespace hgbr_API.ImplInterfaces
 
 
                 //Console.WriteLine(admision.ToString());
-=======
                 Console.WriteLine("LA ADMISION QUE SE RECIBE");
                 Console.WriteLine(admision.ToString());
->>>>>>> c02b6d09b9371ca5fbc83be288a132241ff64d10
                 context.Admisiones.Add(admision);
                 context.SaveChanges();
             }
