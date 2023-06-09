@@ -114,7 +114,22 @@ namespace hgbr_API.ImplInterfaces
         {
             try
             {
-                Console.WriteLine(admision.ToString());
+                //DateTime fecha = Convert.ToDateTime(admision.FechaNacimiento);
+                //admision.FechaNacimiento = fecha;
+
+
+                //  Intento hacer la conversion pero desde antes de acceder a la hora me sale NULL el objeto admision
+                //  Que lo haga Joel en la vista 
+
+                //string horaAux = Convert.ToString(admision.HoraNacimiento);
+                //Console.WriteLine("Cadena de la hora: " + horaAux);
+                //TimeOnly hora = TimeOnly.Parse(horaAux + ":00");
+                //Console.WriteLine("Cadena de la hora concatenada: " + hora);
+                //admision.HoraNacimiento = hora;
+                //Console.WriteLine("Cadena de la hora en admision: " + admision.HoraNacimiento);
+
+
+                //Console.WriteLine(admision.ToString());
                 context.Admisiones.Add(admision);
                 context.SaveChanges();
             }
