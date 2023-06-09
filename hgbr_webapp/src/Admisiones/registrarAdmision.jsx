@@ -210,8 +210,8 @@ export default function AddAdmision() {
           segundoApellido: datos.segundoApellido,
           curp: datos.curp,
           fechaNacimiento: datos.fechaNacimiento,
-          horaNacimiento: datos.horaNacimiento,
-          // horaNacimeinto: datos.horaNacimiento,
+          //horaNacimiento: datos.horaNacimiento,
+          horaNacimeinto: datos.horaNacimiento,
           entidadNacimiento: datos.entidadNacimiento,
           edadYears: datos.edadYears, //CALCULAR
           edadMonths: datos.edadMonths,
@@ -291,7 +291,7 @@ export default function AddAdmision() {
 
   if (finish) {
     setTimeout(() => setDelay(true), 2000)
-    if (delay) return <Navigate to="/admisiones/all" />
+    if (delay) return <Navigate to="/admisiones" />
   }
 
   return (
