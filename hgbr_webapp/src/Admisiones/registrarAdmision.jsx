@@ -252,10 +252,10 @@ export default function AddAdmision() {
           //horaNacimiento: datos.horaNacimiento,
           horaNacimeinto: datos.horaNacimiento,
           entidadNacimiento: datos.entidadNacimiento,
-          edadYears: datos.edadYears, //CALCULAR
-          edadMonths: datos.edadMonths,
-          edadDays: datos.edadDays,
-          edadHours: datos.edadHours,
+          edadYears: years, //CALCULAR
+          edadMonths: months,
+          edadDays: days,
+          edadHours: hours,
           fkSexo: datos.fkSexo,
           insabi: datos.insabi,
           gratuitidad: datos.gratuitidad,
