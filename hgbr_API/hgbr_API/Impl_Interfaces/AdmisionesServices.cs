@@ -4,6 +4,7 @@ using hgbr_API.Interfaces;
 using System;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.Intrinsics.Arm;
+using System.Globalization;
 
 namespace hgbr_API.ImplInterfaces
 {
@@ -114,22 +115,22 @@ namespace hgbr_API.ImplInterfaces
         {
             try
             {
-                //DateTime fecha = Convert.ToDateTime(admision.FechaNacimiento);
-                //admision.FechaNacimiento = fecha;
+                //if (admision.HoraNacimiento != null)
+                //{
+                //    string horaAux = admision.HoraNacimiento.ToString("H:mm");
 
+                //    Console.WriteLine("Cadena de la hora: " + horaAux);
 
-                //  Intento hacer la conversion pero desde antes de acceder a la hora me sale NULL el objeto admision
-                //  Que lo haga Joel en la vista 
+                //    if (TimeOnly.TryParseExact(horaAux, "H:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out TimeOnly hora))
+                //    {
+                //        Console.WriteLine("Cadena de la hora convertida: " + hora);
+                //        admision.HoraNacimiento = hora;
+                //        Console.WriteLine("Hora en admision: " + admision.HoraNacimiento);
+                //    }
+                //    else
+                //        Console.WriteLine("Formato de hora inválido");
+                //}
 
-                //string horaAux = Convert.ToString(admision.HoraNacimiento);
-                //Console.WriteLine("Cadena de la hora: " + horaAux);
-                //TimeOnly hora = TimeOnly.Parse(horaAux + ":00");
-                //Console.WriteLine("Cadena de la hora concatenada: " + hora);
-                //admision.HoraNacimiento = hora;
-                //Console.WriteLine("Cadena de la hora en admision: " + admision.HoraNacimiento);
-
-
-                //Console.WriteLine(admision.ToString());
                 Console.WriteLine("LA ADMISION QUE SE RECIBE");
                 Console.WriteLine(admision.ToString());
                 context.Admisiones.Add(admision);
