@@ -95,7 +95,7 @@ export default function App() {
           <footer>
             <div className='footerRight'>
               <p>Powered by FIEE-UV</p>
-              <img alt="Logotipo de FIEE" src="/media/fiee.jpg"></img>
+              <img alt="Logo_FIEE" src="/media/fiee.jpg"></img>
             </div>
           </footer>
         </ThemeProvider>

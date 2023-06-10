@@ -17,10 +17,8 @@ export default function Home() {
             alignment="center"
           />
         </Grid>
-      </Grid>
 
-      <Grid container spacing={2}>
-        <Grid item xs>
+        <Grid item xs margin={1}>
           <ExtendedCard
             imgPath="./media/urgencias.png"
             imgText="Secretaria de Salud Urgencias"
@@ -29,6 +27,7 @@ export default function Home() {
             alignment="center"
           />
         </Grid>
+
       </Grid>
     </div>
   )
