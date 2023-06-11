@@ -10,7 +10,7 @@ export default function Home() {
       <Grid container spacing={1} justifyContent="center">
         <Grid item xs margin={1}>
           <ExtendedCard
-            imgPath="./media/pacientes.png"
+            imgPath="./media/paciente.png"
             imgText="Secretaria de Salud Pacientes"
             Title="Registro de Pacientes"
             link="/pacientes"
@@ -20,7 +20,7 @@ export default function Home() {
 
         <Grid item xs margin={1}>
           <ExtendedCard
-            imgPath="./media/urgencias.png"
+            imgPath="./media/hospital.png"
             imgText="Secretaria de Salud Urgencias"
             Title="Servico de Urgencias y Admisiones"
             link="/admisiones"

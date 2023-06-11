@@ -36,6 +36,14 @@ const useStyles = makeStyles((theme) => ({
       top: 20,
       width: 1,
     },
+    footer: {
+      justifyContent: 'left',
+    },
+    imgFooter: {
+      justifyContent: 'left',
+      height: 80,
+      widht: 80,
+    },
   }));
 
 export default useStyles;

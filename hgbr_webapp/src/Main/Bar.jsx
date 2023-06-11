@@ -11,6 +11,12 @@ const useStyles = makeStyles(theme => ({
     height: 50,
     marginRight: theme.spacing(2),
   },
+  barra: {
+    backgroundColor: theme.palette.background.default,
+  },
+  text: {
+    color: "#000000",
+  },
 }))
 
 /**
@@ -27,11 +33,11 @@ const useStyles = makeStyles(theme => ({
 //   </div>
 // }
 
-export default function NavBar({userName, menuCallBack}) {
+export default function Bar({userName, menuCallBack}) {
   const classes = useStyles()
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.barra}>
         <Toolbar>
           <IconButton
             onClick={() => menuCallBack()}
@@ -45,11 +51,9 @@ export default function NavBar({userName, menuCallBack}) {
           <a href="/">
             <img src="/media/logo.png" alt="logo" className={classes.logo} />
           </a>
-          <Link to="/" style={{ textDecoration: 'none', color: '#000' }}>
-            <Typography color="inherit">
-              Hospital General de Boca del Río
-            </Typography>
-          </Link>
+          <Typography align='center' className={classes.text}>
+            HOSPITAL GENERAL DE BOCA DEL RÍO
+          </Typography>
           {/* {mostrarUsuario(userName())} */}
         </Toolbar>
       </AppBar>

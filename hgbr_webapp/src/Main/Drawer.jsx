@@ -6,6 +6,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import PersonIcon from '@mui/icons-material/Person'
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital'
 import Usericon from '@mui/icons-material/Person3Outlined'
+import HomeIcon from '@mui/icons-material/Home'
 import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 
@@ -39,6 +40,21 @@ export default function TempDrawer({open, menuCallBack}) {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
+      <Divider/>
+      
+      <List>
+        <Link className={classes.enlace} to="/">
+          <ListItem button key="home">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Página principal" />
+          </ListItem>
+        </Link>
+      </List>
+
+      <Divider />
+
       <List>
         <Link className={classes.enlace} to="/pacientes">
           <ListItem button key="pacientes">

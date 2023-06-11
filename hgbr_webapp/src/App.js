@@ -2,7 +2,7 @@
 import './App.css';
 
 import {React, useState} from 'react';
-import NavBar from './Main/AppBar';
+import Bar from './Main/Bar';
 import { createTheme, ThemeProvider} from '@mui/material/styles';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import useStyles from './Styles/Styles';
@@ -16,6 +16,8 @@ import AllAdmisiones from './Admisiones/listadoAdmisiones';
 import ArchiveAdmision from './Admisiones/archivoAdmision';
 import AddAdmision from './Admisiones/registrarAdmision';
 import DetailsAdmision from './Admisiones/infoAdmision';
+
+var year;
 
 const theme = createTheme({
   palette: {
@@ -72,13 +74,18 @@ export default function App() {
         <Route path="*" element={
           <div>
             <h1>Oh no!</h1>
-            <h2>Se ha produciodo un error</h2>
+            <h2>Se ha producido un error</h2>
             <a href="/">Home</a>
           </div>
           } 
         />
       </Routes>
     );
+
+    //AÑO ACTUAL
+
+    var fecha = new Date(Date.now());
+    year = fecha.getFullYear();
   }
 
   return (
@@ -86,16 +93,16 @@ export default function App() {
       <div className="App">
         <ThemeProvider theme = {theme}>
           <header>
-            <NavBar menuCallBack = {handleDrawer}/>
+            <Bar menuCallBack = {handleDrawer}/>
             <Drawer open={isOpen} menuCallBack = {handleDrawer}/>
           </header>
           <main className={classes.main}>
           { RoutingPaths() }
           </main>
           <footer>
-            <div className='footerRight'>
-              <p>Powered by FIEE-UV</p>
-              <img alt="Logo_FIEE" src="/media/fiee.jpg"></img>
+            <div>
+              <p>{year} Powered by FIEE-UV</p>
+              <img alt="Logo_FIEE" src="/media/fiee.jpg" className={classes.imgFooter}></img>
             </div>
           </footer>
         </ThemeProvider>
