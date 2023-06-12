@@ -166,7 +166,7 @@ export default function AddAdmision() {
   }
 
   const guardaAdmision = () => {
-    // AQUI CALCULAR LA EDAD
+    // AQUI SE CALCULA LA EDAD
     var fNac = new Date(datos.fechaNacimiento);
     var yearNac = fNac.getFullYear();
     var monthNac = fNac.getMonth();

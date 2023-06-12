@@ -68,14 +68,15 @@ export default function DetailsAdmision() {
       .then(
         response => {
           if (response.status === 200) {
-            var fecha = response.data.fechaNac.substring(0, response.data.fechaNac.indexOf('T'))
+            console.log("Recibo de la BD");
+            var fechaNacimiento = response.data.fechaNacimiento.substring(0, response.data.fechaNacimiento.indexOf('T'))
             setDatos({
               folio: response.data.folio,
               nombre: response.data.nombre,
               primerApellido: response.data.primerApellido,
               segundoApellido: response.data.segundoApellido,
               curp: response.data.curp,
-              fechaNacimiento: response.data.fechaNacimiento,
+              fechaNacimiento: fechaNacimiento,
               horaNacimiento: response.data.horaNacimiento,
               entidadNacimiento: response.data.entidadNacimiento,
               edadYears: response.data.edadYears,
@@ -203,7 +204,33 @@ export default function DetailsAdmision() {
     })
   }
 
-  const guardaAdmision = () => {
+  const actualizaAdmision = () => {
+
+    var fNac = new Date(datos.fechaNacimiento);
+    var yearNac = fNac.getFullYear();
+    var monthNac = fNac.getMonth();
+    var dayNac = fNac.getDate();
+
+    var anio = fNac.getFullYear();
+    var mes = ("0" + (fNac.getMonth() + 1)).slice(-2);
+    var dia = ("0" + fNac.getDate()).slice(-2);
+    var fechaFormateada = anio + "-" + mes + "-" + dia + "T00:00:00.000Z";
+    datos.fechaNacimiento = fechaFormateada;
+
+    monthNac = monthNac + 1;
+    var hourNac = datos.horaNacimiento;
+
+    var currentDate = new Date(Date.now());
+    var yearCurr = currentDate.getFullYear();
+    var monthCurr = currentDate.getMonth()+1;
+    var dayCurr = currentDate.getDate();
+    var hourCurr = currentDate.getTime();
+
+    var partesHora = datos.horaNacimiento.split(":");
+    var horas = partesHora[0];
+    var minutos = partesHora[1];
+    datos.horaNacimiento = horas + ":" + minutos + ":00";
+
     axios
       .post(
         process.env.REACT_APP_SERVIDOR + '/hgbr_api/admisiones/update',
@@ -279,7 +306,7 @@ export default function DetailsAdmision() {
       setIsFail(true)
       return
     } else {
-      guardaAdmision()
+      actualizaAdmision()
     }
   }
 
@@ -741,7 +768,7 @@ export default function DetailsAdmision() {
 
         <Snackbar open={finish}>
           <Alert variant="filled" severity="success" sx={{ width: '100%' }}>
-            Registro guardado con éxito, redirigiendo...
+            Registro actualizado con éxito
           </Alert>
         </Snackbar>
       </div>

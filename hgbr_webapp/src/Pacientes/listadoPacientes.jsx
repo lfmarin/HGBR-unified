@@ -27,7 +27,7 @@ const headCells = [
 export default function AllPacientes({}) {
   const [pacientes, setPacientes] = useState([])
   const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(5)
+  const [rowsPerPage, setRowsPerPage] = useState(25)
   const [order, setOrder] = useState('asc')
   const [orderBy, setOrderBy] = useState('folio')
   const [errorbd, setErrorbd] = useState(false)
@@ -54,7 +54,7 @@ export default function AllPacientes({}) {
 
   const handleEnterSearch = event => {
     if (event.key === 'Enter') {
-      setPacientes(SortTable.searchTable(pacientes, search))
+      setPacientes(SortTable.searchTablePacientes(pacientes, search))
     }
   }
 

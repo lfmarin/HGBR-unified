@@ -76,14 +76,14 @@ export default function DetailsPaciente() {
       .then(
         response => {
           if (response.status === 200) {
-            var fecha = response.data.fechaNac.substring(0, response.data.fechaNac.indexOf('T'))
+            var fechaNac = response.data.fechaNac.substring(0, response.data.fechaNac.indexOf('T'))
             setDatos({
               folio: response.data.noExpediente,
               nombre: response.data.nombre,
               primerApellido: response.data.apPaterno,
               segundoApellido: response.data.apMaterno,
               curp: response.data.curp,
-              fechaNacimiento: response.data.fechaNac,
+              fechaNacimiento: fechaNac,
               horaNacimiento: response.data.horaNac,
               entidadNacimiento: response.data.entidadNac,
               edadYears: response.data.edadYears,
@@ -247,7 +247,32 @@ export default function DetailsPaciente() {
     })
   }
 
-  const guardaPaciente = () => {
+  const actualizaPaciente = () => {
+    var fNac = new Date(datos.fechaNacimiento);
+    var yearNac = fNac.getFullYear();
+    var monthNac = fNac.getMonth();
+    var dayNac = fNac.getDate();
+
+    var anio = fNac.getFullYear();
+    var mes = ("0" + (fNac.getMonth() + 1)).slice(-2);
+    var dia = ("0" + fNac.getDate()).slice(-2);
+    var fechaFormateada = anio + "-" + mes + "-" + dia + "T00:00:00.000Z";
+    datos.fechaNacimiento = fechaFormateada;
+
+    monthNac = monthNac + 1;
+    var hourNac = datos.horaNacimiento;
+
+    var currentDate = new Date(Date.now());
+    var yearCurr = currentDate.getFullYear();
+    var monthCurr = currentDate.getMonth()+1;
+    var dayCurr = currentDate.getDate();
+    var hourCurr = currentDate.getTime();
+
+    var partesHora = datos.horaNacimiento.split(":");
+    var horas = partesHora[0];
+    var minutos = partesHora[1];
+    datos.horaNacimiento = horas + ":" + minutos + ":00";
+
     axios
       .post(
         process.env.REACT_APP_SERVIDOR + '/hgbr_api/pacientes/update',
@@ -330,7 +355,7 @@ export default function DetailsPaciente() {
       setIsFail(true)
       return
     } else {
-      guardaPaciente()
+      actualizaPaciente()
     }
   }
 
@@ -340,7 +365,7 @@ export default function DetailsPaciente() {
 
   if (finish) {
     setTimeout(() => setDelay(true), 3500)
-    if (delay) return <Navigate to="/pacientes/all" />
+    if (delay) return <Navigate to="/pacientes" />
   }
 
   if (load) {
@@ -915,7 +940,7 @@ export default function DetailsPaciente() {
 
         <Snackbar open={finish}>
           <Alert variant="filled" severity="success" sx={{ width: '100%' }}>
-            Paciente registrado con éxito, redirigiendo...
+            Paciente actualizado con éxito
           </Alert>
         </Snackbar>
       </div>

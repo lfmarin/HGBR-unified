@@ -9,7 +9,7 @@ import Box from '@mui/material/Box'
 
 export default function ExtendedCard(props) {
   return (
-    <Card sx={{ margin: 1, boxShadow: 3 }}>
+    <Card sx={{ margin: 1, boxShadow: 5}}>
       <Link to={props.link} style={{ textDecoration: 'none' }}>
         <CardActionArea>
           <img alt={props.imgText} src={props.imgPath} />

@@ -23,7 +23,19 @@ const SortTable = {
     })
     return stabilizedThis.map(el => el[0])
   },
-  searchTable: (array, search) => {
+  searchTablePacientes: (array, search) => {
+    const expedienteFilter = array.filter(element => {
+      return (
+        element.folio.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.nombre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.apPaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+        element.apMaterno.toLowerCase().indexOf(search.toLowerCase()) !== -1
+      )
+    })
+
+    return expedienteFilter
+  },
+  searchTableAdmisiones: (array, search) => {
     const expedienteFilter = array.filter(element => {
       return (
         element.folio.toString().indexOf(search) !== -1 ||

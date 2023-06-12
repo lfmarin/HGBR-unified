@@ -7,12 +7,12 @@ export default function Home() {
   const style = useStyles()
   return (
     <div className={style.fullWidth}>
-      <Grid container spacing={1} justifyContent="center">
+      <Grid container justifyContent="center">
         <Grid item xs margin={1}>
           <ExtendedCard
+            Title="Registro de Pacientes"
             imgPath="./media/paciente.png"
             imgText="Secretaria de Salud Pacientes"
-            Title="Registro de Pacientes"
             link="/pacientes"
             alignment="center"
           />
@@ -20,8 +20,8 @@ export default function Home() {
 
         <Grid item xs margin={1}>
           <ExtendedCard
-            imgPath="./media/hospital.png"
             imgText="Secretaria de Salud Urgencias"
+            imgPath="./media/hospital.png"
             Title="Servico de Urgencias y Admisiones"
             link="/admisiones"
             alignment="center"
