@@ -258,7 +258,7 @@ export default function AddAdmision() {
           edadHours: hours,
           fkSexo: datos.fkSexo,
           insabi: datos.insabi,
-          gratuitidad: datos.gratuitidad,
+          gratuitidad: datos.insabi,
           fkTipoVialidad: datos.fkTipoVialidad,
           nombreVialidad: datos.nombreVialidad,
           numExt: datos.numExt,
@@ -309,7 +309,6 @@ export default function AddAdmision() {
       datos.fechaNacimiento === '' ||
       datos.fkSexo === '' ||
       datos.insabi === null ||
-      datos.gratuitidad === null ||
       datos.fkTipoVialidad === '' ||
       datos.nombreVialidad === '' ||
       datos.numExt === '' ||
@@ -393,17 +392,32 @@ export default function AddAdmision() {
 
         <Grid container spacing={1} justifyContent="center">
           <Grid item xs margin={1}>
-            <TextField
-              id="curp"
-              label="CURP"
-              variant="outlined"
-              name="curp"
-              defaultValue={datos.curp}
-              // error={datos.curp === '' && isFail}
-              onChange={handleChange}
-              InputLabelProps={{ maxLength: 18}}
-              fullWidth
-            />
+              <TextField
+                id="curp"
+                label="CURP"
+                variant="outlined"
+                name="curp"
+                defaultValue={datos.curp}
+                // error={datos.curp === '' && isFail}
+                onChange={handleChange}
+                fullWidth
+                inputProps={{ maxLength: 18 }}
+              />
+
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <Button
+              variant="contained"
+              color="secondary"
+              className={style.button}
+              type="submit"
+              size="large"
+              onClick={handleSave}
+              startIcon={<SaveOutlinedIcon />}
+            >
+              VALIDAR
+            </Button>
           </Grid>
 
           <Grid item xs margin={1}>
@@ -484,10 +498,7 @@ export default function AddAdmision() {
             </FormControl>
           </Grid>
 
-        </Grid>
-
-        <Grid container spacing={1} justifyContent="center">
-        <Grid item xs margin={1}>
+          <Grid item xs margin={1}>
             {/** espacio para el elemento para el link de coonsulta insabi */}
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="insabi">Afiliacion INSABI</InputLabel>
@@ -507,7 +518,11 @@ export default function AddAdmision() {
             </FormControl>
           </Grid>
 
-          <Grid item xs margin={1}>
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+
+          {/* <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="gratuitidad">Gratuitidad</InputLabel>
               <Select
@@ -524,7 +539,7 @@ export default function AddAdmision() {
                 <MenuItem value={false}>No</MenuItem>
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
@@ -760,7 +775,7 @@ export default function AddAdmision() {
 
       <Snackbar open={finish}>
         <Alert variant="filled" severity="success" sx={{ width: '100%' }}>
-          Se ha registrado con el folio: {datos.folio}
+          Se ha registrado la admision
         </Alert>
       </Snackbar>
     </div>

@@ -320,7 +320,7 @@ export default function AddPaciente() {
           talla: parseInt(datos.talla),
           fkEstadoCivil: datos.fkEstadoConyugal,
           insabi: datos.insabi,
-          gratuitidad: datos.gratuitidad,
+          gratuitidad: datos.insabi,
           indigena: datos.indigena,
           lenguaIndigena: datos.lenguaIndigena,
           cualLengua: datos.cualLengua,
@@ -374,7 +374,6 @@ export default function AddPaciente() {
       datos.fechaNacimiento === '' ||
       datos.fkSexo === '' ||
       datos.insabi === null ||
-      datos.gratuitidad === null ||
       datos.fkTipoVialidad === '' ||
       datos.nombreVialidad === '' ||
       datos.numExt === '' ||
@@ -466,7 +465,7 @@ export default function AddPaciente() {
               defaultValue={datos.curp}
               // error={datos.curp === '' && isFail}
               onChange={handleChange}
-              InputLabelProps={{ maxLength: 18}}
+              inputProps={{ maxLength: 18}}
               fullWidth
             />
           </Grid>
@@ -490,7 +489,7 @@ export default function AddPaciente() {
           <Grid item xs margin={1}>
             <TextField
               id="horaNacimiento"
-              label="Hora de Nacimiento (Si tiene menos de 24 hrs de nacido)"
+              label="Hora de Nacimiento"
               type="time"
               variant="outlined"
               name="horaNacimiento"
@@ -521,13 +520,6 @@ export default function AddPaciente() {
             </FormControl>
           </Grid>
           
-        </Grid>
-
-        <Grid container spacing={1} justifyContent="center">
-                {/** ESTE GRID SERA PARA LA edadYears */}
-        </Grid>
-
-        <Grid container spacing={1} justifyContent="center">
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="nacidoHospital">¿Nació en el Hospital?</InputLabel>
@@ -545,6 +537,14 @@ export default function AddPaciente() {
               </Select>
             </FormControl>
           </Grid>
+          
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+                {/** ESTE GRID SERA PARA LA edadYears */}
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
@@ -611,10 +611,7 @@ export default function AddPaciente() {
             </FormControl>
           </Grid>
 
-        </Grid>
-
-        <Grid container spacing={1} justifyContent="center">
-        <Grid item xs margin={1}>
+          <Grid item xs margin={1}>
             {/** espacio para el elemento para el link de coonsulta insabi */}
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="insabi">Afiliacion INSABI</InputLabel>
@@ -634,24 +631,28 @@ export default function AddPaciente() {
             </FormControl>
           </Grid>
 
-          <Grid item xs margin={1}>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel id="gratuitidad">Gratuitidad</InputLabel>
-              <Select
-                required
-                labelId='gratuitidad'
-                id='gratuitidad'
-                label='Gratuitidad'
-                name='gratuitidad'
-                defaultValue={datos.gratuitidad}
-                onChange={handleChange}
-                error={datos.gratuitidad === null && isFail}
-              >
-                <MenuItem value={true}>Sí</MenuItem>
-                <MenuItem value={false}>No</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+
+            {/* <Grid item xs margin={1}>
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel id="gratuitidad">Gratuitidad</InputLabel>
+                <Select
+                  required
+                  labelId='gratuitidad'
+                  id='gratuitidad'
+                  label='Gratuitidad'
+                  name='gratuitidad'
+                  defaultValue={datos.gratuitidad}
+                  onChange={handleChange}
+                  error={datos.gratuitidad === null && isFail}
+                >
+                  <MenuItem value={true}>Sí</MenuItem>
+                  <MenuItem value={false}>No</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid> */}
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
@@ -702,7 +703,7 @@ export default function AddPaciente() {
           <Grid item xs margin={1}>
             <TextField
               id="cualLengua"
-              label="¿Cual lengua?"
+              label="¿Cuál lengua?"
               variant="outlined"
               name="cualLengua"
               defaultValue={datos.cualLengua}
@@ -948,7 +949,7 @@ export default function AddPaciente() {
 
       <Snackbar open={finish}>
         <Alert variant="filled" severity="success" sx={{ width: '100%' }}>
-          Se ha creado el expediente: {datos.folio}
+          Se ha creado el expediente
         </Alert>
       </Snackbar>
     </div>
