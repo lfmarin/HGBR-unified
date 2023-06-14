@@ -17,8 +17,6 @@ import ArchiveAdmision from './Admisiones/archivoAdmision';
 import AddAdmision from './Admisiones/registrarAdmision';
 import DetailsAdmision from './Admisiones/infoAdmision';
 
-var year;
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -30,30 +28,15 @@ const theme = createTheme({
   }
 });
 
-// function BotonConImagen(props) {
-//   return (
-//     <button
-//       style={{
-//         backgroundImage: `url(${props.img_urgencias})`,
-//         backgroundSize: 'cover',
-//         width: '200px',
-//         height: '200px',
-//         border: 'none',
-//         borderRadius: '50%',
-//         cursor: 'pointer',
-//       }}
-//       onClick={props.onClick}
-//     />
-//   );
-// }
-
-// export default BotonConImagen;
-
-
 export default function App() {
 
   const [isOpen, setIsOpen] = useState(false);
   const classes = useStyles();
+
+  //AÑO ACTUAL
+
+  var fecha = new Date(Date.now());
+  var year = fecha.getFullYear();
 
   const handleDrawer = () => {
     setIsOpen(!isOpen);
@@ -82,10 +65,6 @@ export default function App() {
       </Routes>
     );
 
-    //AÑO ACTUAL
-
-    var fecha = new Date(Date.now());
-    year = fecha.getFullYear();
   }
 
   return (
@@ -101,7 +80,7 @@ export default function App() {
           </main>
           <footer>
             <div>
-              <p>{year} Powered by FIEE-UV</p>
+              <p>&copy; {year} - Powered by FIEE-UV</p>
               <img alt="Logo_FIEE" src="/media/fiee.jpg" className={classes.imgFooter}></img>
             </div>
           </footer>
@@ -110,19 +89,5 @@ export default function App() {
     </BrowserRouter>
   );
 
-  // return (
-  //   <div className="App">
-  //     <center>
-  //       <img width='200px' src='./media/pacientes.png' className="opt1" />
-  //       <img width='200px' src="/media/urgencias.png" className="opt2" />
-  //     </center>
-  //     <footer>
-  //       <div className='footer'>
-  //         <p>Powered by FIEE-UV</p>
-  //         <img alt="Logo FIEE" src="/media/fiee.jpg"></img>
-  //       </div>
-  //     </footer>
-  //   </div>
-  // );
 }
 

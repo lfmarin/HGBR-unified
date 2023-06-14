@@ -14,6 +14,8 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined'
 import { Grid } from '@mui/material'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
+import ExternalLink from '../Components/ExternalLink'
+import FileUpload from '../Components/FileUpload'
 
 export default function AddPaciente() {
   const [isFail, setIsFail] = useState(false)
@@ -468,6 +470,9 @@ export default function AddPaciente() {
               inputProps={{ maxLength: 18}}
               fullWidth
             />
+
+            <ExternalLink url="https://www.gob.mx/curp/">Descargar CURP</ExternalLink>
+
           </Grid>
 
           <Grid item xs margin={1}>
@@ -629,6 +634,9 @@ export default function AddPaciente() {
                 <MenuItem value={false}>No</MenuItem>
               </Select>
             </FormControl>
+
+            <ExternalLink url="https://carnet.insabi.gob.mx/">Validar derechohabencia</ExternalLink>
+          
           </Grid>
 
         </Grid>
@@ -930,6 +938,56 @@ export default function AddPaciente() {
             />
           </Grid>
           
+        </Grid>
+
+        
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs margin={1}>
+            <Typography variant="h5" style={{ color: '#000000' }}>
+              Documentos digitalizados
+            </Typography>
+            <Typography className={style.line} variant="h7" style={{ color: '#000000' }}>
+              INSTRUCCIONES: Carga o arrastra los documentos en sus respectivos contenedores, posteriormente sube cada uno de ellos
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1} justifyContent="center">
+          <Grid
+            item xs margin={1} 
+            style={{ border:'1px solid gray', padding: '10px' }}>
+            <Typography variant="h8" style={{ color: '#000000' }}>
+                CURP
+            </Typography>
+            <FileUpload/>
+          </Grid>
+
+          <Grid
+            item xs margin={1} 
+            style={{ border:'1px solid gray', padding: '10px' }}>
+            <Typography variant="h8" style={{ color: '#000000' }}>
+                Carnet INSABI
+            </Typography>
+            <FileUpload/>
+          </Grid>
+
+          <Grid
+            item xs margin={1} 
+            style={{ border:'1px solid gray', padding: '10px' }}>
+            <Typography variant="h8" style={{ color: '#000000' }}>
+                Anverso INE
+            </Typography>
+            <FileUpload/>
+          </Grid>
+
+          <Grid
+            item xs margin={1} 
+            style={{ border:'1px solid gray', padding: '10px' }}>
+            <Typography variant="h8" style={{ color: '#000000' }}>
+                Reverso INE
+            </Typography>
+            <FileUpload/>
+          </Grid>
         </Grid>
 
         <Grid>

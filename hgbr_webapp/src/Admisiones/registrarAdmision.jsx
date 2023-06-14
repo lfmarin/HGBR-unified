@@ -508,6 +508,7 @@ export default function AddAdmision() {
             </FormControl>
 
             <ExternalLink url="https://carnet.insabi.gob.mx/">Validar derechohabencia</ExternalLink>
+          
           </Grid>
 
         </Grid>
