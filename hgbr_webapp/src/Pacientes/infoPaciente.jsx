@@ -248,30 +248,36 @@ export default function DetailsPaciente() {
   }
 
   const actualizaPaciente = () => {
-    var fNac = new Date(datos.fechaNacimiento);
-    var yearNac = fNac.getFullYear();
-    var monthNac = fNac.getMonth();
-    var dayNac = fNac.getDate();
 
-    var anio = fNac.getFullYear();
-    var mes = ("0" + (fNac.getMonth() + 1)).slice(-2);
-    var dia = ("0" + fNac.getDate()).slice(-2);
-    var fechaFormateada = anio + "-" + mes + "-" + dia + "T00:00:00.000Z";
-    datos.fechaNacimiento = fechaFormateada;
+    if (datos.fechaNacimiento != '') {
+      var fNac = new Date(datos.fechaNacimiento);
+      var yearNac = fNac.getFullYear();
+      var monthNac = fNac.getMonth();
+      var dayNac = fNac.getDate();
 
-    monthNac = monthNac + 1;
-    var hourNac = datos.horaNacimiento;
+      var anio = fNac.getFullYear();
+      var mes = ("0" + (fNac.getMonth() + 1)).slice(-2);
+      var dia = ("0" + (fNac.getDate()+1)).slice(-2);
+      var fechaFormateada = anio + "-" + mes + "-" + dia + "T00:00:00.000Z";
+      datos.fechaNacimiento = fechaFormateada;
 
-    var currentDate = new Date(Date.now());
-    var yearCurr = currentDate.getFullYear();
-    var monthCurr = currentDate.getMonth()+1;
-    var dayCurr = currentDate.getDate();
-    var hourCurr = currentDate.getTime();
+      monthNac = monthNac + 1;
+      var hourNac = datos.horaNacimiento;
 
-    var partesHora = datos.horaNacimiento.split(":");
-    var horas = partesHora[0];
-    var minutos = partesHora[1];
-    datos.horaNacimiento = horas + ":" + minutos + ":00";
+      var currentDate = new Date(Date.now());
+      var yearCurr = currentDate.getFullYear();
+      var monthCurr = currentDate.getMonth()+1;
+      var dayCurr = currentDate.getDate();
+      var hourCurr = currentDate.getTime();
+      //CALCULAR LA EDAD EN LA ACTUALIZACION
+    }
+
+    if (datos.horaNacimiento != '') {
+      var partesHora = datos.horaNacimiento.split(":");
+      var horas = partesHora[0];
+      var minutos = partesHora[1];
+      datos.horaNacimiento = horas + ":" + minutos + ":00";
+    }
 
     axios
       .post(

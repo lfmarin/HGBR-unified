@@ -233,12 +233,11 @@ export default function AddPaciente() {
 
     var anio = fNac.getFullYear();
     var mes = ("0" + (fNac.getMonth() + 1)).slice(-2);
-    var dia = ("0" + fNac.getDate()).slice(-2);
+    var dia = ("0" + (fNac.getDate()+1)).slice(-2);
     var fechaFormateada = anio + "-" + mes + "-" + dia + "T00:00:00.000Z";
     datos.fechaNacimiento = fechaFormateada;
 
     monthNac = monthNac + 1;
-    var hourNac = datos.horaNacimiento;
 
     var currentDate = new Date(Date.now());
     var yearCurr = currentDate.getFullYear();
@@ -246,6 +245,7 @@ export default function AddPaciente() {
     var dayCurr = currentDate.getDate();
     var hourCurr = currentDate.getTime();
 
+    var hourNac = datos.horaNacimiento;
     var partesHora = datos.horaNacimiento.split(":");
     var horas = partesHora[0];
     var minutos = partesHora[1];
@@ -291,7 +291,6 @@ export default function AddPaciente() {
       } 
     }
 
-    
     console.log("EDAD")
     console.log("Años: "+years);
     console.log("Meses: "+months);
@@ -374,6 +373,7 @@ export default function AddPaciente() {
       datos.primerApellido === '' ||
       datos.segundoApellido === '' ||
       datos.fechaNacimiento === '' ||
+      datos.horaNacimiento === '' ||
       datos.fkSexo === '' ||
       datos.insabi === null ||
       datos.fkTipoVialidad === '' ||
@@ -493,13 +493,14 @@ export default function AddPaciente() {
 
           <Grid item xs margin={1}>
             <TextField
+              required
               id="horaNacimiento"
               label="Hora de Nacimiento"
               type="time"
               variant="outlined"
               name="horaNacimiento"
               defaultValue={datos.horaNacimiento}
-              // error={datos.horaNacimiento === '' && isFail}
+              error={datos.horaNacimiento === '' && isFail}
               onChange={handleChange}
               InputLabelProps={{ shrink: true }}
               fullWidth
