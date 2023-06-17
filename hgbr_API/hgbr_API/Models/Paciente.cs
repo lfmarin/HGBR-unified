@@ -13,7 +13,7 @@ public partial class Paciente
 
     public string? ApMaterno { get; set; }
 
-    public DateOnly? FechaNac { get; set; }
+    public DateTime? FechaNac { get; set; }
 
     public int? FkEstadoCivil { get; set; }
 
@@ -66,4 +66,9 @@ public partial class Paciente
     public virtual Religion? FkReligionNavigation { get; set; }
 
     public virtual ICollection<Historiaclinica> Historiaclinicas { get; set; } = new List<Historiaclinica>();
+
+    //public static implicit operator Paciente(Paciente v)
+    //{
+    //    throw new NotImplementedException();
+    //}
 }

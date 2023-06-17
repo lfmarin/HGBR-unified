@@ -161,6 +161,26 @@ namespace hgbr_API.ImplInterfaces
 
                 context.Pacientesarches.Add(paciente);
                 context.SaveChanges();
+
+
+                // Crear un objeto de la clase Pacientes utilizando los datos que coincidadan con pacientesArch
+                Paciente pacientePacientes = new Paciente
+                {
+                    NoExpediente = folio,
+                    Nombre = paciente.Nombre,
+                    ApPaterno = paciente.ApPaterno,
+                    ApMaterno = paciente.ApMaterno,
+                    FechaNac = paciente.FechaNac,
+                    FkEstadoCivil = paciente.FkEstadoCivil,
+                    CalleCasa = paciente.CalleCasa,
+                    NumCasa = Convert.ToInt32(paciente.NumCasa),
+                    ColCasa = paciente.ColCasa,
+                    TelCasa = Convert.ToString(paciente.TelCasa)
+                };
+
+                // Insertar el objeto en la tabla paciente
+                context.Pacientes.Add(pacientePacientes);
+                context.SaveChanges();
             }
             catch (System.Exception)
             {
