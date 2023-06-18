@@ -272,6 +272,27 @@ namespace hgbr_API.ImplInterfaces
                     else    if (!aux.TelCasa.Equals(paciente.TelCasa)) aux.TelCasa = paciente.TelCasa;
 
                     context.SaveChanges();
+
+
+
+                    // Realizar la actualización en la tabla pacientes
+                    var pacientePacientes = context.Pacientes.FirstOrDefault(p => p.NoExpediente.Equals(paciente.NoExpediente));
+
+                    if (pacientePacientes != null)
+                    {
+                        pacientePacientes.Nombre = paciente.Nombre;
+                        pacientePacientes.ApPaterno = paciente.ApPaterno;
+                        pacientePacientes.ApMaterno = paciente.ApMaterno;
+                        pacientePacientes.FechaNac = paciente.FechaNac;
+                        pacientePacientes.FkEstadoCivil = paciente.FkEstadoCivil;
+                        pacientePacientes.CalleCasa = paciente.CalleCasa;
+                        pacientePacientes.NumCasa = Convert.ToInt32(paciente.NumCasa);
+                        pacientePacientes.ColCasa = paciente.ColCasa;
+                        pacientePacientes.TelCasa = Convert.ToString(paciente.TelCasa);
+
+                        context.SaveChanges();
+                    }
+
                 }
                 catch (System.Exception)
                 {
