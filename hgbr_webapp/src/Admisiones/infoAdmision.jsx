@@ -212,10 +212,14 @@ export default function DetailsAdmision() {
       var monthNac = fNac.getMonth();
       var dayNac = fNac.getDate();
 
-      var anio = fNac.getFullYear();
+      console.log("Mes: "+monthNac);
+      console.log("Dia: "+dayNac);
+
+      /* var anio = fNac.getFullYear();
       var mes = ("0" + (fNac.getMonth() + 1)).slice(-2);
-      var dia = ("0" + (fNac.getDate()+1)).slice(-2);
-      var fechaFormateada = anio + "-" + mes + "-" + dia + "T00:00:00.000Z";
+      var dia = ("0" + (fNac.getDate())).slice(-2);
+      var fechaFormateada = anio + "-" + mes + "-" + dia + "T00:00:00.000Z"; */
+      var fechaFormateada = fNac.toISOString();
       datos.fechaNacimiento = fechaFormateada;
 
       monthNac = monthNac + 1;
