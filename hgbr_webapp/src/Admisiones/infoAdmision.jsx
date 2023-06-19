@@ -29,6 +29,7 @@ export default function DetailsAdmision() {
     fechaNacimiento: '',
     horaNacimiento: '',
     entidadNacimiento: '',
+    edad: '',
     edadYears: '',
     edadMonths: '',
     edadDays: '',
@@ -105,6 +106,28 @@ export default function DetailsAdmision() {
           if( response.status === 204 ) {
             setErrorbd(true)
             setShow(false)
+          }
+
+          if(response.data.edadHours != null){
+            setDatos({
+              edad: "Edad: "+response.data.edadHours+" horas",
+            })
+            return;
+          }else if(response.data.edadDays != null){
+            setDatos({
+              edad: "Edad: "+response.data.edadDays+" dias",
+            })
+            return;
+          }else if(response.data.edadMonths != null){
+            setDatos({
+              edad: "Edad: "+response.data.edadMonths+" meses",
+            })
+            return;
+          }else if(response.data.edadYears != null){
+            setDatos({
+              edad: "Edad: "+response.data.edadYears+" años",
+            })
+            return;
           }
         },
         error => {
@@ -340,7 +363,6 @@ export default function DetailsAdmision() {
           <Grid container spacing={1} justifyContent="flex-end" alignItems="center">
             <Grid item xs margin={1}>
               <TextField
-                required
                 id="folio"
                 label="Folio de registro"
                 variant="outlined"
@@ -476,10 +498,6 @@ export default function DetailsAdmision() {
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
-                {/** ESTE GRID SERA PARA LA edadYears */}
-        </Grid>
-
-        <Grid container spacing={1} justifyContent="center">
           
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
@@ -499,6 +517,18 @@ export default function DetailsAdmision() {
                 })}
               </Select>
             </FormControl>
+          </Grid>
+
+          <Grid item xs margin={1}>
+            <TextField
+              id="edad"
+              label={datos.edad}
+              variant="outlined"
+              name="edad"
+              defaultValue={datos.edad}
+              fullWidth
+              inputProps={{ readOnly: true }}
+            />
           </Grid>
 
         </Grid>
@@ -535,6 +565,7 @@ export default function DetailsAdmision() {
                 name='gratuitidad'
                 defaultValue={datos.gratuitidad}
                 onChange={handleChange}
+                inputProps={{ readOnly: true }}
                 error={datos.gratuitidad === null && isFail}
               >
                 <MenuItem value={true}>Sí</MenuItem>

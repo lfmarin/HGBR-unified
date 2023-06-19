@@ -30,6 +30,7 @@ export default function DetailsPaciente() {
     fechaNacimiento: '',
     horaNacimiento: '',
     entidadNacimiento: '',
+    edad: '',
     edadYears: '',
     edadMonths: '',
     edadDays: '',
@@ -98,7 +99,7 @@ export default function DetailsPaciente() {
               insabi: response.data.insabi,
               gratuitidad: response.data.gratuitidad,
               indigena: response.data.indigena,
-              lenguaIndigena: response.data.lenuaIndigena,
+              lenguaIndigena: response.data.lenguaIndigena,
               cualLengua: response.data.cualLengua,
               fkTipoVialidad: response.data.fkTipoCalleCasa,
               nombreVialidad: response.data.nombreVialidad,
@@ -114,11 +115,33 @@ export default function DetailsPaciente() {
               telefono: response.data.telCasa,
             })
             setShow(true)
-          }
 
-          if( response.status === 204 ) {
-            setErrorbd(true)
-            setShow(false)
+            if( response.status === 204 ) {
+              setErrorbd(true)
+              setShow(false)
+            }
+
+            if(response.data.edadHours != null){
+              setDatos({
+                edad: "Edad: "+response.data.edadHours+" horas",
+              })
+              return;
+            }else if(response.data.edadDays != null){
+              setDatos({
+                edad: "Edad: "+response.data.edadDays+" dias",
+              })
+              return;
+            }else if(response.data.edadMonths != null){
+              setDatos({
+                edad: "Edad: "+response.data.edadMonths+" meses",
+              })
+              return;
+            }else if(response.data.edadYears != null){
+              setDatos({
+                edad: "Edad: "+response.data.edadYears+" años",
+              })
+              return;
+            }
           }
         },
         error => {
@@ -376,6 +399,8 @@ export default function DetailsPaciente() {
     setLoad(false)
   }
 
+  console.log("EDAD: "+datos.edad);
+
   if (show) {
     return (
       <div className={style.fullWidth}>
@@ -383,7 +408,6 @@ export default function DetailsPaciente() {
           <Grid container spacing={1} justifyContent="flex-end" alignItems="center">
             <Grid item xs margin={1}>
               <TextField
-                required
                 id="NoExpediente"
                 label="No. de Expediente"
                 variant="outlined"
@@ -588,6 +612,18 @@ export default function DetailsPaciente() {
           </Grid>
 
           <Grid item xs margin={1}>
+            <TextField
+              id="edad"
+              label={datos.edad}
+              variant="outlined"
+              name="edad"
+              defaultValue={datos.edad}
+              fullWidth
+              inputProps={{ readOnly: true }}
+            />
+          </Grid>
+
+          <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="fkEstadoConyugal">Estado Conyugal</InputLabel>
               <Select
@@ -639,6 +675,7 @@ export default function DetailsPaciente() {
                 label='Gratuitidad'
                 name='gratuitidad'
                 defaultValue={datos.gratuitidad}
+                inputProps={{readOnly: true}}
                 onChange={handleChange}
                 error={datos.gratuitidad === null && isFail}
               >
