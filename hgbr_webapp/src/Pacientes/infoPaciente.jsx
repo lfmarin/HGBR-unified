@@ -273,11 +273,13 @@ export default function DetailsPaciente() {
   const actualizaPaciente = () => {
 
     if (datos.fechaNacimiento != '') {
+      console.log("datosFnac: "+datos.fechaNacimiento);
       var fNac = new Date(datos.fechaNacimiento);
       var yearNac = fNac.getFullYear();
       var monthNac = fNac.getMonth();
       var dayNac = fNac.getDate();
 
+      console.log("fechaNac: "+fNac);
       var fechaFormateada = fNac.toISOString();
       datos.fechaNacimiento = fechaFormateada;
 
