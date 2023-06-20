@@ -29,7 +29,6 @@ export default function DetailsAdmision() {
     fechaNacimiento: '',
     horaNacimiento: '',
     entidadNacimiento: '',
-    edad: '',
     edadYears: '',
     edadMonths: '',
     edadDays: '',
@@ -108,7 +107,7 @@ export default function DetailsAdmision() {
             setShow(false)
           }
 
-          if(response.data.edadHours != null){
+          /* if(response.data.edadHours != null){
             setDatos({
               edad: "Edad: "+response.data.edadHours+" horas",
             })
@@ -128,7 +127,7 @@ export default function DetailsAdmision() {
               edad: "Edad: "+response.data.edadYears+" años",
             })
             return;
-          }
+          } */
         },
         error => {
           if (error.response) {
@@ -519,7 +518,7 @@ export default function DetailsAdmision() {
             </FormControl>
           </Grid>
 
-          <Grid item xs margin={1}>
+          {/* <Grid item xs margin={1}>
             <TextField
               id="edad"
               label={datos.edad}
@@ -529,7 +528,7 @@ export default function DetailsAdmision() {
               fullWidth
               inputProps={{ readOnly: true }}
             />
-          </Grid>
+          </Grid> */}
 
         </Grid>
 

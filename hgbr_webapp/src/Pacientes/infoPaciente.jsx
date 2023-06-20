@@ -30,7 +30,6 @@ export default function DetailsPaciente() {
     fechaNacimiento: '',
     horaNacimiento: '',
     entidadNacimiento: '',
-    edad: '',
     edadYears: '',
     edadMonths: '',
     edadDays: '',
@@ -121,7 +120,7 @@ export default function DetailsPaciente() {
               setShow(false)
             }
 
-            if(response.data.edadHours != null){
+            /* if(response.data.edadHours != null){
               setDatos({
                 edad: "Edad: "+response.data.edadHours+" horas",
               })
@@ -141,7 +140,7 @@ export default function DetailsPaciente() {
                 edad: "Edad: "+response.data.edadYears+" años",
               })
               return;
-            }
+            } */
           }
         },
         error => {
@@ -401,8 +400,6 @@ export default function DetailsPaciente() {
     setLoad(false)
   }
 
-  console.log("EDAD: "+datos.edad);
-
   if (show) {
     return (
       <div className={style.fullWidth}>
@@ -545,10 +542,6 @@ export default function DetailsPaciente() {
         </Grid>
 
         <Grid container spacing={1} justifyContent="center">
-                {/** ESTE GRID SERA PARA LA edadYears */}
-        </Grid>
-
-        <Grid container spacing={1} justifyContent="center">
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>
               <InputLabel id="nacidoHospital">¿Nació en el Hospital?</InputLabel>
@@ -613,7 +606,7 @@ export default function DetailsPaciente() {
             />
           </Grid>
 
-          <Grid item xs margin={1}>
+          {/* <Grid item xs margin={1}>
             <TextField
               id="edad"
               label={datos.edad}
@@ -623,7 +616,7 @@ export default function DetailsPaciente() {
               fullWidth
               inputProps={{ readOnly: true }}
             />
-          </Grid>
+          </Grid> */}
 
           <Grid item xs margin={1}>
             <FormControl variant="outlined" fullWidth>

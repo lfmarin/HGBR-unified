@@ -139,34 +139,6 @@ export default function AddAdmision() {
       )
   }, [])
 
-  const getYears = d1 => {
-    d1 = new Date(d1.slice(0, 10))
-    const d2 = new Date()
-    const diff = d2.getTime() - d1.getTime()
-    return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25))
-  }
-
-  const getMonths = d1 => {
-    d1 = new Date(d1.slice(0, 10))
-    const d2 = new Date()
-    const diff = d2.getTime() - d1.getTime()
-    return Math.floor(diff / (1000 * 60 * 60 * 24 * 30.4375))
-  }
-
-  const getDays = d1 => {
-    d1 = new Date(d1.slice(0, 10))
-    const d2 = new Date()
-    const diff = d2.getTime() - d1.getTime()
-    return Math.floor(diff / (1000 * 60 * 60 * 24))
-  }
-
-  const getHours = d1 => {
-    d1 = new Date(d1.slice(0, 10))
-    const d2 = new Date()
-    const diff = d2.getTime() - d1.getTime()
-    return Math.floor(diff / (1000 * 60 * 60))
-  }
-
   const guardaAdmision = () => {
     // AQUI SE CALCULA LA EDAD
     var fNac = new Date(datos.fechaNacimiento);
