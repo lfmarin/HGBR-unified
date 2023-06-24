@@ -1,0 +1,27 @@
+.DS_Store
+
+/.vs 
+/bin
+/obj
+# Evita subir el cotenido compilado de estos programas.
+API_Hospital_Boca/bin
+API_Hospital_Boca/obj
+API_Hospital_Boca/docsh/gen
+# Para evitar problemas con documentos generados,
+# las bases de documentos requeridos son serán agregados al repositorio.
+API_Hospital_Boca/docsh/src
+API_Hospital_Boca/publish
+API_Hospital_Boca/vas_p1.png
+API_Hospital_Boca/vas_p2.png
+API_Hospital_Boca/nota-p1.png
+API_Hospital_Boca/nota-p2.png
+API_Hospital_Boca/encuesta.png
+API_Hospital_Boca/const.png
+API_Hospital_Boca/deploy.sh
+API_Hospital_Boca/Properties/launchSettings.json
+publish.zip
+API_Hospital_Boca/post-op_p1.png
+API_Hospital_Boca/post-op_p2.png
+API_Hospital_Boca/BaltimoreCyberTrustRoot.crt.pem
+ControlUsuarios/obj
+ControlUsuarios/bin
