@@ -78,9 +78,9 @@ public partial class HospitalBocaContext : DbContext
     public virtual DbSet<Tipovialidad> Tipovialidads { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;port=3306;user=root;password=123456;database=hospital_boca", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.31-mysql"));
-
+    {
+        
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
@@ -365,7 +365,7 @@ public partial class HospitalBocaContext : DbContext
         {
             entity.HasKey(e => e.IdEstadoCivil).HasName("PRIMARY");
 
-            entity.ToTable("estadocivil");
+            entity.ToTable("EstadoCivil");
 
             entity.Property(e => e.IdEstadoCivil).HasColumnName("idEstadoCivil");
             entity.Property(e => e.NombreEstado)
@@ -707,7 +707,7 @@ public partial class HospitalBocaContext : DbContext
         {
             entity.HasKey(e => e.NoExpediente).HasName("PRIMARY");
 
-            entity.ToTable("pacientes");
+            entity.ToTable("Pacientes");
 
             entity.HasIndex(e => e.FkEscolaridad, "fkEscolaridad");
 
