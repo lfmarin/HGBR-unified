@@ -8,65 +8,65 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System;
+using System.Globalization;
+//using Newtonsoft.Json;
+//using Newtonsoft.Json.Converters;
+//using Newtonsoft.Json.Linq;
+//using Newtonsoft.Json.Serialization;
+
+
 
 namespace hgbr_API
 {
-    public sealed class DateOnlyJsonConverter : JsonConverter<DateOnly>
-    {
-        public override DateOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            return DateOnly.FromDateTime(reader.GetDateTime());
-        }
-
-        public override void Write(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options)
-        {
-            var isoDate = value.ToString("O");
-            writer.WriteStringValue(isoDate);
-        }
-    }
-
-    public sealed class TimeOnlyJsonConverter : JsonConverter<TimeOnly>
-    {
-        public override TimeOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            return TimeOnly.FromDateTime(reader.GetDateTime());
-        }
-
-        public override void Write(Utf8JsonWriter writer, TimeOnly value, JsonSerializerOptions options)
-        {
-            var isoDate = value.ToString("O");
-            writer.WriteStringValue(isoDate);
-        }
-    }
-
     public class DateOnlyJsonConverter : JsonConverter<DateOnly>
     {
         private const string DateFormat = "yyyy-MM-dd";
 
-        public override DateOnly ReadJson(JsonReader reader, Type objectType, DateOnly existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override DateOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return DateOnly.ParseExact((string)reader.Value, DateFormat, CultureInfo.InvariantCulture);
+            throw new NotImplementedException();
         }
 
-        public override void WriteJson(JsonWriter writer, DateOnly value, JsonSerializer serializer)
+      /*  public override DateOnly ReadJson(JsonReader reader, Type objectType, DateOnly existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            return DateOnly.ParseExact((string)reader.Value, DateFormat, CultureInfo.InvariantCulture);
+        }*/
+
+        public override void Write(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*public override void WriteJson(JsonWriter writer, DateOnly value, JsonSerializer serializer)
         {
             writer.WriteValue(value.ToString(DateFormat, CultureInfo.InvariantCulture));
-        }
+        }*/
     }
 
     public class TimeOnlyJsonConverter : JsonConverter<TimeOnly>
     {
         private const string TimeFormat = "HH:mm:ss.FFFFFFF";
 
-        public override TimeOnly ReadJson(JsonReader reader, Type objectType, TimeOnly existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override TimeOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return TimeOnly.ParseExact((string)reader.Value, TimeFormat, CultureInfo.InvariantCulture);
+            throw new NotImplementedException();
         }
 
-        public override void WriteJson(JsonWriter writer, TimeOnly value, JsonSerializer serializer)
+        /*public override TimeOnly ReadJson(JsonReader reader, Type objectType, TimeOnly existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            return TimeOnly.ParseExact((string)reader.Value, TimeFormat, CultureInfo.InvariantCulture);
+        }*/
+
+        public override void Write(Utf8JsonWriter writer, TimeOnly value, JsonSerializerOptions options)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*public override void WriteJson(JsonWriter writer, TimeOnly value, JsonSerializer serializer)
         {
             writer.WriteValue(value.ToString(TimeFormat, CultureInfo.InvariantCulture));
-        }
+        }*/
     }
     
     public class Startup

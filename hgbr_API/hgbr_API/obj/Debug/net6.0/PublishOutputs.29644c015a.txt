@@ -18,6 +18,7 @@ C:\Users\joelj\Desktop\HGBR-unified\hgbr_API\hgbr_API\Release\Microsoft.Extensio
 C:\Users\joelj\Desktop\HGBR-unified\hgbr_API\hgbr_API\Release\Microsoft.Extensions.Primitives.dll
 C:\Users\joelj\Desktop\HGBR-unified\hgbr_API\hgbr_API\Release\Microsoft.OpenApi.dll
 C:\Users\joelj\Desktop\HGBR-unified\hgbr_API\hgbr_API\Release\MySqlConnector.dll
+C:\Users\joelj\Desktop\HGBR-unified\hgbr_API\hgbr_API\Release\Newtonsoft.Json.dll
 C:\Users\joelj\Desktop\HGBR-unified\hgbr_API\hgbr_API\Release\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\joelj\Desktop\HGBR-unified\hgbr_API\hgbr_API\Release\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\joelj\Desktop\HGBR-unified\hgbr_API\hgbr_API\Release\Swashbuckle.AspNetCore.SwaggerGen.dll

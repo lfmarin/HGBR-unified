@@ -253,3 +253,4 @@ C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\refint\hgbr_API.dll
 C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.pdb
 C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.genruntimeconfig.cache
 C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\ref\hgbr_API.dll
+C:\Users\joelj\Desktop\HGBR-unified\hgbr_API\hgbr_API\bin\Debug\net6.0\Newtonsoft.Json.dll

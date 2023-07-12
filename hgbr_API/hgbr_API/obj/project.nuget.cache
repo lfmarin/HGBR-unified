@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "13rUXH8x958faSCIfUER1+jR0q8eZZAe6jOQXoaQ+L2N4Dhq22GS31UA2xFJpLv4iIxiDI++g7YdxFUhEedUew==",
+  "dgSpecHash": "IS+AcaSFOSqDUrmI3Mps57BZq+GXQMtO8OXAkpCF4HdlRINOEEa5t2NL9eEYw2sjhKQYC93o+Rw/u0cicLdBKg==",
   "success": true,
   "projectFilePath": "C:\\Users\\joelj\\Desktop\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,7 @@
     "C:\\Users\\joelj\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\joelj\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\joelj\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512",
+    "C:\\Users\\joelj\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\joelj\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\7.0.0\\pomelo.entityframeworkcore.mysql.7.0.0.nupkg.sha512",
     "C:\\Users\\joelj\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\joelj\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
