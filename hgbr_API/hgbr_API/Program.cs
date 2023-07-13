@@ -1,15 +1,8 @@
 using hgbr_API.Interfaces;
-using hgbr_API.Models;
 //using Google.Protobuf.WellKnownTypes;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Configuration;
 using hgbr_API.ImplInterfaces;
+using hgbr_API;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -43,6 +36,12 @@ builder.Services.AddScoped<IPacientesArchServices, PacientesArchServices>();
 builder.Services.AddScoped<IAdmisionesServices, AdmisionesServices>();
 
 builder.Services.AddControllers();
+
+builder.Services.AddControllers()
+                .AddJsonOptions(options => {
+                    options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+                    options.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
+                });
 
 builder.Services.AddCors(options =>
 {

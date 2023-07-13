@@ -50,7 +50,9 @@ namespace hgbr_API
 
         public override TimeOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            string timeStr = reader.GetString();
+            return TimeOnly.ParseExact(timeStr, TimeFormat, CultureInfo.InvariantCulture);
+            //throw new NotImplementedException();
         }
 
         /*public override TimeOnly ReadJson(JsonReader reader, Type objectType, TimeOnly existingValue, bool hasExistingValue, JsonSerializer serializer)
@@ -60,7 +62,8 @@ namespace hgbr_API
 
         public override void Write(Utf8JsonWriter writer, TimeOnly value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            writer.WriteStringValue(value.ToString(TimeFormat, CultureInfo.InvariantCulture));
+            //throw new NotImplementedException();
         }
 
         /*public override void WriteJson(JsonWriter writer, TimeOnly value, JsonSerializer serializer)
@@ -102,6 +105,13 @@ namespace hgbr_API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors();
+
+            /* app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            }); */
         }
     }
 }
