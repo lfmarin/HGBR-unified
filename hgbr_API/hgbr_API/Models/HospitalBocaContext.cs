@@ -79,7 +79,7 @@ public partial class HospitalBocaContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        
+    
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -119,9 +119,9 @@ public partial class HospitalBocaContext : DbContext
             entity.Property(e => e.FkTipoAsentamiento).HasColumnName("fkTipoAsentamiento");
             entity.Property(e => e.FkTipoVialidad).HasColumnName("fkTipoVialidad");
             entity.Property(e => e.Gratuitidad).HasColumnName("gratuitidad");
-            entity.Property(e => e.HoraNacimiento)
-                .HasColumnType("time")
-                .HasColumnName("horaNacimiento");
+            //entity.Property(e => e.HoraNacimiento)
+            //    .HasColumnType("time")
+            //    .HasColumnName("horaNacimiento");
             entity.Property(e => e.Insabi).HasColumnName("insabi");
             entity.Property(e => e.Localidad)
                 .HasMaxLength(50)
@@ -838,9 +838,9 @@ public partial class HospitalBocaContext : DbContext
             entity.Property(e => e.FkTipoCalleCasa).HasColumnName("fkTipoCalleCasa");
             entity.Property(e => e.FkTipoColCasa).HasColumnName("fkTipoColCasa");
             entity.Property(e => e.Gratuitidad).HasColumnName("gratuitidad");
-            entity.Property(e => e.HoraNac)
-                .HasColumnType("time")
-                .HasColumnName("horaNac");
+            //entity.Property(e => e.HoraNac)
+            //    .HasColumnType("time")
+            //    .HasColumnName("horaNac");
             entity.Property(e => e.Indigena).HasColumnName("indigena");
             entity.Property(e => e.Insabi).HasColumnName("insabi");
             entity.Property(e => e.LenguaIndigena).HasColumnName("lenguaIndigena");

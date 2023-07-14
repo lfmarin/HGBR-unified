@@ -73,7 +73,7 @@ namespace hgbr_API.ImplInterfaces
                     segundoApellido = adm.SegundoApellido,
                     curp = adm.Curp,
                     fechaNacimiento = adm.FechaNacimiento,
-                    horaNacimiento = adm.HoraNacimiento,
+                    //horaNacimiento = adm.HoraNacimiento,
                     entidadNacimiento = adm.EntidadNacimiento,
                     // Edad = adm.Edad,
                     edadYears = adm.EdadYears,
@@ -163,8 +163,8 @@ namespace hgbr_API.ImplInterfaces
                     else    if (!aux.Curp.Equals(admision.Curp)) aux.Curp = admision.Curp;
                     if (aux.FechaNacimiento == null) aux.FechaNacimiento = admision.FechaNacimiento;
                     else    if (!aux.FechaNacimiento.Equals(admision.FechaNacimiento)) aux.FechaNacimiento = admision.FechaNacimiento;
-                    if (aux.HoraNacimiento == null) aux.HoraNacimiento = admision.HoraNacimiento;
-                    else    if (!aux.HoraNacimiento.Equals(admision.HoraNacimiento)) aux.HoraNacimiento = admision.HoraNacimiento;
+                    //if (aux.HoraNacimiento == null) aux.HoraNacimiento = admision.HoraNacimiento;
+                    //else    if (!aux.HoraNacimiento.Equals(admision.HoraNacimiento)) aux.HoraNacimiento = admision.HoraNacimiento;
                     if (aux.EntidadNacimiento == null) aux.EntidadNacimiento = admision.EntidadNacimiento;
                     else    if (!aux.EntidadNacimiento.Equals(admision.EntidadNacimiento)) aux.EntidadNacimiento = admision.EntidadNacimiento;
                     // if (aux.Edad != admision.Edad) aux.Edad = admision.Edad;

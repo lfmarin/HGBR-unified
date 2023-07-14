@@ -254,3 +254,9 @@ C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.pdb
 C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\hgbr_API.genruntimeconfig.cache
 C:\repo\HGBR-unified\hgbr_API\hgbr_API\obj\Debug\net6.0\ref\hgbr_API.dll
 C:\Users\joelj\Desktop\HGBR-unified\hgbr_API\hgbr_API\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\bin\Debug\net6.0\Release\web.config
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\bin\Debug\net6.0\Release\appsettings.Development.json
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\bin\Debug\net6.0\Release\appsettings.json
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\bin\Debug\net6.0\Release\hgbr_API.deps.json
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\bin\Debug\net6.0\Release\hgbr_API.runtimeconfig.json
+C:\repo\HGBR-unified\hgbr_API\hgbr_API\bin\Debug\net6.0\Newtonsoft.Json.dll

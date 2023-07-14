@@ -17,7 +17,7 @@ public partial class Admisione
 
     public DateTime? FechaNacimiento { get; set; }
 
-    public TimeOnly? HoraNacimiento { get; set; }
+    //public TimeOnly? HoraNacimiento { get; set; }
 
     public string? EntidadNacimiento { get; set; }
 

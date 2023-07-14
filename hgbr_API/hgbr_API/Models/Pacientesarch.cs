@@ -17,7 +17,7 @@ public partial class Pacientesarch
 
     public DateTime? FechaNac { get; set; }
 
-    public TimeOnly? HoraNac { get; set; }
+    //public TimeOnly? HoraNac { get; set; }
 
     public string? EntidadNac { get; set; }
 

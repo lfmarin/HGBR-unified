@@ -81,7 +81,7 @@ namespace hgbr_API.ImplInterfaces
                     apMaterno = pa.ApMaterno,
                     curp = pa.Curp,
                     fechaNac = pa.FechaNac,
-                    horaNac = pa.HoraNac,
+                    //horaNac = pa.HoraNac,
                     entidadNac = pa.EntidadNac,
                     // Edad = pa.Edad,
                     edadYears = pa.EdadYears,
@@ -130,7 +130,7 @@ namespace hgbr_API.ImplInterfaces
                 string bornMonth = Convert.ToDateTime(paciente.FechaNac).ToString("MM");
                 string bornDay = Convert.ToDateTime(paciente.FechaNac).ToString("dd");
 
-                string gender = (paciente.FkSexo == 1) ? 'M'.ToString() : 'F'.ToString();
+                string gender = (paciente.FkSexo == 1) ? "M" : "F";
 
                 string folio = "";
                 string folioAux = currentYear + bornYear + bornMonth + bornDay;
@@ -213,8 +213,8 @@ namespace hgbr_API.ImplInterfaces
                     else    if (!aux.Curp.Equals(paciente.Curp)) aux.Curp = paciente.Curp;
                     if (aux.FechaNac == null)  aux.FechaNac = paciente.FechaNac;
                     else    if (!aux.FechaNac.Equals(paciente.FechaNac)) aux.FechaNac = paciente.FechaNac;
-                    if (aux.HoraNac == null)  aux.HoraNac = paciente.HoraNac;
-                    else    if (!aux.HoraNac.Equals(paciente.HoraNac)) aux.HoraNac = paciente.HoraNac;
+                    //if (aux.HoraNac == null)  aux.HoraNac = paciente.HoraNac;
+                    //else    if (!aux.HoraNac.Equals(paciente.HoraNac)) aux.HoraNac = paciente.HoraNac;
                     if (aux.EntidadNac == null)  aux.EntidadNac = paciente.EntidadNac;
                     else    if (!aux.EntidadNac.Equals(paciente.EntidadNac)) aux.EntidadNac = paciente.EntidadNac;
                     // if (aux.Edad != paciente.Edad) aux.Edad = paciente.Edad;
