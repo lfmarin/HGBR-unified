@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\repo\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj": {}
+    "C:\\Users\\joelj\\Desktop\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj": {}
   },
   "projects": {
-    "C:\\repo\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj": {
+    "C:\\Users\\joelj\\Desktop\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repo\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
+        "projectUniqueName": "C:\\Users\\joelj\\Desktop\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
         "projectName": "hgbr_API",
-        "projectPath": "C:\\repo\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
-        "packagesPath": "C:\\Users\\JOSUE TELLEZ\\.nuget\\packages\\",
-        "outputPath": "C:\\repo\\HGBR-unified\\hgbr_API\\hgbr_API\\obj\\",
+        "projectPath": "C:\\Users\\joelj\\Desktop\\HGBR-unified\\hgbr_API\\hgbr_API\\hgbr_API.csproj",
+        "packagesPath": "C:\\Users\\joelj\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\joelj\\Desktop\\HGBR-unified\\hgbr_API\\hgbr_API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\JOSUE TELLEZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\joelj\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
